@@ -1,7 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
-void main() {
-  runApp(const MainApp());
+import 'presentation/router/router.dart';
+
+Future<void> main() async {
+  await dotenv.load(fileName: "assets/.env");
+  await Supabase.initialize(
+    url: 'https://wwdvooszvayxzzkxsokv.supabase.co',
+    anonKey: dotenv.env['API_ANON_SUPABASE'].toString(),
+    debug: true,
+  );
+  runApp(const ProviderScope(child: MainApp()));
 }
 
 class MainApp extends StatelessWidget {
@@ -9,12 +20,6 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
-    );
+    return MaterialApp.router(routerConfig: router);
   }
 }
