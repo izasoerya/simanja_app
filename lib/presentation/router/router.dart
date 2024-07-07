@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simanja_app/presentation/screens/welcome.dart';
+import 'package:simanja_app/presentation/screens/authentication.dart';
 
 class MainLayout extends StatelessWidget {
   final Widget child;
@@ -19,7 +19,7 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const WelcomePage();
+        return const MainLayout(child: AuthenticationPage());
       },
       routes: <RouteBase>[
         GoRoute(
