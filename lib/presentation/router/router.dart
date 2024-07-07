@@ -1,12 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:simanja_app/presentation/screens/welcome.dart';
+
+class MainLayout extends StatelessWidget {
+  final Widget child;
+  const MainLayout({super.key, required this.child});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: child,
+    );
+  }
+}
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const Placeholder();
+        return const WelcomePage();
       },
       routes: <RouteBase>[
         GoRoute(
