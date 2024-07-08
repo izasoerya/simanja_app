@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
@@ -6,6 +7,9 @@ import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
+
+  void _pushToRegister() => router.go('/register');
+  void _pushToForgotPassword() => router.go('/forgot-password');
 
   @override
   State<LoginPage> createState() => _LoginPageState();
@@ -48,8 +52,10 @@ class _LoginPageState extends State<LoginPage> {
                   const Padding(padding: EdgeInsets.only(top: 15)),
                   const SubmitButton(text: 'Masuk'),
                   const Padding(padding: EdgeInsets.only(top: 15)),
-                  NudeButton(text: 'Lupa Kata Sandi?', redirect: () {}),
-                  NudeButton(text: 'Daftar', redirect: () {}),
+                  NudeButton(
+                      text: 'Lupa Kata Sandi?',
+                      redirect: () => widget._pushToForgotPassword()),
+                  NudeButton(text: 'Daftar', redirect: widget._pushToRegister),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                 ],
               ),
