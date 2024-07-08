@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simanja_app/presentation/screens/authentication.dart';
+import 'package:simanja_app/presentation/screens/register.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class MainLayout extends StatelessWidget {
