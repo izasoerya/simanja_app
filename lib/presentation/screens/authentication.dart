@@ -10,13 +10,21 @@ class AuthenticationPage extends StatefulWidget {
 }
 
 class _AuthenticationPageState extends State<AuthenticationPage> {
+  late GlobalTheme theme;
+
+  @override
+  void initState() {
+    theme = GlobalTheme();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: [
         Container(
           height: MediaQuery.of(context).size.height,
-          decoration: BoxDecoration(color: const GlobalTheme().primaryColor),
+          decoration: BoxDecoration(color: theme.primaryColor),
         ),
         Center(
           child: SingleChildScrollView(
@@ -36,10 +44,22 @@ class _AuthenticationPageState extends State<AuthenticationPage> {
                       topRight: Radius.circular(30),
                     ),
                   ),
-                  child: const Column(
+                  child: Column(
                     children: [
-                      TextInput(),
-                      TextInput(),
+                      Padding(padding: EdgeInsets.only(top: 30)),
+                      Text(
+                        'Daftar Remaja',
+                        style: theme.headerStyle,
+                      ),
+                      Padding(padding: EdgeInsets.only(top: 30)),
+                      const TextInput(
+                        labelText: 'NIK',
+                        hintText: 'Masukkan NIK...',
+                      ),
+                      const TextInput(
+                        labelText: 'Nama Lengkap',
+                        hintText: 'Masukkan Nama Lengkap...',
+                      ),
                     ],
                   ),
                 ),

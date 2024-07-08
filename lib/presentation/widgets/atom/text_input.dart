@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 
 class TextInput extends StatefulWidget {
-  const TextInput({super.key});
+  final String hintText;
+  final String labelText;
+  const TextInput({super.key, required this.hintText, required this.labelText});
 
   @override
   State<TextInput> createState() => _TextInputState();
@@ -15,11 +17,11 @@ class _TextInputState extends State<TextInput> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('NIK'),
+          Text(widget.labelText),
           Padding(padding: EdgeInsets.only(bottom: 5)),
           TextField(
             decoration: InputDecoration(
-              hintText: 'Masukan NIK...',
+              hintText: widget.hintText,
               contentPadding:
                   const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
               border: OutlineInputBorder(
