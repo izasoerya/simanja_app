@@ -18,6 +18,16 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   late GlobalTheme theme;
 
+  String _email = '';
+  _readEmail(email) {
+    setState(() => _email = email);
+  }
+
+  String _password = '';
+  _readPassword(password) {
+    setState(() => _password = password);
+  }
+
   @override
   void initState() {
     theme = GlobalTheme();
@@ -47,10 +57,23 @@ class _LoginPageState extends State<LoginPage> {
                     style: theme.headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
-                  const TextInput(hintText: 'Email', labelText: 'Email'),
-                  const TextInput(hintText: 'Password', labelText: 'Password'),
+                  TextInput(
+                    hintText: 'Email',
+                    labelText: 'Email',
+                    value: _readEmail,
+                  ),
+                  TextInput(
+                    hintText: 'Password',
+                    labelText: 'Password',
+                    value: _readPassword,
+                  ),
                   const Padding(padding: EdgeInsets.only(top: 15)),
-                  const SubmitButton(text: 'Masuk'),
+                  SubmitButton(
+                    text: 'Masuk',
+                    onClick: () {
+                      print('Email: $_email, Password: $_password');
+                    },
+                  ),
                   const Padding(padding: EdgeInsets.only(top: 15)),
                   NudeButton(
                       text: 'Lupa Kata Sandi?',
