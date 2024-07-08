@@ -22,13 +22,19 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const AuthLayout(child: RegisterPage());
+        return const AuthLayout(child: LoginPage());
       },
       routes: <RouteBase>[
         GoRoute(
           path: 'login',
           builder: (BuildContext context, GoRouterState state) {
             return const AuthLayout(child: LoginPage());
+          },
+        ),
+        GoRoute(
+          path: 'register',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AuthLayout(child: RegisterPage());
           },
         ),
         GoRoute(
