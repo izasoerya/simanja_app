@@ -20,10 +20,12 @@ class _TextInputState extends State<TextInput> {
           Text(widget.labelText),
           Padding(padding: EdgeInsets.only(bottom: 5)),
           TextField(
+            keyboardType: TextInputType.multiline, // Enable multiline input
+            maxLines: null,
             decoration: InputDecoration(
               hintText: widget.hintText,
-              contentPadding:
-                  const EdgeInsets.symmetric(vertical: 1, horizontal: 10),
+              contentPadding: const EdgeInsets.symmetric(
+                  vertical: 2, horizontal: 10), // Adjusted vertical padding
               border: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: Colors.grey,
