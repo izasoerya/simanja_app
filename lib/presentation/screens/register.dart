@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
@@ -17,6 +18,31 @@ class RegisterPage extends StatefulWidget {
 
 class _RegisterPageState extends State<RegisterPage> {
   late GlobalTheme theme;
+
+  String _nik = '';
+  _readNIK(data) {
+    setState(() => _nik = data);
+  }
+
+  String _name = '';
+  _readName(data) {
+    setState(() => _name = data);
+  }
+
+  String _address = '';
+  _readAddress(data) {
+    setState(() => _address = data);
+  }
+
+  String _email = '';
+  _readEmail(data) {
+    setState(() => _email = data);
+  }
+
+  String _password = '';
+  _readPassword(data) {
+    setState(() => _password = data);
+  }
 
   @override
   void initState() {
@@ -50,30 +76,46 @@ class _RegisterPageState extends State<RegisterPage> {
                     style: theme.headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
-                  const TextInput(
+                  TextInput(
                     labelText: 'NIK',
                     hintText: 'Masukkan NIK...',
+                    value: _readNIK,
                   ),
-                  const TextInput(
+                  TextInput(
                     labelText: 'Nama Lengkap',
                     hintText: 'Masukkan Nama Lengkap...',
+                    value: _readName,
                   ),
-                  const TextInput(
+                  TextInput(
                     labelText: 'Alamat',
                     hintText: 'Masukkan Alamat...',
+                    value: _readAddress,
                   ),
-                  const TextInput(
+                  TextInput(
                     labelText: 'Email',
                     hintText: 'Masukkan Email...',
+                    value: _readEmail,
                   ),
-                  const TextInput(
+                  TextInput(
                     labelText: 'Kata Sandi',
                     hintText: 'Masukkan Alamat...',
+                    value: _readPassword,
                   ),
                   const ChecklistBox(
                     text: 'Punya BPJS ?',
                   ),
-                  const SubmitButton(text: 'Daftar'),
+                  SubmitButton(
+                      text: 'Daftar',
+                      onClick: () {
+                        UserRemaja remaja = UserRemaja(
+                          nik: _nik,
+                          name: _name,
+                          address: _address,
+                          email: _email,
+                          password: _password,
+                        );
+                        print(remaja);
+                      }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',
                     redirect: widget._pushToLogin,
