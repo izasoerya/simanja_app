@@ -5,14 +5,14 @@ import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
-class AuthenticationPage extends StatefulWidget {
-  const AuthenticationPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<AuthenticationPage> createState() => _AuthenticationPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _AuthenticationPageState extends State<AuthenticationPage> {
+class _RegisterPageState extends State<RegisterPage> {
   late GlobalTheme theme;
 
   @override
