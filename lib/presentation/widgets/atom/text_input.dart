@@ -3,13 +3,33 @@ import 'package:flutter/material.dart';
 class TextInput extends StatefulWidget {
   final String hintText;
   final String labelText;
-  const TextInput({super.key, required this.hintText, required this.labelText});
+  final void Function(String d) value;
+  const TextInput({
+    super.key,
+    required this.hintText,
+    required this.labelText,
+    required this.value,
+  });
 
   @override
   State<TextInput> createState() => _TextInputState();
 }
 
 class _TextInputState extends State<TextInput> {
+  late TextEditingController _controller;
+
+  @override
+  void initState() {
+    _controller = TextEditingController();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -18,10 +38,11 @@ class _TextInputState extends State<TextInput> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(widget.labelText),
-          Padding(padding: EdgeInsets.only(bottom: 5)),
+          const Padding(padding: EdgeInsets.only(bottom: 5)),
           TextField(
-            keyboardType: TextInputType.multiline, // Enable multiline input
             maxLines: null,
+            controller: _controller,
+            keyboardType: TextInputType.multiline, // Enable multiline input
             decoration: InputDecoration(
               hintText: widget.hintText,
               contentPadding: const EdgeInsets.symmetric(
@@ -48,8 +69,11 @@ class _TextInputState extends State<TextInput> {
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
+            onChanged: (data) {
+              widget.value(data);
+            },
           ),
-          Padding(padding: EdgeInsets.only(bottom: 15)),
+          const Padding(padding: EdgeInsets.only(bottom: 15)),
         ],
       ),
     );

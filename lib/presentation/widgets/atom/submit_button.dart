@@ -3,7 +3,8 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class SubmitButton extends StatelessWidget {
   final String text;
-  const SubmitButton({super.key, required this.text});
+  final void Function() onClick;
+  const SubmitButton({super.key, required this.text, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +18,7 @@ class SubmitButton extends StatelessWidget {
               borderRadius: BorderRadius.circular(5),
             ),
           ),
-          onPressed: () {},
+          onPressed: onClick,
           child: Text(text,
               style: GlobalTheme()
                   .headerStyle
