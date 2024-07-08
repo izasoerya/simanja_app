@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
@@ -7,6 +8,8 @@ import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
+
+  void _pushToLogin() => router.go('/login');
 
   @override
   State<RegisterPage> createState() => _RegisterPageState();
@@ -71,7 +74,10 @@ class _RegisterPageState extends State<RegisterPage> {
                     text: 'Punya BPJS ?',
                   ),
                   const SubmitButton(text: 'Daftar'),
-                  const NudeButton(text: 'Sudah punya akun? Masuk'),
+                  NudeButton(
+                    text: 'Sudah punya akun? Masuk',
+                    redirect: widget._pushToLogin,
+                  ),
                   const Padding(padding: EdgeInsets.only(bottom: 75)),
                 ],
               ),

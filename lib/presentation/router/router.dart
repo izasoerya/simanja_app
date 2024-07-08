@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:simanja_app/presentation/screens/login.dart';
 import 'package:simanja_app/presentation/screens/register.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
-class MainLayout extends StatelessWidget {
+class AuthLayout extends StatelessWidget {
   final Widget child;
-  const MainLayout({super.key, required this.child});
+  const AuthLayout({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
@@ -21,13 +22,13 @@ final GoRouter router = GoRouter(
     GoRoute(
       path: '/',
       builder: (BuildContext context, GoRouterState state) {
-        return const MainLayout(child: RegisterPage());
+        return const AuthLayout(child: RegisterPage());
       },
       routes: <RouteBase>[
         GoRoute(
           path: 'login',
           builder: (BuildContext context, GoRouterState state) {
-            return const Placeholder();
+            return const AuthLayout(child: LoginPage());
           },
         ),
         GoRoute(
