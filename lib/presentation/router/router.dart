@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:simanja_app/presentation/layout/kader_layout.dart';
 import 'package:simanja_app/presentation/screens/kader/home.dart';
 import 'package:simanja_app/presentation/screens/kader/login_kader.dart';
 import 'package:simanja_app/presentation/screens/remaja/login_remaja.dart';
@@ -43,7 +44,7 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'dashboard-kader',
           builder: (BuildContext context, GoRouterState state) {
-            return const DashboardKader();
+            return const LayoutKader(child: DashboardKader());
           },
         ),
       ],

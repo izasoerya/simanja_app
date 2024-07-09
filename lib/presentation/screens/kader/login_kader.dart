@@ -63,9 +63,9 @@ class _LoginKaderPageState extends ConsumerState<LoginKaderPage> {
                   const Padding(padding: EdgeInsets.only(top: 15)),
                   SubmitButton(
                     text: 'Masuk',
-                    onClick: () {
+                    onClick: () async {
                       var kader = UserKader(email: _email, password: _password);
-                      KaderAuthentication()
+                      await KaderAuthentication()
                           .loginUser(kader)
                           .then((fetchedKader) {
                         if (UserKader().uid == null) {
