@@ -5,7 +5,7 @@ import 'package:simanja_app/presentation/screens/remaja/login_remaja.dart';
 import 'package:simanja_app/presentation/screens/remaja/register_remaja.dart';
 import 'package:simanja_app/presentation/screens/kader/register_kader.dart';
 import 'package:simanja_app/presentation/screens/welcome.dart';
-import 'package:simanja_app/presentation/theme/auth_layout.dart';
+import 'package:simanja_app/presentation/layout/auth_layout.dart';
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
