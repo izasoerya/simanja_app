@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/kader_auth.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
+import 'package:simanja_app/domain/services/remaja.auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
@@ -53,7 +56,7 @@ class _LoginRemajaPageState extends State<LoginRemajaPage> {
                 children: [
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   Text(
-                    'Masuk',
+                    'Masuk Remaja',
                     style: theme.headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
@@ -70,8 +73,16 @@ class _LoginRemajaPageState extends State<LoginRemajaPage> {
                   const Padding(padding: EdgeInsets.only(top: 15)),
                   SubmitButton(
                     text: 'Masuk',
-                    onClick: () {
-                      print('Email: $_email, Password: $_password');
+                    onClick: () async {
+                      UserRemaja remaja = UserRemaja(
+                        email: _email,
+                        password: _password,
+                      );
+                      bool auth =
+                          await RemajaAuthentication().loginUser(remaja);
+                      if (auth) {
+                        router.go('/details');
+                      }
                     },
                   ),
                   const Padding(padding: EdgeInsets.only(top: 15)),

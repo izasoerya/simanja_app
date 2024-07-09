@@ -49,8 +49,36 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
   }
 
   @override
-  Future<UserRemaja> getUserbyEmail(String email) {
-    // TODO: implement getUserbyEmail
+  Future<UserRemaja> getUserbyEmail(String email) async {
+    PostgrestMap response;
+    try {
+      response = await Supabase.instance.client
+          .from('remaja_auth') // select from table remaja_auth
+          .select() // select all columns
+          .eq('email', email) // where email = email
+          .single(); // fetches the first row
+    } catch (e) {
+      print('$e');
+      return Future.error(e);
+    }
+
+    UserRemaja user = UserRemaja(
+      uid: response['uid'],
+      name: response['name'],
+      nik: response['nik'],
+      sex: response['is_male'] == true ? Gender.male : Gender.female,
+      birthDate: DateTime.parse(response['date_of_birth']),
+      address: response['address'],
+      bpjs: response['is_bpjs'],
+      email: response['email'],
+      password: response['password'],
+    );
+    return user;
+  }
+
+  @override
+  Future<UserRemaja> getUserbyPassword(String password) {
+    // TODO: implement getUserbyPassword
     throw UnimplementedError();
   }
 

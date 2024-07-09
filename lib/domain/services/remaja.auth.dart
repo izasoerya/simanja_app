@@ -6,4 +6,17 @@ class RemajaAuthentication {
     await RemajaAuthImplementation().createUser(user);
     return true;
   }
+
+  Future<bool> loginUser(UserRemaja user) async {
+    try {
+      UserRemaja fetchedUser =
+          await RemajaAuthImplementation().getUserbyEmail(user.email!);
+      if (fetchedUser.password == user.password) {
+        return true;
+      }
+    } catch (e) {
+      print('Error logging in user: $e');
+    }
+    return false;
+  }
 }
