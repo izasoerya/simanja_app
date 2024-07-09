@@ -73,15 +73,16 @@ class _LoginRemajaPageState extends State<LoginRemajaPage> {
                   SubmitButton(
                     text: 'Masuk',
                     onClick: () async {
-                      UserRemaja remaja = UserRemaja(
-                        email: _email,
-                        password: _password,
-                      );
-                      bool auth =
-                          await RemajaAuthentication().loginUser(remaja);
-                      if (auth) {
-                        router.go('/details');
-                      }
+                      RemajaAuthentication()
+                          .loginUser(
+                              UserRemaja(email: _email, password: _password))
+                          .then((value) {
+                        if (value == true) {
+                          print('Login Success');
+                        } else {
+                          print('Login Failed');
+                        }
+                      });
                     },
                   ),
                   const Padding(padding: EdgeInsets.only(top: 15)),
