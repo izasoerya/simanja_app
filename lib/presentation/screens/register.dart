@@ -3,6 +3,7 @@ import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
+import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -50,6 +51,11 @@ class _RegisterPageState extends State<RegisterPage> {
     setState(() => _bpjs = data);
   }
 
+  DateTime _dateOfBirth = DateTime.now();
+  _readDoB(data) {
+    setState(() => _dateOfBirth = data);
+  }
+
   @override
   void initState() {
     theme = GlobalTheme();
@@ -83,47 +89,42 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   TextInput(
-                    labelText: 'NIK',
-                    hintText: 'Masukkan NIK...',
-                    value: _readNIK,
-                  ),
+                      labelText: 'NIK',
+                      hintText: 'Masukkan NIK...',
+                      value: _readNIK),
                   TextInput(
-                    labelText: 'Nama Lengkap',
-                    hintText: 'Masukkan Nama Lengkap...',
-                    value: _readName,
-                  ),
+                      labelText: 'Nama Lengkap',
+                      hintText: 'Masukkan Nama Lengkap...',
+                      value: _readName),
+                  DateOfBirthField(value: _readDoB),
                   TextInput(
-                    labelText: 'Alamat',
-                    hintText: 'Masukkan Alamat...',
-                    value: _readAddress,
-                  ),
+                      labelText: 'Alamat',
+                      hintText: 'Masukkan Alamat...',
+                      value: _readAddress),
                   TextInput(
-                    labelText: 'Email',
-                    hintText: 'Masukkan Email...',
-                    value: _readEmail,
-                  ),
+                      labelText: 'Email',
+                      hintText: 'Masukkan Email...',
+                      value: _readEmail),
                   TextInput(
-                    labelText: 'Kata Sandi',
-                    hintText: 'Masukkan Alamat...',
-                    value: _readPassword,
-                  ),
-                  ChecklistBox(
-                    text: 'Punya BPJS ?',
-                    value: _readBPJS,
-                  ),
+                      labelText: 'Kata Sandi',
+                      hintText: 'Masukkan Alamat...',
+                      value: _readPassword),
+                  ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () {
                         UserRemaja remaja = UserRemaja(
                           nik: _nik,
                           name: _name,
+                          birthDate: _dateOfBirth,
                           address: _address,
                           email: _email,
                           password: _password,
                           bpjs: _bpjs,
                         );
                         // Todo: Implement registration logic
-                        print('name: ${remaja.name}, status: ${remaja.bpjs}');
+                        print(
+                            'name: ${remaja.name}, status: ${remaja.birthDate}');
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',
