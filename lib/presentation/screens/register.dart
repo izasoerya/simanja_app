@@ -4,9 +4,11 @@ import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
+import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
+import 'package:simanja_app/utils/enums.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -20,41 +22,30 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   late GlobalTheme theme;
 
-  // Callback hell
+  //* Callback hell
   String _nik = '';
-  _readNIK(data) {
-    setState(() => _nik = data);
-  }
+  void _readNIK(data) => _nik = data;
 
   String _name = '';
-  _readName(data) {
-    setState(() => _name = data);
-  }
-
-  String _address = '';
-  _readAddress(data) {
-    setState(() => _address = data);
-  }
-
-  String _email = '';
-  _readEmail(data) {
-    setState(() => _email = data);
-  }
-
-  String _password = '';
-  _readPassword(data) {
-    setState(() => _password = data);
-  }
-
-  bool _bpjs = false;
-  _readBPJS(data) {
-    setState(() => _bpjs = data);
-  }
+  void _readName(data) => _name = data;
 
   DateTime _dateOfBirth = DateTime.now();
-  _readDoB(data) {
-    setState(() => _dateOfBirth = data);
-  }
+  void _readDoB(data) => _dateOfBirth = data;
+
+  String _address = '';
+  void _readAddress(data) => _address = data;
+
+  String _email = '';
+  void _readEmail(data) => _email = data;
+
+  String _password = '';
+  void _readPassword(data) => _password = data;
+
+  bool _bpjs = false;
+  void _readBPJS(data) => _bpjs = data;
+
+  Gender _sex = Gender.male;
+  void _readSex(data) => _sex = data;
 
   @override
   void initState() {
@@ -110,6 +101,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       hintText: 'Masukkan Alamat...',
                       value: _readPassword),
                   ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
+                  GenderSelection(value: _readSex),
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () {
@@ -121,10 +113,11 @@ class _RegisterPageState extends State<RegisterPage> {
                           email: _email,
                           password: _password,
                           bpjs: _bpjs,
+                          sex: _sex,
                         );
                         // Todo: Implement registration logic
                         print(
-                            'name: ${remaja.name}, status: ${remaja.birthDate}');
+                            'Name user: ${remaja.name}, Status: ${remaja.sex}');
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',
