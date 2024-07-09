@@ -27,8 +27,8 @@ class WelcomePage extends StatelessWidget {
               ),
               const Image(
                 image: AssetImage('assets/logo/SiMandja-Logo.png'),
-                height: 250,
-                width: 250,
+                height: 275,
+                width: 275,
               ),
               SizedBox(
                 child: Column(
