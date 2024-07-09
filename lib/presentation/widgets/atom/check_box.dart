@@ -3,7 +3,8 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class ChecklistBox extends StatefulWidget {
   final String text;
-  const ChecklistBox({super.key, required this.text});
+  final void Function(bool d) value;
+  const ChecklistBox({super.key, required this.text, required this.value});
 
   @override
   State<ChecklistBox> createState() => _ChecklistBoxState();
@@ -30,6 +31,7 @@ class _ChecklistBoxState extends State<ChecklistBox> {
           onChanged: (bool? value) {
             setState(() {
               isChecked = value!;
+              widget.value(isChecked);
             });
           },
         ),

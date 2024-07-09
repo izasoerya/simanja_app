@@ -19,6 +19,7 @@ class RegisterPage extends StatefulWidget {
 class _RegisterPageState extends State<RegisterPage> {
   late GlobalTheme theme;
 
+  // Callback hell
   String _nik = '';
   _readNIK(data) {
     setState(() => _nik = data);
@@ -42,6 +43,11 @@ class _RegisterPageState extends State<RegisterPage> {
   String _password = '';
   _readPassword(data) {
     setState(() => _password = data);
+  }
+
+  bool _bpjs = false;
+  _readBPJS(data) {
+    setState(() => _bpjs = data);
   }
 
   @override
@@ -101,8 +107,9 @@ class _RegisterPageState extends State<RegisterPage> {
                     hintText: 'Masukkan Alamat...',
                     value: _readPassword,
                   ),
-                  const ChecklistBox(
+                  ChecklistBox(
                     text: 'Punya BPJS ?',
+                    value: _readBPJS,
                   ),
                   SubmitButton(
                       text: 'Daftar',
@@ -113,8 +120,10 @@ class _RegisterPageState extends State<RegisterPage> {
                           address: _address,
                           email: _email,
                           password: _password,
+                          bpjs: _bpjs,
                         );
-                        print(remaja);
+                        // Todo: Implement registration logic
+                        print('name: ${remaja.name}, status: ${remaja.bpjs}');
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',
