@@ -17,7 +17,7 @@ class _ChecklistBoxState extends State<ChecklistBox> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
-        Padding(padding: EdgeInsets.only(left: 5)),
+        const Padding(padding: EdgeInsets.only(left: 5)),
         Checkbox(
           value: isChecked,
           checkColor: Colors.white, // Color of the tick
