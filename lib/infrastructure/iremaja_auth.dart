@@ -6,6 +6,7 @@ import 'package:uuid/uuid.dart';
 
 class RemajaAuthImplementation implements RemajaAuthRepo {
   final Uuid _uuid = const Uuid();
+  PostgrestResponse? response;
 
   @override
   Future<void> createUser(UserRemaja user) async {
@@ -35,7 +36,8 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
         'password': newUser.password,
       });
     } catch (e) {
-      print('Error creating user: $e');
+      print('$e');
+      return Future.value(e);
     }
     return Future.value();
   }

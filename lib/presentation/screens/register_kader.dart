@@ -1,52 +1,32 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/remaja_auth.dart';
-import 'package:simanja_app/domain/services/remaja.auth.dart';
+import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
-import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
-import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
-import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
-import 'package:simanja_app/utils/enums.dart';
 
-class RegisterPage extends StatefulWidget {
-  const RegisterPage({super.key});
+class RegisterKaderPage extends StatefulWidget {
+  const RegisterKaderPage({super.key});
 
-  void _pushToLogin() => router.go('/login');
+  void _pushToLogin() => router.go('/login-kader');
 
   @override
-  State<RegisterPage> createState() => _RegisterPageState();
+  State<RegisterKaderPage> createState() => _RegisterKaderPageState();
 }
 
-class _RegisterPageState extends State<RegisterPage> {
+class _RegisterKaderPageState extends State<RegisterKaderPage> {
   late GlobalTheme theme;
 
   //* Callback hell
-  String _nik = '';
-  void _readNIK(data) => _nik = data;
-
   String _name = '';
   void _readName(data) => _name = data;
-
-  DateTime _dateOfBirth = DateTime.now();
-  void _readDoB(data) => _dateOfBirth = data;
-
-  String _address = '';
-  void _readAddress(data) => _address = data;
 
   String _email = '';
   void _readEmail(data) => _email = data;
 
   String _password = '';
   void _readPassword(data) => _password = data;
-
-  bool _bpjs = false;
-  void _readBPJS(data) => _bpjs = data;
-
-  Gender _sex = Gender.male;
-  void _readSex(data) => _sex = data;
 
   @override
   void initState() {
@@ -81,18 +61,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   TextInput(
-                      labelText: 'NIK',
-                      hintText: 'Masukkan NIK...',
-                      value: _readNIK),
-                  TextInput(
                       labelText: 'Nama Lengkap',
                       hintText: 'Masukkan Nama Lengkap...',
                       value: _readName),
-                  DateOfBirthField(value: _readDoB),
-                  TextInput(
-                      labelText: 'Alamat',
-                      hintText: 'Masukkan Alamat...',
-                      value: _readAddress),
                   TextInput(
                       labelText: 'Email',
                       hintText: 'Masukkan Email...',
@@ -101,22 +72,16 @@ class _RegisterPageState extends State<RegisterPage> {
                       labelText: 'Kata Sandi',
                       hintText: 'Masukkan Alamat...',
                       value: _readPassword),
-                  ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
-                  GenderSelection(value: _readSex),
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () {
-                        UserRemaja remaja = UserRemaja(
-                          nik: _nik,
+                        UserKader kader = UserKader(
                           name: _name,
-                          birthDate: _dateOfBirth,
-                          address: _address,
                           email: _email,
                           password: _password,
-                          bpjs: _bpjs,
-                          sex: _sex,
                         );
-                        RemajaAuthentication().createUser(remaja);
+                        print(
+                            'Registering kader: ${kader.name}, ${kader.email}, ${kader.password}');
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',

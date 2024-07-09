@@ -6,8 +6,8 @@ import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 class WelcomePage extends StatelessWidget {
   const WelcomePage({super.key});
 
-  void _pushToKaderAuth() => router.go('/login');
-  void _pushToRemajaAuth() => router.go('/login');
+  void _pushToKaderAuth() => router.go('/login-kader');
+  void _pushToRemajaAuth() => router.go('/login-remaja');
 
   @override
   Widget build(BuildContext context) {

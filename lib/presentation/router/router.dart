@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simanja_app/presentation/screens/login.dart';
-import 'package:simanja_app/presentation/screens/register.dart';
+import 'package:simanja_app/presentation/screens/login_kader.dart';
+import 'package:simanja_app/presentation/screens/login_remaja.dart';
+import 'package:simanja_app/presentation/screens/register_remaja.dart';
+import 'package:simanja_app/presentation/screens/register_kader.dart';
 import 'package:simanja_app/presentation/screens/welcome.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
@@ -27,15 +29,27 @@ final GoRouter router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'login',
+          path: 'login-remaja',
           builder: (BuildContext context, GoRouterState state) {
-            return const AuthLayout(child: LoginPage());
+            return const AuthLayout(child: LoginRemajaPage());
           },
         ),
         GoRoute(
-          path: 'register',
+          path: 'register-remaja',
           builder: (BuildContext context, GoRouterState state) {
-            return const AuthLayout(child: RegisterPage());
+            return const AuthLayout(child: RegisterRemajaPage());
+          },
+        ),
+        GoRoute(
+          path: 'login-kader',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AuthLayout(child: LoginKaderPage());
+          },
+        ),
+        GoRoute(
+          path: 'register-kader',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AuthLayout(child: RegisterKaderPage());
           },
         ),
         GoRoute(

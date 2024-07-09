@@ -5,17 +5,17 @@ import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class LoginRemajaPage extends StatefulWidget {
+  const LoginRemajaPage({super.key});
 
-  void _pushToRegister() => router.go('/register');
+  void _pushToRegister() => router.go('/register-remaja');
   void _pushToForgotPassword() => router.go('/forgot-password');
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<LoginRemajaPage> createState() => _LoginRemajaPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginRemajaPageState extends State<LoginRemajaPage> {
   late GlobalTheme theme;
 
   String _email = '';
