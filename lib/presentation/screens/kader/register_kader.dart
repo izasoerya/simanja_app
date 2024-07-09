@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_auth.dart';
+import 'package:simanja_app/domain/services/kader_auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
@@ -80,8 +81,7 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                           email: _email,
                           password: _password,
                         );
-                        print(
-                            'Registering kader: ${kader.name}, ${kader.email}, ${kader.password}');
+                        KaderAuthentication().createUser(kader);
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',

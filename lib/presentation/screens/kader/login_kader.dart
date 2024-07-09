@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/kader_auth.dart';
+import 'package:simanja_app/domain/services/kader_auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
@@ -72,6 +74,16 @@ class _LoginKaderPageState extends State<LoginKaderPage> {
                     text: 'Masuk',
                     onClick: () {
                       print('Email: $_email, Password: $_password');
+                      KaderAuthentication()
+                          .loginUser(
+                              UserKader(email: _email, password: _password))
+                          .then((value) {
+                        if (value) {
+                          print('Login success');
+                        } else {
+                          print('Login failed');
+                        }
+                      });
                     },
                   ),
                   const Padding(padding: EdgeInsets.only(top: 15)),
