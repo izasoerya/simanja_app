@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/services/remaja.auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
