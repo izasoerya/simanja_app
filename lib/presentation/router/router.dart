@@ -5,20 +5,7 @@ import 'package:simanja_app/presentation/screens/remaja/login_remaja.dart';
 import 'package:simanja_app/presentation/screens/remaja/register_remaja.dart';
 import 'package:simanja_app/presentation/screens/kader/register_kader.dart';
 import 'package:simanja_app/presentation/screens/welcome.dart';
-import 'package:simanja_app/presentation/theme/global_theme.dart';
-
-class AuthLayout extends StatelessWidget {
-  final Widget child;
-  const AuthLayout({super.key, required this.child});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: GlobalTheme().primaryColor,
-      body: child,
-    );
-  }
-}
+import 'package:simanja_app/presentation/theme/auth_layout.dart';
 
 final GoRouter router = GoRouter(
   routes: <RouteBase>[
