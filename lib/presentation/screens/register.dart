@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
+import 'package:simanja_app/domain/services/remaja.auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
@@ -118,6 +119,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         // Todo: Implement registration logic
                         print(
                             'Name user: ${remaja.name}, Status: ${remaja.sex}');
+                        RemajaAuthentication().createUser(remaja);
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',
