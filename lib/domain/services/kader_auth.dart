@@ -7,16 +7,16 @@ class KaderAuthentication {
     return true;
   }
 
-  Future<bool> loginUser(UserKader user) async {
+  Future<UserKader> loginUser(UserKader user) async {
     try {
       UserKader fetchedUser =
           await KaderAuthImplementation().getUserbyEmail(user.email!);
       if (fetchedUser.password == user.password) {
-        return true;
+        return fetchedUser;
       }
     } catch (e) {
       print('Error logging in user: $e');
     }
-    return false;
+    return UserKader();
   }
 }
