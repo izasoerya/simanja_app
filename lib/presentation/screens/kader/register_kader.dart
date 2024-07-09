@@ -56,7 +56,7 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                 children: [
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   Text(
-                    'Daftar Remaja',
+                    'Daftar Kader',
                     style: theme.headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),

@@ -53,7 +53,7 @@ class _LoginKaderPageState extends State<LoginKaderPage> {
                 children: [
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   Text(
-                    'Masuk',
+                    'Masuk Kader',
                     style: theme.headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
