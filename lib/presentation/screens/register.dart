@@ -116,9 +116,6 @@ class _RegisterPageState extends State<RegisterPage> {
                           bpjs: _bpjs,
                           sex: _sex,
                         );
-                        // Todo: Implement registration logic
-                        print(
-                            'Name user: ${remaja.name}, Status: ${remaja.sex}');
                         RemajaAuthentication().createUser(remaja);
                       }),
                   NudeButton(
