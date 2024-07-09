@@ -1,5 +1,4 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/widgets/organism/wide_textvalue_rectangle.dart.dart';
 import 'package:simanja_app/presentation/widgets/organism/big_textvalue_rectangle.dart';
 
