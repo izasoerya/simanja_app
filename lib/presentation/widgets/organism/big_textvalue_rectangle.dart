@@ -4,8 +4,8 @@ import 'package:flutter/widgets.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/label_value_text.dart';
 
-class DashboardRemajaDrafted extends StatelessWidget {
-  const DashboardRemajaDrafted({super.key});
+class BigTextValueRectangle extends StatelessWidget {
+  const BigTextValueRectangle({super.key});
 
   @override
   Widget build(BuildContext context) {

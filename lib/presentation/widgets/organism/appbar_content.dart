@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/widgets/atom/appbar_text.dart';
 
-class AppbarDashboard extends StatelessWidget {
-  const AppbarDashboard({super.key});
+class AppbarContent extends StatelessWidget {
+  const AppbarContent({super.key});
 
   @override
   Widget build(BuildContext context) {

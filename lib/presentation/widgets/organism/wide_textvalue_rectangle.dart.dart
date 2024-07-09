@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/widgets/atom/label_value_text.dart';
 
-class DashboardCountRemaja extends StatelessWidget {
-  const DashboardCountRemaja({super.key});
+class WideTextValueRectangle extends StatelessWidget {
+  const WideTextValueRectangle({super.key});
 
   @override
   Widget build(BuildContext context) {
