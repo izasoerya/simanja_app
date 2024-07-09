@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class TextInput extends StatefulWidget {
   final String hintText;
@@ -69,6 +70,7 @@ class _TextInputState extends State<TextInput> {
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
+            style: GlobalTheme().paragraphStyle,
             onChanged: (data) {
               widget.value(data);
             },
