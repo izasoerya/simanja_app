@@ -16,8 +16,8 @@ class GlobalTheme {
       );
   TextStyle get paragraphStyle => TextStyle(
         fontFamily: GoogleFonts.openSans().fontFamily,
-        fontSize: 12,
-        // fontWeight: FontWeight.bold,
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
         color: Colors.black,
       );
 }
