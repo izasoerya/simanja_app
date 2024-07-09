@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/services/kader_auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
@@ -18,23 +19,11 @@ class LoginKaderPage extends StatefulWidget {
 }
 
 class _LoginKaderPageState extends State<LoginKaderPage> {
-  late GlobalTheme theme;
-
   String _email = '';
-  _readEmail(email) {
-    setState(() => _email = email);
-  }
+  void _readEmail(data) => _email = data;
 
   String _password = '';
-  _readPassword(password) {
-    setState(() => _password = password);
-  }
-
-  @override
-  void initState() {
-    theme = GlobalTheme();
-    super.initState();
-  }
+  void _readPassword(data) => _password = data;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +45,7 @@ class _LoginKaderPageState extends State<LoginKaderPage> {
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   Text(
                     'Masuk Kader',
-                    style: theme.headerStyle,
+                    style: GlobalTheme().headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   TextInput(

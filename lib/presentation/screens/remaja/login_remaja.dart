@@ -18,23 +18,11 @@ class LoginRemajaPage extends StatefulWidget {
 }
 
 class _LoginRemajaPageState extends State<LoginRemajaPage> {
-  late GlobalTheme theme;
-
   String _email = '';
-  _readEmail(email) {
-    setState(() => _email = email);
-  }
+  void _readEmail(data) => _email = data;
 
   String _password = '';
-  _readPassword(password) {
-    setState(() => _password = password);
-  }
-
-  @override
-  void initState() {
-    theme = GlobalTheme();
-    super.initState();
-  }
+  void _readPassword(data) => _password = data;
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +44,7 @@ class _LoginRemajaPageState extends State<LoginRemajaPage> {
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   Text(
                     'Masuk Remaja',
-                    style: theme.headerStyle,
+                    style: GlobalTheme().headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   TextInput(
