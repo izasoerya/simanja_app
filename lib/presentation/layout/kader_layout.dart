@@ -21,7 +21,7 @@ class _LayoutKaderState extends State<LayoutKader> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child,
+      body: SafeArea(child: widget.child),
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
