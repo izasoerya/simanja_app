@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/presentation/widgets/atom/attentance_bpjs.dart';
+import 'package:simanja_app/presentation/widgets/atom/label_value_text.dart';
 
 class DashboardCountRemaja extends StatelessWidget {
   const DashboardCountRemaja({super.key});
@@ -19,8 +19,8 @@ class DashboardCountRemaja extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              AttendanceBPJS(label: 'Hadir hari ini:', value: '20'),
-              AttendanceBPJS(label: 'Memiliki BPJS:', value: '2'),
+              LabelValueText(label: 'Hadir hari ini:', value: '20'),
+              LabelValueText(label: 'Memiliki BPJS:', value: '2'),
             ],
           ),
         ],

@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
-import 'package:simanja_app/presentation/widgets/atom/attentance_bpjs.dart';
+import 'package:simanja_app/presentation/widgets/atom/label_value_text.dart';
 
 class DashboardRemajaDrafted extends StatelessWidget {
   const DashboardRemajaDrafted({super.key});

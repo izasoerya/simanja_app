@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
-class AttendanceBPJS extends ConsumerWidget {
+class LabelValueText extends ConsumerWidget {
   final String label;
   final String value;
-  const AttendanceBPJS({super.key, required this.label, required this.value});
+  const LabelValueText({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
