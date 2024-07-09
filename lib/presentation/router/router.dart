@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:simanja_app/presentation/screens/login_kader.dart';
-import 'package:simanja_app/presentation/screens/login_remaja.dart';
-import 'package:simanja_app/presentation/screens/register_remaja.dart';
-import 'package:simanja_app/presentation/screens/register_kader.dart';
+import 'package:simanja_app/presentation/screens/kader/login_kader.dart';
+import 'package:simanja_app/presentation/screens/remaja/login_remaja.dart';
+import 'package:simanja_app/presentation/screens/remaja/register_remaja.dart';
+import 'package:simanja_app/presentation/screens/kader/register_kader.dart';
 import 'package:simanja_app/presentation/screens/welcome.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
