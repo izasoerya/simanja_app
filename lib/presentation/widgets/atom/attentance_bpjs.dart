@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class AttendanceBPJS extends ConsumerWidget {
   final String label;
@@ -20,9 +21,9 @@ class AttendanceBPJS extends ConsumerWidget {
         ),
         Text(
           value,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 12,
+          style: TextStyle(
+            color: GlobalTheme().secondaryColor,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),

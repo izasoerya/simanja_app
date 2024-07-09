@@ -8,7 +8,7 @@ class DashboardCountRemaja extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
-      height: 60,
+      height: 75,
       decoration: BoxDecoration(
         color: Colors.grey.shade300,
         borderRadius: const BorderRadius.all(Radius.circular(5)),
