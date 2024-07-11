@@ -2,7 +2,8 @@ import 'package:simanja_app/utils/enums.dart';
 
 class UserKader {
   final String uid;
-  final String name;
+  final String nameKader;
+  final String namePosyandu;
   final String nik;
   final Gender sex;
   final DateTime birthDate;
@@ -13,7 +14,8 @@ class UserKader {
 
   UserKader({
     required this.uid,
-    required this.name,
+    required this.nameKader,
+    required this.namePosyandu,
     required this.nik,
     required this.sex,
     required this.birthDate,
@@ -25,7 +27,8 @@ class UserKader {
 
   UserKader copyWith({
     String? uid,
-    String? name,
+    String? nameKader,
+    String? namePosyandu,
     String? nik,
     Gender? sex,
     DateTime? birthDate,
@@ -36,7 +39,8 @@ class UserKader {
   }) {
     return UserKader(
       uid: uid ?? this.uid,
-      name: name ?? this.name,
+      nameKader: nameKader ?? this.nameKader,
+      namePosyandu: namePosyandu ?? this.namePosyandu,
       nik: nik ?? this.nik,
       sex: sex ?? this.sex,
       birthDate: birthDate ?? this.birthDate,

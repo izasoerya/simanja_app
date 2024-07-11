@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_auth.dart';
-import 'package:simanja_app/domain/services/kader_auth.dart';
+import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
@@ -72,7 +72,7 @@ class _LoginKaderPageState extends ConsumerState<LoginKaderPage> {
                       await KaderAuthentication()
                           .loginUser(kader)
                           .then((fetchedKader) {
-                        if (kader.uid != 'dummy') {
+                        if (fetchedKader.uid != 'dummy') {
                           setUserKader(ref, fetchedKader);
                           widget._pushToDashboard();
                         } else {

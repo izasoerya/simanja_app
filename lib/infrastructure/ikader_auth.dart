@@ -13,7 +13,8 @@ class KaderAuthImplementation implements KaderAuthRepo {
     String uid = _uuid.v4();
     UserKader newUser = UserKader(
       uid: uid,
-      name: user.name,
+      nameKader: user.nameKader,
+      namePosyandu: user.namePosyandu,
       nik: user.nik,
       sex: user.sex,
       birthDate: user.birthDate,
@@ -26,7 +27,13 @@ class KaderAuthImplementation implements KaderAuthRepo {
     try {
       await Supabase.instance.client.from('kader_auth').insert({
         'uid': newUser.uid,
-        'name': newUser.name,
+        'kader_name': newUser.nameKader,
+        'posyandu_name': newUser.namePosyandu,
+        'nik': newUser.nik,
+        'is_male': newUser.sex == Gender.male ? true : false,
+        'date_of_birth': newUser.birthDate.toIso8601String(),
+        'address': newUser.address,
+        'is_bpjs': newUser.bpjs,
         'email': newUser.email,
         'password': newUser.password,
       });
@@ -65,7 +72,8 @@ class KaderAuthImplementation implements KaderAuthRepo {
 
     UserKader user = UserKader(
       uid: response['uid'],
-      name: response['name'],
+      nameKader: response['kader_name'],
+      namePosyandu: response['posyandu_name'],
       nik: response['nik'],
       sex: response['is_male'] == true ? Gender.male : Gender.female,
       birthDate: DateTime.parse(response['date_of_birth']),

@@ -3,7 +3,8 @@ import 'package:simanja_app/utils/enums.dart';
 
 UserKader kaderAccount = UserKader(
   uid: 'dummy',
-  name: 'dummy',
+  nameKader: 'dummy',
+  namePosyandu: 'dummy',
   nik: 'dummy',
   sex: Gender.male,
   birthDate: DateTime.now(),
