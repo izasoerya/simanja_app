@@ -1,25 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simanja_app/presentation/provider/provider_index_page.dart';
+import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
-class LayoutKader extends StatefulWidget {
+class LayoutKader extends ConsumerStatefulWidget {
   final Widget child;
   const LayoutKader({super.key, required this.child});
 
   @override
-  _LayoutKaderState createState() => _LayoutKaderState();
+  ConsumerState<LayoutKader> createState() => _LayoutKaderState();
 }
 
-class _LayoutKaderState extends State<LayoutKader> {
-  int _selectedIndex = 0;
-
+class _LayoutKaderState extends ConsumerState<LayoutKader> {
   void _onItemTapped(int index) {
     setState(() {
-      _selectedIndex = index;
-      if (_selectedIndex == 4) {
-        router.go('/');
+      ref.watch(pageIndexProvider.notifier).state = index;
+      switch (ref.watch(pageIndexProvider)) {
+        case 0:
+          router.push('/dashboard-kader');
+          break;
+        case 1:
+          router.go('/data-remaja-kader');
+          break;
+        case 4:
+          router.push('/');
+          break;
       }
-      print(_selectedIndex);
+      print(ref.watch(pageIndexProvider));
     });
   }
 
@@ -33,7 +42,7 @@ class _LayoutKaderState extends State<LayoutKader> {
         backgroundColor: Colors.white,
         selectedItemColor: GlobalTheme().primaryColor,
         unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
+        currentIndex: ref.watch(pageIndexProvider),
         onTap: _onItemTapped,
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
