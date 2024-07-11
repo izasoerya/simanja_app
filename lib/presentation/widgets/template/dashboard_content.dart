@@ -14,22 +14,24 @@ class DashboardContent extends StatelessWidget {
         const WideTextValueRectangle(),
         const Padding(padding: EdgeInsets.only(top: 5)),
         SizedBox(
-          height: MediaQuery.of(context).size.height *
-              0.4, // Adjust height as needed
+          height: MediaQuery.of(context).size.height * 0.4,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
               const BigTextValueRectangle(),
               Positioned(
-                top: MediaQuery.of(context).size.height *
-                    0.18, // Adjust position as needed
+                top: MediaQuery.of(context).size.height * 0.18,
                 left: 0,
                 right: 0,
                 child: const Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    SmallTextvalueSquareContainer(),
-                    SmallTextvalueSquareContainer(),
+                    SmallTextvalueSquareContainer(
+                        upperText: '//Todo:4',
+                        lowerText: 'Jumlah Remaja Perempuan'),
+                    SmallTextvalueSquareContainer(
+                        upperText: '//Todo:4',
+                        lowerText: 'Jumlah Remaja Laki-laki'),
                   ],
                 ),
               ),

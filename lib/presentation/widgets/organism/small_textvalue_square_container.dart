@@ -3,7 +3,10 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/label_value_text.dart';
 
 class SmallTextvalueSquareContainer extends StatelessWidget {
-  const SmallTextvalueSquareContainer({super.key});
+  final String upperText;
+  final String lowerText;
+  const SmallTextvalueSquareContainer(
+      {super.key, required this.upperText, required this.lowerText});
 
   @override
   Widget build(BuildContext context) {
@@ -14,12 +17,12 @@ class SmallTextvalueSquareContainer extends StatelessWidget {
         color: GlobalTheme().secondaryColor,
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
-      child: const Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           LabelValueText(
-            label: 'Jumlah Remaja Perempuan',
-            value: '//Todo: 4',
+            label: upperText,
+            value: lowerText,
             textColor: Colors.white,
           ),
         ],

@@ -15,32 +15,37 @@ class AppbarText extends ConsumerWidget {
           'Selamat Datang,',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 20,
+            fontSize: 18,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          '${ref.watch(userKaderProvider).name}',
+          ref.watch(userKaderProvider).nameKader,
           style: TextStyle(
             color: GlobalTheme().primaryColor,
-            fontSize: 16,
+            fontSize: 24,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          '//TODO: Place Name',
+          ref.watch(userKaderProvider).namePosyandu,
           style: TextStyle(
             color: GlobalTheme().secondaryColor,
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
         ),
-        Text(
-          '//TODO: Address',
-          style: TextStyle(
-            color: GlobalTheme().secondaryColor,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+        SizedBox(
+          width: MediaQuery.of(context).size.width * 0.5,
+          child: Text(
+            ref.watch(userKaderProvider).address,
+            style: TextStyle(
+              color: GlobalTheme().secondaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.normal,
+            ),
+            maxLines: 2,
+            overflow: TextOverflow.ellipsis,
           ),
         ),
       ],

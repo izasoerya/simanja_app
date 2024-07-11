@@ -15,6 +15,7 @@ class DashboardKader extends ConsumerWidget {
           AppbarContent(),
           Padding(padding: EdgeInsets.only(top: 30)),
           TemplateTitle(),
+          Padding(padding: EdgeInsets.only(top: 15)),
           DashboardContent(),
         ],
       ),

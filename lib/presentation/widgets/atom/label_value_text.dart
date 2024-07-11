@@ -29,9 +29,10 @@ class LabelValueText extends ConsumerWidget {
           value,
           style: TextStyle(
             color: textColor,
-            fontSize: 24,
+            fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
+          textAlign: TextAlign.center,
         ),
       ],
     );
