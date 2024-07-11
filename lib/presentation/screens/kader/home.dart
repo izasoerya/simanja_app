@@ -28,6 +28,8 @@ class DashboardKader extends ConsumerWidget {
                   child: const SummaryRemaja(
                       leftText: 'HARI INI', rightText: 'SEMUA')),
               const Padding(padding: EdgeInsets.only(top: 50)),
+              const TemplateTitle(text: 'KEGIATAN POSYANDU'),
+              const Padding(padding: EdgeInsets.only(top: 50)),
             ],
           ),
         ),

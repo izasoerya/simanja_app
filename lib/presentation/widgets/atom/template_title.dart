@@ -11,7 +11,7 @@ class TemplateTitle extends StatelessWidget {
     return Text(
       text,
       style: TextStyle(
-          fontSize: 28,
+          fontSize: 20,
           fontWeight: FontWeight.normal,
           color: GlobalTheme().primaryColor,
           fontFamily: GoogleFonts.archivoBlack().fontFamily),

@@ -14,7 +14,7 @@ class DashboardContent extends StatelessWidget {
         const WideTextValueRectangle(),
         const Padding(padding: EdgeInsets.only(top: 5)),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.4,
+          height: MediaQuery.of(context).size.height * 0.35,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
