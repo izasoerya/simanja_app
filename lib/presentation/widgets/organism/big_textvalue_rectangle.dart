@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
-class BigTextValueRectangle extends StatelessWidget {
+class BigTextValueRectangle extends ConsumerWidget {
   const BigTextValueRectangle({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Container(
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.25,
@@ -16,10 +18,10 @@ class BigTextValueRectangle extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const SizedBox(
+          SizedBox(
             child: Column(
               children: [
-                Text(
+                const Text(
                   'Jumlah Remaja Terdaftar SiMandja',
                   style: TextStyle(
                     color: Colors.white,
@@ -28,8 +30,8 @@ class BigTextValueRectangle extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '//TODO: Posyandu Remaja Pramahayu',
-                  style: TextStyle(
+                  ref.watch(userKaderProvider).namePosyandu,
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 16,
                     fontWeight: FontWeight.bold,
