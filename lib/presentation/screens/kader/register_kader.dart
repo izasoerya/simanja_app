@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/utils/enums.dart';
 import 'package:simanja_app/domain/entities/kader_auth.dart';
-import 'package:simanja_app/domain/services/kader_auth.dart';
+import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
@@ -9,8 +10,6 @@ import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
-import 'package:simanja_app/utils/default_account.dart';
-import 'package:simanja_app/utils/enums.dart';
 
 class RegisterKaderPage extends StatefulWidget {
   const RegisterKaderPage({super.key});
@@ -28,8 +27,11 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
   String _nik = '';
   void _readNIK(data) => _nik = data;
 
-  String _name = '';
-  void _readName(data) => _name = data;
+  String _nameKader = '';
+  void _readNameKader(data) => _nameKader = data;
+
+  String _namePosyandu = '';
+  void _readNamePosyandu(data) => _namePosyandu = data;
 
   String _email = '';
   void _readEmail(data) => _email = data;
@@ -81,9 +83,13 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   TextInput(
-                      labelText: 'Nama Lengkap',
-                      hintText: 'Masukkan Nama Lengkap...',
-                      value: _readName),
+                      labelText: 'Nama Kader',
+                      hintText: 'Masukkan Nama Kader...',
+                      value: _readNameKader),
+                  TextInput(
+                      labelText: 'Nama Posyandu',
+                      hintText: 'Masukkan Nama Posyandu...',
+                      value: _readNamePosyandu),
                   TextInput(
                       labelText: 'NIK',
                       hintText: 'Masukkan NIK...',
@@ -108,7 +114,8 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                       onClick: () {
                         UserKader kader = UserKader(
                             uid: '',
-                            name: _name,
+                            nameKader: _nameKader,
+                            namePosyandu: _namePosyandu,
                             nik: _nik,
                             sex: _sex,
                             birthDate: _dateOfBirth,
