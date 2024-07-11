@@ -15,7 +15,7 @@ class AppbarText extends ConsumerWidget {
           'Selamat Datang,',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 18,
+            fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -23,7 +23,7 @@ class AppbarText extends ConsumerWidget {
           ref.watch(userKaderProvider).nameKader,
           style: TextStyle(
             color: GlobalTheme().primaryColor,
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -31,7 +31,7 @@ class AppbarText extends ConsumerWidget {
           ref.watch(userKaderProvider).namePosyandu,
           style: TextStyle(
             color: GlobalTheme().secondaryColor,
-            fontSize: 16,
+            fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -41,7 +41,7 @@ class AppbarText extends ConsumerWidget {
             ref.watch(userKaderProvider).address,
             style: TextStyle(
               color: GlobalTheme().secondaryColor,
-              fontSize: 16,
+              fontSize: 14,
               fontWeight: FontWeight.normal,
             ),
             maxLines: 2,

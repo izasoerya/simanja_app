@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class LayoutKader extends StatefulWidget {
@@ -15,6 +16,10 @@ class _LayoutKaderState extends State<LayoutKader> {
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
+      if (_selectedIndex == 4) {
+        router.go('/');
+      }
+      print(_selectedIndex);
     });
   }
 

@@ -12,30 +12,27 @@ class DashboardKader extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Center(
-      child: SizedBox(
-        width: MediaQuery.of(context).size.width * 0.9,
-        child: SingleChildScrollView(
-          child: Column(
-            children: [
-              const AppbarContent(),
-              const Padding(padding: EdgeInsets.only(top: 30)),
-              const TemplateTitle(text: 'DASHBOARD'),
-              const Padding(padding: EdgeInsets.only(top: 15)),
-              const DashboardContent(),
-              const Padding(padding: EdgeInsets.only(top: 15)),
-              const TemplateTitle(text: 'REKAP KONDISI REMAJA'),
-              const Padding(padding: EdgeInsets.only(top: 15)),
-              SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.8,
-                  child: const SummaryRemaja(
-                      leftText: 'HARI INI', rightText: 'SEMUA')),
-              const Padding(padding: EdgeInsets.only(top: 30)),
-              const TemplateTitle(text: 'KEGIATAN POSYANDU'),
-              const Padding(padding: EdgeInsets.only(top: 15)),
-              const ActivityList(),
-              const Padding(padding: EdgeInsets.only(top: 50)),
-            ],
-          ),
+      child: SingleChildScrollView(
+        child: Column(
+          children: [
+            const AppbarContent(),
+            const Padding(padding: EdgeInsets.only(top: 30)),
+            const TemplateTitle(text: 'DASHBOARD'),
+            const Padding(padding: EdgeInsets.only(top: 15)),
+            const DashboardContent(),
+            const Padding(padding: EdgeInsets.only(top: 15)),
+            const TemplateTitle(text: 'REKAP KONDISI REMAJA'),
+            const Padding(padding: EdgeInsets.only(top: 15)),
+            SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: const SummaryRemaja(
+                    leftText: 'HARI INI', rightText: 'SEMUA')),
+            const Padding(padding: EdgeInsets.only(top: 30)),
+            const TemplateTitle(text: 'KEGIATAN POSYANDU'),
+            const Padding(padding: EdgeInsets.only(top: 15)),
+            const ActivityList(),
+            const Padding(padding: EdgeInsets.only(top: 50)),
+          ],
         ),
       ),
     );
