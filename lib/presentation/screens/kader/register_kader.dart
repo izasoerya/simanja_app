@@ -3,9 +3,14 @@ import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/services/kader_auth.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
+import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
+import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
+import 'package:simanja_app/utils/default_account.dart';
+import 'package:simanja_app/utils/enums.dart';
 
 class RegisterKaderPage extends StatefulWidget {
   const RegisterKaderPage({super.key});
@@ -20,6 +25,9 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
   late GlobalTheme theme;
 
   //* Callback hell
+  String _nik = '';
+  void _readNIK(data) => _nik = data;
+
   String _name = '';
   void _readName(data) => _name = data;
 
@@ -28,6 +36,17 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
 
   String _password = '';
   void _readPassword(data) => _password = data;
+  DateTime _dateOfBirth = DateTime.now();
+  void _readDoB(data) => _dateOfBirth = data;
+
+  String _address = '';
+  void _readAddress(data) => _address = data;
+
+  bool _bpjs = false;
+  void _readBPJS(data) => _bpjs = data;
+
+  Gender _sex = Gender.male;
+  void _readSex(data) => _sex = data;
 
   @override
   void initState() {
@@ -66,6 +85,15 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                       hintText: 'Masukkan Nama Lengkap...',
                       value: _readName),
                   TextInput(
+                      labelText: 'NIK',
+                      hintText: 'Masukkan NIK...',
+                      value: _readNIK),
+                  DateOfBirthField(value: _readDoB),
+                  TextInput(
+                      labelText: 'Alamat',
+                      hintText: 'Masukkan Alamat...',
+                      value: _readAddress),
+                  TextInput(
                       labelText: 'Email',
                       hintText: 'Masukkan Email...',
                       value: _readEmail),
@@ -73,14 +101,23 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                       labelText: 'Kata Sandi',
                       hintText: 'Masukkan Alamat...',
                       value: _readPassword),
+                  ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
+                  GenderSelection(value: _readSex),
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () {
                         UserKader kader = UserKader(
-                          name: _name,
-                          email: _email,
-                          password: _password,
-                        );
+                            uid: '',
+                            name: _name,
+                            nik: _nik,
+                            sex: _sex,
+                            birthDate: _dateOfBirth,
+                            address: _address,
+                            bpjs: _bpjs,
+                            email: _email,
+                            password: _password);
+
+                        // TODO: Implement input condition
                         KaderAuthentication().createUser(kader);
                       }),
                   NudeButton(

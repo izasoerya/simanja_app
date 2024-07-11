@@ -1,13 +1,14 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
+import 'package:simanja_app/utils/default_account.dart';
 
 final userRemajaProvider = StateProvider<UserRemaja>((ref) {
   return UserRemaja();
 });
 
 final userKaderProvider = StateProvider<UserKader>((ref) {
-  return UserKader();
+  return kaderAccount;
 });
 
 void setUserRemaja(WidgetRef ref, UserRemaja user) {

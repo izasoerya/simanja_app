@@ -17,6 +17,6 @@ class KaderAuthentication {
     } catch (e) {
       print('Error logging in user: $e');
     }
-    return UserKader();
+    throw Exception('Invalid credentials');
   }
 }

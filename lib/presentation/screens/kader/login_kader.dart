@@ -8,6 +8,7 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
+import 'package:simanja_app/utils/default_account.dart';
 
 class LoginKaderPage extends ConsumerStatefulWidget {
   const LoginKaderPage({super.key});
@@ -64,11 +65,14 @@ class _LoginKaderPageState extends ConsumerState<LoginKaderPage> {
                   SubmitButton(
                     text: 'Masuk',
                     onClick: () async {
-                      var kader = UserKader(email: _email, password: _password);
+                      UserKader kader = kaderAccount.copyWith(
+                        email: _email,
+                        password: _password,
+                      );
                       await KaderAuthentication()
                           .loginUser(kader)
                           .then((fetchedKader) {
-                        if (UserKader().uid == null) {
+                        if (kader.uid != 'dummy') {
                           setUserKader(ref, fetchedKader);
                           widget._pushToDashboard();
                         } else {
