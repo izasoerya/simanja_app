@@ -3,17 +3,19 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class TemplateTitle extends StatelessWidget {
-  const TemplateTitle({super.key});
+  final String text;
+  const TemplateTitle({super.key, required this.text});
 
   @override
   Widget build(BuildContext context) {
     return Text(
-      'DASHBOARD',
+      text,
       style: TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.normal,
           color: GlobalTheme().primaryColor,
           fontFamily: GoogleFonts.archivoBlack().fontFamily),
+      textAlign: TextAlign.center,
     );
   }
 }
