@@ -4,11 +4,13 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 class TextInput extends StatefulWidget {
   final String hintText;
   final String labelText;
+  final TextInputType type;
   final void Function(String d) value;
   const TextInput({
     super.key,
     required this.hintText,
     required this.labelText,
+    this.type = TextInputType.text,
     required this.value,
   });
 
@@ -43,7 +45,7 @@ class _TextInputState extends State<TextInput> {
           TextField(
             maxLines: null,
             controller: _controller,
-            keyboardType: TextInputType.multiline, // Enable multiline input
+            keyboardType: TextInputType.text, // Enable multiline input
             decoration: InputDecoration(
               hintText: widget.hintText,
               contentPadding: const EdgeInsets.symmetric(

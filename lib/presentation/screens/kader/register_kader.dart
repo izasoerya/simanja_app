@@ -98,15 +98,18 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                   DateOfBirthField(value: _readDoB),
                   TextInput(
                       labelText: 'Alamat',
+                      type: TextInputType.streetAddress,
                       hintText: 'Masukkan Alamat...',
                       value: _readAddress),
                   TextInput(
                       labelText: 'Email',
+                      type: TextInputType.emailAddress,
                       hintText: 'Masukkan Email...',
                       value: _readEmail),
                   TextInput(
                       labelText: 'Kata Sandi',
-                      hintText: 'Masukkan Alamat...',
+                      hintText: 'Masukkan Kata Sandi...',
+                      type: TextInputType.visiblePassword,
                       value: _readPassword),
                   ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
                   GenderSelection(value: _readSex),
