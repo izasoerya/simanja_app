@@ -9,6 +9,7 @@ import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
 import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
 class RegisterKaderPage extends StatefulWidget {
@@ -126,6 +127,7 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
 
                         // TODO: Implement input condition
                         KaderAuthentication().createUser(kader);
+                        showCustomSnackbar(context, 'Berhasil mendaftar', 0);
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',

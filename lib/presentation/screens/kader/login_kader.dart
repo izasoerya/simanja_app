@@ -5,6 +5,7 @@ import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -74,9 +75,11 @@ class _LoginKaderPageState extends ConsumerState<LoginKaderPage> {
                           .then((fetchedKader) {
                         if (fetchedKader.uid != 'dummy') {
                           setUserKader(ref, fetchedKader);
+                          showCustomSnackbar(context, 'Berhasil masuk', 0);
                           widget._pushToDashboard();
                         } else {
-                          print('Login failed');
+                          showCustomSnackbar(
+                              context, 'Email atau password salah', 2);
                         }
                       });
                     },
