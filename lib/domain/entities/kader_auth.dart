@@ -50,4 +50,9 @@ class UserKader {
       password: password ?? this.password,
     );
   }
+
+  @override
+  String toString() {
+    return 'UserKader(uid: $uid, nameKader: $nameKader, namePosyandu: $namePosyandu, nik: $nik, sex: $sex, birthDate: $birthDate, address: $address, bpjs: $bpjs, email: $email, password: $password)';
+  }
 }

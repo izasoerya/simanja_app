@@ -19,4 +19,11 @@ class KaderAuthentication {
     }
     return user.copyWith(uid: 'dummy'); // return invalid account
   }
+
+  Future<void> debugUsers() async {
+    var data = await KaderAuthImplementation().getUsers();
+    for (var user in data) {
+      print(user.toString());
+    }
+  }
 }

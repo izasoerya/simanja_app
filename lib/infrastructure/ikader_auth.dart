@@ -96,4 +96,33 @@ class KaderAuthImplementation implements KaderAuthRepo {
     // TODO: implement getUserbyId
     throw UnimplementedError();
   }
+
+  @override
+  Future<List<UserKader>> getUsers() async {
+    List<PostgrestMap> response;
+    try {
+      response = await Supabase.instance.client
+          .from('kader_auth') // select from table kader_auth
+          .select(); // select all columns
+    } catch (e) {
+      return Future.error(e);
+    }
+
+    List<UserKader> users = [];
+    for (PostgrestMap user in response) {
+      users.add(UserKader(
+        uid: user['uid'],
+        nameKader: user['kader_name'],
+        namePosyandu: user['posyandu_name'],
+        nik: user['nik'],
+        sex: user['is_male'] == true ? Gender.male : Gender.female,
+        birthDate: DateTime.parse(user['date_of_birth']),
+        address: user['address'],
+        bpjs: user['is_bpjs'],
+        email: user['email'],
+        password: user['password'],
+      ));
+    }
+    return users;
+  }
 }
