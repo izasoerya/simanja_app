@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:simanja_app/presentation/provider/provider_index_page.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
@@ -20,12 +19,8 @@ class TitleWPosyandu extends ConsumerWidget {
           height: 60,
           width: MediaQuery.of(context).size.width,
           alignment: Alignment.centerLeft,
-          child: GestureDetector(
-            onTap: () {
-              onTap();
-              ref.watch(pageIndexProvider.notifier).state = 0;
-            },
-            child: BackButtonAppbar(),
+          child: BackButtonAppbar(
+            onTap: onTap,
           ),
         ),
         const TemplateTitle(text: 'DATA REMAJA'),
@@ -34,7 +29,7 @@ class TitleWPosyandu extends ConsumerWidget {
                 fontSize: 16,
                 fontWeight: FontWeight.bold,
                 color: GlobalTheme().secondaryColor)),
-        Padding(padding: EdgeInsets.only(top: 15)),
+        const Padding(padding: EdgeInsets.only(top: 15)),
         Container(
           height: 2,
           width: MediaQuery.of(context).size.width * 0.8,
