@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_searchbar.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_posyandu.dart';
 
 class MemberPage extends ConsumerWidget {
@@ -11,6 +12,8 @@ class MemberPage extends ConsumerWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         TitleWPosyandu(),
+        Padding(padding: EdgeInsets.only(top: 30)),
+        CustomSearchBar(label: 'Ihza Surya P...', icon: Icons.search),
       ],
     );
   }
