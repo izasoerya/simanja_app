@@ -21,7 +21,7 @@ class _LayoutKaderState extends ConsumerState<LayoutKader> {
           router.push('/dashboard-kader');
           break;
         case 1:
-          router.go('/data-remaja-kader');
+          router.push('/data-remaja-kader');
           break;
         case 4:
           router.push('/');

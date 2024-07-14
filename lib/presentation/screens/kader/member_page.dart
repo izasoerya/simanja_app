@@ -7,15 +7,10 @@ class MemberPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
+    return const Column(
+      crossAxisAlignment: CrossAxisAlignment.center,
       children: [
-        const Padding(padding: EdgeInsets.only(top: 20)),
-        Column(
-          children: [
-            TitleWPosyandu(),
-          ],
-        ),
+        TitleWPosyandu(),
       ],
     );
   }

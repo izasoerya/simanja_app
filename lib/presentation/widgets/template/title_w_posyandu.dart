@@ -10,17 +10,23 @@ import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
 class TitleWPosyandu extends ConsumerWidget {
   const TitleWPosyandu({super.key});
 
-  void onTap() => router.go('/dashboard-kader');
+  void onTap() => router.pop();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        BackButtonAppbar(
-          onTap: () {
-            onTap();
-            ref.watch(pageIndexProvider.notifier).state = 0;
-          },
+        Container(
+          height: 60,
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.centerLeft,
+          child: GestureDetector(
+            onTap: () {
+              onTap();
+              ref.watch(pageIndexProvider.notifier).state = 0;
+            },
+            child: BackButtonAppbar(),
+          ),
         ),
         const TemplateTitle(text: 'DATA REMAJA'),
         Text(ref.watch(userKaderProvider).namePosyandu,
@@ -30,11 +36,10 @@ class TitleWPosyandu extends ConsumerWidget {
                 color: GlobalTheme().secondaryColor)),
         Padding(padding: EdgeInsets.only(top: 15)),
         Container(
-          height: 2, // Thickness of the line
+          height: 2,
           width: MediaQuery.of(context).size.width * 0.8,
-          color: Colors.black, // Color of the line
-          margin: const EdgeInsets.symmetric(
-              horizontal: 20), // Optional: Add some horizontal margin
+          color: Colors.black,
+          margin: const EdgeInsets.symmetric(horizontal: 20),
         ),
       ],
     );
