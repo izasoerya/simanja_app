@@ -3,7 +3,9 @@ import 'package:intl/intl.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart'; // Add this for date formatting
 
 class DateOfBirthField extends StatefulWidget {
-  const DateOfBirthField({super.key, required this.value});
+  final String text;
+  const DateOfBirthField(
+      {super.key, required this.value, this.text = 'Tanggal Lahir'});
   final void Function(DateTime date) value;
 
   @override
@@ -37,9 +39,7 @@ class _DateOfBirthFieldState extends State<DateOfBirthField> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
-          'Tanggal Lahir',
-        ),
+        Text(widget.text),
         const Padding(padding: EdgeInsets.only(bottom: 5)),
         SizedBox(
           height: 45,

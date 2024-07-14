@@ -87,7 +87,7 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                       labelText: 'Kode Kader',
                       hintText: 'Masukkan Kode Kader...',
                       value: _readKey),
-                  DateOfBirthField(value: _readDoB),
+                  DateOfBirthField(value: _readDoB, text: 'Tanggal Berdiri'),
                   TextInput(
                       labelText: 'Alamat',
                       type: TextInputType.streetAddress,
