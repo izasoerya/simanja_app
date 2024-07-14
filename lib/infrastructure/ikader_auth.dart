@@ -1,6 +1,5 @@
 import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/repositories/kader_auth_repo.dart';
-import 'package:simanja_app/utils/enums.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
@@ -13,13 +12,11 @@ class KaderAuthImplementation implements KaderAuthRepo {
     String uid = _uuid.v4();
     UserKader newUser = UserKader(
       uid: uid,
-      nameKader: user.nameKader,
+      nameAccount: user.nameAccount,
       namePosyandu: user.namePosyandu,
-      nik: user.nik,
-      sex: user.sex,
+      keyPosyandu: user.keyPosyandu,
       birthDate: user.birthDate,
       address: user.address,
-      bpjs: user.bpjs,
       email: user.email,
       password: user.password,
     );
@@ -27,13 +24,11 @@ class KaderAuthImplementation implements KaderAuthRepo {
     try {
       await Supabase.instance.client.from('kader_auth').insert({
         'uid': newUser.uid,
-        'kader_name': newUser.nameKader,
+        'kader_name': newUser.nameAccount,
         'posyandu_name': newUser.namePosyandu,
-        'nik': newUser.nik,
-        'is_male': newUser.sex == Gender.male ? true : false,
+        'nik': newUser.keyPosyandu,
         'date_of_birth': newUser.birthDate.toIso8601String(),
         'address': newUser.address,
-        'is_bpjs': newUser.bpjs,
         'email': newUser.email,
         'password': newUser.password,
       });
@@ -72,13 +67,11 @@ class KaderAuthImplementation implements KaderAuthRepo {
 
     UserKader user = UserKader(
       uid: response['uid'],
-      nameKader: response['kader_name'],
+      nameAccount: response['kader_name'],
       namePosyandu: response['posyandu_name'],
-      nik: response['nik'],
-      sex: response['is_male'] == true ? Gender.male : Gender.female,
+      keyPosyandu: response['nik'],
       birthDate: DateTime.parse(response['date_of_birth']),
       address: response['address'],
-      bpjs: response['is_bpjs'],
       email: response['email'],
       password: response['password'],
     );
@@ -112,13 +105,11 @@ class KaderAuthImplementation implements KaderAuthRepo {
     for (PostgrestMap user in response) {
       users.add(UserKader(
         uid: user['uid'],
-        nameKader: user['kader_name'],
+        nameAccount: user['kader_name'],
         namePosyandu: user['posyandu_name'],
-        nik: user['nik'],
-        sex: user['is_male'] == true ? Gender.male : Gender.female,
+        keyPosyandu: user['nik'],
         birthDate: DateTime.parse(user['date_of_birth']),
         address: user['address'],
-        bpjs: user['is_bpjs'],
         email: user['email'],
         password: user['password'],
       ));

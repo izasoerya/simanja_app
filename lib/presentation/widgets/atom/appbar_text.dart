@@ -20,7 +20,7 @@ class AppbarText extends ConsumerWidget {
           ),
         ),
         Text(
-          ref.watch(userKaderProvider).nameKader,
+          ref.watch(userKaderProvider).nameAccount,
           style: TextStyle(
             color: GlobalTheme().primaryColor,
             fontSize: 20,

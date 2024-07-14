@@ -1,51 +1,41 @@
-import 'package:simanja_app/utils/enums.dart';
-
 class UserKader {
   final String uid;
-  final String nameKader;
+  final String nameAccount;
   final String namePosyandu;
-  final String nik;
-  final Gender sex;
+  final String keyPosyandu;
   final DateTime birthDate;
   final String address;
-  final bool bpjs;
   final String email;
   final String password;
 
   UserKader({
     required this.uid,
-    required this.nameKader,
+    required this.nameAccount,
     required this.namePosyandu,
-    required this.nik,
-    required this.sex,
+    required this.keyPosyandu,
     required this.birthDate,
     required this.address,
-    required this.bpjs,
     required this.email,
     required this.password,
   });
 
   UserKader copyWith({
     String? uid,
-    String? nameKader,
+    String? nameAccount,
     String? namePosyandu,
-    String? nik,
-    Gender? sex,
+    String? keyPosyandu,
     DateTime? birthDate,
     String? address,
-    bool? bpjs,
     String? email,
     String? password,
   }) {
     return UserKader(
       uid: uid ?? this.uid,
-      nameKader: nameKader ?? this.nameKader,
+      nameAccount: nameAccount ?? this.nameAccount,
       namePosyandu: namePosyandu ?? this.namePosyandu,
-      nik: nik ?? this.nik,
-      sex: sex ?? this.sex,
+      keyPosyandu: keyPosyandu ?? this.keyPosyandu,
       birthDate: birthDate ?? this.birthDate,
       address: address ?? this.address,
-      bpjs: bpjs ?? this.bpjs,
       email: email ?? this.email,
       password: password ?? this.password,
     );
@@ -53,6 +43,6 @@ class UserKader {
 
   @override
   String toString() {
-    return 'UserKader(uid: $uid, nameKader: $nameKader, namePosyandu: $namePosyandu, nik: $nik, sex: $sex, birthDate: $birthDate, address: $address, bpjs: $bpjs, email: $email, password: $password)';
+    return 'UserKader(uid: $uid, nameKader: $nameAccount, namePosyandu: $namePosyandu, nik: $keyPosyandu, birthDate: $birthDate, address: $address, email: $email, password: $password)';
   }
 }
