@@ -1,3 +1,4 @@
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 class ItemListview extends StatelessWidget {
@@ -12,11 +13,13 @@ class ItemListview extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.125,
+          width: 45,
           child: Image.asset('assets/logo/No_Image.jpg'),
         ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.75,
+        const Padding(padding: EdgeInsets.only(left: 15)),
+        Container(
+          color: Colors.yellow[100], //! CHANGE TO SIZEDBOX IN PRODUCTION
+          width: MediaQuery.of(context).size.width * 0.625,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -24,17 +27,18 @@ class ItemListview extends StatelessWidget {
               Text(
                 title,
                 style: const TextStyle(
-                  fontSize: 16,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.left,
               ),
-              ...descriptions
-                  .map((text) => Text(
-                        text,
-                        textAlign: TextAlign.left,
-                      ))
-                  .toList(),
+              ...descriptions.map((text) => Text(
+                    text,
+                    style: const TextStyle(
+                      fontSize: 10,
+                    ),
+                    textAlign: TextAlign.left,
+                  )),
             ],
           ),
         ),

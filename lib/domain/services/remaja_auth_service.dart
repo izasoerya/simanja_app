@@ -19,4 +19,8 @@ class RemajaAuthentication {
     }
     return false;
   }
+
+  Future<List<UserRemaja>> getUsers() async {
+    return await RemajaAuthImplementation().getUsers();
+  }
 }

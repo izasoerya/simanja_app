@@ -49,6 +49,12 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
   }
 
   @override
+  Future<void> updateUser(UserRemaja user) {
+    // TODO: implement updateUser
+    throw UnimplementedError();
+  }
+
+  @override
   Future<UserRemaja> getUserbyEmail(String email) async {
     PostgrestMap response;
     try {
@@ -89,8 +95,28 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
   }
 
   @override
-  Future<void> updateUser(UserRemaja user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<List<UserRemaja>> getUsers() async {
+    // TODO: implement getUsers
+    List<PostgrestMap> responses;
+    try {
+      responses =
+          await Supabase.instance.client.from('remaja_auth').select('*');
+    } catch (e) {
+      print('$e');
+      return Future.error(e);
+    }
+    return responses
+        .map((response) => UserRemaja(
+              uid: response['uid'],
+              name: response['name'],
+              nik: response['nik'],
+              sex: response['is_male'] == true ? Gender.male : Gender.female,
+              birthDate: DateTime.parse(response['date_of_birth']),
+              address: response['address'],
+              bpjs: response['is_bpjs'],
+              email: response['email'],
+              password: response['password'],
+            ))
+        .toList();
   }
 }

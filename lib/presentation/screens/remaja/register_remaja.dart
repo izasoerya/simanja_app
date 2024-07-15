@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
-import 'package:simanja_app/domain/services/remaja.auth_service.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
