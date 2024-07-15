@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/item_listview.dart';
+import 'package:simanja_app/utils/enums.dart';
 
 class ListViewAccount extends StatelessWidget {
   const ListViewAccount({super.key});
@@ -33,7 +34,7 @@ class ListViewAccount extends StatelessWidget {
                   title: user.name!,
                   descriptions: [
                     user.birthDate.toString().substring(0, 10),
-                    user.email!
+                    user.sex == Gender.male ? 'Laki-laki' : 'Perempuan',
                   ],
                 );
               },
