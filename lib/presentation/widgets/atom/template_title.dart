@@ -4,14 +4,15 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class TemplateTitle extends StatelessWidget {
   final String text;
-  const TemplateTitle({super.key, required this.text});
+  final double fontSize;
+  const TemplateTitle({super.key, required this.text, this.fontSize = 24});
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: TextStyle(
-          fontSize: 24,
+          fontSize: fontSize,
           fontWeight: FontWeight.normal,
           color: GlobalTheme().primaryColor,
           fontFamily: GoogleFonts.archivoBlack().fontFamily),
