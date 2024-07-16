@@ -15,7 +15,7 @@ class MemberPage extends ConsumerWidget {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TitleWPosyandu(),
+          TitleWPosyandu(title: 'DATA REMAJA'),
           Padding(padding: EdgeInsets.only(top: 30)),
           CustomSearchBar(label: 'Ihza Surya P...', icon: Icons.search),
           Padding(padding: EdgeInsets.only(top: 30)),

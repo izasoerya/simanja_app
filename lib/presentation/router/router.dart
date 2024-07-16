@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simanja_app/presentation/layout/kader_layout.dart';
+import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/login_page.dart';
@@ -60,6 +61,12 @@ final GoRouter router = GoRouter(
               path: 'data-remaja-kader',
               builder: (BuildContext context, GoRouterState state) {
                 return const LayoutKader(child: MemberPage());
+              },
+            ),
+            GoRoute(
+              path: 'activity-kader',
+              builder: (BuildContext context, GoRouterState state) {
+                return const LayoutKader(child: ActivityPage());
               },
             ),
           ],
