@@ -19,21 +19,9 @@ final GoRouter router = GoRouter(
       },
       routes: <RouteBase>[
         GoRoute(
-          path: 'login-remaja',
-          builder: (BuildContext context, GoRouterState state) {
-            return const AuthLayout(child: LoginRemajaPage());
-          },
-        ),
-        GoRoute(
           path: 'register-remaja',
           builder: (BuildContext context, GoRouterState state) {
             return const AuthLayout(child: RegisterRemajaPage());
-          },
-        ),
-        GoRoute(
-          path: 'login-kader',
-          builder: (BuildContext context, GoRouterState state) {
-            return const AuthLayout(child: LoginKaderPage());
           },
         ),
         GoRoute(
@@ -43,16 +31,38 @@ final GoRouter router = GoRouter(
           },
         ),
         GoRoute(
-          path: 'dashboard-kader',
+          path: 'login-remaja',
           builder: (BuildContext context, GoRouterState state) {
-            return const LayoutKader(child: DashboardPage());
+            return const AuthLayout(child: LoginRemajaPage());
           },
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'dashboard-remaja',
+              builder: (BuildContext context, GoRouterState state) {
+                return const AuthLayout(child: RegisterKaderPage());
+              },
+            ),
+          ],
         ),
         GoRoute(
-          path: 'data-remaja-kader',
+          path: 'login-kader',
           builder: (BuildContext context, GoRouterState state) {
-            return const LayoutKader(child: MemberPage());
+            return const AuthLayout(child: LoginKaderPage());
           },
+          routes: <RouteBase>[
+            GoRoute(
+              path: 'dashboard-kader',
+              builder: (BuildContext context, GoRouterState state) {
+                return const LayoutKader(child: DashboardPage());
+              },
+            ),
+            GoRoute(
+              path: 'data-remaja-kader',
+              builder: (BuildContext context, GoRouterState state) {
+                return const LayoutKader(child: MemberPage());
+              },
+            ),
+          ],
         ),
       ],
     ),

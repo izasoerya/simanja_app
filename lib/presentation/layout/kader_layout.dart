@@ -18,10 +18,13 @@ class _LayoutKaderState extends ConsumerState<LayoutKader> {
       ref.watch(pageIndexProvider.notifier).state = index;
       switch (ref.watch(pageIndexProvider)) {
         case 0:
-          router.push('/dashboard-kader');
+          router.push('/login-kader/dashboard-kader');
           break;
         case 1:
-          router.push('/data-remaja-kader');
+          router.push('/login-kader/data-remaja-kader');
+          break;
+        case 2:
+          router.push('/login-kader/activity-kader');
           break;
         case 4:
           router.push('/');
