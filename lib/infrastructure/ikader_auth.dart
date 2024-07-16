@@ -5,7 +5,6 @@ import 'package:uuid/uuid.dart';
 
 class KaderAuthImplementation implements KaderAuthRepo {
   final Uuid _uuid = const Uuid();
-  PostgrestResponse? response;
 
   @override
   Future<void> createUser(UserKader user) async {
