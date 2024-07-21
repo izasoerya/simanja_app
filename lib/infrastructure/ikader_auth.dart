@@ -51,7 +51,7 @@ class KaderAuthImplementation implements KaderAuthRepo {
   }
 
   @override
-  Future<UserKader> getUserbyEmail(String email) async {
+  Future<UserKader?> getUserbyEmail(String email) async {
     PostgrestMap response;
     try {
       response = await Supabase.instance.client
@@ -61,7 +61,7 @@ class KaderAuthImplementation implements KaderAuthRepo {
           .single(); // fetches the first row
     } catch (e) {
       print('$e');
-      return Future.error(e);
+      return null;
     }
 
     UserKader user = UserKader(

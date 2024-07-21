@@ -8,15 +8,11 @@ class KaderAuthentication {
   }
 
   Future<UserKader> loginUser(UserKader user) async {
-    try {
-      UserKader fetchedUser =
-          await KaderAuthImplementation().getUserbyEmail(user.email);
-      if (fetchedUser.password == user.password) {
-        return fetchedUser;
-      }
-    } catch (e) {
-      print('Error logging in user: $e');
+    final kader = await KaderAuthImplementation().getUserbyEmail(user.email);
+    if (kader != null && kader.password == user.password) {
+      return kader;
     }
+    print('There is no user with that email or password');
     return user.copyWith(uid: 'dummy'); // return invalid account
   }
 
