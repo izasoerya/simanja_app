@@ -8,4 +8,10 @@ class KaderCheckupService {
         await KaderCheckupImplementation().createCheckup(title, date, uid);
     return data;
   }
+
+  Future<List<KaderCheckup>> getCheckupList(String uid) async {
+    List<KaderCheckup> data =
+        await KaderCheckupImplementation().getCheckups(uid);
+    return data;
+  }
 }

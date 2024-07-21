@@ -39,9 +39,27 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
   }
 
   @override
-  Future<List<KaderCheckup>> getCheckupList() {
+  Future<List<KaderCheckup>> getCheckups(String uid) async {
     // TODO: implement getCheckupList
-    throw UnimplementedError();
+    List<PostgrestMap> response;
+    try {
+      response = await Supabase.instance.client
+          .from('kader_checkup') // select from table kader_checkup
+          .select('*') // select all columns
+          .eq('uid_kader', uid); // where uid_kader = uid
+    } catch (e) {
+      return Future.error(e);
+    }
+
+    List<KaderCheckup> checkups = [];
+    for (PostgrestMap user in response) {
+      checkups.add(KaderCheckup(
+        uid: user['uid'],
+        checkupTitle: user['event_name'],
+        date: DateTime.parse(user['date']),
+      ));
+    }
+    return checkups;
   }
 
   @override
