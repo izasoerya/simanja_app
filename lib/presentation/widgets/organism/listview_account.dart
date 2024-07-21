@@ -36,6 +36,23 @@ class ListViewAccount extends StatelessWidget {
                     user.birthDate.toString().substring(0, 10),
                     user.sex == Gender.male ? 'Laki-laki' : 'Perempuan',
                   ],
+                  onTap: () {
+                    showGeneralDialog(
+                        context: context,
+                        pageBuilder: (context, _, __) {
+                          return AlertDialog(
+                            title: Text('Not Implemented yet!'),
+                            content:
+                                Text('This feature is not implemented yet'),
+                            actions: [
+                              TextButton(
+                                onPressed: () => Navigator.of(context).pop(),
+                                child: const Text('Close'),
+                              ),
+                            ],
+                          );
+                        });
+                  },
                 );
               },
             );
