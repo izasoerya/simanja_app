@@ -69,8 +69,26 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
   }
 
   @override
-  Future<void> updateCheckup(KaderCheckup activity) {
-    // TODO: implement updateCheckup
-    throw UnimplementedError();
+  Future<KaderCheckup?> updateCheckup(KaderCheckup checkup) async {
+    PostgrestMap response;
+    try {
+      response = await Supabase.instance.client
+          .from('kader_checkup')
+          .update({
+            'event_name': checkup.checkupTitle,
+            'date': checkup.date.toIso8601String(),
+            'is_finish': checkup.isFinish, // Update is_finish to true
+          })
+          .eq('uid', checkup.uid)
+          .select()
+          .single();
+    } catch (e) {
+      return null;
+    }
+    return KaderCheckup(
+      uid: response['uid'],
+      checkupTitle: response['event_name'],
+      date: DateTime.parse(response['date']),
+    );
   }
 }

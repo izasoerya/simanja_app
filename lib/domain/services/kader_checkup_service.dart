@@ -14,4 +14,10 @@ class KaderCheckupService {
         await KaderCheckupImplementation().getCheckups(uid);
     return data;
   }
+
+  Future<KaderCheckup?> updateCheckupStatus(KaderCheckup checkup) async {
+    KaderCheckup? data =
+        await KaderCheckupImplementation().updateCheckup(checkup);
+    return data;
+  }
 }
