@@ -64,7 +64,7 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
                       _name, _date, ref.watch(userKaderProvider).uid);
                   if (response != null) {
                     print(
-                        'Berhasil membuat jadwal ${response.uid} pada ${response.date} dengan judul ${response.checkupTitle}');
+                        'Berhasil membuat jadwal ${response.uid} pada ${response.dateEvent} dengan judul ${response.checkupTitle}');
                   } else {
                     print('Gagal membuat jadwal $_name pada $_date');
                   }

@@ -10,20 +10,20 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
       String title, DateTime date, String kaderUID) async {
     String uid = _uuid.v4();
     KaderCheckup checkup =
-        KaderCheckup(uid: uid, checkupTitle: title, date: date);
+        KaderCheckup(uid: uid, checkupTitle: title, dateEvent: date);
     try {
       final response =
           await Supabase.instance.client.from('kader_checkup').insert({
         'uid': checkup.uid,
         'uid_kader': kaderUID,
         'event_name': checkup.checkupTitle,
-        'date': checkup.date.toIso8601String(),
+        'date': checkup.dateEvent.toIso8601String(),
       }).select();
       if (response[0]['uid'] == checkup.uid) {
         return KaderCheckup(
             uid: response[0]['uid'],
             checkupTitle: response[0]['event_name'],
-            date: DateTime.parse(response[0]['date']));
+            dateEvent: DateTime.parse(response[0]['date']));
       }
       return null; // else return error
     } catch (e) {
@@ -56,7 +56,7 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
       checkups.add(KaderCheckup(
         uid: user['uid'],
         checkupTitle: user['event_name'],
-        date: DateTime.parse(user['date']),
+        dateEvent: DateTime.parse(user['date']),
       ));
     }
     return checkups;
@@ -76,19 +76,19 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
           .from('kader_checkup')
           .update({
             'event_name': checkup.checkupTitle,
-            'date': checkup.date.toIso8601String(),
             'is_finish': checkup.isFinish, // Update is_finish to true
           })
           .eq('uid', checkup.uid)
           .select()
           .single();
     } catch (e) {
+      print('$e');
       return null;
     }
     return KaderCheckup(
       uid: response['uid'],
       checkupTitle: response['event_name'],
-      date: DateTime.parse(response['date']),
+      dateEvent: DateTime.parse(response['date']),
     );
   }
 }
