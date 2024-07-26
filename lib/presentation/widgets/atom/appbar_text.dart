@@ -27,15 +27,19 @@ class AppbarText extends ConsumerWidget {
                 : ref.watch(userRemajaProvider).name;
           }(),
           style: TextStyle(
-            color: GlobalTheme().primaryColor,
+            color: const GlobalTheme().primaryColor,
             fontSize: 20,
             fontWeight: FontWeight.bold,
           ),
         ),
         Text(
-          ref.watch(userKaderProvider).namePosyandu,
+          () {
+            return isKader
+                ? ref.watch(userKaderProvider).namePosyandu
+                : ref.watch(userRemajaProvider).posyandu;
+          }(),
           style: TextStyle(
-            color: GlobalTheme().secondaryColor,
+            color: const GlobalTheme().secondaryColor,
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
@@ -43,9 +47,13 @@ class AppbarText extends ConsumerWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,
           child: Text(
-            ref.watch(userKaderProvider).address,
+            () {
+              return isKader
+                  ? ref.watch(userKaderProvider).address
+                  : ref.watch(userRemajaProvider).address;
+            }(),
             style: TextStyle(
-              color: GlobalTheme().secondaryColor,
+              color: const GlobalTheme().secondaryColor,
               fontSize: 14,
               fontWeight: FontWeight.normal,
             ),
