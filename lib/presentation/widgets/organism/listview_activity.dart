@@ -34,18 +34,42 @@ class ListviewActivity extends ConsumerWidget {
                 final checkup = checkupList[index];
                 return ItemListview(
                     title: checkup.checkupTitle,
-                    descriptions: [checkup.date.toString()],
-                    onTap: () {
+                    uid: checkup.uid,
+                    descriptions: [
+                      checkup.dateEvent.toString().substring(0, 10)
+                    ],
+                    onTap: (data) {
                       showGeneralDialog(
                           context: context,
                           pageBuilder: (context, _, __) {
                             return AlertDialog(
-                              title: Text(checkup.checkupTitle),
-                              content: Text(checkup.date.toString()),
+                              title: Text(data),
+                              content: Text(checkup.dateEvent.toString()),
                               actions: [
                                 TextButton(
                                   onPressed: () => Navigator.of(context).pop(),
-                                  child: const Text('Close'),
+                                  child: const Text('Belum Selesai'),
+                                ),
+                                TextButton(
+                                  onPressed: () async {
+                                    final response = await KaderCheckupService()
+                                        .updateCheckupStatus(checkup.copyWith(
+                                            isFinish: true,
+                                            dateEvent: DateTime.now()));
+                                    if (response != null) {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  'Checkup berhasil diselesaikan')));
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(const SnackBar(
+                                              content: Text(
+                                                  'Checkup gagal diselesaikan')));
+                                    }
+                                    Navigator.of(context).pop();
+                                  },
+                                  child: const Text('Selesai'),
                                 ),
                               ],
                             );

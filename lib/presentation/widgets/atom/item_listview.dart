@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 
 class ItemListview extends StatelessWidget {
   final String title;
+  final String uid;
   final List<String> descriptions;
-  final void Function() onTap;
+  final void Function(String callBack) onTap;
   const ItemListview({
     super.key,
     required this.title,
+    required this.uid,
     required this.descriptions,
     required this.onTap,
   });
@@ -14,7 +16,7 @@ class ItemListview extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: onTap,
+      onTap: () => onTap(title),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
