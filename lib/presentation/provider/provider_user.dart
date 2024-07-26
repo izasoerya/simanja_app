@@ -4,7 +4,7 @@ import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/utils/default_account.dart';
 
 final userRemajaProvider = StateProvider<UserRemaja>((ref) {
-  return UserRemaja();
+  return remajaAccount;
 });
 
 final userKaderProvider = StateProvider<UserKader>((ref) {
