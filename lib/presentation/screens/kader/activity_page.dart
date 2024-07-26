@@ -73,8 +73,14 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
             Container(
                 alignment: Alignment.centerLeft,
                 padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: const TemplateTitle(
-                    text: 'Acara Sedang Berlangsung', fontSize: 18)),
+                child: const Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    TemplateTitle(
+                        text: 'Acara Sedang Berlangsung', fontSize: 18),
+                    Icon(Icons.history, size: 30),
+                  ],
+                )),
             const Padding(padding: EdgeInsets.only(top: 15)),
             const ListviewActivity(),
           ],
