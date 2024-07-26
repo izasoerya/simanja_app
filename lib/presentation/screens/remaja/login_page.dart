@@ -12,6 +12,7 @@ class LoginRemajaPage extends StatefulWidget {
 
   void _pushToRegister() => router.go('/register-remaja');
   void _pushToForgotPassword() => router.go('/forgot-password');
+  void _pushToHome() => router.go('/dashboard-remaja');
 
   @override
   State<LoginRemajaPage> createState() => _LoginRemajaPageState();
@@ -67,6 +68,7 @@ class _LoginRemajaPageState extends State<LoginRemajaPage> {
                           .then((value) {
                         if (value == true) {
                           print('Login Success');
+                          widget._pushToHome();
                         } else {
                           print('Login Failed');
                         }
