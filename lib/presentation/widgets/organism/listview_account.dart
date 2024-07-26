@@ -32,11 +32,12 @@ class ListViewAccount extends StatelessWidget {
                 final user = userList[index];
                 return ItemListview(
                   title: user.name!,
+                  uid: user.uid!,
                   descriptions: [
                     user.birthDate.toString().substring(0, 10),
                     user.sex == Gender.male ? 'Laki-laki' : 'Perempuan',
                   ],
-                  onTap: () {
+                  onTap: (data) {
                     showGeneralDialog(
                         context: context,
                         pageBuilder: (context, _, __) {
