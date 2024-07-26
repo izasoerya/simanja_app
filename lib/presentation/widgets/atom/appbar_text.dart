@@ -4,7 +4,8 @@ import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class AppbarText extends ConsumerWidget {
-  const AppbarText({super.key});
+  final bool isKader;
+  const AppbarText({super.key, required this.isKader});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -20,7 +21,11 @@ class AppbarText extends ConsumerWidget {
           ),
         ),
         Text(
-          ref.watch(userKaderProvider).nameAccount,
+          () {
+            return isKader
+                ? ref.watch(userKaderProvider).nameAccount
+                : ref.watch(userRemajaProvider).name;
+          }(),
           style: TextStyle(
             color: GlobalTheme().primaryColor,
             fontSize: 20,

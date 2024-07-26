@@ -1,13 +1,21 @@
 import 'package:flutter/material.dart';
 
-class CustomDropdown extends StatelessWidget {
+class CustomDropdown extends StatefulWidget {
   final void Function(String data) onChanged;
   final List<String> items;
+
   const CustomDropdown({
     super.key,
     required this.onChanged,
     required this.items,
   });
+
+  @override
+  _CustomDropdownState createState() => _CustomDropdownState();
+}
+
+class _CustomDropdownState extends State<CustomDropdown> {
+  String? _selectedItem;
 
   @override
   Widget build(BuildContext context) {
@@ -29,13 +37,20 @@ class CustomDropdown extends StatelessWidget {
       child: DropdownButton<String>(
         isExpanded: true,
         underline: Container(),
-        items: items.map<DropdownMenuItem<String>>((String value) {
+        value: _selectedItem,
+        items: widget.items.map<DropdownMenuItem<String>>((String value) {
           return DropdownMenuItem<String>(
             value: value,
             child: Text(value),
           );
         }).toList(),
-        onChanged: (String? newValue) => onChanged(newValue!),
+        onChanged: (String? newValue) {
+          setState(() {
+            _selectedItem = newValue;
+            widget.onChanged(newValue!);
+            print(newValue);
+          });
+        },
         hint: const Text('Select an item'),
       ),
     );

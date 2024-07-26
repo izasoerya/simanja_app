@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
+import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
 import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
 import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
@@ -22,6 +24,7 @@ class RegisterRemajaPage extends StatefulWidget {
 
 class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
   late GlobalTheme theme;
+  late Future<List<String>> listPosyandu;
 
   //* Callback hell
   String _nik = '';
@@ -29,6 +32,9 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
 
   String _name = '';
   void _readName(data) => _name = data;
+
+  String _posyanduMember = '';
+  void _readPosyanduMember(data) => _posyanduMember = data;
 
   DateTime _dateOfBirth = DateTime.now();
   void _readDoB(data) => _dateOfBirth = data;
@@ -50,8 +56,9 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
 
   @override
   void initState() {
-    theme = GlobalTheme();
     super.initState();
+    theme = const GlobalTheme();
+    listPosyandu = KaderAuthentication().getPosyanduList()!;
   }
 
   @override
@@ -88,6 +95,20 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                       labelText: 'Nama Lengkap',
                       hintText: 'Masukkan Nama Lengkap...',
                       value: _readName),
+                  FutureBuilder(
+                      future: KaderAuthentication().getPosyanduList(),
+                      builder: (context, snapshot) {
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const CircularProgressIndicator();
+                        } else if (snapshot.hasData) {
+                          return CustomDropdown(
+                            onChanged: _readPosyanduMember,
+                            items: snapshot.data!,
+                          );
+                        }
+                        return const Text('Error');
+                      }),
                   DateOfBirthField(value: _readDoB),
                   TextInput(
                       labelText: 'Alamat',
@@ -107,8 +128,10 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                       text: 'Daftar',
                       onClick: () {
                         UserRemaja remaja = UserRemaja(
+                          uid: 'dummy',
                           nik: _nik,
                           name: _name,
+                          posyandu: _posyanduMember,
                           birthDate: _dateOfBirth,
                           address: _address,
                           email: _email,

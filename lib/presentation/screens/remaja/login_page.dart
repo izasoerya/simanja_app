@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
+import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
+import 'package:simanja_app/utils/default_account.dart';
 
-class LoginRemajaPage extends StatefulWidget {
+class LoginRemajaPage extends ConsumerStatefulWidget {
   const LoginRemajaPage({super.key});
 
   void _pushToRegister() => router.go('/register-remaja');
   void _pushToForgotPassword() => router.go('/forgot-password');
-  void _pushToHome() => router.go('/login-remaja/dashboard-remaja');
+  void _pushToDashboard() => router.go('/login-remaja/dashboard-remaja');
 
   @override
-  State<LoginRemajaPage> createState() => _LoginRemajaPageState();
+  ConsumerState<LoginRemajaPage> createState() => _LoginRemajaPageState();
 }
 
-class _LoginRemajaPageState extends State<LoginRemajaPage> {
+class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
   String _email = '';
   void _readEmail(data) => _email = data;
 
@@ -62,14 +65,16 @@ class _LoginRemajaPageState extends State<LoginRemajaPage> {
                   SubmitButton(
                     text: 'Masuk',
                     onClick: () async {
-                      RemajaAuthentication()
-                          .loginUser(
-                              UserRemaja(email: _email, password: _password))
-                          .then((value) {
-                        if (value == true) {
+                      UserRemaja user = remajaAccount.copyWith(
+                          email: _email, password: _password);
+                      await RemajaAuthentication()
+                          .loginUser(user)
+                          .then((fetchedUser) {
+                        if (fetchedUser != null) {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Login Berhasil')));
-                          widget._pushToHome();
+                          setUserRemaja(ref, fetchedUser);
+                          widget._pushToDashboard();
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                               const SnackBar(content: Text('Login Gagal')));
