@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/widgets/atom/appbar_text.dart';
 
 class AppbarContent extends StatelessWidget {
-  const AppbarContent({super.key});
+  final bool isKader;
+  const AppbarContent({super.key, required this.isKader});
 
   @override
   Widget build(BuildContext context) {
@@ -10,15 +11,15 @@ class AppbarContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const Padding(padding: EdgeInsets.only(top: 20)),
-        const Row(
+        Row(
           children: [
-            Padding(padding: EdgeInsets.only(left: 15)),
-            Image(
+            const Padding(padding: EdgeInsets.only(left: 15)),
+            const Image(
                 image: AssetImage('assets/logo/SiMandja-Logo.png'),
                 width: 100,
                 height: 100),
-            Padding(padding: EdgeInsets.only(left: 15)),
-            AppbarText(),
+            const Padding(padding: EdgeInsets.only(left: 15)),
+            AppbarText(isKader: isKader),
           ],
         ),
         const SizedBox(

@@ -15,7 +15,7 @@ class DashboardKader extends ConsumerWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            const AppbarContent(),
+            const AppbarContent(isKader: true),
             const Padding(padding: EdgeInsets.only(top: 30)),
             const TemplateTitle(text: 'DASHBOARD'),
             const Padding(padding: EdgeInsets.only(top: 15)),
