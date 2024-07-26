@@ -25,11 +25,10 @@ class ListviewActivity extends ConsumerWidget {
             return const Center(child: Text('No users found'));
           } else {
             final checkupList = snapshot.data!;
+            checkupList.removeWhere((checkup) => checkup.isFinish);
             return ListView.separated(
               itemCount: checkupList.length,
-              separatorBuilder: (context, index) => const Divider(
-                height: 20,
-              ),
+              separatorBuilder: (context, index) => const Divider(height: 20),
               itemBuilder: (context, index) {
                 final checkup = checkupList[index];
                 return ItemListview(

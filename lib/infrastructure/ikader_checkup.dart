@@ -57,6 +57,7 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
         uid: user['uid'],
         checkupTitle: user['event_name'],
         dateEvent: DateTime.parse(user['date']),
+        isFinish: user['is_finish'],
       ));
     }
     return checkups;
