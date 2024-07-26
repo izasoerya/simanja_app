@@ -7,17 +7,18 @@ class RemajaAuthentication {
     return true;
   }
 
-  Future<bool> loginUser(UserRemaja user) async {
+  Future<UserRemaja?> loginUser(UserRemaja user) async {
     try {
       UserRemaja fetchedUser =
-          await RemajaAuthImplementation().getUserbyEmail(user.email!);
+          await RemajaAuthImplementation().getUserbyEmail(user.email);
       if (fetchedUser.password == user.password) {
-        return true;
+        return fetchedUser;
       }
+      return null;
     } catch (e) {
       print('Error logging in user: $e');
+      return null;
     }
-    return false;
   }
 
   Future<List<UserRemaja>> getUsers() async {

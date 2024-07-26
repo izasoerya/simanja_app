@@ -101,16 +101,16 @@ class KaderAuthImplementation implements KaderAuthRepo {
     }
 
     List<UserKader> users = [];
-    for (PostgrestMap user in response) {
+    for (PostgrestMap response in response) {
       users.add(UserKader(
-        uid: user['uid'],
-        nameAccount: user['kader_name'],
-        namePosyandu: user['posyandu_name'],
-        keyPosyandu: user['nik'],
-        birthDate: DateTime.parse(user['date_of_birth']),
-        address: user['address'],
-        email: user['email'],
-        password: user['password'],
+        uid: response['uid'],
+        nameAccount: response['account_name'],
+        namePosyandu: response['posyandu_name'],
+        keyPosyandu: response['posyandu_key'],
+        birthDate: DateTime.parse(response['date_of_birth']),
+        address: response['address'],
+        email: response['email'],
+        password: response['password'],
       ));
     }
     return users;
