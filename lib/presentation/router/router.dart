@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simanja_app/presentation/layout/kader_layout.dart';
+import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
@@ -41,7 +42,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'dashboard-remaja',
               builder: (BuildContext context, GoRouterState state) {
-                return const AuthLayout(child: DashboardRemaja());
+                return const LayoutRemaja(child: DashboardRemaja());
               },
             ),
           ],
