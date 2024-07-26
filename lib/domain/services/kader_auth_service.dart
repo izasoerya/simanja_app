@@ -16,6 +16,11 @@ class KaderAuthentication {
     return user.copyWith(uid: 'dummy'); // return invalid account
   }
 
+  Future<List<String>> getPosyanduList() async {
+    final response = await KaderAuthImplementation().getUsers();
+    return response.map((e) => e.namePosyandu).toList();
+  }
+
   Future<void> debugUsers() async {
     var data = await KaderAuthImplementation().getUsers();
     for (var user in data) {
