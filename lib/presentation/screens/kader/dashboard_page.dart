@@ -6,8 +6,8 @@ import 'package:simanja_app/presentation/widgets/template/activity_list.dart';
 import 'package:simanja_app/presentation/widgets/template/dashboard_content.dart';
 import 'package:simanja_app/presentation/widgets/template/summary_remaja.dart';
 
-class DashboardPage extends ConsumerWidget {
-  const DashboardPage({super.key});
+class DashboardKader extends ConsumerWidget {
+  const DashboardKader({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

@@ -12,7 +12,7 @@ class LoginRemajaPage extends StatefulWidget {
 
   void _pushToRegister() => router.go('/register-remaja');
   void _pushToForgotPassword() => router.go('/forgot-password');
-  void _pushToHome() => router.go('/dashboard-remaja');
+  void _pushToHome() => router.go('/login-remaja/dashboard-remaja');
 
   @override
   State<LoginRemajaPage> createState() => _LoginRemajaPageState();
@@ -67,10 +67,12 @@ class _LoginRemajaPageState extends State<LoginRemajaPage> {
                               UserRemaja(email: _email, password: _password))
                           .then((value) {
                         if (value == true) {
-                          print('Login Success');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Login Berhasil')));
                           widget._pushToHome();
                         } else {
-                          print('Login Failed');
+                          ScaffoldMessenger.of(context).showSnackBar(
+                              const SnackBar(content: Text('Login Gagal')));
                         }
                       });
                     },

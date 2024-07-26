@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:simanja_app/presentation/layout/kader_layout.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
+import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/login_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/login_page.dart';
@@ -40,7 +41,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'dashboard-remaja',
               builder: (BuildContext context, GoRouterState state) {
-                return const AuthLayout(child: RegisterKaderPage());
+                return const AuthLayout(child: DashboardRemaja());
               },
             ),
           ],
@@ -54,7 +55,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'dashboard-kader',
               builder: (BuildContext context, GoRouterState state) {
-                return const LayoutKader(child: DashboardPage());
+                return const LayoutKader(child: DashboardKader());
               },
             ),
             GoRoute(
