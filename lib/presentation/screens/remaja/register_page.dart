@@ -58,7 +58,7 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
   void initState() {
     super.initState();
     theme = const GlobalTheme();
-    listPosyandu = KaderAuthentication().getPosyanduList()!;
+    listPosyandu = KaderAuthentication().getPosyanduList();
   }
 
   @override
