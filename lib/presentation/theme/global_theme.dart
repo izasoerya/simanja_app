@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class GlobalTheme {
-  GlobalTheme();
+  const GlobalTheme();
 
   final Color primaryColor = const Color.fromRGBO(89, 43, 119, 1);
   final Color secondaryColor = const Color.fromRGBO(203, 101, 53, 1);
