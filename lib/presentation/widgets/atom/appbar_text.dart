@@ -33,11 +33,11 @@ class AppbarText extends ConsumerWidget {
           ),
         ),
         Text(
-          () {
+          'Peserta Posyandu ${() {
             return isKader
                 ? ref.watch(userKaderProvider).namePosyandu
                 : ref.watch(userRemajaProvider).posyandu;
-          }(),
+          }()}',
           style: TextStyle(
             color: const GlobalTheme().secondaryColor,
             fontSize: 14,

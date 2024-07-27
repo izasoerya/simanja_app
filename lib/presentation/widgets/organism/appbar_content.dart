@@ -22,15 +22,12 @@ class AppbarContent extends StatelessWidget {
             AppbarText(isKader: isKader),
           ],
         ),
-        const SizedBox(
-            height: 10), // Add some space between the row and the line
+        const SizedBox(height: 10),
         Container(
-          height: 2, // Thickness of the line
-          width: MediaQuery.of(context).size.width * 0.9,
-          color: Colors.orange, // Color of the line
-          margin: const EdgeInsets.symmetric(
-              horizontal: 20), // Optional: Add some horizontal margin
-        ),
+            height: 2,
+            width: MediaQuery.of(context).size.width * 0.9,
+            color: Colors.orange,
+            margin: const EdgeInsets.symmetric(horizontal: 20)),
       ],
     );
   }
