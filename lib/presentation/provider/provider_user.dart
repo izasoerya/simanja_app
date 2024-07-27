@@ -13,8 +13,10 @@ final userKaderProvider = StateProvider<UserKader>((ref) {
 
 void setUserRemaja(WidgetRef ref, UserRemaja user) {
   ref.read(userRemajaProvider.notifier).state = user;
+  remajaAccount = user;
 }
 
 void setUserKader(WidgetRef ref, UserKader user) {
   ref.read(userKaderProvider.notifier).state = user;
+  kaderAccount = user;
 }
