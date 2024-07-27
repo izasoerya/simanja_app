@@ -31,8 +31,8 @@ class ListViewAccount extends StatelessWidget {
               itemBuilder: (context, index) {
                 final user = userList[index];
                 return ItemListview(
-                  title: user.name!,
-                  uid: user.uid!,
+                  title: user.name,
+                  uid: user.uid,
                   descriptions: [
                     user.birthDate.toString().substring(0, 10),
                     user.sex == Gender.male ? 'Laki-laki' : 'Perempuan',
