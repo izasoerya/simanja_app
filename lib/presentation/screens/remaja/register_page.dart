@@ -24,7 +24,17 @@ class RegisterRemajaPage extends StatefulWidget {
 
 class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
   late GlobalTheme theme;
-  late Future<List<String>> listPosyandu;
+  late Future<List<Map<String, String>>> listPosyandu;
+  late List<String> posyanduNames;
+
+  String? _translateNametoUID(List<Map<String, String>> source, String input) {
+    for (var item in source) {
+      if (item['posyandu'] == input) {
+        return item['uid']!;
+      }
+    }
+    return null;
+  }
 
   //* Callback hell
   String _nik = '';
@@ -102,10 +112,13 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                             ConnectionState.waiting) {
                           return const CircularProgressIndicator();
                         } else if (snapshot.hasData) {
+                          final futureData = snapshot.data!;
+                          posyanduNames = futureData
+                              .map((item) => item['posyandu']!)
+                              .toList();
                           return CustomDropdown(
-                            onChanged: _readPosyanduMember,
-                            items: snapshot.data!,
-                          );
+                              onChanged: _readPosyanduMember,
+                              items: posyanduNames);
                         }
                         return const Text('Error');
                       }),
@@ -126,12 +139,14 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                   GenderSelection(value: _readSex),
                   SubmitButton(
                       text: 'Daftar',
-                      onClick: () {
+                      onClick: () async {
                         UserRemaja remaja = UserRemaja(
                           uid: 'dummy',
                           nik: _nik,
                           name: _name,
-                          posyandu: _posyanduMember,
+                          posyandu: _translateNametoUID(
+                                  await listPosyandu, _posyanduMember) ??
+                              'dummy',
                           birthDate: _dateOfBirth,
                           address: _address,
                           email: _email,
