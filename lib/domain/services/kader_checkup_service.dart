@@ -15,6 +15,11 @@ class KaderCheckupService {
     return data;
   }
 
+  Future<List<KaderCheckup>> getActiveCheckupList(String posyanduUID) async {
+    // TODO: implement getActiveCheckupList
+    throw UnimplementedError();
+  }
+
   Future<KaderCheckup?> updateCheckupStatus(KaderCheckup checkup) async {
     KaderCheckup? data =
         await KaderCheckupImplementation().updateCheckup(checkup);
