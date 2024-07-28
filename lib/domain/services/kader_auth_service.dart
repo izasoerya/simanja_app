@@ -12,7 +12,6 @@ class KaderAuthentication {
     if (kader != null && kader.password == user.password) {
       return kader;
     }
-    print('There is no user with that email or password');
     return user.copyWith(uid: 'dummy'); // return invalid account
   }
 
@@ -21,6 +20,12 @@ class KaderAuthentication {
     return response
         .map((e) => {'uid': e.uid, 'posyandu': e.namePosyandu})
         .toList();
+  }
+
+  Future<String> getPosyanduName(String uid) async {
+    final response = await KaderAuthImplementation().getUsers();
+    final user = response.firstWhere((element) => element.uid == uid);
+    return user.namePosyandu;
   }
 
   Future<void> debugUsers() async {

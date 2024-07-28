@@ -40,7 +40,6 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
 
   @override
   Future<List<KaderCheckup>> getCheckups(String uid) async {
-    // TODO: implement getCheckupList
     List<PostgrestMap> response;
     try {
       response = await Supabase.instance.client

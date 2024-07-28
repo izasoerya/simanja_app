@@ -34,15 +34,14 @@ class AppbarText extends ConsumerWidget {
         ),
         Text(
           'Peserta Posyandu ${() {
-            return isKader
-                ? ref.watch(userKaderProvider).namePosyandu
-                : ref.watch(userRemajaProvider).posyandu;
+            return isKader ? ref.watch(userKaderProvider).namePosyandu : 'T0D0';
           }()}',
           style: TextStyle(
             color: const GlobalTheme().secondaryColor,
             fontSize: 14,
             fontWeight: FontWeight.bold,
           ),
+          overflow: TextOverflow.fade,
         ),
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.5,

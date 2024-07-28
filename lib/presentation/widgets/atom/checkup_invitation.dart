@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class CheckupInvitation extends StatelessWidget {
-  const CheckupInvitation({super.key});
+  final List<KaderCheckup?> items;
+  const CheckupInvitation({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -46,9 +48,11 @@ class CheckupInvitation extends StatelessWidget {
               bottomRight: Radius.circular(10),
             ),
           ),
-          child: const Text(
-            'Tidak ada undangan posyandu',
-            style: TextStyle(
+          child: Text(
+            items.isNotEmpty
+                ? 'Anda memiliki ${items.length} undangan posyandu'
+                : 'Tidak ada undangan posyandu',
+            style: const TextStyle(
               color: Colors.white,
               fontSize: 24,
               fontWeight: FontWeight.bold,
