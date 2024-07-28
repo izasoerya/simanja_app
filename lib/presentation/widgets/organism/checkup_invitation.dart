@@ -2,12 +2,17 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/checkup_listview.dart';
-import 'package:simanja_app/presentation/widgets/atom/item_listview.dart';
 
-class CheckupInvitation extends StatelessWidget {
+class CheckupInvitation extends StatefulWidget {
   final List<KaderCheckup?> items;
   const CheckupInvitation({super.key, required this.items});
 
+  @override
+  State<CheckupInvitation> createState() => _CheckupInvitationState();
+}
+
+class _CheckupInvitationState extends State<CheckupInvitation> {
+  List<String> selected = [];
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -51,10 +56,24 @@ class CheckupInvitation extends StatelessWidget {
               bottomRight: Radius.circular(10),
             ),
           ),
-          child: ListView.builder(
-            itemCount: items.length,
+          child: ListView.separated(
+            itemCount: widget.items.length,
+            separatorBuilder: (context, index) => const Divider(
+              color: Colors.white,
+              height: 20,
+            ),
             itemBuilder: (context, index) {
-              return CheckupListview(items: items[index]!, onTap: (data) {});
+              return CheckupListview(
+                  item: widget.items[index]!,
+                  onTap: (data) {
+                    if (selected.contains(data)) {
+                      selected.remove(data);
+                    } else {
+                      selected.add(data);
+                    }
+                    print(selected);
+                    setState(() {});
+                  });
             },
           ),
         ),
