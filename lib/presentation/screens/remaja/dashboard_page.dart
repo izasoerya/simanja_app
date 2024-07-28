@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/widgets/organism/appbar_content.dart';
-import 'package:simanja_app/presentation/widgets/organism/checkup_confirmation.dart';
+import 'package:simanja_app/presentation/widgets/template/checkup_confirmation.dart';
 
 class DashboardRemaja extends StatelessWidget {
   const DashboardRemaja({super.key});

@@ -5,7 +5,7 @@ import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/button_attend.dart';
 import 'package:simanja_app/presentation/widgets/atom/button_cancel.dart';
-import 'package:simanja_app/presentation/widgets/atom/checkup_invitation.dart';
+import 'package:simanja_app/presentation/widgets/organism/checkup_invitation.dart';
 import 'package:simanja_app/utils/default_account.dart';
 
 class CheckupConfirmation extends StatefulWidget {
