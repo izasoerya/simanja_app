@@ -1,17 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/presentation/provider/provider_checkup.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/checkup_listview.dart';
 
-class CheckupInvitation extends StatefulWidget {
+class CheckupInvitation extends ConsumerStatefulWidget {
   final List<KaderCheckup?> items;
   const CheckupInvitation({super.key, required this.items});
 
   @override
-  State<CheckupInvitation> createState() => _CheckupInvitationState();
+  ConsumerState<CheckupInvitation> createState() => _CheckupInvitationState();
 }
 
-class _CheckupInvitationState extends State<CheckupInvitation> {
+class _CheckupInvitationState extends ConsumerState<CheckupInvitation> {
   List<String> selected = [];
   @override
   Widget build(BuildContext context) {
@@ -66,11 +68,12 @@ class _CheckupInvitationState extends State<CheckupInvitation> {
                 item: widget.items[index]!,
                 onTap: (data) {
                   if (selected.contains(data)) {
+                    removeCheckup(ref, widget.items[index]!);
                     selected.remove(data);
                   } else {
+                    addCheckup(ref, widget.items[index]!);
                     selected.add(data);
                   }
-                  print(selected);
                   setState(() {});
                 },
               );
@@ -81,7 +84,6 @@ class _CheckupInvitationState extends State<CheckupInvitation> {
                   child: item,
                 );
               }
-
               return item;
             },
           ),
