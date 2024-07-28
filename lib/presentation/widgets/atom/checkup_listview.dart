@@ -28,8 +28,9 @@ class _CheckupListviewState extends State<CheckupListview> {
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Container(
-            height: 45,
-            width: MediaQuery.of(context).size.width * 0.75,
+            height: 30,
+            width: MediaQuery.of(context).size.width * 0.85,
+            margin: const EdgeInsets.only(left: 15),
             color: isActive
                 ? Colors.green
                 : Colors.transparent, //! CHANGE TO SIZEDBOX IN PRODUCTION
@@ -40,7 +41,7 @@ class _CheckupListviewState extends State<CheckupListview> {
                 Text(
                   widget.item.checkupTitle,
                   style: const TextStyle(
-                    fontSize: 12,
+                    fontSize: 16,
                     fontWeight: FontWeight.bold,
                   ),
                   textAlign: TextAlign.left,

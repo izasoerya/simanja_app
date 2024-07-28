@@ -48,7 +48,6 @@ class _CheckupInvitationState extends State<CheckupInvitation> {
         Container(
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height * 0.2,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
           decoration: BoxDecoration(
             color: const GlobalTheme().primaryColorLight,
             borderRadius: const BorderRadius.only(
@@ -63,17 +62,27 @@ class _CheckupInvitationState extends State<CheckupInvitation> {
               height: 20,
             ),
             itemBuilder: (context, index) {
-              return CheckupListview(
-                  item: widget.items[index]!,
-                  onTap: (data) {
-                    if (selected.contains(data)) {
-                      selected.remove(data);
-                    } else {
-                      selected.add(data);
-                    }
-                    print(selected);
-                    setState(() {});
-                  });
+              Widget item = CheckupListview(
+                item: widget.items[index]!,
+                onTap: (data) {
+                  if (selected.contains(data)) {
+                    selected.remove(data);
+                  } else {
+                    selected.add(data);
+                  }
+                  print(selected);
+                  setState(() {});
+                },
+              );
+
+              if (index == 0) {
+                item = Padding(
+                  padding: const EdgeInsets.only(top: 10),
+                  child: item,
+                );
+              }
+
+              return item;
             },
           ),
         ),
