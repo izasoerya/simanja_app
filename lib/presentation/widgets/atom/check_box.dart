@@ -24,7 +24,7 @@ class _ChecklistBoxState extends State<ChecklistBox> {
           fillColor:
               WidgetStateProperty.resolveWith<Color>((Set<WidgetState> states) {
             if (states.contains(WidgetState.selected)) {
-              return GlobalTheme().secondaryColor; // Color when checked
+              return const GlobalTheme().secondaryColor; // Color when checked
             }
             return Colors.white; // Default color (unchecked)
           }),
@@ -35,7 +35,10 @@ class _ChecklistBoxState extends State<ChecklistBox> {
             });
           },
         ),
-        Text(widget.text, style: GlobalTheme().paragraphStyle),
+        Text(
+          widget.text,
+          style: const GlobalTheme().paragraphStyle,
+        ),
       ],
     );
   }
