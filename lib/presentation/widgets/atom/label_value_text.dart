@@ -16,24 +16,28 @@ class LabelValueText extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     return Column(
       children: [
-        Text(
-          label,
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        Text(
-          value,
-          style: TextStyle(
-            color: textColor,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          textAlign: TextAlign.center,
-        ),
+        label != ''
+            ? Text(
+                label,
+                style: const TextStyle(
+                  color: Colors.black,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              )
+            : const SizedBox(),
+        value != ''
+            ? Text(
+                value,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                ),
+                textAlign: TextAlign.center,
+              )
+            : const SizedBox(),
       ],
     );
   }

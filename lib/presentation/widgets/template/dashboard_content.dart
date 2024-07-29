@@ -23,13 +23,17 @@ class DashboardContent extends StatelessWidget {
                 top: MediaQuery.of(context).size.height * 0.18,
                 left: 0,
                 right: 0,
-                child: const Row(
+                child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SmallTextvalueSquareContainer(
+                        height: MediaQuery.of(context).size.height * 0.12,
+                        width: MediaQuery.of(context).size.width * 0.25,
                         upperText: '//Todo:4',
                         lowerText: 'Jumlah Remaja Perempuan'),
                     SmallTextvalueSquareContainer(
+                        height: MediaQuery.of(context).size.height * 0.12,
+                        width: MediaQuery.of(context).size.width * 0.25,
                         upperText: '//Todo:4',
                         lowerText: 'Jumlah Remaja Laki-laki'),
                   ],

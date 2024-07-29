@@ -18,8 +18,8 @@ class SummaryRemaja extends StatelessWidget {
           child: SmallTextvalueSquareContainer(
               upperText: '',
               lowerText: leftText,
-              width: 150,
-              height: 100,
+              width: MediaQuery.of(context).size.width * 0.25,
+              height: MediaQuery.of(context).size.height * 0.1,
               boxColor: GlobalTheme().primaryColor),
         ),
         GestureDetector(
@@ -27,8 +27,8 @@ class SummaryRemaja extends StatelessWidget {
           child: SmallTextvalueSquareContainer(
               upperText: '',
               lowerText: rightText,
-              width: 150,
-              height: 100,
+              width: MediaQuery.of(context).size.width * 0.25,
+              height: MediaQuery.of(context).size.height * 0.1,
               boxColor: GlobalTheme().primaryColor),
         ),
       ],
