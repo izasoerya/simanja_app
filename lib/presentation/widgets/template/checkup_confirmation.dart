@@ -56,6 +56,10 @@ class _CheckupConfirmationState extends ConsumerState<CheckupConfirmation> {
                 ref.watch(checkupProvider.notifier).state![0].uid,
                 remajaAccount.uid,
               );
+              setState(() {
+                listCheckup = KaderCheckupService()
+                    .getActiveCheckupList(remajaAccount.posyandu);
+              });
             }),
             const ButtonCancel(),
           ],
