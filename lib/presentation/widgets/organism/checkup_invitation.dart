@@ -75,7 +75,7 @@ class _CheckupInvitationState extends ConsumerState<CheckupInvitation> {
                     removeCheckup(ref, widget.items[index]!);
                     selected.remove(widget.items[index]!.uid);
                   }
-                  print(selected);
+                  print(ref.watch(checkupProvider.notifier).state);
                 },
               );
 
