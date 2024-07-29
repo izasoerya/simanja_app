@@ -27,6 +27,15 @@ class KaderCheckup {
     );
   }
 
+  factory KaderCheckup.fromJson(Map<String, dynamic> json) {
+    return KaderCheckup(
+      uid: json['uid'],
+      checkupTitle: json['event_name'],
+      dateEvent: DateTime.parse(json['date']),
+      isFinish: json['is_finish'],
+    );
+  }
+
   void debugData() {
     print('uid: $uid');
     print('checkupTitle: $checkupTitle');

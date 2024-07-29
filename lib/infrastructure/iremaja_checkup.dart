@@ -36,8 +36,25 @@ class RemajaCheckupImplementation implements RemajaCheckupRepo {
   }
 
   @override
-  Future<List<KaderCheckup>> getCheckupList(String uid) {
-    // TODO: implement getCheckupList
-    throw UnimplementedError();
+  Future<List<KaderCheckup>> getCheckupList(String uid) async {
+    List<PostgrestMap> response;
+    try {
+      response = await Supabase.instance.client
+          .from('kader_checkup')
+          .select()
+          .contains('uid_remaja', [uid]).eq('is_finish', false);
+
+      print('response: ${response}');
+
+      List<KaderCheckup> checkupList = [];
+      for (var item in response) {
+        KaderCheckup checkup = KaderCheckup.fromJson(item);
+        checkupList.add(checkup);
+      }
+      return checkupList;
+    } catch (e) {
+      print('error: $e');
+      return [];
+    }
   }
 }
