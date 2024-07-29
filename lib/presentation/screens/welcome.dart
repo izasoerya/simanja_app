@@ -21,7 +21,7 @@ class WelcomePage extends StatelessWidget {
               Text(
                 'Selamat \nDatang',
                 textAlign: TextAlign.center, // Center text
-                style: GlobalTheme()
+                style: const GlobalTheme()
                     .headerStyle
                     .copyWith(fontSize: 36, fontWeight: FontWeight.w900),
               ),
@@ -36,7 +36,7 @@ class WelcomePage extends StatelessWidget {
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     Text(
                       'Pilih Jenis Pengguna: ',
-                      style: GlobalTheme().paragraphStyle,
+                      style: const GlobalTheme().paragraphStyle,
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     SubmitButton(
@@ -46,7 +46,7 @@ class WelcomePage extends StatelessWidget {
                     const Padding(padding: EdgeInsets.only(top: 10)),
                     SubmitButton(
                       text: 'Kader',
-                      backgroundColor: GlobalTheme().primaryColor,
+                      backgroundColor: const GlobalTheme().primaryColor,
                       onClick: _pushToKaderAuth,
                     ),
                   ],
