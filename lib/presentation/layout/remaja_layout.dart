@@ -18,7 +18,11 @@ class _LayoutRemajaState extends ConsumerState<LayoutRemaja> {
       ref.watch(pageIndexProvider.notifier).state = index;
       switch (ref.watch(pageIndexProvider)) {
         case 0:
-          router.push('/login-remaja/dashboard-remaja');
+          if (ref.watch(pageIndexProvider.notifier).state != 0) {
+            router.go('/login-remaja/dashboard-remaja');
+          } else {
+            router.push('/login-remaja/dashboard-remaja');
+          }
           break;
         case 1:
           break;
@@ -27,6 +31,9 @@ class _LayoutRemajaState extends ConsumerState<LayoutRemaja> {
         case 4:
           router.push('/');
           break;
+      }
+      if (ref.watch(pageIndexProvider.notifier).state == 0) {
+        router.go('/login-remaja/dashboard-remaja');
       }
       print(ref.watch(pageIndexProvider));
     });
