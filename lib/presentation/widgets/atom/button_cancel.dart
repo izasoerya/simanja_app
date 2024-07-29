@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 
 class ButtonCancel extends StatelessWidget {
-  const ButtonCancel({super.key});
+  final void Function() onTap;
+  const ButtonCancel({super.key, required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ButtonCancel extends StatelessWidget {
       ),
       child: IconButton(
         icon: const Icon(Icons.cancel),
-        onPressed: () {},
+        onPressed: onTap,
         color: Colors.white,
       ),
     );

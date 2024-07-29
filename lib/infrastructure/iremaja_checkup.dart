@@ -4,35 +4,31 @@ import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RemajaCheckupImplementation implements RemajaCheckupRepo {
   @override
-  Future<List<String>?> subscribeCheckup(
-      String checkupUID, String remajaUID) async {
-    List<PostgrestMap> response;
-    print('checkupUID: $checkupUID');
-    print('remajaID: $remajaUID');
+  Future<void> subscribeCheckup(String checkupUID, String remajaUID) async {
+    // TODO: LEARN TO USE RPC AND RETURNING
     try {
-      response = await Supabase.instance.client
-          .from('kader_checkup')
-          .update({
-            'uid_remaja': [remajaUID],
-          })
-          .eq('uid', checkupUID)
-          .select();
+      await Supabase.instance.client.rpc('append_to_uid_remaja', params: {
+        'checkup_uid': checkupUID,
+        'new_uid_remaja': remajaUID,
+      });
     } catch (e) {
       print('error: $e');
-      return null;
+      rethrow;
     }
-    if (response.isNotEmpty) {
-      List<dynamic> remajaIdList = response[0]['uid_remaja'];
-      return remajaIdList.map((id) => id.toString()).toList();
-    }
-    print('response: $response');
-    return null;
   }
 
   @override
-  Future<KaderCheckup?> deleteCheckup(String checkupUID, String remajaUID) {
-    // TODO: implement deleteCheckup
-    throw UnimplementedError();
+  Future<void> unsubscribeCheckup(String checkupUID, String remajaUID) async {
+    // TODO: LEARN TO USE RPC AND RETURNING
+    try {
+      await Supabase.instance.client.rpc('remove_from_uid_remaja', params: {
+        'checkup_uid': checkupUID,
+        'new_uid_remaja': remajaUID,
+      });
+    } catch (e) {
+      print('error: $e');
+      rethrow;
+    }
   }
 
   @override

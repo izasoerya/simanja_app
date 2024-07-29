@@ -18,7 +18,7 @@ class _LayoutRemajaState extends ConsumerState<LayoutRemaja> {
       ref.watch(pageIndexProvider.notifier).state = index;
       switch (ref.watch(pageIndexProvider)) {
         case 0:
-          router.push('/login-kader/dashboard-remaja');
+          router.push('/login-remaja/dashboard-remaja');
           break;
         case 1:
           break;

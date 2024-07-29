@@ -22,6 +22,21 @@ class CheckupConfirmation extends ConsumerStatefulWidget {
 class _CheckupConfirmationState extends ConsumerState<CheckupConfirmation> {
   late Future<List<KaderCheckup>> listCheckup;
 
+  void _subscribeCheckup(bool subscribe) async {
+    for (var item in ref.watch(checkupProvider.notifier).state) {
+      await (subscribe
+          ? RemajaCheckupService()
+              .subscribeCheckups(item.uid, remajaAccount.uid)
+          : RemajaCheckupService()
+              .unsubscribeCheckups(item.uid, remajaAccount.uid));
+      ref.watch(checkupProvider.notifier).state = [];
+    }
+    setState(() {
+      listCheckup =
+          KaderCheckupService().getActiveCheckupList(remajaAccount.posyandu);
+    });
+  }
+
   @override
   void initState() {
     super.initState();
@@ -51,20 +66,8 @@ class _CheckupConfirmationState extends ConsumerState<CheckupConfirmation> {
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            ButtonAttend(onTap: () async {
-              for (var item in ref.watch(checkupProvider.notifier).state) {
-                await RemajaCheckupService().subscribeCheckup(
-                  item.uid,
-                  remajaAccount.uid,
-                );
-                ref.watch(checkupProvider.notifier).state = [];
-              }
-              setState(() {
-                listCheckup = KaderCheckupService()
-                    .getActiveCheckupList(remajaAccount.posyandu);
-              });
-            }),
-            const ButtonCancel(),
+            ButtonAttend(onTap: () async => _subscribeCheckup(true)),
+            ButtonCancel(onTap: () async => _subscribeCheckup(false)),
           ],
         ),
       ],
