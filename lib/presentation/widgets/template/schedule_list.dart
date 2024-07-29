@@ -72,7 +72,7 @@ class ScheduleList extends StatelessWidget {
                     width: MediaQuery.of(context).size.width,
                     alignment: Alignment.center,
                     child: Text('Tidak ada jadwal checkup',
-                        style: GlobalTheme().headerStyle),
+                        style: const GlobalTheme().headerStyle),
                   );
                 }
               }),

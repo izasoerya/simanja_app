@@ -67,12 +67,13 @@ class _CheckupInvitationState extends ConsumerState<CheckupInvitation> {
               Widget item = CheckupListview(
                 item: widget.items[index]!,
                 onTap: (data) {
-                  if (!selected.contains(data)) {
+                  bool resultValue = data[widget.items[index]!.uid]!;
+                  if (resultValue) {
                     addCheckup(ref, widget.items[index]!);
-                    selected.add(data!);
+                    selected.add(widget.items[index]!.uid);
                   } else {
                     removeCheckup(ref, widget.items[index]!);
-                    selected.remove(data!);
+                    selected.remove(widget.items[index]!.uid);
                   }
                   print(selected);
                 },

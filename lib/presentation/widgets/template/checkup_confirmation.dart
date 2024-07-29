@@ -52,10 +52,12 @@ class _CheckupConfirmationState extends ConsumerState<CheckupConfirmation> {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             ButtonAttend(onTap: () async {
-              await RemajaCheckupService().subscribeCheckup(
-                ref.watch(checkupProvider.notifier).state![0].uid,
-                remajaAccount.uid,
-              );
+              for (var item in ref.watch(checkupProvider.notifier).state!) {
+                await RemajaCheckupService().subscribeCheckup(
+                  item.uid,
+                  remajaAccount.uid,
+                );
+              }
               setState(() {
                 listCheckup = KaderCheckupService()
                     .getActiveCheckupList(remajaAccount.posyandu);

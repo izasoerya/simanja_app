@@ -5,13 +5,16 @@ import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 class CheckupListview extends StatefulWidget {
   final bool checkBox;
   final KaderCheckup item;
-  final void Function(String? callBack) onTap;
+  final void Function(Map<String, bool> callBack) onTap;
   const CheckupListview({
     super.key,
     this.checkBox = true,
     required this.item,
     required this.onTap,
   });
+
+  Map<String, bool> _mapCheckboxtoUID(String uid, bool value) =>
+      Map.from({uid: value});
 
   @override
   State<CheckupListview> createState() => _CheckupListviewState();
@@ -56,7 +59,10 @@ class _CheckupListviewState extends State<CheckupListview> {
               widget.checkBox
                   ? ChecklistBox(
                       text: '',
-                      value: (d) => widget.onTap(widget.item.uid),
+                      value: (d) {
+                        widget.onTap(
+                            widget._mapCheckboxtoUID(widget.item.uid, d));
+                      },
                     )
                   : const SizedBox(),
             ],
