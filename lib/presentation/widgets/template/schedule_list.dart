@@ -18,8 +18,18 @@ class ScheduleList extends StatelessWidget {
             } else if (snapshot.hasData) {
               return Column(
                 children: [
-                  TemplateTitle(text: 'Jadwal Checkup Posyandu'),
-                  CheckupListview(item: snapshot.data![0], onTap: (d) {})
+                  const TemplateTitle(text: 'Jadwal Checkup Posyandu'),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return CheckupListview(
+                        item: snapshot.data![index],
+                        checkBox: false,
+                        onTap: (_) {},
+                      );
+                    },
+                  ),
                 ],
               );
             }
