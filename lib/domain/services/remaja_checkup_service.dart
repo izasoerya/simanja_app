@@ -11,7 +11,13 @@ class RemajaCheckupService {
         .unsubscribeCheckup(checkupUID, remajaID);
   }
 
-  Future<List<KaderCheckup>?> getCheckupList(String remajaUID) async {
-    return await RemajaCheckupImplementation().getCheckupList(remajaUID);
+  Future<List<KaderCheckup>?> getCheckupList(String posyanduUID) async {
+    return await RemajaCheckupImplementation().getCheckupList(posyanduUID);
+  }
+
+  Future<List<KaderCheckup>?> getSubscribeList(
+      String posyanduUID, String remajaUID) async {
+    return await RemajaCheckupImplementation()
+        .getSubscribeList(posyanduUID, remajaUID);
   }
 }

@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/services/remaja_checkup_service.dart';
+import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/checkup_listview.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
-import 'package:simanja_app/utils/default_account.dart';
 
 class ScheduleList extends StatelessWidget {
-  const ScheduleList({super.key});
+  final List<KaderCheckup> items;
+  const ScheduleList({super.key, required this.items});
 
   @override
   Widget build(BuildContext context) {
@@ -46,36 +46,21 @@ class ScheduleList extends StatelessWidget {
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10)),
           ),
-          child: FutureBuilder(
-              future: RemajaCheckupService().getCheckupList(remajaAccount.uid),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasData) {
-                  return ListView.separated(
-                    shrinkWrap: true,
-                    separatorBuilder: (context, index) => const Divider(
-                      color: Colors.white,
-                      height: 25,
-                    ),
-                    itemCount: snapshot.data!.length,
-                    itemBuilder: (context, index) {
-                      return CheckupListview(
-                        item: snapshot.data![index],
-                        checkBox: false,
-                        onTap: (_) {},
-                      );
-                    },
-                  );
-                } else {
-                  return Container(
-                    width: MediaQuery.of(context).size.width,
-                    alignment: Alignment.center,
-                    child: Text('Tidak ada jadwal checkup',
-                        style: const GlobalTheme().headerStyle),
-                  );
-                }
-              }),
+          child: ListView.separated(
+            shrinkWrap: true,
+            separatorBuilder: (context, index) => const Divider(
+              color: Colors.white,
+              height: 25,
+            ),
+            itemCount: items.length,
+            itemBuilder: (context, index) {
+              return CheckupListview(
+                item: items[index],
+                checkBox: false,
+                onTap: (_) {},
+              );
+            },
+          ),
         ),
       ],
     );

@@ -1,9 +1,6 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
-import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/domain/services/remaja_checkup_service.dart';
 import 'package:simanja_app/presentation/provider/provider_checkup.dart';
 import 'package:simanja_app/presentation/widgets/atom/button_attend.dart';
@@ -12,7 +9,10 @@ import 'package:simanja_app/presentation/widgets/organism/checkup_invitation.dar
 import 'package:simanja_app/utils/default_account.dart';
 
 class CheckupConfirmation extends ConsumerStatefulWidget {
-  const CheckupConfirmation({super.key});
+  final List<KaderCheckup> items;
+  final void Function() onTap;
+  const CheckupConfirmation(
+      {super.key, required this.items, required this.onTap});
 
   @override
   ConsumerState<CheckupConfirmation> createState() =>
@@ -20,48 +20,26 @@ class CheckupConfirmation extends ConsumerStatefulWidget {
 }
 
 class _CheckupConfirmationState extends ConsumerState<CheckupConfirmation> {
-  late Future<List<KaderCheckup>> listCheckup;
-
   void _subscribeCheckup(bool subscribe) async {
-    for (var item in ref.watch(checkupProvider.notifier).state) {
+    final checkupNotifier = ref.read(checkupProvider.notifier);
+    final checkupList = checkupNotifier.state;
+
+    for (var item in checkupList) {
       await (subscribe
           ? RemajaCheckupService()
               .subscribeCheckups(item.uid, remajaAccount.uid)
           : RemajaCheckupService()
               .unsubscribeCheckups(item.uid, remajaAccount.uid));
-      ref.watch(checkupProvider.notifier).state = [];
     }
-    setState(() {
-      listCheckup =
-          KaderCheckupService().getActiveCheckupList(remajaAccount.posyandu);
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    listCheckup =
-        KaderCheckupService().getActiveCheckupList(remajaAccount.posyandu);
+    checkupNotifier.state = [];
+    widget.onTap();
   }
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        FutureBuilder(
-          future: listCheckup,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const CircularProgressIndicator();
-            } else if (snapshot.hasData) {
-              return CheckupInvitation(
-                items: snapshot.data!,
-              );
-            } else {
-              return const CheckupInvitation(items: [null]);
-            }
-          },
-        ),
+        CheckupInvitation(items: widget.items),
         const Padding(padding: EdgeInsets.only(top: 10)),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
