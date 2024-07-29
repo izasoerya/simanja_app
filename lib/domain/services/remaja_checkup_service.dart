@@ -9,7 +9,7 @@ class RemajaCheckupService {
     return data;
   }
 
-  Future<List<KaderCheckup>>? getCheckupList(String remajaUID) async {
+  Future<List<KaderCheckup>?> getCheckupList(String remajaUID) async {
     return await RemajaCheckupImplementation().getCheckupList(remajaUID);
   }
 }

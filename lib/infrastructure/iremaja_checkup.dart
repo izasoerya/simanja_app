@@ -36,7 +36,7 @@ class RemajaCheckupImplementation implements RemajaCheckupRepo {
   }
 
   @override
-  Future<List<KaderCheckup>> getCheckupList(String uid) async {
+  Future<List<KaderCheckup>?> getCheckupList(String uid) async {
     List<PostgrestMap> response;
     try {
       response = await Supabase.instance.client
@@ -45,7 +45,9 @@ class RemajaCheckupImplementation implements RemajaCheckupRepo {
           .contains('uid_remaja', [uid]).eq('is_finish', false);
 
       print('response: ${response}');
-
+      if (response.isEmpty) {
+        return null;
+      }
       List<KaderCheckup> checkupList = [];
       for (var item in response) {
         KaderCheckup checkup = KaderCheckup.fromJson(item);
