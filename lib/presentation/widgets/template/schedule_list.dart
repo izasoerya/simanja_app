@@ -32,7 +32,7 @@ class ScheduleList extends StatelessWidget {
                   text: 'Jadwal Checkup Posyandu',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 24,
+                    fontSize: 20,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
