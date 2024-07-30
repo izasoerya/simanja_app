@@ -50,4 +50,34 @@ class UserRemaja {
       password: password ?? this.password,
     );
   }
+
+  factory UserRemaja.fromJSON(Map<String, dynamic> json) {
+    return UserRemaja(
+      uid: json['uid'],
+      name: json['name'],
+      nik: json['nik'],
+      posyandu: json['posyandu'],
+      sex: json['is_male'] == true ? Gender.male : Gender.female,
+      birthDate: DateTime.parse(json['date_of_birth']),
+      address: json['address'],
+      bpjs: json['is_bpjs'],
+      email: json['email'],
+      password: json['password'],
+    );
+  }
+
+  Map<String, dynamic> toJSON() {
+    return {
+      'uid': uid,
+      'name': name,
+      'nik': nik,
+      'posyandu': posyandu,
+      'is_male': sex == Gender.male ? true : false,
+      'date_of_birth': birthDate.toIso8601String(),
+      'address': address,
+      'is_bpjs': bpjs,
+      'email': email,
+      'password': password,
+    };
+  }
 }

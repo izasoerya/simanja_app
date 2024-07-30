@@ -6,6 +6,7 @@ import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
 import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
@@ -154,7 +155,14 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                           bpjs: _bpjs,
                           sex: _sex,
                         );
-                        RemajaAuthentication().createUser(remaja);
+                        final response =
+                            await RemajaAuthentication().createUser(remaja);
+                        if (response) {
+                          router.go('/login-remaja');
+                          showCustomSnackbar(context, 'Berhasil mendaftar', 0);
+                        } else {
+                          showCustomSnackbar(context, 'Gagal mendaftar', 2);
+                        }
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',

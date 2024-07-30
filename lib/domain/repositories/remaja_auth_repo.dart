@@ -6,7 +6,7 @@ abstract class RemajaAuthRepo {
   Future<UserRemaja> getUserbyPassword(String password);
   Future<List<UserRemaja>> getUsers();
 
-  Future<void> createUser(UserRemaja user);
+  Future<UserRemaja?> createUser(UserRemaja user);
   Future<void> updateUser(UserRemaja user);
   Future<void> deleteUser(UserRemaja user);
 }

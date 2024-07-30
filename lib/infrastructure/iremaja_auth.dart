@@ -1,47 +1,32 @@
+import 'dart:async';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/repositories/remaja_auth_repo.dart';
-import 'package:simanja_app/utils/enums.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
 
 class RemajaAuthImplementation implements RemajaAuthRepo {
   final Uuid _uuid = const Uuid();
-  PostgrestResponse? response;
 
   @override
-  Future<void> createUser(UserRemaja user) async {
+  Future<UserRemaja?> createUser(UserRemaja user) async {
     String uid = _uuid.v4();
-    UserRemaja newUser = UserRemaja(
-      uid: uid,
-      name: user.name,
-      nik: user.nik,
-      posyandu: user.posyandu,
-      sex: user.sex,
-      birthDate: user.birthDate,
-      address: user.address,
-      bpjs: user.bpjs,
-      email: user.email,
-      password: user.password,
-    );
+    UserRemaja newUser = user.copyWith(uid: uid);
 
     try {
-      await Supabase.instance.client.from('remaja_auth').insert({
-        'uid': newUser.uid,
-        'name': newUser.name,
-        'nik': newUser.nik,
-        'posyandu': newUser.posyandu,
-        'is_male': newUser.sex == Gender.male ? true : false,
-        'date_of_birth': newUser.birthDate.toIso8601String(),
-        'address': newUser.address,
-        'is_bpjs': newUser.bpjs,
-        'email': newUser.email,
-        'password': newUser.password,
-      });
+      await Supabase.instance.client
+          .from('remaja_auth')
+          .insert(newUser.toJSON());
+
+      final response = await Supabase.instance.client
+          .from('remaja_auth')
+          .select()
+          .eq('uid', newUser.uid)
+          .single();
+      return response.containsValue(newUser.uid) ? newUser : null;
     } catch (e) {
       print('$e');
-      return Future.value(e);
+      return null;
     }
-    return Future.value();
   }
 
   @override
@@ -70,19 +55,8 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
       return Future.error(e);
     }
 
-    UserRemaja user = UserRemaja(
-      uid: response['uid'],
-      name: response['name'],
-      nik: response['nik'],
-      posyandu: response['posyandu'],
-      sex: response['is_male'] == true ? Gender.male : Gender.female,
-      birthDate: DateTime.parse(response['date_of_birth']),
-      address: response['address'],
-      bpjs: response['is_bpjs'],
-      email: response['email'],
-      password: response['password'],
-    );
-    return user;
+    UserRemaja fetchedUser = UserRemaja.fromJSON(response);
+    return fetchedUser;
   }
 
   @override
@@ -108,19 +82,6 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
       print('$e');
       return Future.error(e);
     }
-    return responses
-        .map((response) => UserRemaja(
-              uid: response['uid'],
-              name: response['name'],
-              nik: response['nik'],
-              posyandu: response['posyandu'],
-              sex: response['is_male'] == true ? Gender.male : Gender.female,
-              birthDate: DateTime.parse(response['date_of_birth']),
-              address: response['address'],
-              bpjs: response['is_bpjs'],
-              email: response['email'],
-              password: response['password'],
-            ))
-        .toList();
+    return responses.map((response) => UserRemaja.fromJSON(response)).toList();
   }
 }
