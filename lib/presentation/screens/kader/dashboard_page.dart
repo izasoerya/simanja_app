@@ -32,12 +32,9 @@ class DashboardKader extends StatelessWidget {
                   return const Text('Error');
                 }),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            const TemplateTitle(text: 'REKAP KONDISI REMAJA'),
+            const TemplateTitle(text: 'REKAP CHECKUP'),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            SizedBox(
-                width: MediaQuery.of(context).size.width * 0.8,
-                child: const SummaryRemaja(
-                    leftText: 'HARI INI', rightText: 'SEMUA')),
+            const SummaryRemaja(),
             const Padding(padding: EdgeInsets.only(top: 30)),
             const TemplateTitle(text: 'KEGIATAN POSYANDU'),
             const Padding(padding: EdgeInsets.only(top: 15)),
