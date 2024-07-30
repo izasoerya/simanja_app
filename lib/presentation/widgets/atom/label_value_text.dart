@@ -5,10 +5,14 @@ class LabelValueText extends ConsumerWidget {
   final String label;
   final String value;
   final Color textColor;
+  final double fontSizeUpper;
+  final double fontSizeBottom;
   const LabelValueText({
     super.key,
     required this.label,
     required this.value,
+    this.fontSizeUpper = 32,
+    this.fontSizeBottom = 16,
     this.textColor = const Color.fromRGBO(203, 101, 53, 1),
   });
 
@@ -19,9 +23,9 @@ class LabelValueText extends ConsumerWidget {
         label != ''
             ? Text(
                 label,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16,
+                style: TextStyle(
+                  color: textColor,
+                  fontSize: fontSizeUpper,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,
@@ -32,7 +36,7 @@ class LabelValueText extends ConsumerWidget {
                 value,
                 style: TextStyle(
                   color: textColor,
-                  fontSize: 16,
+                  fontSize: fontSizeBottom,
                   fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.center,

@@ -1,24 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/presentation/widgets/organism/small_textvalue_square_container.dart';
 import 'package:simanja_app/presentation/widgets/organism/wide_textvalue_rectangle.dart.dart';
 import 'package:simanja_app/presentation/widgets/organism/big_textvalue_rectangle.dart';
+import 'package:simanja_app/utils/enums.dart';
 
 class DashboardContent extends StatelessWidget {
-  const DashboardContent({super.key});
+  final List<UserRemaja> users;
+  const DashboardContent({super.key, required this.users});
 
   @override
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const WideTextValueRectangle(),
+        WideTextValueRectangle(users: users),
         const Padding(padding: EdgeInsets.only(top: 5)),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.35,
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
-              const BigTextValueRectangle(),
+              BigTextValueRectangle(users: users),
               Positioned(
                 top: MediaQuery.of(context).size.height * 0.18,
                 left: 0,
@@ -27,15 +30,21 @@ class DashboardContent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SmallTextvalueSquareContainer(
-                        height: MediaQuery.of(context).size.height * 0.12,
-                        width: MediaQuery.of(context).size.width * 0.25,
-                        upperText: '//Todo:4',
-                        lowerText: 'Jumlah Remaja Perempuan'),
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        upperText: users
+                            .where((element) => element.sex == Gender.female)
+                            .length
+                            .toString(),
+                        lowerText: 'Remaja Perempuan'),
                     SmallTextvalueSquareContainer(
-                        height: MediaQuery.of(context).size.height * 0.12,
-                        width: MediaQuery.of(context).size.width * 0.25,
-                        upperText: '//Todo:4',
-                        lowerText: 'Jumlah Remaja Laki-laki'),
+                        height: MediaQuery.of(context).size.height * 0.15,
+                        width: MediaQuery.of(context).size.width * 0.3,
+                        upperText: users
+                            .where((element) => element.sex == Gender.male)
+                            .length
+                            .toString(),
+                        lowerText: 'Remaja Laki-laki'),
                   ],
                 ),
               ),

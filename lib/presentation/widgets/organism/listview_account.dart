@@ -14,7 +14,8 @@ class ListViewAccount extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.5, // Set a fixed height
       child: FutureBuilder<List<UserRemaja>>(
-        future: RemajaAuthentication().getUsers(remajaAccount.posyandu),
+        future:
+            RemajaAuthentication().getUsersbyPosyanduID(remajaAccount.posyandu),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

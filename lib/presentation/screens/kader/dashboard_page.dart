@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
 import 'package:simanja_app/presentation/widgets/organism/appbar_content.dart';
 import 'package:simanja_app/presentation/widgets/template/activity_list.dart';
 import 'package:simanja_app/presentation/widgets/template/dashboard_content.dart';
 import 'package:simanja_app/presentation/widgets/template/summary_remaja.dart';
+import 'package:simanja_app/utils/default_account.dart';
 
 class DashboardKader extends StatelessWidget {
   const DashboardKader({super.key});
@@ -18,7 +20,17 @@ class DashboardKader extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(top: 30)),
             const TemplateTitle(text: 'DASHBOARD'),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            const DashboardContent(),
+            FutureBuilder(
+                future: RemajaAuthentication()
+                    .getUsersbyPosyanduID(kaderAccount.uid),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const CircularProgressIndicator();
+                  } else if (snapshot.hasData) {
+                    return DashboardContent(users: snapshot.data!);
+                  }
+                  return const Text('Error');
+                }),
             const Padding(padding: EdgeInsets.only(top: 15)),
             const TemplateTitle(text: 'REKAP KONDISI REMAJA'),
             const Padding(padding: EdgeInsets.only(top: 15)),

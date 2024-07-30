@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
+import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/label_value_text.dart';
 
 class WideTextValueRectangle extends StatelessWidget {
-  const WideTextValueRectangle({super.key});
+  final List<UserRemaja> users;
+  const WideTextValueRectangle({super.key, required this.users});
 
   @override
   Widget build(BuildContext context) {
@@ -13,14 +16,32 @@ class WideTextValueRectangle extends StatelessWidget {
         color: Colors.grey.shade300,
         borderRadius: const BorderRadius.all(Radius.circular(5)),
       ),
-      child: const Column(
+      child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              LabelValueText(label: 'Hadir hari ini:', value: '20'),
-              LabelValueText(label: 'Memiliki BPJS:', value: '2'),
+              LabelValueText(
+                label: 'non-BPJS:',
+                value: users
+                    .where((element) => element.bpjs == false)
+                    .length
+                    .toString(),
+                textColor: const GlobalTheme().primaryColor,
+                fontSizeUpper: 18,
+                fontSizeBottom: 28,
+              ),
+              LabelValueText(
+                label: 'BPJS:',
+                value: users
+                    .where((element) => element.bpjs == true)
+                    .length
+                    .toString(),
+                textColor: const GlobalTheme().primaryColor,
+                fontSizeUpper: 18,
+                fontSizeBottom: 28,
+              ),
             ],
           ),
         ],
