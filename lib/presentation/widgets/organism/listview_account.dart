@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/item_listview.dart';
+import 'package:simanja_app/utils/default_account.dart';
 import 'package:simanja_app/utils/enums.dart';
 
 class ListViewAccount extends StatelessWidget {
@@ -13,7 +14,7 @@ class ListViewAccount extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.5, // Set a fixed height
       child: FutureBuilder<List<UserRemaja>>(
-        future: RemajaAuthentication().getUsers(),
+        future: RemajaAuthentication().getUsers(remajaAccount.posyandu),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());

@@ -72,16 +72,23 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
   }
 
   @override
-  Future<List<UserRemaja>> getUsers() async {
-    // TODO: implement getUsers
+  Future<List<UserRemaja>> getUsersbyPosyanduID(String posyanduUID) async {
     List<PostgrestMap> responses;
     try {
-      responses =
-          await Supabase.instance.client.from('remaja_auth').select('*');
+      responses = await Supabase.instance.client
+          .from('remaja_auth')
+          .select('*')
+          .eq('posyandu', posyanduUID);
     } catch (e) {
       print('$e');
       return Future.error(e);
     }
     return responses.map((response) => UserRemaja.fromJSON(response)).toList();
+  }
+
+  @override
+  Future<List<UserRemaja>> getAllUsers() {
+    // TODO: implement getAllUsers
+    throw UnimplementedError();
   }
 }
