@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_searchbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/posyandu_activity.dart';
 
 class ActivityList extends StatelessWidget {
@@ -10,7 +11,7 @@ class ActivityList extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       child: const Column(
         children: [
-          SearchBar(),
+          CustomSearchBar(label: 'Judul Kegiatan', icon: Icons.search),
           Padding(padding: EdgeInsets.only(top: 20)),
           Row(
             children: [
