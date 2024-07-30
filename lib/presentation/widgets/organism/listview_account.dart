@@ -14,9 +14,7 @@ class ListViewAccount extends StatelessWidget {
       height: MediaQuery.of(context).size.height * 0.5, // Set a fixed height
       child: ListView.separated(
           itemCount: users.length,
-          separatorBuilder: (context, index) => const Divider(
-                height: 20,
-              ),
+          separatorBuilder: (context, index) => const Divider(height: 20),
           itemBuilder: (context, index) {
             final user = users[index];
             return ItemListview(
