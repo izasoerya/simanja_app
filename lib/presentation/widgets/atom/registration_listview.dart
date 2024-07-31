@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 
-class CheckupListview extends StatefulWidget {
+class RegistrationListview extends StatefulWidget {
   final bool checkBox;
   final KaderCheckup item;
   final void Function(Map<String, bool> callBack) onTap;
-  const CheckupListview({
+  const RegistrationListview({
     super.key,
     this.checkBox = true,
     required this.item,
@@ -17,10 +17,10 @@ class CheckupListview extends StatefulWidget {
       Map.from({uid: value});
 
   @override
-  State<CheckupListview> createState() => _CheckupListviewState();
+  State<RegistrationListview> createState() => _RegistrationListviewState();
 }
 
-class _CheckupListviewState extends State<CheckupListview> {
+class _RegistrationListviewState extends State<RegistrationListview> {
   bool isActive = false;
 
   @override

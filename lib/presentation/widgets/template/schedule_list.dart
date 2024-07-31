@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
-import 'package:simanja_app/presentation/widgets/atom/checkup_listview.dart';
+import 'package:simanja_app/presentation/widgets/atom/registration_listview.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
 
 class ScheduleList extends StatelessWidget {
@@ -54,7 +54,7 @@ class ScheduleList extends StatelessWidget {
             ),
             itemCount: items.length,
             itemBuilder: (context, index) {
-              return CheckupListview(
+              return RegistrationListview(
                 item: items[index],
                 checkBox: false,
                 onTap: (_) {},
