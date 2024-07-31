@@ -75,7 +75,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'daftar-hadir-checkup',
               builder: (BuildContext context, GoRouterState state) {
-                return const LayoutRemaja(child: AttendanceCheckupPage());
+                return const AttendanceCheckupPage();
               },
             ),
           ],

@@ -13,7 +13,7 @@ class ListViewRekapCheckup extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
-        height: MediaQuery.of(context).size.height * 0.8,
+        height: MediaQuery.of(context).size.height * 0.75,
         child: Column(
           children: [
             ItemListViewNude(
