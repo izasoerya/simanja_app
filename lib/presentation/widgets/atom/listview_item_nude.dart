@@ -8,7 +8,7 @@ class ItemListViewNude extends StatelessWidget {
   const ItemListViewNude(
       {super.key, required this.title, required this.description});
 
-  void _attendacePage() => router.go('/login-kader/daftar-hadir-checkup');
+  void _attendacePage() => router.push('/login-kader/daftar-hadir-checkup');
 
   @override
   Widget build(BuildContext context) {
