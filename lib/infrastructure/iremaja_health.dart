@@ -10,6 +10,12 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   }
 
   @override
+  Future<HealthPropertiesRemaja?> updateHealth(HealthPropertiesRemaja health) {
+    // TODO: implement updateHealth
+    throw UnimplementedError();
+  }
+
+  @override
   Future<bool?> deleteHealth(HealthPropertiesRemaja health) {
     // TODO: implement deleteHealth
     throw UnimplementedError();
@@ -23,8 +29,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
           .select('*')
           .eq('uid', uid)
           .single();
-      HealthPropertiesRemaja data = HealthPropertiesRemaja.fromJSON(response);
-      return data;
+      return HealthPropertiesRemaja.fromJSON(response);
     } catch (e) {
       print('Error:$e');
       return null;
@@ -32,13 +37,11 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   }
 
   @override
-  Future<List<HealthPropertiesRemaja>> getHealths() async {
+  Future<List<HealthPropertiesRemaja>> getListHealth() async {
     try {
       final response =
           await Supabase.instance.client.from('health').select('*');
-      final List<HealthPropertiesRemaja> data =
-          response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
-      return data;
+      return response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
     } catch (e) {
       print('Error:$e');
       return [];
@@ -46,8 +49,17 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   }
 
   @override
-  Future<HealthPropertiesRemaja?> updateHealth(HealthPropertiesRemaja health) {
-    // TODO: implement updateHealth
-    throw UnimplementedError();
+  Future<List<HealthPropertiesRemaja?>> getListHealthByCheckupUID(
+      String checkupUID) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('health')
+          .select('*')
+          .eq('checkup_uid', checkupUID);
+      return response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
+    } catch (e) {
+      print('Error:$e');
+      return [];
+    }
   }
 }
