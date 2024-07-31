@@ -6,13 +6,16 @@ class ItemListViewNude extends StatelessWidget {
   final String uid;
   final String title;
   final String description;
+  final void Function() onTap;
   const ItemListViewNude(
       {super.key,
       required this.title,
       required this.description,
-      required this.uid});
+      required this.uid,
+      this.onTap = _attendacePage});
 
-  void _attendacePage() => router.push('/login-kader/daftar-hadir-checkup');
+  static void _attendacePage() =>
+      router.push('/login-kader/daftar-hadir-checkup');
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +66,7 @@ class ItemListViewNude extends StatelessWidget {
                 color: Colors.white,
               ),
               color: Colors.white,
-              onPressed: _attendacePage),
+              onPressed: onTap),
         ],
       ),
     );

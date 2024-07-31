@@ -11,17 +11,41 @@ class ListViewRekapCheckup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-        separatorBuilder: (context, index) => const Divider(
-              color: Colors.white,
-              height: 10,
-            ),
-        itemBuilder: (context, index) {
-          return ItemListViewNude(
-              uid: items[index].uid,
-              title: items[index].height.toString(),
-              description: items[index].weight.toString());
-        },
-        itemCount: items.length);
+    return SizedBox(
+        width: MediaQuery.of(context).size.width * 0.8,
+        height: MediaQuery.of(context).size.height * 0.8,
+        child: Column(
+          children: [
+            ItemListViewNude(
+                title: 'Jumlah Remaja Yang',
+                description:
+                    'Anemia: ${items.where((element) => element.anemia).length}',
+                uid: 'anemia'),
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            ItemListViewNude(
+                title: 'Jumlah Remaja Yang',
+                description:
+                    'Beresiko KEK: ${items.where((element) => element.kek).length}',
+                uid: 'kek'),
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            ItemListViewNude(
+                title: 'Jumlah Remaja Yang',
+                description:
+                    'Obesitas: ${items.where((element) => element.weight > 10).length}',
+                uid: 'obesitas'),
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            ItemListViewNude(
+                title: 'Jumlah Remaja Yang',
+                description:
+                    'Sangat Kurus: ${items.where((element) => element.weight < 10).length}',
+                uid: 'kurus'),
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            ItemListViewNude(
+                title: 'Jumlah Remaja Yang',
+                description:
+                    'Merokok: ${items.where((element) => element.smoker).length}',
+                uid: 'merokok'),
+          ],
+        ));
   }
 }
