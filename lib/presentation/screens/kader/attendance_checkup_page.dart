@@ -25,9 +25,8 @@ class AttendanceCheckupPage extends StatelessWidget {
           ),
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),
-            onPressed: () {
-              Navigator.pop(context);
-            },
+            padding: const EdgeInsets.only(left: 15),
+            onPressed: () => Navigator.pop(context),
           ),
         ),
       ),
