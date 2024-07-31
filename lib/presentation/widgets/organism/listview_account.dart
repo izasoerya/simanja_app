@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
-import 'package:simanja_app/presentation/widgets/atom/item_listview.dart';
+import 'package:simanja_app/presentation/widgets/atom/listview_item_image.dart';
 import 'package:simanja_app/utils/enums.dart';
 
 class ListViewAccount extends StatelessWidget {
@@ -17,7 +17,7 @@ class ListViewAccount extends StatelessWidget {
           separatorBuilder: (context, index) => const Divider(height: 20),
           itemBuilder: (context, index) {
             final user = users[index];
-            return ItemListview(
+            return ItemListviewImage(
               title: user.name,
               uid: user.uid,
               descriptions: [

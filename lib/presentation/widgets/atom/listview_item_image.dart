@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 
-class ItemListview extends StatelessWidget {
+class ItemListviewImage extends StatelessWidget {
   final String title;
   final String uid;
   final List<String> descriptions;
   final void Function(String callBack) onTap;
-  const ItemListview({
+  const ItemListviewImage({
     super.key,
     required this.title,
     required this.uid,

@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
-import 'package:simanja_app/presentation/widgets/atom/item_listview.dart';
+import 'package:simanja_app/presentation/widgets/atom/listview_item_image.dart';
 
 class ListviewActivity extends ConsumerWidget {
   const ListviewActivity({super.key});
@@ -31,7 +31,7 @@ class ListviewActivity extends ConsumerWidget {
               separatorBuilder: (context, index) => const Divider(height: 20),
               itemBuilder: (context, index) {
                 final checkup = checkupList[index];
-                return ItemListview(
+                return ItemListviewImage(
                     title: checkup.checkupTitle,
                     uid: checkup.uid,
                     descriptions: [

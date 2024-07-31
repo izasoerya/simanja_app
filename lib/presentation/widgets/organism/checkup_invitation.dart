@@ -3,7 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/provider/provider_checkup.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
-import 'package:simanja_app/presentation/widgets/atom/registration_listview.dart';
+import 'package:simanja_app/presentation/widgets/atom/listview_item_checkbox.dart';
 
 class CheckupInvitation extends ConsumerStatefulWidget {
   final List<KaderCheckup?> items;
@@ -64,7 +64,7 @@ class _CheckupInvitationState extends ConsumerState<CheckupInvitation> {
               height: 20,
             ),
             itemBuilder: (context, index) {
-              Widget item = RegistrationListview(
+              Widget item = ItemListViewCheckbox(
                 item: widget.items[index]!,
                 onTap: (data) {
                   bool resultValue = data[widget.items[index]!.uid]!;

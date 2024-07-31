@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 
-class RegistrationListview extends StatefulWidget {
-  final bool checkBox;
+class ItemListViewCheckbox extends StatefulWidget {
   final KaderCheckup item;
+  final String label;
   final void Function(Map<String, bool> callBack) onTap;
-  const RegistrationListview({
+  const ItemListViewCheckbox({
     super.key,
-    this.checkBox = true,
+    this.label = '',
     required this.item,
     required this.onTap,
   });
@@ -17,10 +17,10 @@ class RegistrationListview extends StatefulWidget {
       Map.from({uid: value});
 
   @override
-  State<RegistrationListview> createState() => _RegistrationListviewState();
+  State<ItemListViewCheckbox> createState() => _ItemListViewCheckboxState();
 }
 
-class _RegistrationListviewState extends State<RegistrationListview> {
+class _ItemListViewCheckboxState extends State<ItemListViewCheckbox> {
   bool isActive = false;
 
   @override
@@ -56,15 +56,12 @@ class _RegistrationListviewState extends State<RegistrationListview> {
                   ),
                 ],
               ),
-              widget.checkBox
-                  ? ChecklistBox(
-                      text: '',
-                      value: (d) {
-                        widget.onTap(
-                            widget._mapCheckboxtoUID(widget.item.uid, d));
-                      },
-                    )
-                  : const SizedBox(),
+              ChecklistBox(
+                text: widget.label,
+                value: (d) {
+                  widget.onTap(widget._mapCheckboxtoUID(widget.item.uid, d));
+                },
+              )
             ],
           ),
         ),
