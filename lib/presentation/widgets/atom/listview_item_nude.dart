@@ -3,10 +3,14 @@ import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class ItemListViewNude extends StatelessWidget {
+  final String uid;
   final String title;
   final String description;
   const ItemListViewNude(
-      {super.key, required this.title, required this.description});
+      {super.key,
+      required this.title,
+      required this.description,
+      required this.uid});
 
   void _attendacePage() => router.push('/login-kader/daftar-hadir-checkup');
 

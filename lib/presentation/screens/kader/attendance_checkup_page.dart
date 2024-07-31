@@ -1,4 +1,5 @@
-import 'package:flutter/widgets.dart';
+import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/widgets/organism/listview_checkup.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_posyandu.dart';
 
 class AttendanceCheckupPage extends StatelessWidget {
@@ -6,12 +7,23 @@ class AttendanceCheckupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * 0.8,
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      alignment: Alignment.center,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          TitleWPosyandu(title: 'Daftar Remaja Checkup'),
+          const TitleWPosyandu(title: 'Rekap Checkup Remaja'),
+          FutureBuilder(
+              future: null,
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const CircularProgressIndicator();
+                } else if (snapshot.hasData) {
+                  return Placeholder();
+                }
+                return const Text('Belum ada remaja mendaftar');
+              }),
         ],
       ),
     );

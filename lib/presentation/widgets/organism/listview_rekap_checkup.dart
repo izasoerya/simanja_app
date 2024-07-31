@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_nude.dart';
 
-class ListviewCheckup extends StatelessWidget {
-  final List<KaderCheckup> checkupList;
-  const ListviewCheckup({
+class ListViewRekapCheckup extends StatelessWidget {
+  final List<HealthPropertiesRemaja> items;
+  const ListViewRekapCheckup({
     super.key,
-    required this.checkupList,
+    required this.items,
   });
 
   @override
@@ -18,11 +18,10 @@ class ListviewCheckup extends StatelessWidget {
             ),
         itemBuilder: (context, index) {
           return ItemListViewNude(
-              uid: checkupList[index].uid,
-              title: checkupList[index].checkupTitle,
-              description:
-                  checkupList[index].dateEvent.toString().substring(0, 10));
+              uid: items[index].uid,
+              title: items[index].height.toString(),
+              description: items[index].weight.toString());
         },
-        itemCount: checkupList.length);
+        itemCount: items.length);
   }
 }
