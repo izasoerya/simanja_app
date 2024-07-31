@@ -20,6 +20,7 @@ class ListviewCheckup extends StatelessWidget {
           return ItemListViewNude(
               uid: checkupList[index].uid,
               title: checkupList[index].checkupTitle,
+              isFinish: checkupList[index].isFinish,
               description:
                   checkupList[index].dateEvent.toString().substring(0, 10));
         },

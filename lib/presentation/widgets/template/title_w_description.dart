@@ -1,3 +1,4 @@
+import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
@@ -16,8 +17,8 @@ class TitleWDescription extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
+              fontSize: 21.sp,
+              fontWeight: FontWeight.w800,
               color: const GlobalTheme().primaryColor,
             ),
             textAlign: TextAlign.center,
@@ -25,8 +26,8 @@ class TitleWDescription extends StatelessWidget {
           Text(
             description,
             style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+              fontSize: 10.sp,
+              fontWeight: FontWeight.normal,
               color: const GlobalTheme().secondaryColor,
             ),
             textAlign: TextAlign.center,

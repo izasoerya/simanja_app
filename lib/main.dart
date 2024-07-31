@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:sizer/sizer.dart'; // Import Sizer package
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 import 'presentation/router/router.dart';
@@ -20,6 +21,10 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(routerConfig: router);
+    return Sizer(
+      builder: (context, orientation, deviceType) {
+        return MaterialApp.router(routerConfig: router);
+      },
+    );
   }
 }

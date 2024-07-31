@@ -6,12 +6,14 @@ class ItemListViewNude extends StatelessWidget {
   final String uid;
   final String title;
   final String description;
+  final bool isFinish;
   final void Function() onTap;
   const ItemListViewNude(
       {super.key,
       required this.title,
       required this.description,
       required this.uid,
+      this.isFinish = false,
       this.onTap = _attendacePage});
 
   static void _attendacePage() =>
@@ -21,7 +23,7 @@ class ItemListViewNude extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: const GlobalTheme().primaryColor,
@@ -44,7 +46,7 @@ class ItemListViewNude extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 16,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                   color: const GlobalTheme().secondaryColor,
                 ),
@@ -53,20 +55,43 @@ class ItemListViewNude extends StatelessWidget {
               Text(
                 description,
                 style: const TextStyle(
-                  fontSize: 24,
+                  fontSize: 18,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.left,
               ),
             ],
           ),
-          IconButton(
-              icon: const Icon(
-                Icons.arrow_forward_ios,
-                color: Colors.white,
-              ),
-              color: Colors.white,
-              onPressed: onTap),
+          Row(
+            children: [
+              !isFinish
+                  ? Container(
+                      padding: const EdgeInsets.all(7.5),
+                      decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(color: Colors.green),
+                        borderRadius:
+                            const BorderRadius.all(Radius.circular(15)),
+                      ),
+                      child: const Text(
+                        'Masih Berlangsung',
+                        style: TextStyle(
+                          color: Colors.green,
+                          fontSize: 8,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    )
+                  : const SizedBox(),
+              IconButton(
+                  icon: const Icon(
+                    Icons.arrow_forward_ios,
+                    color: Colors.white,
+                  ),
+                  color: Colors.white,
+                  onPressed: onTap),
+            ],
+          )
         ],
       ),
     );

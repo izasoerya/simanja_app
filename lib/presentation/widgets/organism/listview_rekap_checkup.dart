@@ -20,30 +20,35 @@ class ListViewRekapCheckup extends StatelessWidget {
                 title: 'Jumlah Remaja Yang',
                 description:
                     'Anemia: ${items.where((element) => element.anemia).length}',
+                isFinish: true,
                 uid: 'anemia'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
                     'Beresiko KEK: ${items.where((element) => element.kek).length}',
+                isFinish: true,
                 uid: 'kek'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
                     'Obesitas: ${items.where((element) => element.weight > 10).length}',
+                isFinish: true,
                 uid: 'obesitas'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
                     'Sangat Kurus: ${items.where((element) => element.weight < 10).length}',
+                isFinish: true,
                 uid: 'kurus'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
                     'Merokok: ${items.where((element) => element.smoker).length}',
+                isFinish: true,
                 uid: 'merokok'),
           ],
         ));
