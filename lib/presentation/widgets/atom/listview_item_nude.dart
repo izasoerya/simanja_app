@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class ItemListViewNude extends StatelessWidget {
@@ -6,6 +7,8 @@ class ItemListViewNude extends StatelessWidget {
   final String description;
   const ItemListViewNude(
       {super.key, required this.title, required this.description});
+
+  void _attendacePage() => router.go('/login-kader/daftar-hadir-checkup');
 
   @override
   Widget build(BuildContext context) {
@@ -50,13 +53,13 @@ class ItemListViewNude extends StatelessWidget {
               ),
             ],
           ),
-          const IconButton(
-              icon: Icon(
+          IconButton(
+              icon: const Icon(
                 Icons.arrow_forward_ios,
                 color: Colors.white,
               ),
               color: Colors.white,
-              onPressed: null),
+              onPressed: _attendacePage),
         ],
       ),
     );
