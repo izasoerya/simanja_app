@@ -20,7 +20,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
     try {
       final response = await Supabase.instance.client
           .from('health')
-          .select()
+          .select('*')
           .eq('uid', uid)
           .single();
       HealthPropertiesRemaja data = HealthPropertiesRemaja.fromJSON(response);
@@ -32,9 +32,17 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   }
 
   @override
-  Future<List<HealthPropertiesRemaja>> getHealths() {
-    // TODO: implement getHealths
-    throw UnimplementedError();
+  Future<List<HealthPropertiesRemaja>> getHealths() async {
+    try {
+      final response =
+          await Supabase.instance.client.from('health').select('*');
+      final List<HealthPropertiesRemaja> data =
+          response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
+      return data;
+    } catch (e) {
+      print('Error:$e');
+      return [];
+    }
   }
 
   @override
