@@ -63,12 +63,6 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
   }
 
   @override
-  Future<KaderCheckup> getCheckupbyDate(DateTime date) {
-    // TODO: implement getCheckupbyDate
-    throw UnimplementedError();
-  }
-
-  @override
   Future<KaderCheckup?> updateCheckup(KaderCheckup checkup) async {
     PostgrestMap response;
     try {
@@ -89,6 +83,27 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
       uid: response['uid'],
       checkupTitle: response['event_name'],
       dateEvent: DateTime.parse(response['date']),
+    );
+  }
+
+  @override
+  Future<KaderCheckup> getCheckupbyUID(String checkupUID) async {
+    PostgrestMap response;
+    try {
+      response = await Supabase.instance.client
+          .from('kader_checkup')
+          .select('*')
+          .eq('uid', checkupUID)
+          .single();
+    } catch (e) {
+      print('Error: $e');
+      return Future.error(e);
+    }
+    return KaderCheckup(
+      uid: response['uid'],
+      checkupTitle: response['event_name'],
+      dateEvent: DateTime.parse(response['date']),
+      isFinish: response['is_finish'],
     );
   }
 }
