@@ -1,5 +1,6 @@
 class HealthPropertiesRemaja {
   final String uid;
+  final String uidRemaja;
   final double weight;
   final double height;
   final double armCircumference;
@@ -19,6 +20,7 @@ class HealthPropertiesRemaja {
 
   HealthPropertiesRemaja({
     required this.uid,
+    required this.uidRemaja,
     required this.weight,
     required this.height,
     required this.armCircumference,
@@ -39,6 +41,7 @@ class HealthPropertiesRemaja {
 
   HealthPropertiesRemaja copyWith({
     String? uid,
+    String? uidRemaja,
     double? weight,
     double? height,
     double? armCircumference,
@@ -58,6 +61,7 @@ class HealthPropertiesRemaja {
   }) {
     return HealthPropertiesRemaja(
       uid: uid ?? this.uid,
+      uidRemaja: uidRemaja ?? this.uidRemaja,
       weight: weight ?? this.weight,
       height: height ?? this.height,
       armCircumference: armCircumference ?? this.armCircumference,
@@ -81,10 +85,11 @@ class HealthPropertiesRemaja {
   factory HealthPropertiesRemaja.fromJSON(Map<String, dynamic> json) {
     return HealthPropertiesRemaja(
       uid: json['uid'],
+      uidRemaja: json['uid_remaja'],
       weight: json['weight'],
       height: json['height'],
-      armCircumference: json['arm_circumference'],
-      abdominalCircumference: json['abdominal_circumference'],
+      armCircumference: json['arm_radius'],
+      abdominalCircumference: json['abdominal_radius'],
       bloodPressure: json['blood_pressure'],
       hemoglobin: json['hemoglobin'],
       cholesterol: json['cholesterol'],
@@ -92,11 +97,11 @@ class HealthPropertiesRemaja {
       tds: json['tds'],
       tdd: json['tdd'],
       checkedAt: DateTime.parse(json['checked_at']),
-      kek: json['kek'],
-      anemia: json['anemia'],
-      smoker: json['smoker'],
-      tablet: json['tablet'],
-      note: json['note'],
+      kek: json['status_kek'],
+      anemia: json['status_anemia'],
+      smoker: json['status_smoker'],
+      tablet: json['status_tablet'],
+      note: json['doctor_note'],
     );
   }
 
@@ -105,8 +110,8 @@ class HealthPropertiesRemaja {
       'uid': uid,
       'weight': weight,
       'height': height,
-      'arm_circumference': armCircumference,
-      'abdominal_circumference': abdominalCircumference,
+      'arm_radius': armCircumference,
+      'abdominal_radius': abdominalCircumference,
       'blood_pressure': bloodPressure,
       'hemoglobin': hemoglobin,
       'cholesterol': cholesterol,
@@ -114,11 +119,11 @@ class HealthPropertiesRemaja {
       'tds': tds,
       'tdd': tdd,
       'checked_at': checkedAt.toIso8601String(),
-      'kek': kek,
-      'anemia': anemia,
-      'smoker': smoker,
-      'tablet': tablet,
-      'note': note,
+      'status_kek': kek,
+      'status_anemia': anemia,
+      'status_smoker': smoker,
+      'status_tablet': tablet,
+      'doctor_note': note,
     };
   }
 }
