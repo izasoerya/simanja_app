@@ -3,20 +3,20 @@ import 'package:simanja_app/domain/repositories/remaja_health_repo.dart';
 
 class RemajaHealthImplementation implements RemajaHealthRepo {
   @override
-  Future<void> createHealth(HealthPropertiesRemaja health) {
+  Future<HealthPropertiesRemaja?> createHealth(HealthPropertiesRemaja health) {
     // TODO: implement createHealth
     throw UnimplementedError();
   }
 
   @override
-  Future<void> deleteHealth(HealthPropertiesRemaja health) {
+  Future<bool?> deleteHealth(HealthPropertiesRemaja health) {
     // TODO: implement deleteHealth
     throw UnimplementedError();
   }
 
   @override
-  Future<HealthPropertiesRemaja> getHealthById(String id) {
-    // TODO: implement getHealthById
+  Future<HealthPropertiesRemaja> getHealthByUID(String uid) {
+    // TODO: implement getHealthByUID
     throw UnimplementedError();
   }
 
@@ -27,7 +27,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   }
 
   @override
-  Future<void> updateHealth(HealthPropertiesRemaja health) {
+  Future<HealthPropertiesRemaja?> updateHealth(HealthPropertiesRemaja health) {
     // TODO: implement updateHealth
     throw UnimplementedError();
   }
