@@ -59,7 +59,7 @@ class ListViewRekapCheckup extends StatelessWidget {
                     'Merokok: ${items.where((element) => element?.smoker ?? false).length}',
                 isFinish: true,
                 uid: 'merokok'),
-            const Padding(padding: EdgeInsets.only(top: 20)),
+            const Padding(padding: EdgeInsets.only(top: 40)),
             !isFinish
                 ? SubmitButton(text: 'Tambah Data Checkup', onClick: () {})
                 : const SizedBox(),

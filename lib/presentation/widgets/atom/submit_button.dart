@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class SubmitButton extends StatelessWidget {
   final String text;
@@ -18,16 +19,16 @@ class SubmitButton extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
-            padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 20),
+            padding: EdgeInsets.symmetric(vertical: 1.w, horizontal: 16.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
           ),
           onPressed: onClick,
           child: Text(text,
-              style: GlobalTheme()
+              style: const GlobalTheme()
                   .headerStyle
-                  .copyWith(color: Colors.white, fontSize: 16)),
+                  .copyWith(color: Colors.white, fontSize: 8.sp)),
         ));
   }
 }
