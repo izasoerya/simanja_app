@@ -50,7 +50,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   }
 
   @override
-  Future<List<HealthPropertiesRemaja?>> getListHealthByCheckupUID(
+  Future<List<HealthPropertiesRemaja?>?> getListHealthByCheckupUID(
       String checkupUID) async {
     try {
       final response = await Supabase.instance.client
@@ -60,7 +60,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
       return response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
     } catch (e) {
       print('Error:$e');
-      return [];
+      return null;
     }
   }
 }

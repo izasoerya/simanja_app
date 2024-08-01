@@ -3,7 +3,7 @@ import 'package:simanja_app/domain/entities/remaja_health.dart';
 abstract class RemajaHealthRepo {
   Future<List<HealthPropertiesRemaja>> getListHealth();
   Future<HealthPropertiesRemaja?> getHealthByUID(String uid);
-  Future<List<HealthPropertiesRemaja?>> getListHealthByCheckupUID(
+  Future<List<HealthPropertiesRemaja?>?> getListHealthByCheckupUID(
       String checkupUID);
 
   Future<HealthPropertiesRemaja?> createHealth(HealthPropertiesRemaja health);
