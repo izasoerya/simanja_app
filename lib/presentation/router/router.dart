@@ -75,7 +75,8 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'daftar-hadir-checkup',
               builder: (BuildContext context, GoRouterState state) {
-                return const AttendanceCheckupPage();
+                return AttendanceCheckupPage(
+                    checkupUID: state.uri.queryParameters['checkupUID']!);
               },
             ),
           ],
