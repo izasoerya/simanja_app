@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:simanja_app/presentation/layout/kader_layout.dart';
 import 'package:simanja_app/presentation/layout/remaja_layout.dart';
+import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
@@ -75,8 +76,11 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'rekap-checkup',
               builder: (BuildContext context, GoRouterState state) {
-                return CheckupSummaryPage(
-                    checkupUID: state.uri.queryParameters['checkupUID']!);
+                return SubPageLayout(
+                  appBarTitle: 'REKAP KONDISI KESEHATAN REMAJA',
+                  child: CheckupSummaryPage(
+                      checkupUID: state.uri.queryParameters['checkupUID']!),
+                );
               },
             ),
           ],
