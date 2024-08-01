@@ -25,7 +25,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   Future<HealthPropertiesRemaja?> getHealthByUID(String uid) async {
     try {
       final response = await Supabase.instance.client
-          .from('health')
+          .from('health_properties_remaja')
           .select('*')
           .eq('uid', uid)
           .single();
@@ -39,8 +39,9 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   @override
   Future<List<HealthPropertiesRemaja>> getListHealth() async {
     try {
-      final response =
-          await Supabase.instance.client.from('health').select('*');
+      final response = await Supabase.instance.client
+          .from('health_properties_remaja')
+          .select('*');
       return response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
     } catch (e) {
       print('Error:$e');
@@ -53,8 +54,8 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
       String checkupUID) async {
     try {
       final response = await Supabase.instance.client
-          .from('health')
-          .select('*')
+          .from('health_properties_remaja')
+          .select()
           .eq('checkup_uid', checkupUID);
       return response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
     } catch (e) {
