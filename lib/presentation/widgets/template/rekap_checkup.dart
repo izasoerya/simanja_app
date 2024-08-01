@@ -6,9 +6,8 @@ class RekapCheckup extends StatelessWidget {
   final List<KaderCheckup> checkupList;
   const RekapCheckup({super.key, required this.checkupList});
 
-  List<KaderCheckup> get sortedData {
-    return checkupList..sort((a, b) => b.dateEvent.compareTo(a.dateEvent));
-  }
+  List<KaderCheckup> get sortedData =>
+      checkupList..sort((a, b) => b.dateEvent.compareTo(a.dateEvent));
 
   @override
   Widget build(BuildContext context) {

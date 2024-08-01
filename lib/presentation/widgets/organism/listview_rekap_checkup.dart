@@ -22,41 +22,41 @@ class ListViewRekapCheckup extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-                'Tanggal Posyandu: ${items.first?.checkedAt.toString().substring(0, 10) ?? ''}',
+                'Tanggal Posyandu: ${items.isEmpty ? '' : items.first?.checkedAt.toString().substring(0, 10) ?? ''}',
                 style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold)),
             const Padding(padding: EdgeInsets.only(top: 10)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Anemia: ${items.where((element) => element?.anemia ?? false).length}',
+                    'Anemia: ${items.isEmpty ? '0' : items.where((element) => element?.anemia ?? false).length}',
                 isFinish: true,
                 uid: 'anemia'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Beresiko KEK: ${items.where((element) => element?.kek ?? false).length}',
+                    'Beresiko KEK: ${items.isEmpty ? '0' : items.where((element) => element?.kek ?? false).length}',
                 isFinish: true,
                 uid: 'kek'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Obesitas: ${items.where((element) => (element?.weight ?? 0) > 10).length}',
+                    'Obesitas: ${items.isEmpty ? '0' : items.where((element) => (element?.weight ?? 0) > 10).length}',
                 isFinish: true,
                 uid: 'obesitas'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Sangat Kurus: ${items.where((element) => (element?.weight ?? 0) < 10).length}',
+                    'Sangat Kurus: ${items.isEmpty ? '0' : items.where((element) => (element?.weight ?? 0) < 10).length}',
                 isFinish: true,
                 uid: 'kurus'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Merokok: ${items.where((element) => element?.smoker ?? false).length}',
+                    'Merokok: ${items.isEmpty ? '0' : items.where((element) => element?.smoker ?? false).length}',
                 isFinish: true,
                 uid: 'merokok'),
             const Padding(padding: EdgeInsets.only(top: 40)),
