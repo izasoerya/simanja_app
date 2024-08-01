@@ -1,6 +1,5 @@
 import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/domain/services/remaja_heath_service.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
