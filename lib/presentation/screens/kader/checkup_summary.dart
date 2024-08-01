@@ -6,9 +6,9 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_rekap_checkup.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_description.dart';
 
-class AttendanceCheckupPage extends StatelessWidget {
+class CheckupSummaryPage extends StatelessWidget {
   final String checkupUID;
-  const AttendanceCheckupPage({super.key, required this.checkupUID});
+  const CheckupSummaryPage({super.key, required this.checkupUID});
 
   @override
   Widget build(BuildContext context) {

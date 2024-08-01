@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:simanja_app/presentation/layout/kader_layout.dart';
 import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
-import 'package:simanja_app/presentation/screens/kader/attendance_checkup_page.dart';
+import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
@@ -75,7 +75,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'daftar-hadir-checkup',
               builder: (BuildContext context, GoRouterState state) {
-                return AttendanceCheckupPage(
+                return CheckupSummaryPage(
                     checkupUID: state.uri.queryParameters['checkupUID']!);
               },
             ),
