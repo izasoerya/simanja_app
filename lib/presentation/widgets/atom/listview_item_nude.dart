@@ -58,7 +58,6 @@ class ItemListViewNude extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 10.sp,
                   color: Colors.white,
-                  fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.left,
               ),
