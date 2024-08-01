@@ -6,7 +6,7 @@ import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_nude.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 
-class ListViewRekapCheckup extends StatelessWidget {
+class ListViewRekapCheckup extends StatefulWidget {
   final List<HealthPropertiesRemaja?> items;
   final DateTime checkupDate;
   final bool isFinish;
@@ -17,13 +17,31 @@ class ListViewRekapCheckup extends StatelessWidget {
     this.isFinish = false,
   });
 
-  String get formattedDate => DateFormat('d MMMM y', 'id').format(checkupDate);
+  @override
+  State<ListViewRekapCheckup> createState() => _ListViewRekapCheckupState();
+}
+
+class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
+  bool _isLocaleInitialized = false;
+  String get formattedDate {
+    return DateFormat('d MMMM y', 'id').format(widget.checkupDate);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    initializeDateFormatting('id', null).then((_) {
+      setState(() {
+        _isLocaleInitialized = true;
+      });
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    initializeDateFormatting('id', null).then((_) {
-      (context as Element).markNeedsBuild();
-    });
+    if (!_isLocaleInitialized) {
+      return const Center(child: CircularProgressIndicator());
+    }
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
         height: MediaQuery.of(context).size.height * 0.75,
@@ -36,39 +54,39 @@ class ListViewRekapCheckup extends StatelessWidget {
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Anemia: ${items.isEmpty ? '0' : items.where((element) => element?.anemia ?? false).length}',
+                    'Anemia: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.anemia ?? false).length}',
                 isFinish: true,
                 uid: 'anemia'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Beresiko KEK: ${items.isEmpty ? '0' : items.where((element) => element?.kek ?? false).length}',
+                    'Beresiko KEK: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.kek ?? false).length}',
                 isFinish: true,
                 uid: 'kek'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Obesitas: ${items.isEmpty ? '0' : items.where((element) => (element?.weight ?? 0) > 10).length}',
+                    'Obesitas: ${widget.items.isEmpty ? '0' : widget.items.where((element) => (element?.weight ?? 0) > 10).length}',
                 isFinish: true,
                 uid: 'obesitas'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Sangat Kurus: ${items.isEmpty ? '0' : items.where((element) => (element?.weight ?? 0) < 10).length}',
+                    'Sangat Kurus: ${widget.items.isEmpty ? '0' : widget.items.where((element) => (element?.weight ?? 0) < 10).length}',
                 isFinish: true,
                 uid: 'kurus'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Merokok: ${items.isEmpty ? '0' : items.where((element) => element?.smoker ?? false).length}',
+                    'Merokok: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.smoker ?? false).length}',
                 isFinish: true,
                 uid: 'merokok'),
             const Padding(padding: EdgeInsets.only(top: 40)),
-            !isFinish
+            !widget.isFinish
                 ? SubmitButton(text: 'Tambah Data Checkup', onClick: () {})
                 : const SizedBox(),
           ],
