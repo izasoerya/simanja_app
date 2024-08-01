@@ -66,6 +66,7 @@ class AttendanceCheckupPage extends StatelessWidget {
                             final items = snapshot.data!;
                             return ListViewRekapCheckup(
                               items: items,
+                              checkupDate: kaderChekcupData.dateEvent,
                               isFinish: kaderChekcupData.isFinish,
                             );
                           }
