@@ -18,7 +18,7 @@ class ItemListViewNude extends StatelessWidget {
       this.onTap = _attendancePage});
 
   static void _attendancePage(String uid) =>
-      router.push('/login-kader/daftar-hadir-checkup?checkupUID=$uid');
+      router.push('/login-kader/rekap-checkup?checkupUID=$uid');
 
   @override
   Widget build(BuildContext context) {

@@ -73,7 +73,7 @@ final GoRouter router = GoRouter(
               },
             ),
             GoRoute(
-              path: 'daftar-hadir-checkup',
+              path: 'rekap-checkup',
               builder: (BuildContext context, GoRouterState state) {
                 return CheckupSummaryPage(
                     checkupUID: state.uri.queryParameters['checkupUID']!);
