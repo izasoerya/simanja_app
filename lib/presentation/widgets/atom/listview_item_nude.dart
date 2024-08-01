@@ -15,9 +15,9 @@ class ItemListViewNude extends StatelessWidget {
       required this.description,
       required this.uid,
       this.isFinish = false,
-      this.onTap = _attendancePage});
+      this.onTap = _checkupSummaryPage});
 
-  static void _attendancePage(String uid) =>
+  static void _checkupSummaryPage(String uid) =>
       router.push('/login-kader/rekap-checkup?checkupUID=$uid');
 
   @override
