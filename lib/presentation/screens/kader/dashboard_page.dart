@@ -36,8 +36,7 @@ class DashboardKader extends StatelessWidget {
             const TemplateTitle(text: 'REKAP CHECKUP'),
             const Padding(padding: EdgeInsets.only(top: 15)),
             FutureBuilder(
-                future: KaderCheckupService()
-                    .getActiveCheckupList(kaderAccount.uid),
+                future: KaderCheckupService().getCheckupList(kaderAccount.uid),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();

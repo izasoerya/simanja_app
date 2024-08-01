@@ -6,12 +6,16 @@ class RekapCheckup extends StatelessWidget {
   final List<KaderCheckup> checkupList;
   const RekapCheckup({super.key, required this.checkupList});
 
+  List<KaderCheckup> get sortedData {
+    return checkupList..sort((a, b) => b.dateEvent.compareTo(a.dateEvent));
+  }
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
       height: MediaQuery.of(context).size.height * 0.2,
-      child: ListviewCheckup(checkupList: checkupList),
+      child: ListviewCheckup(checkupList: sortedData),
     );
   }
 }
