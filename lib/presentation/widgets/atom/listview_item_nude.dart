@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class ItemListViewNude extends StatelessWidget {
   final String uid;
@@ -46,7 +47,7 @@ class ItemListViewNude extends StatelessWidget {
               Text(
                 title,
                 style: TextStyle(
-                  fontSize: 12,
+                  fontSize: 6.sp,
                   fontWeight: FontWeight.bold,
                   color: const GlobalTheme().secondaryColor,
                 ),
@@ -54,9 +55,10 @@ class ItemListViewNude extends StatelessWidget {
               ),
               Text(
                 description,
-                style: const TextStyle(
-                  fontSize: 18,
+                style: TextStyle(
+                  fontSize: 10.sp,
                   color: Colors.white,
+                  fontWeight: FontWeight.bold,
                 ),
                 textAlign: TextAlign.left,
               ),
