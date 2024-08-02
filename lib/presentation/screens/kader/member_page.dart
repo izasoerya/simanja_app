@@ -30,7 +30,7 @@ class MemberPage extends ConsumerWidget {
                 } else if (snapshot.hasData) {
                   return ListViewAccount(
                       users: snapshot.data!,
-                      redirect: '/login-kader/account-remaja');
+                      redirect: '/login-kader/account-remaja?');
                 }
                 return const Text('No users found');
               }),

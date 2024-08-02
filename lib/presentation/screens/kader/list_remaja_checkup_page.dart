@@ -33,7 +33,8 @@ class ListRemajaCheckupPage extends StatelessWidget {
                 } else if (snapshot.hasData) {
                   return ListViewAccount(
                     users: snapshot.data!,
-                    redirect: '/login-kader/edit-health-remaja',
+                    redirect:
+                        '/login-kader/edit-health-remaja?checkupUID=$checkupUID&',
                   );
                 }
                 return const Text('No users found');

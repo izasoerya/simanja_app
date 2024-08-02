@@ -5,6 +5,7 @@ import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
+import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
 import 'package:simanja_app/presentation/screens/kader/list_remaja_checkup_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
@@ -104,8 +105,11 @@ final GoRouter router = GoRouter(
               path: 'edit-health-remaja',
               builder: (BuildContext context, GoRouterState state) {
                 return SubPageLayout(
-                    appBarTitle: 'EDIT DATA KESEHATAN REMAJA',
-                    child: Placeholder());
+                  appBarTitle: 'EDIT DATA KESEHATAN REMAJA',
+                  child: EditDataHealthPage(
+                      checkupUID: state.uri.queryParameters['checkupUID']!,
+                      remajaUID: state.uri.queryParameters['remajaUID']!),
+                );
               },
             ),
           ],
