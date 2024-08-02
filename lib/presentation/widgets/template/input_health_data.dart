@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -11,6 +12,8 @@ class InputHealthData extends StatefulWidget {
 }
 
 class _InputHealthDataState extends State<InputHealthData> {
+  HealthPropertiesRemaja healthData = HealthPropertiesRemaja();
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -18,49 +21,50 @@ class _InputHealthDataState extends State<InputHealthData> {
         TextInput(
             hintText: 'Ketik berat badan (bb)...',
             labelText: 'Berat Badan (BB)',
-            value: (d) {}),
+            value: (d) => healthData.weight = double.parse(d)),
         TextInput(
             hintText: 'Ketik tinggi badan...',
             labelText: 'Tinggi Badan (TB)',
-            value: (d) {}),
+            value: (d) => healthData.height = double.parse(d)),
         TextInput(
             hintText: 'Ketik lingkar lengan...',
             labelText: 'Lingkar Lengan (LiLa)',
-            value: (d) {}),
+            value: (d) => healthData.armCircumference = double.parse(d)),
         ChecklistBox(
-            text: 'Resiko KEK\n*Centang apabila LiLa < 23.5 cm', value: (d) {}),
+            text: 'Resiko KEK\n*Centang apabila LiLa < 23.5 cm',
+            value: (d) => healthData.kek = d),
         const Padding(padding: EdgeInsets.only(top: 10)),
         TextInput(
             hintText: 'Ketik lingkar perut...',
             labelText: 'Lingkar Perut (LP)',
-            value: (d) {}),
+            value: (d) => healthData.abdominalCircumference = double.parse(d)),
         TextInput(
             hintText: 'Ketik tekanan darah sistolik...',
             labelText: 'Tekanan Darah Sistolik (TDS)',
-            value: (d) {}),
+            value: (d) => healthData.tds = double.parse(d)),
         TextInput(
             hintText: 'Ketik hemoglobin...',
             labelText: 'Hemoglobin (HB)',
-            value: (d) {}),
+            value: (d) => healthData.hemoglobin = double.parse(d)),
         ChecklistBox(
             text: 'Resiko Anemia\n*Centang apabila HB < 13 g/dL',
-            value: (d) {}),
+            value: (d) => healthData.anemia = d),
         const Padding(padding: EdgeInsets.only(top: 10)),
         TextInput(
             hintText: 'Ketik kolesterol...',
             labelText: 'Kolesterol',
-            value: (d) {}),
+            value: (d) => healthData.cholesterol = double.parse(d)),
         TextInput(
             hintText: 'Ketik gula darah...',
             labelText: 'Gula Darah',
-            value: (d) {}),
+            value: (d) => healthData.bloodSugar = double.parse(d)),
         TextInput(
             hintText: 'Ketik catatan...',
             labelText: 'Catatan Konseling',
-            value: (d) {}),
-        Padding(padding: EdgeInsets.only(top: 30)),
+            value: (d) => healthData.note = d),
+        const Padding(padding: EdgeInsets.only(top: 30)),
         SubmitButton(text: 'Simpan Perubahan', onClick: () {}),
-        Padding(padding: EdgeInsets.only(top: 50)),
+        const Padding(padding: EdgeInsets.only(top: 50)),
       ],
     );
   }

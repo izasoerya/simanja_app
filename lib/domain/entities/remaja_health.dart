@@ -1,22 +1,22 @@
 class HealthPropertiesRemaja {
-  final String? uid;
-  final String? uidRemaja;
-  final double? weight;
-  final double? height;
-  final double? armCircumference;
-  final double? abdominalCircumference;
-  final double? bloodPressure;
-  final double? hemoglobin;
-  final double? cholesterol;
-  final double? bloodSugar;
-  final double? tds;
-  final double? tdd;
-  final DateTime? checkedAt;
-  final bool? kek;
-  final bool? anemia;
-  final bool? smoker;
-  final bool? tablet;
-  final String? note;
+  String? uid;
+  String? uidRemaja;
+  double? weight;
+  double? height;
+  double? armCircumference;
+  double? abdominalCircumference;
+  double? bloodPressure;
+  double? hemoglobin;
+  double? cholesterol;
+  double? bloodSugar;
+  double? tds;
+  double? tdd;
+  DateTime? checkedAt;
+  bool? kek;
+  bool? anemia;
+  bool? smoker;
+  bool? tablet;
+  String? note;
 
   HealthPropertiesRemaja({
     this.uid,
