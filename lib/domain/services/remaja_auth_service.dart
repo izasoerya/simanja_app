@@ -19,6 +19,10 @@ class RemajaAuthentication {
     return null;
   }
 
+  Future<UserRemaja?> getUserbyUID(String id) async {
+    return await RemajaAuthImplementation().getUserbyUID(id);
+  }
+
   Future<List<UserRemaja>> getUsersbyPosyanduID(String posyanduUID) async {
     return await RemajaAuthImplementation().getUsersbyPosyanduID(posyanduUID);
   }

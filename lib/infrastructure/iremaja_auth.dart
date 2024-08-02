@@ -66,9 +66,18 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
   }
 
   @override
-  Future<UserRemaja> getUserbyId(String id) {
-    // TODO: implement getUserbyId
-    throw UnimplementedError();
+  Future<UserRemaja?> getUserbyUID(String remajaUID) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('remaja_auth')
+          .select()
+          .eq('uid', remajaUID)
+          .single();
+      return UserRemaja.fromJSON(response);
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
   }
 
   @override

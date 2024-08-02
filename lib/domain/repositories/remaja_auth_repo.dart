@@ -1,7 +1,7 @@
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 
 abstract class RemajaAuthRepo {
-  Future<UserRemaja> getUserbyId(String id);
+  Future<UserRemaja?> getUserbyUID(String id);
   Future<UserRemaja> getUserbyEmail(String email);
   Future<UserRemaja> getUserbyPassword(String password);
   Future<List<UserRemaja>> getUsersbyPosyanduID(String posyanduUID);
