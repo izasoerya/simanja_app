@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
+import 'package:simanja_app/domain/services/kader_checkup_service.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
 class InputHealthData extends StatefulWidget {
-  const InputHealthData({super.key});
+  final String checkup;
+  final String remaja;
+  const InputHealthData(
+      {super.key, required this.checkup, required this.remaja});
 
   @override
   State<InputHealthData> createState() => _InputHealthDataState();
@@ -43,6 +50,10 @@ class _InputHealthDataState extends State<InputHealthData> {
             labelText: 'Tekanan Darah Sistolik (TDS)',
             value: (d) => healthData.tds = double.parse(d)),
         TextInput(
+            hintText: 'Ketik tekanan darah diastolik...',
+            labelText: 'Tekanan Darah Sistolik (TDD)',
+            value: (d) => healthData.tdd = double.parse(d)),
+        TextInput(
             hintText: 'Ketik hemoglobin...',
             labelText: 'Hemoglobin (HB)',
             value: (d) => healthData.hemoglobin = double.parse(d)),
@@ -63,7 +74,18 @@ class _InputHealthDataState extends State<InputHealthData> {
             labelText: 'Catatan Konseling',
             value: (d) => healthData.note = d),
         const Padding(padding: EdgeInsets.only(top: 30)),
-        SubmitButton(text: 'Simpan Perubahan', onClick: () {}),
+        SubmitButton(
+            text: 'Simpan Perubahan',
+            onClick: () async {
+              final remaja =
+                  await RemajaAuthentication().getUserbyUID(widget.remaja);
+
+              final updatedHealthData = healthData.copyWith(
+                uidRemaja: remaja!.uid,
+                checkedAt: DateTime.now(),
+              );
+              print('${updatedHealthData.toJSON()}');
+            }),
         const Padding(padding: EdgeInsets.only(top: 50)),
       ],
     );

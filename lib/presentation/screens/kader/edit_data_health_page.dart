@@ -43,7 +43,10 @@ class EditDataHealthPage extends StatelessWidget {
                   return const Text('No Data Found!'); // Shouldnt be reached
                 }),
             const Padding(padding: EdgeInsets.only(top: 30)),
-            InputHealthData(),
+            InputHealthData(
+              checkup: checkupUID,
+              remaja: remajaUID,
+            ),
           ],
         ),
       ),
