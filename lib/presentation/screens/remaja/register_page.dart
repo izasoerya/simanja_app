@@ -81,7 +81,14 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
           children: [
             Padding(
                 padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.25)),
+                    top: MediaQuery.of(context).size.height * 0.15)),
+            Image.asset(
+              'assets/logo/Logo Word.png',
+              scale: 0.8,
+            ),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05)),
             Container(
               width: MediaQuery.sizeOf(context).width * 0.9,
               decoration: const BoxDecoration(
@@ -90,6 +97,8 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                   Radius.circular(30),
                 ),
               ),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.sizeOf(context).width * 0.05),
               child: Column(
                 children: [
                   const Padding(padding: EdgeInsets.only(top: 30)),
@@ -118,11 +127,14 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                               .map((item) => item['posyandu']!)
                               .toList();
                           return CustomDropdown(
-                              onChanged: _readPosyanduMember,
-                              items: posyanduNames);
+                            label: 'Asal Posyandu',
+                            items: posyanduNames,
+                            onChanged: _readPosyanduMember,
+                          );
                         }
                         return const Text('Error');
                       }),
+                  const Padding(padding: EdgeInsets.only(top: 10)),
                   DateOfBirthField(value: _readDoB),
                   TextInput(
                       labelText: 'Alamat',
@@ -137,6 +149,7 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                       hintText: 'Masukkan Alamat...',
                       value: _readPassword),
                   ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
+                  const Padding(padding: EdgeInsets.only(top: 10)),
                   GenderSelection(value: _readSex),
                   SubmitButton(
                       text: 'Daftar',

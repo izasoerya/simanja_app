@@ -17,15 +17,14 @@ class _GenderSelectionState extends State<GenderSelection> {
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.centerLeft,
-      padding: const EdgeInsets.only(left: 20, top: 10),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text('Jenis Kelamin'),
-          Padding(padding: EdgeInsets.only(top: 5)),
+          const Text('Jenis Kelamin'),
+          const Padding(padding: EdgeInsets.only(top: 5)),
           Container(
             height: 40,
-            width: MediaQuery.of(context).size.width * 0.4,
+            width: MediaQuery.of(context).size.width * 0.2,
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
               border: Border.all(
@@ -37,8 +36,11 @@ class _GenderSelectionState extends State<GenderSelection> {
             ),
             child: DropdownButton<String>(
               value: selectedGender,
-              style: GlobalTheme().paragraphStyle,
+              style: const GlobalTheme().paragraphStyle,
               hint: const Text('Select Gender'),
+              dropdownColor: Colors.white,
+              borderRadius: BorderRadius.circular(5),
+              elevation: 4,
               onChanged: (String? newValue) {
                 setState(() {
                   selectedGender = newValue ?? selectedGender;
@@ -58,7 +60,7 @@ class _GenderSelectionState extends State<GenderSelection> {
               underline: Container(), // Hide the underline
             ),
           ),
-          Padding(padding: EdgeInsets.only(top: 50)),
+          const Padding(padding: EdgeInsets.only(top: 50)),
         ],
       ),
     );

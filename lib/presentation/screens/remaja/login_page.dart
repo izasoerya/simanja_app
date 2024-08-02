@@ -30,11 +30,23 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      alignment: Alignment.topCenter,
       child: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.15)),
+            Image.asset(
+              'assets/logo/Logo Word.png',
+              scale: 0.8,
+            ),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05)),
             Container(
               width: MediaQuery.of(context).size.width * 0.9,
               decoration: const BoxDecoration(
@@ -43,6 +55,8 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
                   Radius.circular(30),
                 ),
               ),
+              padding: EdgeInsets.symmetric(
+                  horizontal: MediaQuery.of(context).size.width * 0.05),
               child: Column(
                 children: [
                   const Padding(padding: EdgeInsets.only(top: 30)),
