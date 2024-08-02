@@ -8,6 +8,7 @@ import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
+import 'package:sizer/sizer.dart';
 
 class RegisterKaderPage extends StatefulWidget {
   const RegisterKaderPage({super.key});
@@ -63,7 +64,7 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                     top: MediaQuery.of(context).size.height * 0.15)),
             Image.asset(
               'assets/logo/Logo Word.png',
-              scale: 0.8,
+              scale: 0.8.sp,
             ),
             Padding(
                 padding: EdgeInsets.only(

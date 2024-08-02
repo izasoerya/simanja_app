@@ -13,6 +13,7 @@ import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 import 'package:simanja_app/utils/enums.dart';
+import 'package:sizer/sizer.dart';
 
 class RegisterRemajaPage extends StatefulWidget {
   const RegisterRemajaPage({super.key});
@@ -84,7 +85,7 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                     top: MediaQuery.of(context).size.height * 0.15)),
             Image.asset(
               'assets/logo/Logo Word.png',
-              scale: 0.8,
+              scale: 0.8.sp,
             ),
             Padding(
                 padding: EdgeInsets.only(

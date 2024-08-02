@@ -10,6 +10,7 @@ import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 import 'package:simanja_app/utils/default_account.dart';
+import 'package:sizer/sizer.dart';
 
 class LoginKaderPage extends ConsumerStatefulWidget {
   const LoginKaderPage({super.key});
@@ -43,7 +44,7 @@ class _LoginKaderPageState extends ConsumerState<LoginKaderPage> {
                     top: MediaQuery.of(context).size.height * 0.15)),
             Image.asset(
               'assets/logo/Logo Word.png',
-              scale: 0.8,
+              scale: 0.8.sp,
             ),
             Padding(
                 padding: EdgeInsets.only(

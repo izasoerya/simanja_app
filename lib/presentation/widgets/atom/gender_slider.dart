@@ -24,7 +24,6 @@ class _GenderSelectionState extends State<GenderSelection> {
           const Padding(padding: EdgeInsets.only(top: 5)),
           Container(
             height: 40,
-            width: MediaQuery.of(context).size.width * 0.2,
             alignment: Alignment.centerLeft,
             decoration: BoxDecoration(
               border: Border.all(
