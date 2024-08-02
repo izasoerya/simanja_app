@@ -16,47 +16,53 @@ class DashboardRemaja extends StatefulWidget {
 class _DashboardRemajaState extends State<DashboardRemaja> {
   void _refreshPage() => setState(() {});
 
-  Future<Map<String, dynamic>> _fetchData() async {
-    final checkupList =
-        await RemajaCheckupService().getCheckupList(remajaAccount.posyandu);
-    final subscribeList = await RemajaCheckupService()
+  Future<List<KaderCheckup>?> _fetchCheckupList() async {
+    return await RemajaCheckupService().getCheckupList(remajaAccount.posyandu);
+  }
+
+  Future<List<KaderCheckup>?> _fetchSubscribeList() async {
+    return await RemajaCheckupService()
         .getSubscribeList(remajaAccount.posyandu, remajaAccount.uid);
-    return {
-      'checkupList': checkupList,
-      'subscribeList': subscribeList,
-    };
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<Map<String, dynamic>>(
-      future: _fetchData(),
-      builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
-          return const Center(child: CircularProgressIndicator());
-        } else if (snapshot.hasData) {
-          var data = snapshot.data!;
-          List<KaderCheckup> checkupList = data['checkupList'];
-          List<KaderCheckup> subscribeList = data['subscribeList'];
-          return Container(
-            width: MediaQuery.of(context).size.width,
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: [
-                const AppbarContent(isKader: false),
-                const Padding(padding: EdgeInsets.only(top: 20)),
-                CheckupConfirmation(items: checkupList, onTap: _refreshPage),
-                const Padding(padding: EdgeInsets.only(top: 30)),
-                ScheduleList(items: subscribeList),
-              ],
-            ),
-          );
-        }
-        return const Center(
-          child: Text('Tidak ada data'),
-        );
-      },
+    return Container(
+      width: MediaQuery.of(context).size.width,
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: [
+          const AppbarContent(isKader: false),
+          const Padding(padding: EdgeInsets.only(top: 20)),
+          FutureBuilder(
+            future: _fetchCheckupList(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasData) {
+                return CheckupConfirmation(
+                  items: snapshot.data!,
+                  onTap: _refreshPage,
+                );
+              }
+              return const Center(child: Text('Tidak ada data'));
+            },
+          ),
+          const Padding(padding: EdgeInsets.only(top: 30)),
+          FutureBuilder(
+            future: _fetchSubscribeList(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasData) {
+                return ScheduleList(items: snapshot.data!);
+              }
+              return const ScheduleList(items: []);
+            },
+          ),
+        ],
+      ),
     );
   }
 }

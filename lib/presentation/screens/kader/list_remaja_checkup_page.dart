@@ -10,6 +10,7 @@ class ListRemajaCheckupPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print(checkupUID);
     return Container(
       width: MediaQuery.of(context).size.width,
       alignment: Alignment.center,

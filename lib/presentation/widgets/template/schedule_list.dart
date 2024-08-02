@@ -38,6 +38,8 @@ class ScheduleList extends StatelessWidget {
               ],
             )),
         Container(
+          width: MediaQuery.of(context).size.width,
+          alignment: Alignment.center,
           padding: const EdgeInsets.symmetric(vertical: 15),
           decoration: BoxDecoration(
             color: const GlobalTheme().primaryColorLight,
@@ -45,17 +47,19 @@ class ScheduleList extends StatelessWidget {
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10)),
           ),
-          child: ListView.separated(
-            shrinkWrap: true,
-            separatorBuilder: (context, index) => const Divider(
-              color: Colors.white,
-              height: 25,
-            ),
-            itemCount: items.length,
-            itemBuilder: (context, index) {
-              return Text(items[index].checkupTitle);
-            },
-          ),
+          child: items.isEmpty
+              ? const Text('Belum mendaftar checkup!')
+              : ListView.separated(
+                  shrinkWrap: true,
+                  separatorBuilder: (context, index) => const Divider(
+                    color: Colors.white,
+                    height: 25,
+                  ),
+                  itemCount: items.length,
+                  itemBuilder: (context, index) {
+                    return Text(items[index].checkupTitle);
+                  },
+                ),
         ),
       ],
     );
