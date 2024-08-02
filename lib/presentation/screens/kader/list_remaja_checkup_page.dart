@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_searchbar.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_account.dart';
-import 'package:simanja_app/presentation/widgets/template/title_w_posyandu.dart';
+import 'package:simanja_app/presentation/widgets/template/title_w_description.dart';
 
 class ListRemajaCheckupPage extends StatelessWidget {
   final String checkupUID;
@@ -16,7 +16,11 @@ class ListRemajaCheckupPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const TitleWPosyandu(title: 'DATA REMAJA'),
+          const Padding(padding: EdgeInsets.only(top: 30)),
+          const TitleWDescription(
+              title: 'DATA REMAJA',
+              description:
+                  'Pilih remaja yang akan diupdate kondisi kesehatannya'),
           const Padding(padding: EdgeInsets.only(top: 30)),
           const CustomSearchBar(label: 'Ihza Surya P...', icon: Icons.search),
           const Padding(padding: EdgeInsets.only(top: 30)),

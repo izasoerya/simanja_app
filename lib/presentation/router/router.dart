@@ -5,6 +5,7 @@ import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
+import 'package:simanja_app/presentation/screens/kader/list_remaja_checkup_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
@@ -88,7 +89,9 @@ final GoRouter router = GoRouter(
               path: 'list-remaja-checkup',
               builder: (BuildContext context, GoRouterState state) {
                 return SubPageLayout(
-                    appBarTitle: 'DAFTAR REMAJA', child: Placeholder());
+                    appBarTitle: 'DAFTAR REMAJA',
+                    child: ListRemajaCheckupPage(
+                        checkupUID: state.uri.queryParameters['checkupUID']!));
               },
             ),
           ],

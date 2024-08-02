@@ -40,8 +40,7 @@ class CheckupSummaryPage extends StatelessWidget {
                         final items = snapshot.data!;
                         return ListViewRekapCheckup(
                           items: items,
-                          checkupDate: kaderChekcupData.dateEvent,
-                          isFinish: kaderChekcupData.isFinish,
+                          kaderCheckup: kaderChekcupData,
                         );
                       }
                       return const Text('Belum ada remaja mendaftar');

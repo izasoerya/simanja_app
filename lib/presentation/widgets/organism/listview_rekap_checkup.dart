@@ -1,4 +1,6 @@
 import 'package:intl/intl.dart';
+import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
@@ -8,14 +10,15 @@ import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 
 class ListViewRekapCheckup extends StatefulWidget {
   final List<HealthPropertiesRemaja?> items;
-  final DateTime checkupDate;
-  final bool isFinish;
+  final KaderCheckup kaderCheckup;
   const ListViewRekapCheckup({
     super.key,
     required this.items,
-    required this.checkupDate,
-    this.isFinish = false,
+    required this.kaderCheckup,
   });
+
+  void _gotoAddCheckupData() => router
+      .push('/login-kader/list-remaja-checkup?checkupUID=${kaderCheckup.uid}');
 
   @override
   State<ListViewRekapCheckup> createState() => _ListViewRekapCheckupState();
@@ -24,7 +27,7 @@ class ListViewRekapCheckup extends StatefulWidget {
 class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
   bool _isLocaleInitialized = false;
   String get formattedDate {
-    return DateFormat('d MMMM y', 'id').format(widget.checkupDate);
+    return DateFormat('d MMMM y', 'id').format(widget.kaderCheckup.dateEvent);
   }
 
   @override
@@ -86,8 +89,10 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                 isFinish: true,
                 uid: 'merokok'),
             const Padding(padding: EdgeInsets.only(top: 40)),
-            !widget.isFinish
-                ? SubmitButton(text: 'Tambah Data Checkup', onClick: () {})
+            !widget.kaderCheckup.isFinish
+                ? SubmitButton(
+                    text: 'Tambah Data Checkup',
+                    onClick: widget._gotoAddCheckupData)
                 : const SizedBox(),
           ],
         ));
