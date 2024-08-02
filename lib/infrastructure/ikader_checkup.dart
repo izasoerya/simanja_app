@@ -55,18 +55,19 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
   }
 
   @override
-  Future<List<UserRemaja>?> getRemajaCheckupList(String checkupUID) async {
+  Future<List<String>?> getRemajaCheckupList(String checkupUID) async {
     try {
       final listRemaja = await Supabase.instance.client
           .from('kader_checkup')
           .select('uid_remaja')
-          .eq('uid', checkupUID);
-      List<String> remajaUID =
-          listRemaja.map((e) => e['uid_remaja'].toString()).toList();
-      print(remajaUID);
-      final response =
-          await Supabase.instance.client.from('remaja_auth').select('*');
-      return response.map((e) => UserRemaja.fromJSON(e)).toList();
+          .eq('uid', checkupUID)
+          .single();
+      List<String> remajaUID = listRemaja['uid_remaja']
+          .toString()
+          .replaceAll(RegExp(r'[\[\]]'), '') // Remove brackets
+          .split(','); // Split by comma
+      remajaUID = remajaUID.map((uid) => uid.trim()).toList();
+      return remajaUID;
     } catch (e) {
       print('Error: $e');
       return null;

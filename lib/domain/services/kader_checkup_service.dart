@@ -1,5 +1,6 @@
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/infrastructure/ikader_checkup.dart';
 
 class KaderCheckupService {
@@ -31,11 +32,17 @@ class KaderCheckupService {
   }
 
   Future<List<UserRemaja>?> getRemajaCheckupList(String checkupUID) async {
-    List<UserRemaja>? data =
+    List<String>? listRemaja =
         await KaderCheckupImplementation().getRemajaCheckupList(checkupUID);
-    if (data == null) {
-      // TODO: handle error
+    if (listRemaja == null) {
       return null;
+    }
+    List<UserRemaja> data = [];
+    for (var element in listRemaja) {
+      UserRemaja? remaja = await RemajaAuthentication().getUserbyUID(element);
+      if (remaja != null) {
+        data.add(remaja);
+      }
     }
     return data;
   }
