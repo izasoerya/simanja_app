@@ -18,7 +18,7 @@ class SubPageLayout extends StatelessWidget {
           foregroundColor: Colors.white,
           centerTitle: true,
           title: Text(
-            'REKAP KONDISI KESEHATAN REMAJA',
+            appBarTitle,
             style: TextStyle(
               fontSize: 12.sp,
               fontWeight: FontWeight.bold,

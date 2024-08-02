@@ -105,7 +105,7 @@ final GoRouter router = GoRouter(
               path: 'edit-health-remaja',
               builder: (BuildContext context, GoRouterState state) {
                 return SubPageLayout(
-                  appBarTitle: 'EDIT DATA KESEHATAN REMAJA',
+                  appBarTitle: 'INPUT CHECKUP',
                   child: EditDataHealthPage(
                       checkupUID: state.uri.queryParameters['checkupUID']!,
                       remajaUID: state.uri.queryParameters['remajaUID']!),
