@@ -28,7 +28,9 @@ class MemberPage extends ConsumerWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else if (snapshot.hasData) {
-                  return ListViewAccount(users: snapshot.data!);
+                  return ListViewAccount(
+                      users: snapshot.data!,
+                      redirect: '/login-kader/account-remaja');
                 }
                 return const Text('No users found');
               }),

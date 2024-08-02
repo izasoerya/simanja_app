@@ -31,7 +31,10 @@ class ListRemajaCheckupPage extends StatelessWidget {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const CircularProgressIndicator();
                 } else if (snapshot.hasData) {
-                  return ListViewAccount(users: snapshot.data!);
+                  return ListViewAccount(
+                    users: snapshot.data!,
+                    redirect: '/login-kader/edit-health-remaja',
+                  );
                 }
                 return const Text('No users found');
               }),

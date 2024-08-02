@@ -85,13 +85,27 @@ final GoRouter router = GoRouter(
               },
             ),
             GoRoute(
-              // TODO: Implement this route
               path: 'list-remaja-checkup',
               builder: (BuildContext context, GoRouterState state) {
                 return SubPageLayout(
                     appBarTitle: 'DAFTAR REMAJA',
                     child: ListRemajaCheckupPage(
                         checkupUID: state.uri.queryParameters['checkupUID']!));
+              },
+            ),
+            GoRoute(
+              path: 'account-remaja',
+              builder: (BuildContext context, GoRouterState state) {
+                return SubPageLayout(
+                    appBarTitle: 'DETAIL AKUN', child: Placeholder());
+              },
+            ),
+            GoRoute(
+              path: 'edit-health-remaja',
+              builder: (BuildContext context, GoRouterState state) {
+                return SubPageLayout(
+                    appBarTitle: 'EDIT DATA KESEHATAN REMAJA',
+                    child: Placeholder());
               },
             ),
           ],
