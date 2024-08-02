@@ -19,7 +19,7 @@ class SubmitButton extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
-            padding: EdgeInsets.symmetric(vertical: 1.w, horizontal: 12.h),
+            padding: EdgeInsets.symmetric(vertical: 1.w, horizontal: 1.h),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
@@ -28,7 +28,7 @@ class SubmitButton extends StatelessWidget {
           child: Text(text,
               style: const GlobalTheme()
                   .headerStyle
-                  .copyWith(color: Colors.white, fontSize: 8.sp)),
+                  .copyWith(color: Colors.white, fontSize: 11.sp)),
         ));
   }
 }
