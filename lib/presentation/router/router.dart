@@ -83,6 +83,14 @@ final GoRouter router = GoRouter(
                 );
               },
             ),
+            GoRoute(
+              // TODO: Implement this route
+              path: 'list-remaja-checkup',
+              builder: (BuildContext context, GoRouterState state) {
+                return SubPageLayout(
+                    appBarTitle: 'DAFTAR REMAJA', child: Placeholder());
+              },
+            ),
           ],
         ),
       ],
