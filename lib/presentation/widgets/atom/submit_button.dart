@@ -1,4 +1,3 @@
-import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
@@ -19,7 +18,7 @@ class SubmitButton extends StatelessWidget {
         child: ElevatedButton(
           style: ElevatedButton.styleFrom(
             backgroundColor: backgroundColor,
-            padding: EdgeInsets.symmetric(vertical: 1.w, horizontal: 1.h),
+            padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
@@ -28,7 +27,7 @@ class SubmitButton extends StatelessWidget {
           child: Text(text,
               style: const GlobalTheme()
                   .headerStyle
-                  .copyWith(color: Colors.white, fontSize: 11.sp)),
+                  .copyWith(color: Colors.white, fontSize: 18)),
         ));
   }
 }
