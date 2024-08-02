@@ -13,24 +13,25 @@ class UserIdentity extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Identitas Remaja:', style: TextStyle(fontSize: 10.sp)),
+        Text('Identitas Remaja:', style: TextStyle(fontSize: 8.sp)),
         Text(user.name,
             style: TextStyle(
-              fontSize: 24.sp,
+              fontSize: 18.sp,
               fontWeight: FontWeight.bold,
               color: const GlobalTheme().secondaryColor,
             )),
         Row(
           children: [
             Text(user.nik,
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold)),
-            const Text(' | '),
+                style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold)),
+            Text(' | ',
+                style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold)),
             Text(user.birthDate.toString().substring(0, 10),
-                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 8.sp, fontWeight: FontWeight.bold)),
           ],
         ),
         Text(user.sex == Gender.male ? 'Laki-laki' : 'Perempuan',
-            style: TextStyle(fontSize: 14.sp)),
+            style: TextStyle(fontSize: 8.sp)),
       ],
     );
   }
