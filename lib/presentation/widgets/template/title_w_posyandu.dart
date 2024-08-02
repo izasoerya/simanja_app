@@ -21,9 +21,8 @@ class TitleWPosyandu extends ConsumerWidget {
         const Padding(padding: EdgeInsets.only(top: 5)),
         Container(
           height: 2,
-          width: MediaQuery.of(context).size.width * 0.8,
+          width: MediaQuery.of(context).size.width * 0.9,
           color: Colors.black,
-          margin: const EdgeInsets.symmetric(horizontal: 20),
         ),
       ],
     );
