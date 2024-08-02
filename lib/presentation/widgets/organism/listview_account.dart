@@ -11,7 +11,7 @@ class ListViewAccount extends StatelessWidget {
       {super.key, required this.users, required this.redirect});
 
   void _defaultOnTap(String uidRemaja) {
-    print('$redirect?remajaUID=$uidRemaja');
+    print('${redirect}remajaUID=$uidRemaja');
     router.push('${redirect}remajaUID=$uidRemaja');
   }
 
