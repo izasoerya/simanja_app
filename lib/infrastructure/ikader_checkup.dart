@@ -1,4 +1,5 @@
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/repositories/kader_checkup_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';
@@ -33,33 +34,43 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
   }
 
   @override
-  Future<void> deleteCheckup(KaderCheckup activity) {
-    // TODO: implement deleteCheckup
-    throw UnimplementedError();
+  Future<KaderCheckup> getCheckupbyUID(String checkupUID) async {
+    PostgrestMap response;
+    try {
+      response = await Supabase.instance.client
+          .from('kader_checkup')
+          .select('*')
+          .eq('uid', checkupUID)
+          .single();
+    } catch (e) {
+      print('Error: $e');
+      return Future.error(e);
+    }
+    return KaderCheckup(
+      uid: response['uid'],
+      checkupTitle: response['event_name'],
+      dateEvent: DateTime.parse(response['date']),
+      isFinish: response['is_finish'],
+    );
   }
 
   @override
-  Future<List<KaderCheckup>> getCheckups(String uid) async {
-    List<PostgrestMap> response;
+  Future<List<UserRemaja>?> getRemajaCheckupList(String checkupUID) async {
     try {
-      response = await Supabase.instance.client
-          .from('kader_checkup') // select from table kader_checkup
-          .select('*') // select all columns
-          .eq('uid_kader', uid); // where uid_kader = uid
+      final listRemaja = await Supabase.instance.client
+          .from('kader_checkup')
+          .select('uid_remaja')
+          .eq('uid', checkupUID);
+      List<String> remajaUID =
+          listRemaja.map((e) => e['uid_remaja'].toString()).toList();
+      print(remajaUID);
+      final response =
+          await Supabase.instance.client.from('remaja_auth').select('*');
+      return response.map((e) => UserRemaja.fromJSON(e)).toList();
     } catch (e) {
-      return Future.error(e);
+      print('Error: $e');
+      return null;
     }
-
-    List<KaderCheckup> checkups = [];
-    for (PostgrestMap user in response) {
-      checkups.add(KaderCheckup(
-        uid: user['uid'],
-        checkupTitle: user['event_name'],
-        dateEvent: DateTime.parse(user['date']),
-        isFinish: user['is_finish'],
-      ));
-    }
-    return checkups;
   }
 
   @override
@@ -87,23 +98,32 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
   }
 
   @override
-  Future<KaderCheckup> getCheckupbyUID(String checkupUID) async {
-    PostgrestMap response;
+  Future<void> deleteCheckup(KaderCheckup activity) {
+    // TODO: implement deleteCheckup
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<List<KaderCheckup>> getCheckups(String uid) async {
+    List<PostgrestMap> response;
     try {
       response = await Supabase.instance.client
-          .from('kader_checkup')
-          .select('*')
-          .eq('uid', checkupUID)
-          .single();
+          .from('kader_checkup') // select from table kader_checkup
+          .select('*') // select all columns
+          .eq('uid_kader', uid); // where uid_kader = uid
     } catch (e) {
-      print('Error: $e');
       return Future.error(e);
     }
-    return KaderCheckup(
-      uid: response['uid'],
-      checkupTitle: response['event_name'],
-      dateEvent: DateTime.parse(response['date']),
-      isFinish: response['is_finish'],
-    );
+
+    List<KaderCheckup> checkups = [];
+    for (PostgrestMap user in response) {
+      checkups.add(KaderCheckup(
+        uid: user['uid'],
+        checkupTitle: user['event_name'],
+        dateEvent: DateTime.parse(user['date']),
+        isFinish: user['is_finish'],
+      ));
+    }
+    return checkups;
   }
 }

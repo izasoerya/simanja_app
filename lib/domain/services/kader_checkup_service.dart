@@ -1,4 +1,5 @@
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/infrastructure/ikader_checkup.dart';
 
 class KaderCheckupService {
@@ -27,6 +28,16 @@ class KaderCheckupService {
     final activeCheckup =
         data.where((element) => element.isFinish == false).toList();
     return activeCheckup;
+  }
+
+  Future<List<UserRemaja>?> getRemajaCheckupList(String checkupUID) async {
+    List<UserRemaja>? data =
+        await KaderCheckupImplementation().getRemajaCheckupList(checkupUID);
+    if (data == null) {
+      // TODO: handle error
+      return null;
+    }
+    return data;
   }
 
   Future<KaderCheckup?> updateCheckupStatus(KaderCheckup checkup) async {
