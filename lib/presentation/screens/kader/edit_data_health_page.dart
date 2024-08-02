@@ -21,14 +21,14 @@ class EditDataHealthPage extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          Padding(padding: EdgeInsets.only(top: 30)),
-          TitleWPosyandu(title: 'INPUT PENIMBANGAN'),
-          Padding(padding: EdgeInsets.only(top: 15)),
+          const Padding(padding: EdgeInsets.only(top: 30)),
+          const TitleWPosyandu(title: 'INPUT PENIMBANGAN'),
+          const Padding(padding: EdgeInsets.only(top: 15)),
           FutureBuilder(
               future: RemajaAuthentication().getUserbyUID(remajaUID),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return CircularProgressIndicator();
+                  return const CircularProgressIndicator();
                 }
                 if (snapshot.hasData) {
                   return Container(

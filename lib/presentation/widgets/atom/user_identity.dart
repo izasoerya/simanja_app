@@ -13,7 +13,7 @@ class UserIdentity extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text('Identitas Remaja:', style: TextStyle(fontSize: 12.sp)),
+        Text('Identitas Remaja:', style: TextStyle(fontSize: 10.sp)),
         Text(user.name,
             style: TextStyle(
               fontSize: 24.sp,
@@ -23,13 +23,14 @@ class UserIdentity extends StatelessWidget {
         Row(
           children: [
             Text(user.nik,
-                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold)),
             const Text(' | '),
             Text(user.birthDate.toString().substring(0, 10),
-                style: TextStyle(fontSize: 12.sp, fontWeight: FontWeight.bold)),
+                style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold)),
           ],
         ),
-        Text(user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'),
+        Text(user.sex == Gender.male ? 'Laki-laki' : 'Perempuan',
+            style: TextStyle(fontSize: 14.sp)),
       ],
     );
   }
