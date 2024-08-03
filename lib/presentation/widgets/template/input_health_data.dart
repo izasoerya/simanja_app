@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/kader_checkup.dart';
-import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
-import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/domain/services/remaja_heath_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
@@ -61,6 +58,9 @@ class _InputHealthDataState extends State<InputHealthData> {
         ChecklistBox(
             text: 'Resiko Anemia\n*Centang apabila HB < 13 g/dL',
             value: (d) => healthData.anemia = d),
+        ChecklistBox(text: 'Perokok?', value: (d) => healthData.smoker = d),
+        ChecklistBox(
+            text: 'Sedang konsumsi TTD?', value: (d) => healthData.tablet = d),
         const Padding(padding: EdgeInsets.only(top: 10)),
         TextInput(
             hintText: 'Ketik kolesterol...',
@@ -85,6 +85,8 @@ class _InputHealthDataState extends State<InputHealthData> {
                 uidRemaja: remaja!.uid,
                 anemia: healthData.anemia ?? false,
                 kek: healthData.kek ?? false,
+                smoker: healthData.smoker ?? false,
+                tablet: healthData.tablet ?? false,
                 checkedAt: DateTime.now(),
               );
               final response = await RemajaHeathService().upsertRemajaHealth(
