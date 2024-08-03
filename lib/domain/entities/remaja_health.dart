@@ -1,5 +1,6 @@
 class HealthPropertiesRemaja {
   String? uid;
+  String? uidCheckup;
   String? uidRemaja;
   double? weight;
   double? height;
@@ -20,6 +21,7 @@ class HealthPropertiesRemaja {
 
   HealthPropertiesRemaja({
     this.uid,
+    this.uidCheckup,
     this.uidRemaja,
     this.weight,
     this.height,
@@ -40,6 +42,7 @@ class HealthPropertiesRemaja {
 
   HealthPropertiesRemaja copyWith({
     String? uid,
+    String? uidCheckup,
     String? uidRemaja,
     double? weight,
     double? height,
@@ -60,6 +63,7 @@ class HealthPropertiesRemaja {
   }) {
     return HealthPropertiesRemaja(
       uid: uid ?? this.uid,
+      uidCheckup: uidCheckup ?? this.uidCheckup,
       uidRemaja: uidRemaja ?? this.uidRemaja,
       weight: weight ?? this.weight,
       height: height ?? this.height,
@@ -83,6 +87,7 @@ class HealthPropertiesRemaja {
   factory HealthPropertiesRemaja.fromJSON(Map<String, dynamic> json) {
     return HealthPropertiesRemaja(
       uid: json['uid'],
+      uidCheckup: json['uid_checkup'],
       uidRemaja: json['uid_remaja'],
       weight: json['weight'],
       height: json['height'],
@@ -105,6 +110,8 @@ class HealthPropertiesRemaja {
   Map<String, dynamic> toJSON() {
     return {
       'uid': uid,
+      'uid_checkup': uidCheckup,
+      'uid_remaja': uidRemaja,
       'weight': weight,
       'height': height,
       'arm_radius': armCircumference,
