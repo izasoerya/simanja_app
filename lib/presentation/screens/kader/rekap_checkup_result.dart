@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 
-class CheckupResult extends StatelessWidget {
-  const CheckupResult({super.key});
+class RekapCheckupResult extends StatelessWidget {
+  const RekapCheckupResult({super.key});
 
   @override
   Widget build(BuildContext context) {
