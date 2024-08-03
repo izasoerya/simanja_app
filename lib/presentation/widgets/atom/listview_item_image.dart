@@ -20,15 +20,16 @@ class ItemListviewImage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.1,
+          width: MediaQuery.of(context).size.width * 0.15,
+          height: MediaQuery.of(context).size.height * 0.075,
           child: Image.asset('assets/logo/No_Image.jpg'),
         ),
         Padding(
             padding: EdgeInsets.only(
                 left: MediaQuery.of(context).size.width * 0.025)),
         Container(
-          height: 60,
-          width: MediaQuery.of(context).size.width * 0.675,
+          height: MediaQuery.of(context).size.height * 0.075,
+          width: MediaQuery.of(context).size.width * 0.625,
           color: Colors.yellow[100], //! CHANGE TO SIZEDBOX IN PRODUCTION
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -40,7 +41,7 @@ class ItemListviewImage extends StatelessWidget {
                   Text(
                     title,
                     style: TextStyle(
-                      fontSize: 6.sp,
+                      fontSize: 8.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.left,
@@ -48,7 +49,7 @@ class ItemListviewImage extends StatelessWidget {
                   ...descriptions.map((text) => Text(
                         text,
                         style: TextStyle(
-                          fontSize: 4.sp,
+                          fontSize: 6.sp,
                         ),
                         textAlign: TextAlign.left,
                       )),
