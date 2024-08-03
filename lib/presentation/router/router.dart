@@ -8,6 +8,7 @@ import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
 import 'package:simanja_app/presentation/screens/kader/list_remaja_checkup_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
+import 'package:simanja_app/presentation/screens/kader/rekap_checkup_result.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/login_page.dart';
@@ -83,6 +84,15 @@ final GoRouter router = GoRouter(
                   child: CheckupSummaryPage(
                       checkupUID: state.uri.queryParameters['checkupUID']!),
                 );
+              },
+            ),
+            GoRoute(
+              path: 'rekap-checkup-result',
+              builder: (BuildContext context, GoRouterState state) {
+                return SubPageLayout(
+                    appBarTitle: 'KONDISI REMAJA',
+                    child: RekapCheckupResult(
+                        checkupUID: state.uri.queryParameters['checkupUID']!));
               },
             ),
             GoRoute(

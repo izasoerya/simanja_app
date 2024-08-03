@@ -19,6 +19,8 @@ class ListViewRekapCheckup extends StatefulWidget {
 
   void _gotoAddCheckupData() => router
       .push('/login-kader/list-remaja-checkup?checkupUID=${kaderCheckup.uid}');
+  void _gotoRekapCheckupResult() => router
+      .push('/login-kader/rekap-checkup-result?checkupUID=${kaderCheckup.uid}');
 
   @override
   State<ListViewRekapCheckup> createState() => _ListViewRekapCheckupState();
@@ -59,6 +61,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                 description:
                     'Anemia: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.anemia ?? false).length}',
                 isFinish: true,
+                onTap: (d) => widget._gotoRekapCheckupResult(),
                 uid: 'anemia'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
