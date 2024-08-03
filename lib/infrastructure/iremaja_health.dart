@@ -1,18 +1,43 @@
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/domain/repositories/remaja_health_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 class RemajaHealthImplementation implements RemajaHealthRepo {
+  final Uuid _uuid = const Uuid();
   @override
-  Future<HealthPropertiesRemaja?> createHealth(HealthPropertiesRemaja health) {
-    // TODO: implement createHealth
-    throw UnimplementedError();
+  Future<HealthPropertiesRemaja?> createHealth(
+      HealthPropertiesRemaja health) async {
+    health.uid = _uuid.v4();
+    try {
+      final response = await Supabase.instance.client
+          .from('health_properties_remaja')
+          .insert(health.toJSON())
+          .select()
+          .single();
+      return HealthPropertiesRemaja.fromJSON(response);
+    } catch (e) {
+      print('Error:$e');
+      return null;
+    }
   }
 
   @override
-  Future<HealthPropertiesRemaja?> updateHealth(HealthPropertiesRemaja health) {
-    // TODO: implement updateHealth
-    throw UnimplementedError();
+  Future<HealthPropertiesRemaja?> updateHealth(
+      HealthPropertiesRemaja health) async {
+    try {
+      print('health.uid: ${health.uid}');
+      final response = await Supabase.instance.client
+          .from('health_properties_remaja')
+          .update(health.toJSON())
+          .eq('uid', health.uid!)
+          .select()
+          .single();
+      return HealthPropertiesRemaja.fromJSON(response);
+    } catch (e) {
+      print('Error:$e');
+      return null;
+    }
   }
 
   @override
@@ -30,6 +55,33 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
           .eq('uid', uid)
           .single();
       return HealthPropertiesRemaja.fromJSON(response);
+    } catch (e) {
+      print('Error:$e');
+      return null;
+    }
+  }
+
+  @override
+  Future<HealthPropertiesRemaja?> getHealthbyCheckupUID(
+      String checkupUID, String remajaUID, DateTime date) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('health_properties_remaja')
+          .select()
+          .eq('checkup_uid', checkupUID)
+          .eq('uid_remaja', remajaUID)
+          .eq('checked_at', date);
+      if (response.isNotEmpty) {
+        if (response.length == 1) {
+          return HealthPropertiesRemaja.fromJSON(response.first);
+        }
+        final healthList =
+            response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
+        healthList.sort(
+            (a, b) => b.checkedAt?.compareTo(a.checkedAt ?? DateTime(0)) ?? 0);
+        return healthList.first;
+      }
+      return null;
     } catch (e) {
       print('Error:$e');
       return null;

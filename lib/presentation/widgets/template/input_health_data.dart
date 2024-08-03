@@ -4,6 +4,7 @@ import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
+import 'package:simanja_app/domain/services/remaja_heath_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -79,13 +80,25 @@ class _InputHealthDataState extends State<InputHealthData> {
             onClick: () async {
               final remaja =
                   await RemajaAuthentication().getUserbyUID(widget.remaja);
-
               final updatedHealthData = healthData.copyWith(
+                uidCheckup: widget.checkup,
                 uidRemaja: remaja!.uid,
                 anemia: healthData.anemia ?? false,
                 kek: healthData.kek ?? false,
                 checkedAt: DateTime.now(),
               );
+              final response = await RemajaHeathService().upsertRemajaHealth(
+                  updatedHealthData,
+                  widget.remaja,
+                  widget.checkup,
+                  DateTime.now());
+              if (response != null) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Data Berhasil Disimpan')));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(
+                    const SnackBar(content: Text('Data Gagal Disimpan')));
+              }
               print('${updatedHealthData.toJSON()}');
             }),
         const Padding(padding: EdgeInsets.only(top: 50)),
