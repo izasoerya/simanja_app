@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sizer/sizer.dart';
 
 class ItemListviewImage extends StatelessWidget {
   final String title;
@@ -19,13 +20,15 @@ class ItemListviewImage extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          width: 45,
+          width: MediaQuery.of(context).size.width * 0.1,
           child: Image.asset('assets/logo/No_Image.jpg'),
         ),
-        const Padding(padding: EdgeInsets.only(left: 15)),
+        Padding(
+            padding: EdgeInsets.only(
+                left: MediaQuery.of(context).size.width * 0.025)),
         Container(
-          height: 45,
-          width: MediaQuery.of(context).size.width * 0.625,
+          height: 60,
+          width: MediaQuery.of(context).size.width * 0.675,
           color: Colors.yellow[100], //! CHANGE TO SIZEDBOX IN PRODUCTION
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -36,16 +39,16 @@ class ItemListviewImage extends StatelessWidget {
                 children: [
                   Text(
                     title,
-                    style: const TextStyle(
-                      fontSize: 12,
+                    style: TextStyle(
+                      fontSize: 6.sp,
                       fontWeight: FontWeight.bold,
                     ),
                     textAlign: TextAlign.left,
                   ),
                   ...descriptions.map((text) => Text(
                         text,
-                        style: const TextStyle(
-                          fontSize: 10,
+                        style: TextStyle(
+                          fontSize: 4.sp,
                         ),
                         textAlign: TextAlign.left,
                       )),
