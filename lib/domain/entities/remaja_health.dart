@@ -5,7 +5,7 @@ class HealthPropertiesRemaja {
   double? height;
   double? armCircumference;
   double? abdominalCircumference;
-  double? bloodPressure;
+  String? get bloodPressure => '$tds/$tdd mmHg';
   double? hemoglobin;
   double? cholesterol;
   double? bloodSugar;
@@ -25,7 +25,6 @@ class HealthPropertiesRemaja {
     this.height,
     this.armCircumference,
     this.abdominalCircumference,
-    this.bloodPressure,
     this.hemoglobin,
     this.cholesterol,
     this.bloodSugar,
@@ -46,7 +45,7 @@ class HealthPropertiesRemaja {
     double? height,
     double? armCircumference,
     double? abdominalCircumference,
-    double? bloodPressure,
+    String? bloodPressure,
     double? hemoglobin,
     double? cholesterol,
     double? bloodSugar,
@@ -67,7 +66,6 @@ class HealthPropertiesRemaja {
       armCircumference: armCircumference ?? this.armCircumference,
       abdominalCircumference:
           abdominalCircumference ?? this.abdominalCircumference,
-      bloodPressure: bloodPressure ?? this.bloodPressure,
       hemoglobin: hemoglobin ?? this.hemoglobin,
       cholesterol: cholesterol ?? this.cholesterol,
       bloodSugar: bloodSugar ?? this.bloodSugar,
@@ -90,7 +88,6 @@ class HealthPropertiesRemaja {
       height: json['height'],
       armCircumference: json['arm_radius'],
       abdominalCircumference: json['abdominal_radius'],
-      bloodPressure: json['blood_pressure'],
       hemoglobin: json['hemoglobin'],
       cholesterol: json['cholesterol'],
       bloodSugar: json['blood_sugar'],

@@ -82,6 +82,8 @@ class _InputHealthDataState extends State<InputHealthData> {
 
               final updatedHealthData = healthData.copyWith(
                 uidRemaja: remaja!.uid,
+                anemia: healthData.anemia ?? false,
+                kek: healthData.kek ?? false,
                 checkedAt: DateTime.now(),
               );
               print('${updatedHealthData.toJSON()}');
