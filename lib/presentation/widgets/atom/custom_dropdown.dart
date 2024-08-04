@@ -3,12 +3,14 @@ import 'package:flutter/material.dart';
 class CustomDropdown extends StatefulWidget {
   final void Function(String data) onChanged;
   final String label;
+  final String hint;
   final List<String> items;
 
   const CustomDropdown({
     super.key,
     required this.label,
     required this.items,
+    this.hint = 'Pilih Asal Posyandu...',
     required this.onChanged,
   });
 
@@ -53,7 +55,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 print(newValue);
               });
             },
-            hint: const Text('Pilih Asal Posyandu...'),
+            hint: Text(widget.hint),
           ),
         ),
       ],

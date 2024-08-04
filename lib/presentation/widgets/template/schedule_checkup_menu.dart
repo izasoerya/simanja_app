@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
 import 'package:simanja_app/presentation/widgets/atom/horizontal_datepicker.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -19,7 +20,32 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
   _onDateChange(DateTime date) => _date = date;
 
   String _name = '';
-  _onNameChange(String name) => _name = name;
+  _onNameChange(String data) => _name = data;
+
+  String _description = '';
+  _onDescriptionChange(String data) => _description = data;
+
+  String _theme = '';
+  _onThemeChange(String data) => _theme = data;
+
+  String _note = '';
+  _onNoteChange(String data) => _note = data;
+
+  String _kaderCount = '';
+  _onKaderCountChange(String data) => _kaderCount = data;
+
+  String _attendant = '';
+  _onAttendantChange(String data) => _attendant = data;
+
+  String _urlImage = '';
+  _onUrlImageChange(String data) => _urlImage = data;
+
+  String? _selectedJenisAcara;
+  _onJenisAcaraChange(String? newValue) {
+    setState(() {
+      _selectedJenisAcara = newValue;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -28,10 +54,57 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
         HorizontalDatePicker(onDateChange: _onDateChange),
         const Padding(padding: EdgeInsets.only(top: 15)),
         TextInput(
-            hintText: 'Nama Acara...',
+            hintText: 'Masukkan nama acara...',
             labelText: 'Nama Acara',
             value: _onNameChange),
-        const Padding(padding: EdgeInsets.only(top: 5)),
+        TextInput(
+            hintText: 'Masukkan deskripsi acara...',
+            labelText: 'Deskripsi Acara',
+            value: _onDescriptionChange),
+        CustomDropdown(
+            label: 'Jenis Acara',
+            hint: 'Pilih jenis acara...',
+            items: const ['Checkup', 'Lainnya'],
+            onChanged: _onJenisAcaraChange),
+        if (_selectedJenisAcara == 'Lainnya') ...[
+          const Padding(padding: EdgeInsets.only(top: 15)),
+          TextInput(
+              hintText: 'Masukkan lokasi...',
+              labelText: 'Lokasi Acara',
+              value: _onDescriptionChange),
+          CustomDropdown(
+              label: 'Jenis Kegiatan',
+              hint: 'Pilih jenis kegiatan...',
+              items: const [
+                'PHKS',
+                'Kesehatan Reproduksi Remaja',
+                'Kesehatan Jiwa & NAPZA',
+                'Gizi',
+                'Penyakit Tidak Menular',
+                'Aktivitas Fisik',
+                'Pencegahan Kekerasan Remaja',
+                'Kegiatan Lainnya'
+              ],
+              onChanged: (_) {}),
+          const Padding(padding: EdgeInsets.only(top: 15)),
+          TextInput(
+              hintText: 'Masukkan tema...',
+              labelText: 'Tema Acara',
+              value: _onThemeChange),
+          TextInput(
+              hintText: 'Masukkan ringkasan kegiatan...',
+              labelText: 'Ringkasan Kegiatan',
+              value: _onNoteChange),
+          TextInput(
+              hintText: 'Masukkan jumlah kader...',
+              labelText: 'Jumlah Kader',
+              value: _onKaderCountChange),
+          TextInput(
+              hintText: 'Masukkan tamu...',
+              labelText: 'Tamu Acara',
+              value: _onAttendantChange),
+        ],
+        const Padding(padding: EdgeInsets.only(top: 20)),
         SubmitButton(
             text: 'Jadwalkan Checkup',
             backgroundColor: const GlobalTheme().primaryColor,
