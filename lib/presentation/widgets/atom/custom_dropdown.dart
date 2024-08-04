@@ -30,7 +30,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
           padding: const EdgeInsets.symmetric(horizontal: 10),
           decoration: BoxDecoration(
             color: Colors.white,
-            border: Border.all(color: Colors.grey.shade400),
+            border: Border.all(color: Colors.grey.shade300),
             borderRadius: BorderRadius.circular(5),
           ),
           child: DropdownButton<String>(
