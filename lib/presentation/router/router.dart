@@ -89,10 +89,12 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'rekap-checkup-result',
               builder: (BuildContext context, GoRouterState state) {
+                final param = state.uri.queryParameters;
                 return SubPageLayout(
                     appBarTitle: 'KONDISI REMAJA',
                     child: RekapCheckupResult(
-                        checkupUID: state.uri.queryParameters['checkupUID']!));
+                        checkupUID: param['checkupUID']!,
+                        label: param['label']!));
               },
             ),
             GoRoute(

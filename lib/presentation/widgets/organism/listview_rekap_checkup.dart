@@ -19,8 +19,8 @@ class ListViewRekapCheckup extends StatefulWidget {
 
   void _gotoAddCheckupData() => router
       .push('/login-kader/list-remaja-checkup?checkupUID=${kaderCheckup.uid}');
-  void _gotoRekapCheckupResult() => router
-      .push('/login-kader/rekap-checkup-result?checkupUID=${kaderCheckup.uid}');
+  void _gotoRekapCheckupResult(String label) => router.push(
+      '/login-kader/rekap-checkup-result?checkupUID=${kaderCheckup.uid}&label=$label');
 
   @override
   State<ListViewRekapCheckup> createState() => _ListViewRekapCheckupState();
@@ -61,7 +61,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                 description:
                     'Anemia: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.anemia ?? false).length}',
                 isFinish: true,
-                onTap: (d) => widget._gotoRekapCheckupResult(),
+                onTap: (d) => widget._gotoRekapCheckupResult('Anemia'),
                 uid: 'anemia'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
@@ -69,20 +69,23 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                 description:
                     'Beresiko KEK: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.kek ?? false).length}',
                 isFinish: true,
+                onTap: (d) => widget._gotoRekapCheckupResult('Beresiko KEK'),
                 uid: 'kek'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Obesitas: ${widget.items.isEmpty ? '0' : widget.items.where((element) => (element?.weight ?? 0) > 10).length}',
+                    'Obesitas: ${widget.items.isEmpty ? '0' : widget.items.where((element) => (element?.weight ?? 0) > 60).length}',
                 isFinish: true,
+                onTap: (d) => widget._gotoRekapCheckupResult('Obesitas'),
                 uid: 'obesitas'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Sangat Kurus: ${widget.items.isEmpty ? '0' : widget.items.where((element) => (element?.weight ?? 0) < 10).length}',
+                    'Sangat Kurus: ${widget.items.isEmpty ? '0' : widget.items.where((element) => (element?.weight ?? 0) < 20).length}',
                 isFinish: true,
+                onTap: (d) => widget._gotoRekapCheckupResult('Sangat Kurus'),
                 uid: 'kurus'),
             const Padding(padding: EdgeInsets.only(top: 20)),
             ItemListViewNude(
@@ -90,6 +93,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                 description:
                     'Merokok: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.smoker ?? false).length}',
                 isFinish: true,
+                onTap: (d) => widget._gotoRekapCheckupResult('Merokok'),
                 uid: 'merokok'),
             const Padding(padding: EdgeInsets.only(top: 40)),
             !widget.kaderCheckup.isFinish
