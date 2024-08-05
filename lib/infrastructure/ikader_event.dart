@@ -38,9 +38,20 @@ class KaderEventImplementation implements KaderEventRepo {
   }
 
   @override
-  Future<List<EventKader>> getKaderEvents() {
-    // TODO: implement getKaderEvents
-    throw UnimplementedError();
+  Future<List<EventKader>> getKaderEvents(String idKader) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('kader_activity')
+          .select()
+          .eq('uid_kader', idKader);
+      if (response.isNotEmpty) {
+        return response.map((e) => EventKader.fromJSON(e)).toList();
+      }
+      return [];
+    } catch (e) {
+      print('e: $e');
+      return [];
+    }
   }
 
   @override

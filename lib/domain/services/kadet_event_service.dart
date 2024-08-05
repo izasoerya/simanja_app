@@ -8,6 +8,11 @@ class KaderEventService {
     return response;
   }
 
+  Future<List<EventKader>> getActiveEventList(String idKader) async {
+    final response = await KaderEventImplementation().getKaderEvents(idKader);
+    return response;
+  }
+
   Future<void> updateEvent() async {
     // Update event
   }

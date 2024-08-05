@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_activity.dart';
 
 class OngoingEvent extends StatelessWidget {
-  const OngoingEvent({super.key});
+  final List<KaderCheckup>? itemsCheckup;
+  final List<EventKader>? itemsEvent;
+  const OngoingEvent({super.key, this.itemsCheckup, this.itemsEvent});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +25,10 @@ class OngoingEvent extends StatelessWidget {
           ),
         ),
         const Padding(padding: EdgeInsets.only(top: 15)),
-        const ListviewActivity(),
+        ListviewActivity(
+          itemsCheckup: itemsCheckup,
+          itemsEvent: itemsEvent,
+        ),
       ],
     );
   }
