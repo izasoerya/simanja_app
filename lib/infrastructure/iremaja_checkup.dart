@@ -68,7 +68,6 @@ class RemajaCheckupImplementation implements RemajaCheckupRepo {
           .eq('uid_kader', posyanduUID)
           .contains('uid_remaja', [remajaUID]);
 
-      print('response: ${response}');
       if (response.isEmpty) {
         return null;
       }

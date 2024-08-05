@@ -1,10 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/entities/kader_event.dart';
+import 'package:simanja_app/domain/services/kader_checkup_service.dart';
+import 'package:simanja_app/domain/services/kadet_event_service.dart';
 import 'package:simanja_app/domain/services/remaja_checkup_service.dart';
+import 'package:simanja_app/domain/services/remaja_event_service.dart';
 import 'package:simanja_app/presentation/widgets/organism/appbar_content.dart';
 import 'package:simanja_app/presentation/widgets/template/checkup_confirmation.dart';
 import 'package:simanja_app/presentation/widgets/template/schedule_list.dart';
 import 'package:simanja_app/utils/default_account.dart';
+
+class CheckupData {
+  final List<KaderCheckup> checkupList;
+  final List<EventKader> eventList;
+
+  CheckupData({required this.checkupList, required this.eventList});
+}
+
+class SubscribeData {
+  final List<KaderCheckup> subscribeCheckup;
+  final List<EventKader> subscribeEvent;
+
+  SubscribeData({required this.subscribeCheckup, required this.subscribeEvent});
+}
 
 class DashboardRemaja extends StatefulWidget {
   const DashboardRemaja({super.key});
@@ -16,13 +34,21 @@ class DashboardRemaja extends StatefulWidget {
 class _DashboardRemajaState extends State<DashboardRemaja> {
   void _refreshPage() => setState(() {});
 
-  Future<List<KaderCheckup>?> _fetchCheckupList() async {
-    return await RemajaCheckupService().getCheckupList(remajaAccount.posyandu);
+  Future<CheckupData?> _fetchCheckupList() async {
+    final eventList =
+        await KaderEventService().getActiveEventList(remajaAccount.posyandu);
+    final checkupList = await KaderCheckupService()
+        .getActiveCheckupList(remajaAccount.posyandu);
+    return CheckupData(checkupList: checkupList, eventList: eventList);
   }
 
-  Future<List<KaderCheckup>?> _fetchSubscribeList() async {
-    return await RemajaCheckupService()
+  Future<SubscribeData?> _fetchSubscribeList() async {
+    final subscribeCheckup = await RemajaCheckupService()
         .getSubscribeList(remajaAccount.posyandu, remajaAccount.uid);
+    final subscribeEvent = await RemajaEventService()
+        .getSubscribeList(remajaAccount.posyandu, remajaAccount.uid);
+    return SubscribeData(
+        subscribeCheckup: subscribeCheckup!, subscribeEvent: subscribeEvent!);
   }
 
   @override
@@ -42,8 +68,10 @@ class _DashboardRemajaState extends State<DashboardRemaja> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
+                  final checkupData = snapshot.data as CheckupData;
                   return CheckupConfirmation(
-                    items: snapshot.data!,
+                    itemsCheckup: checkupData.checkupList,
+                    itemsEvent: checkupData.eventList,
                     onTap: _refreshPage,
                   );
                 }
@@ -57,9 +85,13 @@ class _DashboardRemajaState extends State<DashboardRemaja> {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasData) {
-                  return ScheduleList(items: snapshot.data!);
+                  final subscribeData = snapshot.data as SubscribeData;
+                  return ScheduleList(
+                    itemsCheckup: subscribeData.subscribeCheckup,
+                    itemsEvent: subscribeData.subscribeEvent,
+                  );
                 }
-                return const ScheduleList(items: []);
+                return const ScheduleList();
               },
             ),
           ],

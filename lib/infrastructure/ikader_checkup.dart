@@ -1,5 +1,4 @@
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
-import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/repositories/kader_checkup_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:uuid/uuid.dart';

@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_checkup_date.dart';
 
 class ScheduleList extends StatelessWidget {
-  final List<KaderCheckup> items;
-  const ScheduleList({super.key, required this.items});
+  final List<KaderCheckup>? itemsCheckup;
+  final List<EventKader>? itemsEvent;
+  const ScheduleList({super.key, this.itemsCheckup, this.itemsEvent});
 
   @override
   Widget build(BuildContext context) {
+    if ((itemsCheckup == null || itemsCheckup!.isEmpty) &&
+        (itemsEvent == null || itemsEvent!.isEmpty)) {
+      return const Center(child: Text('No data'));
+    }
+
     return Column(
       children: [
         Container(
@@ -48,9 +55,14 @@ class ScheduleList extends StatelessWidget {
                 bottomLeft: Radius.circular(10),
                 bottomRight: Radius.circular(10)),
           ),
-          child: items.isEmpty
-              ? const Text('Belum mendaftar checkup!')
-              : ListviewCheckupDate(items: items),
+          child: Column(
+            children: [
+              if (itemsCheckup != null && itemsCheckup!.isNotEmpty)
+                ListviewCheckupDate(itemsCheckup: itemsCheckup!),
+              if (itemsEvent != null && itemsEvent!.isNotEmpty)
+                ListviewCheckupDate(itemsEvent: itemsEvent!),
+            ],
+          ),
         ),
       ],
     );

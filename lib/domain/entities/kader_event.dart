@@ -9,6 +9,7 @@ class EventKader {
   final String totalKader;
   final String visitor;
   final String urlImage;
+  final bool isFinish;
 
   EventKader({
     required this.id,
@@ -21,6 +22,7 @@ class EventKader {
     required this.totalKader,
     required this.visitor,
     required this.urlImage,
+    this.isFinish = false,
   });
 
   EventKader copyWith({
@@ -34,6 +36,7 @@ class EventKader {
     String? totalKader,
     String? visitor,
     String? urlImage,
+    bool? isFinish,
   }) {
     return EventKader(
       id: id ?? this.id,
@@ -46,6 +49,7 @@ class EventKader {
       totalKader: totalKader ?? this.totalKader,
       visitor: visitor ?? this.visitor,
       urlImage: urlImage ?? this.urlImage,
+      isFinish: isFinish ?? this.isFinish,
     );
   }
 
@@ -61,6 +65,7 @@ class EventKader {
       totalKader: json['kader_count'],
       visitor: json['visitor'],
       urlImage: json['url_image'],
+      isFinish: json['is_finish'],
     );
   }
 
@@ -76,6 +81,7 @@ class EventKader {
       'kader_count': totalKader,
       'visitor': visitor,
       'url_image': urlImage,
+      'is_finish': isFinish,
     };
   }
 }

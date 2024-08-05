@@ -3,13 +3,17 @@ import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 
 class ItemListViewCheckbox extends StatefulWidget {
-  final KaderCheckup item;
+  final String uid;
+  final String title;
   final String label;
+  final DateTime date;
   final void Function(Map<String, bool> callBack) onTap;
   const ItemListViewCheckbox({
     super.key,
+    required this.uid,
+    required this.title,
     this.label = '',
-    required this.item,
+    required this.date,
     required this.onTap,
   });
 
@@ -39,7 +43,7 @@ class _ItemListViewCheckboxState extends State<ItemListViewCheckbox> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    widget.item.checkupTitle,
+                    widget.title,
                     style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
@@ -47,7 +51,7 @@ class _ItemListViewCheckboxState extends State<ItemListViewCheckbox> {
                     textAlign: TextAlign.left,
                   ),
                   Text(
-                    widget.item.dateEvent.toIso8601String().substring(0, 10),
+                    widget.date.toIso8601String().substring(0, 10),
                     style: const TextStyle(
                       fontSize: 14,
                       color: Colors.black54,
@@ -59,7 +63,7 @@ class _ItemListViewCheckboxState extends State<ItemListViewCheckbox> {
               ChecklistBox(
                 text: widget.label,
                 value: (d) {
-                  widget.onTap(widget._mapCheckboxtoUID(widget.item.uid, d));
+                  widget.onTap(widget._mapCheckboxtoUID(widget.uid, d));
                 },
               )
             ],
