@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 
 class ItemListViewCheckbox extends StatefulWidget {
