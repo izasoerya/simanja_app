@@ -50,14 +50,14 @@ class ListviewCheckupDate extends StatelessWidget {
         if (index < filteredCheckupItems.length) {
           return ItemListviewIcon(
             title: filteredCheckupItems[index].checkupTitle,
-            location: kaderAccount.namePosyandu,
+            location: remajaAccount.posyandu,
             date: filteredCheckupItems[index].dateEvent,
           );
         } else {
           int eventIndex = index - filteredCheckupItems.length;
           return ItemListviewIcon(
             title: filteredEventItems[eventIndex].topic,
-            location: kaderAccount.namePosyandu,
+            location: filteredEventItems[eventIndex].location,
             date: filteredEventItems[eventIndex].date,
           );
         }

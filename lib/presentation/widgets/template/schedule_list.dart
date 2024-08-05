@@ -58,9 +58,10 @@ class ScheduleList extends StatelessWidget {
           child: Column(
             children: [
               if (itemsCheckup != null && itemsCheckup!.isNotEmpty)
-                ListviewCheckupDate(itemsCheckup: itemsCheckup!),
-              if (itemsEvent != null && itemsEvent!.isNotEmpty)
-                ListviewCheckupDate(itemsEvent: itemsEvent!),
+                ListviewCheckupDate(
+                  itemsCheckup: itemsCheckup,
+                  itemsEvent: itemsEvent,
+                ),
             ],
           ),
         ),
