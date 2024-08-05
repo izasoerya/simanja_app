@@ -13,20 +13,33 @@ class ListviewCheckupDate extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      shrinkWrap: true,
-      separatorBuilder: (context, index) => const Divider(
-        color: Colors.white,
-        height: 25,
-      ),
-      itemCount: items.length,
-      itemBuilder: (context, index) {
-        return ItemListviewIcon(
-          title: items[index].checkupTitle,
-          location: kaderAccount.namePosyandu,
-          date: items[index].dateEvent,
-        );
-      },
-    );
+    List<KaderCheckup> filteredItem = [];
+    if (items.isNotEmpty) {
+      filteredItem = items.where((e) => e.isFinish == false).toList();
+      return ListView.separated(
+        shrinkWrap: true,
+        separatorBuilder: (context, index) => const Divider(
+          color: Colors.white,
+          height: 25,
+        ),
+        itemCount: filteredItem.length,
+        itemBuilder: (context, index) {
+          return ItemListviewIcon(
+            title: filteredItem[index].checkupTitle,
+            location: kaderAccount.namePosyandu,
+            date: filteredItem[index].dateEvent,
+          );
+        },
+      );
+    } else {
+      return const Text(
+        'Belum mendaftar checkup!',
+        style: TextStyle(
+          color: Colors.black,
+          fontSize: 16,
+          fontWeight: FontWeight.w600,
+        ),
+      );
+    }
   }
 }
