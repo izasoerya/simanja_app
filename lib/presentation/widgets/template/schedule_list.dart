@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
+import 'package:simanja_app/presentation/widgets/organism/listview_checkup_date.dart';
 
 class ScheduleList extends StatelessWidget {
   final List<KaderCheckup> items;
@@ -40,7 +41,7 @@ class ScheduleList extends StatelessWidget {
         Container(
           width: MediaQuery.of(context).size.width,
           alignment: Alignment.center,
-          padding: const EdgeInsets.symmetric(vertical: 15),
+          padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 20),
           decoration: BoxDecoration(
             color: const GlobalTheme().primaryColorLight,
             borderRadius: const BorderRadius.only(
@@ -49,17 +50,7 @@ class ScheduleList extends StatelessWidget {
           ),
           child: items.isEmpty
               ? const Text('Belum mendaftar checkup!')
-              : ListView.separated(
-                  shrinkWrap: true,
-                  separatorBuilder: (context, index) => const Divider(
-                    color: Colors.white,
-                    height: 25,
-                  ),
-                  itemCount: items.length,
-                  itemBuilder: (context, index) {
-                    return Text(items[index].checkupTitle);
-                  },
-                ),
+              : ListviewCheckupDate(items: items),
         ),
       ],
     );

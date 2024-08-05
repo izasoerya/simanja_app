@@ -30,38 +30,40 @@ class _DashboardRemajaState extends State<DashboardRemaja> {
     return Container(
       width: MediaQuery.of(context).size.width,
       padding: const EdgeInsets.all(20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          const AppbarContent(isKader: false),
-          const Padding(padding: EdgeInsets.only(top: 20)),
-          FutureBuilder(
-            future: _fetchCheckupList(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData) {
-                return CheckupConfirmation(
-                  items: snapshot.data!,
-                  onTap: _refreshPage,
-                );
-              }
-              return const Center(child: Text('Tidak ada data'));
-            },
-          ),
-          const Padding(padding: EdgeInsets.only(top: 30)),
-          FutureBuilder(
-            future: _fetchSubscribeList(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return const Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasData) {
-                return ScheduleList(items: snapshot.data!);
-              }
-              return const ScheduleList(items: []);
-            },
-          ),
-        ],
+      child: SingleChildScrollView(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            const AppbarContent(isKader: false),
+            const Padding(padding: EdgeInsets.only(top: 20)),
+            FutureBuilder(
+              future: _fetchCheckupList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasData) {
+                  return CheckupConfirmation(
+                    items: snapshot.data!,
+                    onTap: _refreshPage,
+                  );
+                }
+                return const Center(child: Text('Tidak ada data'));
+              },
+            ),
+            const Padding(padding: EdgeInsets.only(top: 30)),
+            FutureBuilder(
+              future: _fetchSubscribeList(),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasData) {
+                  return ScheduleList(items: snapshot.data!);
+                }
+                return const ScheduleList(items: []);
+              },
+            ),
+          ],
+        ),
       ),
     );
   }
