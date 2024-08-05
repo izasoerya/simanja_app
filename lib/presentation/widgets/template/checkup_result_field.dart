@@ -108,17 +108,26 @@ class CheckupResultField extends StatelessWidget {
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
-            item!.smoker != null
-                ? (item!.smoker!
-                    ? const TextIcon(label: 'Merkokok', value: true)
-                    : const TextIcon(label: 'Merkokok', value: false))
-                : const SizedBox(),
-            item!.smoker != null
-                ? (item!.smoker!
-                    ? const TextIcon(label: 'Sedang konsumsi TTD', value: true)
-                    : const TextIcon(
-                        label: 'Sedang konsumsi TTD', value: false))
-                : const SizedBox(),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              alignment: Alignment.centerLeft,
+              child: item!.smoker != null
+                  ? (item!.smoker!
+                      ? const TextIcon(label: 'Merkokok', value: true)
+                      : const TextIcon(label: 'Merkokok', value: false))
+                  : const SizedBox(),
+            ),
+            Container(
+              width: MediaQuery.of(context).size.width * 0.4,
+              alignment: Alignment.centerLeft,
+              child: item!.smoker != null
+                  ? (item!.smoker!
+                      ? const TextIcon(
+                          label: 'Sedang konsumsi TTD', value: true)
+                      : const TextIcon(
+                          label: 'Sedang konsumsi TTD', value: false))
+                  : const SizedBox(),
+            ),
           ],
         )
       ],
@@ -129,27 +138,22 @@ class CheckupResultField extends StatelessWidget {
 class TextIcon extends StatelessWidget {
   final String label;
   final bool value;
-  final double width;
-  const TextIcon(
-      {super.key, required this.label, required this.value, this.width = 0.3});
+  const TextIcon({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: MediaQuery.of(context).size.width * width,
-      child: SingleChildScrollView(
-        scrollDirection: Axis.horizontal,
-        child: Row(
-          children: [
-            Icon(value ? Icons.check_circle : Icons.cancel,
-                color: const GlobalTheme().primaryColor, size: 30),
-            Text(label,
-                style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black)),
-          ],
-        ),
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      child: Row(
+        children: [
+          Icon(value ? Icons.check_circle : Icons.cancel,
+              color: value ? Colors.green : Colors.red, size: 30),
+          Text('${value ? '' : 'Tidak'} $label',
+              style: const TextStyle(
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.black)),
+        ],
       ),
     );
   }
