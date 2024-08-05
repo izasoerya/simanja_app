@@ -36,9 +36,13 @@ class CheckupResultPage extends StatelessWidget {
                 horizontal: MediaQuery.of(context).size.width * 0.05),
             child: SingleChildScrollView(
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const TitleWPosyandu(title: 'HASIL\nPENIMBANGAN'),
+                  const Padding(padding: EdgeInsets.only(top: 30)),
+                  const TitleWPosyandu(title: 'HASIL PENIMBANGAN'),
+                  const Padding(padding: EdgeInsets.only(top: 15)),
                   UserIdentity(user: userData),
+                  const Padding(padding: EdgeInsets.only(top: 30)),
                   CheckupResultField(item: healthData),
                 ],
               ),
