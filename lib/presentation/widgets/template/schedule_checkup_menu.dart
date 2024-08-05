@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
+import 'package:simanja_app/domain/services/kadet_event_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
@@ -25,6 +27,9 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
   String _description = '';
   _onDescriptionChange(String data) => _description = data;
 
+  String _location = '';
+  _onLocationChange(String data) => _location = data;
+
   String _theme = '';
   _onThemeChange(String data) => _theme = data;
 
@@ -41,11 +46,12 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
   _onUrlImageChange(String data) => _urlImage = data;
 
   String? _selectedJenisAcara;
-  _onJenisAcaraChange(String? newValue) {
-    setState(() {
-      _selectedJenisAcara = newValue;
-    });
-  }
+  _onJenisAcaraChange(String? data) => setState(() {
+        _selectedJenisAcara = data;
+      });
+
+  String? _selectedJenisKegiatan;
+  _onJenisKegiatanChange(String? data) => _selectedJenisKegiatan = data;
 
   @override
   Widget build(BuildContext context) {
@@ -71,7 +77,7 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
           TextInput(
               hintText: 'Masukkan lokasi...',
               labelText: 'Lokasi Acara',
-              value: _onDescriptionChange),
+              value: _onLocationChange),
           CustomDropdown(
               label: 'Jenis Kegiatan',
               hint: 'Pilih jenis kegiatan...',
@@ -85,7 +91,7 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
                 'Pencegahan Kekerasan Remaja',
                 'Kegiatan Lainnya'
               ],
-              onChanged: (_) {}),
+              onChanged: _onJenisKegiatanChange),
           const Padding(padding: EdgeInsets.only(top: 15)),
           TextInput(
               hintText: 'Masukkan tema...',
@@ -109,13 +115,33 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
             text: 'Jadwalkan Checkup',
             backgroundColor: const GlobalTheme().primaryColor,
             onClick: () async {
-              final response = await KaderCheckupService().scheduleCheckup(
-                  _name, _date, ref.watch(userKaderProvider).uid);
-              if (response != null) {
-                print(
-                    'Berhasil membuat jadwal ${response.uid} pada ${response.dateEvent} dengan judul ${response.checkupTitle}');
+              if (_selectedJenisAcara! == 'Checkup') {
+                final response = await KaderCheckupService().scheduleCheckup(
+                    _name, _date, ref.watch(userKaderProvider).uid);
+                if (response != null) {
+                  print(
+                      'Berhasil membuat jadwal ${response.uid} pada ${response.dateEvent} dengan judul ${response.checkupTitle}');
+                } else {
+                  print('Gagal membuat jadwal $_name pada $_date');
+                }
               } else {
-                print('Gagal membuat jadwal $_name pada $_date');
+                EventKader event = EventKader(
+                    id: 'dummy',
+                    idKader: ref.watch(userKaderProvider).uid,
+                    location: _location,
+                    date: _date,
+                    theme: _theme,
+                    topic: _selectedJenisKegiatan!,
+                    note: _note,
+                    totalKader: _kaderCount,
+                    visitor: _attendant,
+                    urlImage: _urlImage);
+                final response = await KaderEventService().createEvent(event);
+                if (response == null) {
+                  print('Gagal membuat jadwal $_name pada $_date');
+                } else {
+                  print('Berhasil membuat jadwal $_name pada $_date');
+                }
               }
             }),
       ],
