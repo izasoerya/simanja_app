@@ -1,7 +1,7 @@
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/infrastructure/iremaja_health.dart';
 
-class RemajaHeathService {
+class RemajaHealthService {
   Future<HealthPropertiesRemaja?> upsertRemajaHealth(
       HealthPropertiesRemaja health,
       String remajaUID,

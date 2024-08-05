@@ -29,7 +29,7 @@ class _RekapCheckupResultState extends State<RekapCheckupResult> {
 
   void _fetchFuture() async {
     data =
-        (await RemajaHeathService().getListCheckupHealth(widget.checkupUID))!;
+        (await RemajaHealthService().getListCheckupHealth(widget.checkupUID))!;
     if (data.isEmpty) {
       print('Data is empty');
       setState(() {

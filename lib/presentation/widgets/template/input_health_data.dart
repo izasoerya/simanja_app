@@ -89,7 +89,7 @@ class _InputHealthDataState extends State<InputHealthData> {
                 tablet: healthData.tablet ?? false,
                 checkedAt: DateTime.now(),
               );
-              final response = await RemajaHeathService().upsertRemajaHealth(
+              final response = await RemajaHealthService().upsertRemajaHealth(
                   updatedHealthData,
                   widget.remaja,
                   widget.checkup,

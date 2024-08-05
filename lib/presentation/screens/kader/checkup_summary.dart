@@ -31,7 +31,7 @@ class CheckupSummaryPage extends StatelessWidget {
                           'Data ini menunjukkan kondisi kesehatan remaja yang telah melakukan cek kesehatan di posyandu'),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   FutureBuilder(
-                    future: RemajaHeathService()
+                    future: RemajaHealthService()
                         .getListCheckupHealth(kaderChekcupData.uid),
                     builder: (context, snapshot) {
                       if (snapshot.connectionState == ConnectionState.waiting) {
