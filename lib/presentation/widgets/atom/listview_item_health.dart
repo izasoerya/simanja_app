@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/utils/enums.dart';
 import 'package:sizer/sizer.dart';
@@ -9,12 +10,18 @@ class ItemListViewHealth extends StatelessWidget {
   final UserRemaja user;
   final HealthPropertiesRemaja health;
   final String label;
+  final void Function()? onTap;
   const ItemListViewHealth({
     super.key,
     required this.user,
     required this.health,
     required this.label,
+    this.onTap,
   });
+
+  void _defaultOnTap() {
+    router.push('/login-kader/result-health-remaja?healthUID=${health.uid}');
+  }
 
   String _getLabelText(String label) {
     switch (label) {
@@ -69,73 +76,77 @@ class ItemListViewHealth extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width * 0.9,
-      padding: EdgeInsets.symmetric(vertical: 7.5.sp, horizontal: 15.sp),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(5),
-        boxShadow: const [
-          BoxShadow(
+    return GestureDetector(
+      onTap: onTap ?? () => _defaultOnTap(),
+      child: Container(
+        width: MediaQuery.of(context).size.width * 0.9,
+        padding: EdgeInsets.symmetric(vertical: 7.5.sp, horizontal: 15.sp),
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(5),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.grey,
+              blurRadius: 1.5,
+            ),
+          ],
+          border: Border.all(
             color: Colors.grey,
-            blurRadius: 1.5,
+            width: 0.5,
           ),
-        ],
-        border: Border.all(
-          color: Colors.grey,
-          width: 0.5,
         ),
-      ),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(user.name,
-                  style: const TextStyle(
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.start),
-              Text(user.nik,
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),
-                  textAlign: TextAlign.start),
-              Text(
-                  '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),
-                  textAlign: TextAlign.start),
-              Text(user.bpjs ? 'Pengguna BPJS' : 'Bukan Pengguna BPJS',
-                  style: const TextStyle(
-                    fontSize: 10,
-                    fontWeight: FontWeight.normal,
-                  ),
-                  textAlign: TextAlign.start),
-            ],
-          ),
-          Column(
-            children: [
-              Text(_getLabelText(label), style: const TextStyle(fontSize: 10)),
-              Text(_getHealthValue(label, health),
-                  style: TextStyle(
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                    color: const GlobalTheme().primaryColor,
-                  )),
-              Text(_getHealthStatus(label),
-                  style: TextStyle(
-                    fontSize: 12,
-                    color: const GlobalTheme().secondaryColor,
-                  )),
-            ],
-          )
-        ],
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(user.name,
+                    style: const TextStyle(
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.start),
+                Text(user.nik,
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    textAlign: TextAlign.start),
+                Text(
+                    '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    textAlign: TextAlign.start),
+                Text(user.bpjs ? 'Pengguna BPJS' : 'Bukan Pengguna BPJS',
+                    style: const TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.normal,
+                    ),
+                    textAlign: TextAlign.start),
+              ],
+            ),
+            Column(
+              children: [
+                Text(_getLabelText(label),
+                    style: const TextStyle(fontSize: 10)),
+                Text(_getHealthValue(label, health),
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: const GlobalTheme().primaryColor,
+                    )),
+                Text(_getHealthStatus(label),
+                    style: TextStyle(
+                      fontSize: 12,
+                      color: const GlobalTheme().secondaryColor,
+                    )),
+              ],
+            )
+          ],
+        ),
       ),
     );
   }

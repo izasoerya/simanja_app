@@ -18,7 +18,7 @@ class CheckupResultPage extends StatelessWidget {
         RemajaHealthService().getRemajaHealthbyUID(healthUID),
         RemajaHealthService().getRemajaHealthbyUID(healthUID).then(
               (healthData) =>
-                  RemajaAuthentication().getUserbyUID(healthData!.uid!),
+                  RemajaAuthentication().getUserbyUID(healthData!.uidRemaja!),
             ),
       ]),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {

@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:simanja_app/presentation/layout/kader_layout.dart';
 import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
+import 'package:simanja_app/presentation/screens/checkup_result_page.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
@@ -121,6 +122,16 @@ final GoRouter router = GoRouter(
                   child: EditDataHealthPage(
                       checkupUID: state.uri.queryParameters['checkupUID']!,
                       remajaUID: state.uri.queryParameters['remajaUID']!),
+                );
+              },
+            ),
+            GoRoute(
+              path: 'result-health-remaja',
+              builder: (BuildContext context, GoRouterState state) {
+                return SubPageLayout(
+                  appBarTitle: 'HASIL PENIMBANGAN',
+                  child: CheckupResultPage(
+                      healthUID: state.uri.queryParameters['healthUID']!),
                 );
               },
             ),
