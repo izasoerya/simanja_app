@@ -13,6 +13,11 @@ class CheckupResultField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (item == null) {
+      return const Text('belum ada data',
+          style: TextStyle(fontSize: 16, color: Colors.red));
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -27,41 +32,66 @@ class CheckupResultField extends StatelessWidget {
                   color: Colors.black),
             ),
             Text(
-                'Tanggal: ${item!.checkedAt!.toIso8601String().substring(0, 10)}',
+                'Tanggal: ${item!.checkedAt?.toIso8601String().substring(0, 10) ?? 'belum ada data'}',
                 style: const TextStyle(
                     fontSize: 13,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)),
             const Padding(padding: EdgeInsets.only(top: 10)),
             ResultContainerSmall(
-                value: '${item!.weight} Kg', label: 'Berat Badan (BB)'),
+                value: item!.weight != null
+                    ? '${item!.weight} Kg'
+                    : 'belum ada data',
+                label: 'Berat Badan (BB)'),
             ResultContainerSmall(
-                value: '${item!.height} cm', label: 'Tinggi Badan (BB)'),
+                value: item!.height != null
+                    ? '${item!.height} cm'
+                    : 'belum ada data',
+                label: 'Tinggi Badan (BB)'),
             const Padding(padding: EdgeInsets.only(top: 10)),
             ResultContainerSmall(
-                value: '${item!.armCircumference} cm',
+                value: item!.armCircumference != null
+                    ? '${item!.armCircumference} cm'
+                    : 'belum ada data',
                 label: 'Lingkar Lengan (LiLa)'),
             ResultContainerSmall(
-                value: '${item!.abdominalCircumference} cm',
+                value: item!.abdominalCircumference != null
+                    ? '${item!.abdominalCircumference} cm'
+                    : 'belum ada data',
                 label: 'Lingkar Perut (LP)'),
             const Padding(padding: EdgeInsets.only(top: 10)),
             ResultContainerSmall(
-                value: '${item!.bloodPressure}',
+                value: item!.bloodPressure != null
+                    ? '${item!.bloodPressure}'
+                    : 'belum ada data',
                 label: 'Tekanan Darah / Tensi'),
             ResultContainerSmall(
-                value: '${item!.hemoglobin} g/dL', label: 'Hemoglobin (HB)'),
+                value: item!.hemoglobin != null
+                    ? '${item!.hemoglobin} g/dL'
+                    : 'belum ada data',
+                label: 'Hemoglobin (HB)'),
             const Padding(padding: EdgeInsets.only(top: 10)),
             ResultContainerSmall(
-                value: '${item!.cholesterol} mg/dL', label: 'Kolesterol'),
+                value: item!.cholesterol != null
+                    ? '${item!.cholesterol} mg/dL'
+                    : 'belum ada data',
+                label: 'Kolesterol'),
             ResultContainerSmall(
-                value: '${item!.bloodSugar} mg/dL', label: 'Gula Darah'),
+                value: item!.bloodSugar != null
+                    ? '${item!.bloodSugar} mg/dL'
+                    : 'belum ada data',
+                label: 'Gula Darah'),
           ],
         ),
         Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ResultContainerSmall(
-              value: (item!.weight! / pow(item!.height!, 2)).toStringAsFixed(2),
+              value: (item == null ||
+                      item!.weight == null ||
+                      item!.height == null)
+                  ? 'NaN'
+                  : (item!.weight! / pow(item!.height!, 2)).toStringAsFixed(2),
               label: 'Indeks Massa Tubuh (IMT)',
               textStyle: const TextStyle(
                   fontSize: 21,
@@ -73,37 +103,49 @@ class CheckupResultField extends StatelessWidget {
             ),
             const ImtDescription(),
             ResultContainerSmall(
-              value: item!.kek! ? 'Ya' : 'Tidak',
+              value: item!.kek != null
+                  ? (item!.kek! ? 'Ya' : 'Tidak')
+                  : 'belum ada data',
               label: 'Resiko KEK',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
-              value: item!.abdominalCircumference! > 20 ? 'Tinggi' : 'Normal',
+              value: item!.abdominalCircumference != null
+                  ? (item!.abdominalCircumference! > 20 ? 'Tinggi' : 'Normal')
+                  : 'belum ada data',
               label: 'Status LP',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
-              value: item!.tdd! > 20 ? 'Tinggi' : 'Normal',
+              value: item!.tdd != null
+                  ? (item!.tdd! > 20 ? 'Tinggi' : 'Normal')
+                  : 'belum ada data',
               label: 'Status Tensi',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
-              value: item!.hemoglobin! < 50 ? 'Ya' : 'Tidak',
+              value: item!.hemoglobin != null
+                  ? (item!.hemoglobin! < 50 ? 'Ya' : 'Tidak')
+                  : 'belum ada data',
               label: 'Status Anemia',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
-              value: item!.cholesterol! > 40 ? 'Tinggi' : 'Normal',
+              value: item!.cholesterol != null
+                  ? (item!.cholesterol! > 40 ? 'Tinggi' : 'Normal')
+                  : 'belum ada data',
               label: 'Status Kolesterol',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
-              value: item!.bloodSugar! > 20 ? 'Tinggi' : 'Normal',
+              value: item!.bloodSugar != null
+                  ? (item!.bloodSugar! > 20 ? 'Tinggi' : 'Normal')
+                  : 'belum ada data',
               label: 'Status Gula Darah',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,

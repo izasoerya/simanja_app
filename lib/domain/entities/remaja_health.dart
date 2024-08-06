@@ -6,7 +6,13 @@ class HealthPropertiesRemaja {
   double? height;
   double? armCircumference;
   double? abdominalCircumference;
-  String? get bloodPressure => '$tds/$tdd mmHg';
+  String? get bloodPressure {
+    if (tds == null || tdd == null) {
+      return 'nan mmHg';
+    }
+    return '$tds/$tdd mmHg';
+  }
+
   double? hemoglobin;
   double? cholesterol;
   double? bloodSugar;
@@ -89,16 +95,32 @@ class HealthPropertiesRemaja {
       uid: json['uid'],
       uidCheckup: json['checkup_uid'],
       uidRemaja: json['uid_remaja'],
-      weight: double.parse(json['weight'].toString()),
-      height: double.parse(json['height'].toString()),
-      armCircumference: double.parse(json['arm_radius'].toString()),
-      abdominalCircumference: double.parse(json['abdominal_radius'].toString()),
-      hemoglobin: double.parse(json['hemoglobin'].toString()),
-      cholesterol: double.parse(json['cholesterol'].toString()),
-      bloodSugar: double.parse(json['blood_sugar'].toString()),
-      tds: double.parse(json['tds'].toString()),
-      tdd: double.parse(json['tdd'].toString()),
-      checkedAt: DateTime.parse(json['checked_at']),
+      weight: json['weight'] != null
+          ? double.parse(json['weight'].toString())
+          : null,
+      height: json['height'] != null
+          ? double.parse(json['height'].toString())
+          : null,
+      armCircumference: json['arm_radius'] != null
+          ? double.parse(json['arm_radius'].toString())
+          : null,
+      abdominalCircumference: json['abdominal_radius'] != null
+          ? double.parse(json['abdominal_radius'].toString())
+          : null,
+      hemoglobin: json['hemoglobin'] != null
+          ? double.parse(json['hemoglobin'].toString())
+          : null,
+      cholesterol: json['cholesterol'] != null
+          ? double.parse(json['cholesterol'].toString())
+          : null,
+      bloodSugar: json['blood_sugar'] != null
+          ? double.parse(json['blood_sugar'].toString())
+          : null,
+      tds: json['tds'] != null ? double.parse(json['tds'].toString()) : null,
+      tdd: json['tdd'] != null ? double.parse(json['tdd'].toString()) : null,
+      checkedAt: json['checked_at'] != null
+          ? DateTime.parse(json['checked_at'])
+          : null,
       kek: json['status_kek'],
       anemia: json['status_anemia'],
       smoker: json['status_smoker'],
