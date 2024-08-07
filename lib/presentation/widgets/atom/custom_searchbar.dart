@@ -4,21 +4,23 @@ class CustomSearchBar extends StatelessWidget {
   final String label;
   final IconData icon;
 
-  const CustomSearchBar({required this.label, required this.icon});
+  const CustomSearchBar({super.key, required this.label, required this.icon});
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      height: 50,
       width: MediaQuery.of(context).size.width * 0.8,
-      padding: EdgeInsets.symmetric(horizontal: 16),
+      padding: const EdgeInsets.symmetric(horizontal: 15),
+      alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: Colors.grey[200],
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(5),
       ),
       child: Row(
         children: [
           Icon(icon),
-          SizedBox(width: 8),
+          const SizedBox(width: 8),
           Expanded(
             child: TextField(
               decoration: InputDecoration(

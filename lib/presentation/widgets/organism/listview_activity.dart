@@ -69,13 +69,15 @@ class ListviewActivity extends ConsumerWidget {
               },
             );
           } else if (item is EventKader) {
-            return ItemListviewImage(
-              title: item.topic,
-              uid: item.id,
-              descriptions: [item.date.toString().substring(0, 10)],
-              onTap: (data) {
-                // Handle EventKader tap
-              },
+            return SizedBox(
+              child: ItemListviewImage(
+                title: item.topic,
+                uid: item.id,
+                descriptions: [item.date.toString().substring(0, 10)],
+                onTap: (data) {
+                  // Handle EventKader tap
+                },
+              ),
             );
           } else {
             return const SizedBox.shrink();
