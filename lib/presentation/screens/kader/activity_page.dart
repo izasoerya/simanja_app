@@ -79,6 +79,7 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
                     }
                   },
                 ),
+                const Padding(padding: EdgeInsets.only(top: 50)),
               ],
             ),
           ),
