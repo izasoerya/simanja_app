@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_health.dart';
 
