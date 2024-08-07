@@ -29,6 +29,11 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
         await KaderEventService().getActiveEventList(kaderAccount.uid);
   }
 
+  Future<void> _refreshPage() async {
+    await _fetchData();
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
     return PopScope(
@@ -57,7 +62,7 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
                   ),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 10)),
-                const ScheduleCheckup(),
+                ScheduleCheckup(onRefresh: _refreshPage),
                 const Padding(padding: EdgeInsets.only(top: 30)),
                 FutureBuilder<void>(
                   future: _fetchData(),

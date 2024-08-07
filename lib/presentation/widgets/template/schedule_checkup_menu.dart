@@ -6,12 +6,14 @@ import 'package:simanja_app/domain/services/kadet_event_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/horizontal_datepicker.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
 class ScheduleCheckup extends ConsumerStatefulWidget {
-  const ScheduleCheckup({super.key});
+  final void Function() onRefresh;
+  const ScheduleCheckup({super.key, required this.onRefresh});
 
   @override
   ConsumerState<ScheduleCheckup> createState() => _ScheduleCheckupState();
@@ -119,10 +121,10 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
                 final response = await KaderCheckupService().scheduleCheckup(
                     _name, _date, ref.watch(userKaderProvider).uid);
                 if (response != null) {
-                  print(
-                      'Berhasil membuat jadwal ${response.uid} pada ${response.dateEvent} dengan judul ${response.checkupTitle}');
+                  showCustomSnackbar(context, 'Berhasil membuat checkup', 0);
+                  widget.onRefresh();
                 } else {
-                  print('Gagal membuat jadwal $_name pada $_date');
+                  showCustomSnackbar(context, 'Gagal membuat checkup', 2);
                 }
               } else {
                 EventKader event = EventKader(
@@ -139,10 +141,11 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
                     visitor: _attendant,
                     urlImage: _urlImage);
                 final response = await KaderEventService().createEvent(event);
-                if (response == null) {
-                  print('Gagal membuat jadwal $_name pada $_date');
+                if (response != null) {
+                  showCustomSnackbar(context, 'Berhasil membuat acara', 0);
+                  widget.onRefresh();
                 } else {
-                  print('Berhasil membuat jadwal $_name pada $_date');
+                  showCustomSnackbar(context, 'Gagal membuat acara', 2);
                 }
               }
             }),
