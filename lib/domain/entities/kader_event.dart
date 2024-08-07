@@ -1,6 +1,8 @@
 class EventKader {
   final String id;
   final String idKader;
+  final String name;
+  final String description;
   final String location;
   final DateTime date;
   final String theme;
@@ -14,6 +16,8 @@ class EventKader {
   EventKader({
     required this.id,
     required this.idKader,
+    required this.name,
+    required this.description,
     required this.location,
     required this.date,
     required this.theme,
@@ -28,6 +32,8 @@ class EventKader {
   EventKader copyWith({
     String? id,
     String? idKader,
+    String? name,
+    String? description,
     String? location,
     DateTime? date,
     String? theme,
@@ -41,6 +47,8 @@ class EventKader {
     return EventKader(
       id: id ?? this.id,
       idKader: idKader ?? this.idKader,
+      name: name ?? this.name,
+      description: description ?? this.description,
       location: location ?? this.location,
       date: date ?? this.date,
       theme: theme ?? this.theme,
@@ -57,6 +65,8 @@ class EventKader {
     return EventKader(
       id: json['uid'],
       idKader: json['uid_kader'],
+      name: json['name'],
+      description: json['description'],
       location: json['location'],
       date: DateTime.parse(json['date']),
       theme: json['theme'],
@@ -73,6 +83,8 @@ class EventKader {
     return {
       'uid': id,
       'uid_kader': idKader,
+      'name': name,
+      'description': description,
       'location': location,
       'date': date.toIso8601String(),
       'theme': theme,

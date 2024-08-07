@@ -128,6 +128,8 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
                 EventKader event = EventKader(
                     id: 'dummy',
                     idKader: ref.watch(userKaderProvider).uid,
+                    name: _name,
+                    description: _description,
                     location: _location,
                     date: _date,
                     theme: _theme,

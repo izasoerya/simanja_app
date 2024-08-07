@@ -19,7 +19,7 @@ class ListviewActivity extends ConsumerWidget {
 
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.8,
+      height: MediaQuery.of(context).size.height * 0.3,
       child: ListView.separated(
         itemCount: mergedItems.length,
         separatorBuilder: (context, index) => const Divider(height: 20),
@@ -71,9 +71,12 @@ class ListviewActivity extends ConsumerWidget {
           } else if (item is EventKader) {
             return SizedBox(
               child: ItemListviewImage(
-                title: item.topic,
+                title: item.name,
                 uid: item.id,
-                descriptions: [item.date.toString().substring(0, 10)],
+                descriptions: [
+                  item.description,
+                  '${item.topic} | ${item.date.toString().substring(0, 10)}',
+                ],
                 onTap: (data) {
                   // Handle EventKader tap
                 },
