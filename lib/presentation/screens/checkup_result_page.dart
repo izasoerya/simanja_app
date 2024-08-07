@@ -17,20 +17,22 @@ class CheckupResultPage extends StatelessWidget {
     return FutureBuilder(
       future: Future.wait([
         RemajaHealthService().getRemajaHealthbyUID(healthUID),
-        RemajaHealthService().getRemajaHealthbyUID(healthUID).then(
-              (healthData) =>
-                  RemajaAuthentication().getUserbyUID(healthData!.uidRemaja!),
-            ),
+        RemajaHealthService()
+            .getRemajaHealthbyUID(healthUID)
+            .then((healthData) {
+          print('uidremaja:${healthData!.uidRemaja}');
+          return RemajaAuthentication().getUserbyUID(healthData.uidRemaja!);
+        }),
       ]),
       builder: (context, AsyncSnapshot<List<dynamic>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
             child: CircularProgressIndicator(),
           );
-        }
-        if (snapshot.hasData) {
+        } else if (snapshot.hasData) {
           final HealthPropertiesRemaja healthData = snapshot.data![0];
           final UserRemaja userData = snapshot.data![1];
+          print(userData.name);
           return Container(
             width: MediaQuery.of(context).size.width * 0.9,
             margin: EdgeInsets.symmetric(

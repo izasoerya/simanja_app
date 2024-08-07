@@ -70,7 +70,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
           .select()
           .eq('checkup_uid', checkupUID)
           .eq('uid_remaja', remajaUID)
-          .eq('checked_at', date);
+          .eq('checked_at', DateTime.parse(date.toString().substring(0, 10)));
       if (response.isNotEmpty) {
         if (response.length == 1) {
           return HealthPropertiesRemaja.fromJSON(response.first);

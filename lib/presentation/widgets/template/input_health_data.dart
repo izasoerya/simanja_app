@@ -83,10 +83,10 @@ class _InputHealthDataState extends State<InputHealthData> {
               final updatedHealthData = healthData.copyWith(
                 uidCheckup: widget.checkup,
                 uidRemaja: remaja!.uid,
-                anemia: healthData.anemia ?? false,
-                kek: healthData.kek ?? false,
-                smoker: healthData.smoker ?? false,
-                tablet: healthData.tablet ?? false,
+                anemia: healthData.anemia,
+                kek: healthData.kek,
+                smoker: healthData.smoker,
+                tablet: healthData.tablet,
                 checkedAt: DateTime.now(),
               );
               final response = await RemajaHealthService().upsertRemajaHealth(

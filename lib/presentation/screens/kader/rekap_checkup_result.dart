@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
-import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/domain/services/remaja_heath_service.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_rekap_result.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_description.dart';
@@ -18,7 +16,6 @@ class RekapCheckupResult extends StatefulWidget {
 
 class _RekapCheckupResultState extends State<RekapCheckupResult> {
   List<HealthPropertiesRemaja?> data = [];
-  List<UserRemaja> users = [];
   bool isLoading = true;
 
   @override
@@ -30,39 +27,30 @@ class _RekapCheckupResultState extends State<RekapCheckupResult> {
   void _fetchFuture() async {
     data =
         (await RemajaHealthService().getListCheckupHealth(widget.checkupUID))!;
-    if (data.isEmpty) {
-      print('Data is empty');
-      setState(() {
-        isLoading = false;
-      });
-    } else {
-      for (var i = 0; i < data.length; i++) {
-        if (data[i] != null && data[i]!.uid != null) {
-          users.add((await RemajaAuthentication()
-              .getUserbyUID(data[i]!.uidRemaja!))!);
-        }
-      }
-      setState(() {
-        isLoading = false;
-      });
-    }
+    setState(() {
+      isLoading = false;
+    });
   }
 
   List<HealthPropertiesRemaja?> _filterHealthsByLabel(
       String label, List<HealthPropertiesRemaja?> data) {
     switch (label) {
       case 'Anemia':
-        return data.where((e) => e!.anemia == true).toList();
+        return data.where((e) => e != null && e.anemia == true).toList();
       case 'Beresiko KEK':
-        return data.where((e) => e!.kek == true).toList();
+        return data.where((e) => e != null && e.kek == true).toList();
       case 'Obesitas':
-        return data.where((e) => e!.weight! > 60).toList();
+        return data
+            .where((e) => e != null && e.weight != null && e.weight! > 60)
+            .toList();
       case 'Sangat Kurus':
-        return data.where((e) => e!.weight! < 20).toList();
+        return data
+            .where((e) => e != null && e.weight != null && e.weight! < 20)
+            .toList();
       case 'Merokok':
-        return data.where((e) => e!.smoker == true).toList();
+        return data.where((e) => e != null && e.smoker == true).toList();
       default:
-        return data;
+        return [];
     }
   }
 
@@ -91,9 +79,7 @@ class _RekapCheckupResultState extends State<RekapCheckupResult> {
                         width: MediaQuery.of(context).size.width * 0.9,
                         height: MediaQuery.of(context).size.height * 0.75,
                         child: RekapResultList(
-                            healths: filteredData,
-                            users: users,
-                            label: widget.label),
+                            healths: filteredData, label: widget.label),
                       ),
           ],
         ),

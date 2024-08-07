@@ -1,25 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/utils/enums.dart';
 import 'package:sizer/sizer.dart';
 
 class ItemListViewHealth extends StatelessWidget {
-  final UserRemaja user;
   final HealthPropertiesRemaja health;
   final String label;
   final void Function()? onTap;
   const ItemListViewHealth({
     super.key,
-    required this.user,
     required this.health,
     required this.label,
     this.onTap,
   });
 
   void _defaultOnTap() {
+    print(health.uid);
     router.push('/login-kader/result-health-remaja?healthUID=${health.uid}');
   }
 
@@ -95,58 +95,69 @@ class ItemListViewHealth extends StatelessWidget {
             width: 0.5,
           ),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(user.name,
-                    style: const TextStyle(
-                      fontSize: 12,
-                      fontWeight: FontWeight.bold,
+        child: FutureBuilder(
+            future: RemajaAuthentication().getUserbyUID(health.uidRemaja!),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const CircularProgressIndicator();
+              } else if (snapshot.hasData) {
+                final UserRemaja user = snapshot.data!;
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(user.name,
+                            style: const TextStyle(
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.start),
+                        Text(user.nik,
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.start),
+                        Text(
+                            '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.start),
+                        Text(
+                            user.bpjs ? 'Pengguna BPJS' : 'Bukan Pengguna BPJS',
+                            style: const TextStyle(
+                              fontSize: 10,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.start),
+                      ],
                     ),
-                    textAlign: TextAlign.start),
-                Text(user.nik,
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.normal,
-                    ),
-                    textAlign: TextAlign.start),
-                Text(
-                    '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.normal,
-                    ),
-                    textAlign: TextAlign.start),
-                Text(user.bpjs ? 'Pengguna BPJS' : 'Bukan Pengguna BPJS',
-                    style: const TextStyle(
-                      fontSize: 10,
-                      fontWeight: FontWeight.normal,
-                    ),
-                    textAlign: TextAlign.start),
-              ],
-            ),
-            Column(
-              children: [
-                Text(_getLabelText(label),
-                    style: const TextStyle(fontSize: 10)),
-                Text(_getHealthValue(label, health),
-                    style: TextStyle(
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold,
-                      color: const GlobalTheme().primaryColor,
-                    )),
-                Text(_getHealthStatus(label),
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: const GlobalTheme().secondaryColor,
-                    )),
-              ],
-            )
-          ],
-        ),
+                    Column(
+                      children: [
+                        Text(_getLabelText(label),
+                            style: const TextStyle(fontSize: 10)),
+                        Text(_getHealthValue(label, health),
+                            style: TextStyle(
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold,
+                              color: const GlobalTheme().primaryColor,
+                            )),
+                        Text(_getHealthStatus(label),
+                            style: TextStyle(
+                              fontSize: 12,
+                              color: const GlobalTheme().secondaryColor,
+                            )),
+                      ],
+                    )
+                  ],
+                );
+              }
+              return const Text('Data tidak ditemukan');
+            }),
       ),
     );
   }
