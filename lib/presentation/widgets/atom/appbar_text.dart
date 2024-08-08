@@ -58,6 +58,7 @@ class AppbarText extends ConsumerWidget {
                 maxLines: 1,
               );
             }
+            if (isKader) return Text(ref.watch(userKaderProvider).namePosyandu);
             return const Text('Tidak ada data');
           },
         ),
