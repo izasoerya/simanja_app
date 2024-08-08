@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/utils/default_account.dart';
 
 class AppbarText extends ConsumerWidget {
   final bool isKader;
@@ -28,37 +30,50 @@ class AppbarText extends ConsumerWidget {
           }(),
           style: TextStyle(
             color: const GlobalTheme().primaryColor,
-            fontSize: 20,
+            fontSize: 22,
             fontWeight: FontWeight.bold,
+            height: 1.2, // Adjust this value to change the vertical spacing
           ),
+          overflow: TextOverflow.visible,
+          maxLines: 2,
+        ),
+        FutureBuilder(
+          future: KaderAuthentication().getPosyanduName(remajaAccount.posyandu),
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const CircularProgressIndicator();
+            } else if (snapshot.hasData) {
+              return Text(
+                'Peserta Posyandu ${() {
+                  return isKader
+                      ? ref.watch(userKaderProvider).namePosyandu
+                      : snapshot.data;
+                }()}',
+                style: TextStyle(
+                  color: const GlobalTheme().secondaryColor,
+                  fontSize: 14,
+                  fontWeight: FontWeight.bold,
+                ),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              );
+            }
+            return const Text('Tidak ada data');
+          },
         ),
         Text(
-          'Peserta Posyandu ${() {
-            return isKader ? ref.watch(userKaderProvider).namePosyandu : 'T0D0';
-          }()}',
+          () {
+            return isKader
+                ? ref.watch(userKaderProvider).address
+                : ref.watch(userRemajaProvider).address;
+          }(),
           style: TextStyle(
             color: const GlobalTheme().secondaryColor,
             fontSize: 14,
-            fontWeight: FontWeight.bold,
+            fontWeight: FontWeight.normal,
           ),
-          overflow: TextOverflow.fade,
-        ),
-        SizedBox(
-          width: MediaQuery.of(context).size.width * 0.5,
-          child: Text(
-            () {
-              return isKader
-                  ? ref.watch(userKaderProvider).address
-                  : ref.watch(userRemajaProvider).address;
-            }(),
-            style: TextStyle(
-              color: const GlobalTheme().secondaryColor,
-              fontSize: 14,
-              fontWeight: FontWeight.normal,
-            ),
-            maxLines: 2,
-            overflow: TextOverflow.ellipsis,
-          ),
+          maxLines: 2,
+          overflow: TextOverflow.ellipsis,
         ),
       ],
     );

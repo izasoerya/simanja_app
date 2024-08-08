@@ -19,7 +19,9 @@ class AppbarContent extends StatelessWidget {
                 width: 100,
                 height: 100),
             const Padding(padding: EdgeInsets.only(left: 15)),
-            AppbarText(isKader: isKader),
+            Expanded(
+              child: AppbarText(isKader: isKader),
+            ),
           ],
         ),
         const SizedBox(height: 10),
