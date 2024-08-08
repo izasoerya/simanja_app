@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/services/kadet_event_service.dart';
-import 'package:simanja_app/presentation/widgets/template/edit_schedule_checkup.dart';
+import 'package:simanja_app/presentation/widgets/template/edit_schedule_event.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_description.dart';
 
 class EditDataActivityPage extends StatelessWidget {
@@ -28,7 +28,7 @@ class EditDataActivityPage extends StatelessWidget {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
                   } else if (snapshot.hasData) {
-                    return EditScheduleCheckup(event: snapshot.data!);
+                    return EditScheduleEvent(event: snapshot.data!);
                   }
                   return const Text('Error');
                 }),

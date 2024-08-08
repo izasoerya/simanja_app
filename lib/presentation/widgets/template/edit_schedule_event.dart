@@ -10,15 +10,15 @@ import 'package:simanja_app/presentation/widgets/atom/horizontal_datepicker.dart
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 
-class EditScheduleCheckup extends ConsumerStatefulWidget {
+class EditScheduleEvent extends ConsumerStatefulWidget {
   final EventKader event;
-  const EditScheduleCheckup({super.key, required this.event});
+  const EditScheduleEvent({super.key, required this.event});
 
   @override
-  ConsumerState<EditScheduleCheckup> createState() => _ScheduleCheckupState();
+  ConsumerState<EditScheduleEvent> createState() => _ScheduleCheckupState();
 }
 
-class _ScheduleCheckupState extends ConsumerState<EditScheduleCheckup> {
+class _ScheduleCheckupState extends ConsumerState<EditScheduleEvent> {
   DateTime? _date;
   _onDateChange(DateTime date) => _date = date;
 
