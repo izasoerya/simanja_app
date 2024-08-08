@@ -26,6 +26,9 @@ class _LayoutKaderState extends ConsumerState<LayoutKader> {
         case 2:
           router.push('/login-kader/activity-kader');
           break;
+        case 3:
+          router.push('/login-kader/management-kader');
+          break;
         case 4:
           router.push('/');
           break;

@@ -10,6 +10,7 @@ import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
 import 'package:simanja_app/presentation/screens/kader/list_remaja_checkup_page.dart';
+import 'package:simanja_app/presentation/screens/kader/management_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_checkup_result.dart';
@@ -78,6 +79,12 @@ final GoRouter router = GoRouter(
               path: 'activity-kader',
               builder: (BuildContext context, GoRouterState state) {
                 return const LayoutKader(child: ActivityPage());
+              },
+            ),
+            GoRoute(
+              path: 'management-kader',
+              builder: (BuildContext context, GoRouterState state) {
+                return const LayoutKader(child: ManagementPage());
               },
             ),
             GoRoute(

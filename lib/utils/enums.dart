@@ -13,3 +13,8 @@ enum TopicEvent {
   kekerasan,
   lainnya,
 }
+
+enum ManagementObject {
+  kas,
+  inventaris,
+}
