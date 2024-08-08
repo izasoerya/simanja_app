@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/kader_finance.dart';
 import 'package:simanja_app/domain/services/kader_finance_service.dart';
 import 'package:simanja_app/utils/default_account.dart';
 import 'package:simanja_app/utils/enums.dart';
@@ -16,6 +17,22 @@ class ManagementPage extends StatefulWidget {
 
 class _ManagementPageState extends State<ManagementPage> {
   ManagementObject _selectedObject = ManagementObject.kas;
+  late Future<List<FinanceKader>?> _financeFuture;
+
+  @override
+  void initState() {
+    super.initState();
+    _financeFuture = KaderFinanceService().getListFinance(kaderAccount.uid);
+  }
+
+  void _onObjectSelected(ManagementObject object) {
+    setState(() {
+      _selectedObject = object;
+      if (_selectedObject == ManagementObject.kas) {
+        _financeFuture = KaderFinanceService().getListFinance(kaderAccount.uid);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,23 +50,20 @@ class _ManagementPageState extends State<ManagementPage> {
             const TitleWPosyandu(title: 'KELOLA POSYANDU'),
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
             ImageBoxSelection(
-                onTap: (ManagementObject object) {
-                  setState(() => _selectedObject = object);
-                },
-                defaultValue: _selectedObject),
+              onTap: _onObjectSelected,
+              defaultValue: _selectedObject,
+            ),
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
             ...(_selectedObject == ManagementObject.kas
                 ? [
                     FutureBuilder(
-                      future: KaderFinanceService()
-                          .getListFinance(kaderAccount.uid),
+                      future: _financeFuture,
                       builder: (context, snapshot) {
-                        final data = snapshot.data!;
                         if (snapshot.connectionState ==
                             ConnectionState.waiting) {
-                          return const Center(
-                              child: CircularProgressIndicator());
+                          return const CircularProgressIndicator();
                         } else if (snapshot.hasData) {
+                          final data = snapshot.data!;
                           return Column(
                             children: [
                               TextfieldAndButton(value: data.first.value),
