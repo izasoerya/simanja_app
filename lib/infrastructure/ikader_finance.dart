@@ -1,11 +1,24 @@
 import 'package:simanja_app/domain/entities/kader_finance.dart';
 import 'package:simanja_app/domain/repositories/kader_finance_repo.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
+import 'package:uuid/uuid.dart';
 
 class KaderFinanceImplementation implements KaderFinanceRepo {
+  final Uuid _uuid = const Uuid();
   @override
-  Future<void> createFinance(FinanceKader finance) {
-    // TODO: implement createFinance
-    throw UnimplementedError();
+  Future<FinanceKader?> createFinance(FinanceKader finance) async {
+    finance = finance.copyWith(uid: _uuid.v4());
+    try {
+      final response = await Supabase.instance.client
+          .from('kader_finance')
+          .insert(finance.toJSON())
+          .select()
+          .single();
+      return FinanceKader.fromJSON(response);
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
   }
 
   @override
@@ -15,19 +28,27 @@ class KaderFinanceImplementation implements KaderFinanceRepo {
   }
 
   @override
-  Future<FinanceKader> getFinanceById(String id) {
+  Future<FinanceKader?> getFinanceById(String id) {
     // TODO: implement getFinanceById
     throw UnimplementedError();
   }
 
   @override
-  Future<List<FinanceKader>> getFinances() {
-    // TODO: implement getFinances
-    throw UnimplementedError();
+  Future<List<FinanceKader>?> getFinances(String uidPosyandu) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('kader_finance')
+          .select()
+          .eq('posyandu_uid', uidPosyandu);
+      return response.map((e) => FinanceKader.fromJSON(e)).toList();
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
   }
 
   @override
-  Future<void> updateFinance(FinanceKader finance) {
+  Future<FinanceKader?> updateFinance(FinanceKader finance) {
     // TODO: implement updateFinance
     throw UnimplementedError();
   }
