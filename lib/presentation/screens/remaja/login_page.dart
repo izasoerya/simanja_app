@@ -16,7 +16,7 @@ class LoginRemajaPage extends ConsumerStatefulWidget {
 
   void _pushToRegister() => router.go('/register-remaja');
   void _pushToForgotPassword() => router.go('/forgot-password');
-  void _pushToDashboard() => router.go('/login-remaja/dashboard-remaja');
+  void _pushToDashboard() => router.replace('/login-remaja/dashboard-remaja');
 
   @override
   ConsumerState<LoginRemajaPage> createState() => _LoginRemajaPageState();
