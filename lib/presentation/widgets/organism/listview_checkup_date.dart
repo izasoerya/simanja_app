@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_icon.dart';
-import 'package:simanja_app/utils/default_account.dart';
 
 class ListviewCheckupDate extends StatelessWidget {
   final List<KaderCheckup>? itemsCheckup;
@@ -50,7 +49,7 @@ class ListviewCheckupDate extends StatelessWidget {
         if (index < filteredCheckupItems.length) {
           return ItemListviewIcon(
             title: filteredCheckupItems[index].checkupTitle,
-            location: remajaAccount.posyandu,
+            location: 'Tanggal Checkup',
             date: filteredCheckupItems[index].dateEvent,
           );
         } else {

@@ -12,11 +12,6 @@ class ScheduleList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    if ((itemsCheckup == null || itemsCheckup!.isEmpty) &&
-        (itemsEvent == null || itemsEvent!.isEmpty)) {
-      return const Center(child: Text('No data'));
-    }
-
     return Column(
       children: [
         Container(
@@ -61,7 +56,14 @@ class ScheduleList extends StatelessWidget {
                 ListviewCheckupDate(
                   itemsCheckup: itemsCheckup,
                   itemsEvent: itemsEvent,
-                ),
+                )
+              else
+                const Text('Belum Mendaftar Acara',
+                    style: TextStyle(
+                      color: Colors.black,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w600,
+                    )),
             ],
           ),
         ),
