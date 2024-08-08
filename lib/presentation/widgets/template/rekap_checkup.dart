@@ -11,9 +11,16 @@ class RekapCheckup extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double baseHeight = 75.0;
+    double maxHeight = MediaQuery.of(context).size.height * 0.2;
+    double calculatedHeight = baseHeight * checkupList.length;
+
+    double finalHeight =
+        calculatedHeight > maxHeight ? maxHeight : calculatedHeight;
+
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.2,
+      height: finalHeight,
       child: ListviewCheckup(checkupList: sortedData),
     );
   }

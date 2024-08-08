@@ -18,9 +18,16 @@ class ListviewActivity extends ConsumerWidget {
       ...?itemsEvent,
     ];
 
+    double baseHeight = 75.0;
+    double maxHeight = MediaQuery.of(context).size.height * 0.3;
+    double calculatedHeight = baseHeight * mergedItems.length;
+
+    double finalHeight =
+        calculatedHeight > maxHeight ? maxHeight : calculatedHeight;
+
     return SizedBox(
       width: MediaQuery.of(context).size.width * 0.8,
-      height: MediaQuery.of(context).size.height * 0.3,
+      height: finalHeight,
       child: ListView.separated(
         itemCount: mergedItems.length,
         separatorBuilder: (context, index) => const Divider(height: 20),

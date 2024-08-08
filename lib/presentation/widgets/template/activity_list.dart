@@ -7,6 +7,8 @@ class ActivityList extends StatelessWidget {
   final List<EventKader>? items;
   const ActivityList({super.key, this.items});
 
+  final Widget isEmpty = const Text('Tidak ada kegiatan posyandu');
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -15,18 +17,14 @@ class ActivityList extends StatelessWidget {
         children: [
           const CustomSearchBar(label: 'Judul Kegiatan', icon: Icons.search),
           const Padding(padding: EdgeInsets.only(top: 20)),
-          items != null
-              ? Row(
-                  children: [
-                    SizedBox(
-                      height: MediaQuery.of(context).size.height * 0.3,
-                      child: ListviewActivity(
-                        itemsEvent: items,
-                      ),
-                    ),
-                  ],
-                )
-              : const Text('Tidak ada kegiatan posyandu')
+          if (items == null || items!.isEmpty)
+            isEmpty
+          else
+            Center(
+              child: ListviewActivity(
+                itemsEvent: items,
+              ),
+            )
         ],
       ),
     );
