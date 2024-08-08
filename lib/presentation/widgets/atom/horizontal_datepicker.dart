@@ -2,8 +2,10 @@ import 'package:date_picker_timeline/date_picker_timeline.dart';
 import 'package:flutter/material.dart';
 
 class HorizontalDatePicker extends StatelessWidget {
+  final DateTime? startDate;
   final void Function(DateTime) onDateChange;
-  const HorizontalDatePicker({super.key, required this.onDateChange});
+  const HorizontalDatePicker(
+      {super.key, required this.onDateChange, this.startDate});
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,7 @@ class HorizontalDatePicker extends StatelessWidget {
           child: SizedBox(
             width: MediaQuery.of(context).size.width * 0.9,
             child: DatePicker(
-              DateTime.now(),
+              startDate ?? DateTime.now(),
               height: 90,
               initialSelectedDate: DateTime.now(),
               selectionColor: const Color.fromRGBO(203, 101, 53, 1),

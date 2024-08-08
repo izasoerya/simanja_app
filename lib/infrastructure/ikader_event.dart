@@ -32,9 +32,18 @@ class KaderEventImplementation implements KaderEventRepo {
   }
 
   @override
-  Future<EventKader> getKaderEventById(String id) {
-    // TODO: implement getKaderEventById
-    throw UnimplementedError();
+  Future<EventKader?> getKaderEventById(String id) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('kader_activity')
+          .select()
+          .eq('uid', id)
+          .single();
+      return EventKader.fromJSON(response);
+    } catch (e) {
+      print('e: $e');
+      return null;
+    }
   }
 
   @override
@@ -55,8 +64,18 @@ class KaderEventImplementation implements KaderEventRepo {
   }
 
   @override
-  Future<void> updateKaderEvent(EventKader kaderEvent) {
-    // TODO: implement updateKaderEvent
-    throw UnimplementedError();
+  Future<EventKader?> updateKaderEvent(EventKader kaderEvent) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('kader_activity')
+          .update(kaderEvent.toJSON())
+          .eq('uid', kaderEvent.id)
+          .select('*')
+          .single();
+      return EventKader.fromJSON(response);
+    } catch (e) {
+      print('e: $e');
+      return null;
+    }
   }
 }

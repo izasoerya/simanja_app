@@ -8,13 +8,21 @@ class KaderEventService {
     return response;
   }
 
-  Future<List<EventKader>> getActiveEventList(String idKader) async {
-    final response = await KaderEventImplementation().getKaderEvents(idKader);
-    return response;
+  Future<EventKader?> getEvent(String idEvent) async {
+    final response =
+        await KaderEventImplementation().getKaderEventById(idEvent);
+    if (response != null) return response;
+    return null;
   }
 
-  Future<void> updateEvent() async {
-    // Update event
+  Future<List<EventKader>> getActiveEventList(String idKader) async {
+    final response = await KaderEventImplementation().getKaderEvents(idKader);
+    return response.where((element) => element.isFinish == false).toList();
+  }
+
+  Future<EventKader?> updateEvent(EventKader event) async {
+    final response = await KaderEventImplementation().updateKaderEvent(event);
+    return response;
   }
 
   Future<void> deleteEvent() async {

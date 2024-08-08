@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_image.dart';
 
 class ListviewActivity extends ConsumerWidget {
@@ -77,8 +78,9 @@ class ListviewActivity extends ConsumerWidget {
                   item.description,
                   '${item.topic} | ${item.date.toString().substring(0, 10)}',
                 ],
-                onTap: (data) {
-                  // Handle EventKader tap
+                onTap: (_) {
+                  router.push(
+                      '/login-kader/edit-data-activity?activityUID=${item.id}');
                 },
               ),
             );
