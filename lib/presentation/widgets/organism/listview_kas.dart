@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:simanja_app/domain/entities/kader_finance.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_kas.dart';
 import 'package:sizer/sizer.dart';
 
 class ListviewKas extends StatelessWidget {
-  const ListviewKas({super.key});
+  final List<FinanceKader> finances;
+  const ListviewKas({super.key, required this.finances});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +24,17 @@ class ListviewKas extends StatelessWidget {
             width: double.infinity,
             height: 2,
             color: Colors.black87,
-            margin: EdgeInsets.only(bottom: 3.h)),
+            margin: EdgeInsets.only(bottom: 2.h, top: 0.5.h)),
         SizedBox(
           height: MediaQuery.of(context).size.height * 0.4,
           child: ListView.separated(
-              itemCount: 5,
+              itemCount: finances.length,
               separatorBuilder: (context, index) => const Divider(),
               itemBuilder: (context, index) {
                 return Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    ItemListViewKas(),
+                    ItemListViewKas(finance: finances[index]),
                     IconButton(
                         onPressed: () {},
                         icon: const Icon(Icons.delete_rounded),

@@ -1,9 +1,16 @@
+import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class TextfieldAndButton extends StatelessWidget {
   final String value;
   const TextfieldAndButton({super.key, this.value = '0,00'});
+
+  String formatToIDR(int value) {
+    final formatter =
+        NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 2);
+    return formatter.format(value);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +40,7 @@ class TextfieldAndButton extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: const GlobalTheme().secondaryColor,
                       )),
-                  Text('Rp $value',
+                  Text(formatToIDR(int.parse(value)),
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,

@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/services/kader_finance_service.dart';
+import 'package:simanja_app/utils/default_account.dart';
 import 'package:simanja_app/utils/enums.dart';
 import 'package:simanja_app/presentation/widgets/organism/image_box_selection.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_kas.dart';
@@ -38,12 +40,32 @@ class _ManagementPageState extends State<ManagementPage> {
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
             ...(_selectedObject == ManagementObject.kas
                 ? [
-                    TextfieldAndButton(),
-                    Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
-                    ListviewKas(),
+                    FutureBuilder(
+                      future: KaderFinanceService()
+                          .getListFinance(kaderAccount.uid),
+                      builder: (context, snapshot) {
+                        final data = snapshot.data!;
+                        if (snapshot.connectionState ==
+                            ConnectionState.waiting) {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        } else if (snapshot.hasData) {
+                          return Column(
+                            children: [
+                              TextfieldAndButton(value: data.first.value),
+                              Padding(
+                                  padding: EdgeInsets.only(
+                                      top: screenHeight * 0.03)),
+                              ListviewKas(finances: data),
+                            ],
+                          );
+                        }
+                        return const Text('Data tidak ditemukan');
+                      },
+                    ),
                   ]
                 : [
-                    Text(''),
+                    const Text(''),
                   ]),
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
           ],
