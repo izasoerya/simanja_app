@@ -4,12 +4,14 @@ import 'package:simanja_app/presentation/layout/kader_layout.dart';
 import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
 import 'package:simanja_app/presentation/screens/checkup_result_page.dart';
+import 'package:simanja_app/presentation/screens/event_result_page.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
 import 'package:simanja_app/presentation/screens/kader/list_remaja_checkup_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
+import 'package:simanja_app/presentation/screens/kader/rekap_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_checkup_result.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
@@ -130,9 +132,28 @@ final GoRouter router = GoRouter(
               path: 'edit-data-activity',
               builder: (BuildContext context, GoRouterState state) {
                 return SubPageLayout(
-                  appBarTitle: 'INPUT CHECKUP',
+                  appBarTitle: 'EDIT DATA KEGIATAN',
                   child: EditDataActivityPage(
                       activityUID: state.uri.queryParameters['activityUID']!),
+                );
+              },
+            ),
+            GoRoute(
+              path: 'list-data-activity',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SubPageLayout(
+                  appBarTitle: 'LIST KEGIATAN DAN CHECKUP',
+                  child: RekapActivityPage(),
+                );
+              },
+            ),
+            GoRoute(
+              path: 'result-data-activity',
+              builder: (BuildContext context, GoRouterState state) {
+                return SubPageLayout(
+                  appBarTitle: 'KEGIATAN POSYANDU',
+                  child: EventResultPage(
+                      eventUID: state.uri.queryParameters['eventUID']!),
                 );
               },
             ),

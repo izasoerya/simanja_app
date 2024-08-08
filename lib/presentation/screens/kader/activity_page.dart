@@ -50,15 +50,9 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
                 const Padding(padding: EdgeInsets.only(top: 30)),
                 Container(
                   padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: const Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TemplateTitle(
-                        text: 'Jadwalkan Posyandu',
-                        fontSize: 18,
-                      ),
-                      Icon(Icons.history, size: 30),
-                    ],
+                  child: const TemplateTitle(
+                    text: 'Jadwalkan Acara',
+                    fontSize: 20,
                   ),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 10)),

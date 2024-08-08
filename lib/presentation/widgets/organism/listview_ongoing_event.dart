@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_activity.dart';
 
@@ -16,15 +17,19 @@ class OngoingEvent extends StatelessWidget {
         Container(
           alignment: Alignment.centerLeft,
           padding: const EdgeInsets.symmetric(horizontal: 20),
-          child: const Row(
+          child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              TemplateTitle(text: 'Acara Sedang Berlangsung', fontSize: 18),
-              Icon(Icons.history, size: 30),
+              const TemplateTitle(text: 'Sedang Berlangsung', fontSize: 18),
+              IconButton(
+                icon: const Icon(Icons.history_sharp),
+                iconSize: 30,
+                onPressed: () => router.push('/login-kader/list-data-activity'),
+              ),
             ],
           ),
         ),
-        const Padding(padding: EdgeInsets.only(top: 15)),
+        const Padding(padding: EdgeInsets.only(top: 10)),
         ListviewActivity(
           itemsCheckup: itemsCheckup,
           itemsEvent: itemsEvent,
