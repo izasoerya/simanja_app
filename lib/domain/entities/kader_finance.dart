@@ -43,9 +43,9 @@ class FinanceKader {
       uidPosyandu: map['posyandu_uid'],
       value: map['value'],
       description: map['description'],
-      date: DateTime.parse(map['date']),
-      isDeposit: map['isDeposit'],
-      total: map['total'],
+      date: DateTime.parse(map['created_at']),
+      isDeposit: map['is_deposit'],
+      total: map['total_kas'],
     );
   }
 
@@ -55,9 +55,9 @@ class FinanceKader {
       'posyandu_uid': uidPosyandu,
       'value': value,
       'description': description,
-      'date': date.toIso8601String().substring(0, 10),
-      'isDeposit': isDeposit,
-      'total': total,
+      'created_at': date.toIso8601String().substring(0, 10),
+      'is_deposit': isDeposit,
+      'total_kas': total,
     };
   }
 }
