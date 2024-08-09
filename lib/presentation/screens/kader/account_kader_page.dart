@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/router/router.dart';
+import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
+import 'package:simanja_app/presentation/widgets/template/detail_account.dart';
 import 'package:simanja_app/presentation/widgets/template/profil_picture.dart';
+import 'package:simanja_app/utils/default_account.dart';
 
 class AccountKaderPage extends StatelessWidget {
   const AccountKaderPage({super.key});
@@ -15,7 +19,14 @@ class AccountKaderPage extends StatelessWidget {
       alignment: Alignment.topCenter,
       child: Column(
         children: [
-          ProfilPicture(),
+          Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
+          ProfilPicture(kader: kaderAccount),
+          SizedBox(height: screenHeight * 0.02),
+          SizedBox(
+              width: MediaQuery.of(context).size.width * 0.75,
+              child: DetailAccount(kader: kaderAccount)),
+          SizedBox(height: screenHeight * 0.08),
+          SubmitButton(text: 'Keluar Akun', onClick: () => router.go('/')),
         ],
       ),
     );

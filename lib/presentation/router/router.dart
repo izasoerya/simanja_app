@@ -5,6 +5,7 @@ import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
 import 'package:simanja_app/presentation/screens/checkup_result_page.dart';
 import 'package:simanja_app/presentation/screens/event_result_page.dart';
+import 'package:simanja_app/presentation/screens/kader/account_kader_page.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
 import 'package:simanja_app/presentation/screens/kader/create_inventory_page.dart';
@@ -138,7 +139,7 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'account-kader',
               builder: (BuildContext context, GoRouterState state) {
-                return LayoutKader(child: Placeholder());
+                return LayoutKader(child: AccountKaderPage());
               },
             ),
             GoRoute(
