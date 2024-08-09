@@ -15,7 +15,7 @@ class AccountKaderPage extends StatelessWidget {
 
     return Container(
       width: screenWidth,
-      margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.025),
+      margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
       alignment: Alignment.topCenter,
       child: Column(
         children: [

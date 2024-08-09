@@ -21,7 +21,7 @@ class ProfilPicture extends StatelessWidget {
       ),
       alignment: Alignment.topCenter,
       child: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           const Text(
             'PROFIL',
