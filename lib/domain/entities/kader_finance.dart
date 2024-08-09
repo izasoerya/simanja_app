@@ -6,6 +6,7 @@ class FinanceKader {
   final DateTime date;
   final bool isDeposit;
   final String total;
+  final String source;
 
   FinanceKader({
     required this.isDeposit,
@@ -15,6 +16,7 @@ class FinanceKader {
     required this.date,
     required this.uid,
     required this.total,
+    required this.source,
   });
 
   FinanceKader copyWith({
@@ -25,6 +27,7 @@ class FinanceKader {
     DateTime? date,
     bool? isDeposit,
     String? total,
+    String? source,
   }) {
     return FinanceKader(
       uid: uid ?? this.uid,
@@ -34,6 +37,7 @@ class FinanceKader {
       date: date ?? this.date,
       isDeposit: isDeposit ?? this.isDeposit,
       total: total ?? this.total,
+      source: source ?? this.source,
     );
   }
 
@@ -46,6 +50,7 @@ class FinanceKader {
       date: DateTime.parse(map['created_at']),
       isDeposit: map['is_deposit'],
       total: map['total_kas'],
+      source: map['source'],
     );
   }
 
@@ -58,6 +63,7 @@ class FinanceKader {
       'created_at': date.toIso8601String().substring(0, 10),
       'is_deposit': isDeposit,
       'total_kas': total,
+      'source': source,
     };
   }
 }
