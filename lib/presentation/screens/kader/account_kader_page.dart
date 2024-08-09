@@ -25,7 +25,7 @@ class AccountKaderPage extends StatelessWidget {
           SizedBox(
               width: MediaQuery.of(context).size.width * 0.75,
               child: DetailAccount(kader: kaderAccount)),
-          SizedBox(height: screenHeight * 0.08),
+          SizedBox(height: screenHeight * 0.05),
           SubmitButton(text: 'Keluar Akun', onClick: () => router.go('/')),
         ],
       ),

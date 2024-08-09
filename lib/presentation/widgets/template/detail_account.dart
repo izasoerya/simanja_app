@@ -36,8 +36,10 @@ class DetailAccount extends StatelessWidget {
         TextSpaceAround(label: 'Email', data: kader!.email),
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TextSpaceAround(
-            label: 'Alamat',
+            label: 'Tanggal Lahir',
             data: kader!.birthDate.toString().substring(0, 10)),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+        TextSpaceAround(label: 'Alamat', data: kader!.address),
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
       ],
     );

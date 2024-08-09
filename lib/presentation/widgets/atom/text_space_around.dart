@@ -18,13 +18,19 @@ class TextSpaceAround extends StatelessWidget {
             fontSize: 16,
             fontWeight: FontWeight.bold,
           ),
+          overflow: TextOverflow.visible,
         ),
-        Text(
-          data,
-          style: TextStyle(
-            color: const GlobalTheme().primaryColor,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
+        Container(
+          width: MediaQuery.of(context).size.width * 0.4,
+          alignment: Alignment.centerRight,
+          child: Text(
+            data,
+            style: TextStyle(
+              color: const GlobalTheme().primaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.bold,
+            ),
+            overflow: TextOverflow.visible,
           ),
         ),
       ],
