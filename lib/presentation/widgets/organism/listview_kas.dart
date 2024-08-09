@@ -1,13 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simanja_app/domain/entities/kader_finance.dart';
+import 'package:simanja_app/domain/services/kader_finance_service.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_kas.dart';
 import 'package:sizer/sizer.dart';
 
 class ListviewKas extends StatelessWidget {
+  final void Function()? onRefresh;
   final List<FinanceKader> finances;
-  const ListviewKas({super.key, required this.finances});
+  const ListviewKas({super.key, required this.finances, this.onRefresh});
 
   @override
   Widget build(BuildContext context) {
@@ -36,7 +39,12 @@ class ListviewKas extends StatelessWidget {
                   children: [
                     ItemListViewKas(finance: finances[index]),
                     IconButton(
-                        onPressed: () {},
+                        onPressed: () async {
+                          await KaderFinanceService()
+                              .deleteFinance(finances[index]);
+                          showCustomSnackbar(context, 'Berhasil Menghapus', 0);
+                          onRefresh!();
+                        },
                         icon: const Icon(Icons.delete_rounded),
                         iconSize: MediaQuery.of(context).size.width * 0.08,
                         color: Colors.grey),

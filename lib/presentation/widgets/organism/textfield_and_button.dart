@@ -1,12 +1,20 @@
 import 'package:intl/intl.dart';
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/entities/kader_finance.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
-class TextfieldAndButton extends StatelessWidget {
-  final String value;
-  const TextfieldAndButton({super.key, this.value = '0,00'});
+class TextfieldAndButton extends StatefulWidget {
+  final void Function()? onRefresh;
+  final List<FinanceKader> finances;
+  const TextfieldAndButton({super.key, required this.finances, this.onRefresh});
 
+  @override
+  State<TextfieldAndButton> createState() => _TextfieldAndButtonState();
+}
+
+class _TextfieldAndButtonState extends State<TextfieldAndButton> {
+  int _total = 0;
   String formatToIDR(int value) {
     final formatter =
         NumberFormat.currency(locale: 'id_ID', symbol: 'Rp ', decimalDigits: 2);
@@ -15,6 +23,14 @@ class TextfieldAndButton extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    for (var e in widget.finances) {
+      if (e.isDeposit) {
+        _total += int.parse(e.value);
+      } else {
+        _total -= int.parse(e.value);
+      }
+    }
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -41,7 +57,7 @@ class TextfieldAndButton extends StatelessWidget {
                         fontWeight: FontWeight.bold,
                         color: const GlobalTheme().secondaryColor,
                       )),
-                  Text(formatToIDR(int.parse(value)),
+                  Text(formatToIDR(int.parse(_total.toString())),
                       style: TextStyle(
                           fontSize: 22,
                           fontWeight: FontWeight.bold,
@@ -50,7 +66,10 @@ class TextfieldAndButton extends StatelessWidget {
               ),
             ),
             IconButton(
-                onPressed: () => router.push('/login-kader/create-mutation'),
+                onPressed: () {
+                  router.push('/login-kader/create-mutation');
+                  widget.onRefresh!();
+                },
                 icon: const Icon(Icons.add_circle_rounded),
                 iconSize: MediaQuery.of(context).size.width * 0.15,
                 color: const GlobalTheme().secondaryColor),

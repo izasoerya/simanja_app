@@ -34,6 +34,14 @@ class _ManagementPageState extends State<ManagementPage> {
     });
   }
 
+  Future<void> _refreshFinanceList() async {
+    final newFinanceList =
+        await KaderFinanceService().getListFinance(kaderAccount.uid);
+    setState(() {
+      _financeFuture = Future.value(newFinanceList);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -67,7 +75,7 @@ class _ManagementPageState extends State<ManagementPage> {
                           if (data == null || data.isEmpty) {
                             return Column(
                               children: [
-                                const TextfieldAndButton(value: '0'),
+                                const TextfieldAndButton(finances: []),
                                 Padding(
                                     padding: EdgeInsets.only(
                                         top: screenHeight * 0.03)),
@@ -79,11 +87,16 @@ class _ManagementPageState extends State<ManagementPage> {
                               (a, b) => b.idIncrement.compareTo(a.idIncrement));
                           return Column(
                             children: [
-                              TextfieldAndButton(value: data.first.total),
+                              TextfieldAndButton(
+                                  finances: data,
+                                  onRefresh: _refreshFinanceList),
                               Padding(
                                   padding: EdgeInsets.only(
                                       top: screenHeight * 0.03)),
-                              ListviewKas(finances: data),
+                              ListviewKas(
+                                finances: data,
+                                onRefresh: _refreshFinanceList,
+                              ),
                             ],
                           );
                         }
