@@ -22,9 +22,15 @@ class KaderFinanceImplementation implements KaderFinanceRepo {
   }
 
   @override
-  Future<void> deleteFinance(FinanceKader finance) {
-    // TODO: implement deleteFinance
-    throw UnimplementedError();
+  Future<void> deleteFinance(FinanceKader finance) async {
+    try {
+      await Supabase.instance.client
+          .from('kader_finance')
+          .delete()
+          .eq('uid', finance.uid);
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 
   @override

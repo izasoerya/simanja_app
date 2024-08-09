@@ -25,4 +25,8 @@ class KaderFinanceService {
     response.sort((a, b) => b.idIncrement.compareTo(a.idIncrement));
     return response.first;
   }
+
+  Future<void> deleteFinance(FinanceKader finance) async {
+    await KaderFinanceImplementation().deleteFinance(finance);
+  }
 }
