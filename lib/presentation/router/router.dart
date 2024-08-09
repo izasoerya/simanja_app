@@ -7,6 +7,7 @@ import 'package:simanja_app/presentation/screens/checkup_result_page.dart';
 import 'package:simanja_app/presentation/screens/event_result_page.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
+import 'package:simanja_app/presentation/screens/kader/create_inventory_page.dart';
 import 'package:simanja_app/presentation/screens/kader/create_mutation_page.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
@@ -181,6 +182,15 @@ final GoRouter router = GoRouter(
                 return const SubPageLayout(
                   appBarTitle: 'BUAT MUTASI KAS',
                   child: CreateMutationPage(),
+                );
+              },
+            ),
+            GoRoute(
+              path: 'create-inventory',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SubPageLayout(
+                  appBarTitle: 'TAMBAH ITEM INVENTARISASI',
+                  child: CreateInventoryPage(),
                 );
               },
             ),

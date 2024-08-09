@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_finance.dart';
+import 'package:simanja_app/domain/entities/kader_inventory.dart';
 import 'package:simanja_app/domain/services/kader_finance_service.dart';
+import 'package:simanja_app/domain/services/kader_inventory_service.dart';
+import 'package:simanja_app/presentation/widgets/organism/listview_inventory.dart';
 import 'package:simanja_app/utils/default_account.dart';
 import 'package:simanja_app/utils/enums.dart';
 import 'package:simanja_app/presentation/widgets/organism/image_box_selection.dart';
@@ -18,11 +21,14 @@ class ManagementPage extends StatefulWidget {
 class _ManagementPageState extends State<ManagementPage> {
   ManagementObject _selectedObject = ManagementObject.kas;
   late Future<List<FinanceKader>?> _financeFuture;
+  late Future<List<KaderInventory>?> _inventoryFuture;
 
   @override
   void initState() {
     super.initState();
     _financeFuture = KaderFinanceService().getListFinance(kaderAccount.uid);
+    _inventoryFuture =
+        KaderInventoryService().getListInventory(kaderAccount.uid);
   }
 
   void _onObjectSelected(ManagementObject object) {
@@ -30,6 +36,9 @@ class _ManagementPageState extends State<ManagementPage> {
       _selectedObject = object;
       if (_selectedObject == ManagementObject.kas) {
         _financeFuture = KaderFinanceService().getListFinance(kaderAccount.uid);
+      } else {
+        _inventoryFuture =
+            KaderInventoryService().getListInventory(kaderAccount.uid);
       }
     });
   }
@@ -37,9 +46,13 @@ class _ManagementPageState extends State<ManagementPage> {
   Future<void> _refreshFinanceList() async {
     final newFinanceList =
         await KaderFinanceService().getListFinance(kaderAccount.uid);
-    setState(() {
-      _financeFuture = Future.value(newFinanceList);
-    });
+    setState(() => _financeFuture = Future.value(newFinanceList));
+  }
+
+  Future<void> _refreshInventoryList() async {
+    final newInventoryList =
+        await KaderInventoryService().getListInventory(kaderAccount.uid);
+    setState(() => _inventoryFuture = Future.value(newInventoryList));
   }
 
   @override
@@ -62,7 +75,7 @@ class _ManagementPageState extends State<ManagementPage> {
               defaultValue: _selectedObject,
             ),
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
-            ...(_selectedObject == ManagementObject.kas
+            ..._selectedObject == ManagementObject.kas
                 ? [
                     FutureBuilder(
                       future: _financeFuture,
@@ -105,8 +118,19 @@ class _ManagementPageState extends State<ManagementPage> {
                     ),
                   ]
                 : [
-                    const Text(''),
-                  ]),
+                    FutureBuilder(
+                        future: _inventoryFuture,
+                        builder: (context, snapshot) {
+                          if (snapshot.connectionState ==
+                              ConnectionState.waiting) {
+                            return const CircularProgressIndicator();
+                          } else if (snapshot.hasData) {
+                            return ListviewInventory(
+                                inventories: snapshot.data);
+                          }
+                          return const Text('Belum ada Inventori');
+                        }),
+                  ],
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
           ],
         ),
