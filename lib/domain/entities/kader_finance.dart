@@ -1,6 +1,7 @@
 class FinanceKader {
   final String uid;
   final String uidPosyandu;
+  final int idIncrement;
   final String value;
   final String description;
   final DateTime date;
@@ -11,6 +12,7 @@ class FinanceKader {
   FinanceKader({
     required this.isDeposit,
     required this.uidPosyandu,
+    required this.idIncrement,
     required this.value,
     required this.description,
     required this.date,
@@ -22,6 +24,7 @@ class FinanceKader {
   FinanceKader copyWith({
     String? uid,
     String? uidPosyandu,
+    int? idIncrement,
     String? value,
     String? description,
     DateTime? date,
@@ -32,6 +35,7 @@ class FinanceKader {
     return FinanceKader(
       uid: uid ?? this.uid,
       uidPosyandu: uidPosyandu ?? this.uidPosyandu,
+      idIncrement: idIncrement ?? this.idIncrement,
       value: value ?? this.value,
       description: description ?? this.description,
       date: date ?? this.date,
@@ -45,9 +49,10 @@ class FinanceKader {
     return FinanceKader(
       uid: map['uid'],
       uidPosyandu: map['posyandu_uid'],
+      idIncrement: map['id_increment'],
       value: map['value'],
       description: map['description'],
-      date: DateTime.parse(map['created_at']),
+      date: DateTime.parse(map['date']),
       isDeposit: map['is_deposit'],
       total: map['total_kas'],
       source: map['source'],
@@ -58,9 +63,10 @@ class FinanceKader {
     return {
       'uid': uid,
       'posyandu_uid': uidPosyandu,
+      'id_increment': idIncrement,
       'value': value,
       'description': description,
-      'created_at': date.toIso8601String().substring(0, 10),
+      'date': date.toIso8601String().substring(0, 10),
       'is_deposit': isDeposit,
       'total_kas': total,
       'source': source,

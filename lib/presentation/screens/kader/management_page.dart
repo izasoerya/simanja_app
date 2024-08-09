@@ -63,10 +63,23 @@ class _ManagementPageState extends State<ManagementPage> {
                             ConnectionState.waiting) {
                           return const CircularProgressIndicator();
                         } else if (snapshot.hasData) {
-                          final data = snapshot.data!;
+                          final data = snapshot.data;
+                          if (data == null || data.isEmpty) {
+                            return Column(
+                              children: [
+                                const TextfieldAndButton(value: '0'),
+                                Padding(
+                                    padding: EdgeInsets.only(
+                                        top: screenHeight * 0.03)),
+                                const ListviewKas(finances: []),
+                              ],
+                            );
+                          }
+                          data.sort(
+                              (a, b) => b.idIncrement.compareTo(a.idIncrement));
                           return Column(
                             children: [
-                              TextfieldAndButton(value: data.first.value),
+                              TextfieldAndButton(value: data.first.total),
                               Padding(
                                   padding: EdgeInsets.only(
                                       top: screenHeight * 0.03)),

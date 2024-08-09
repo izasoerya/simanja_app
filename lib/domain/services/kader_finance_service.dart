@@ -11,4 +11,18 @@ class KaderFinanceService {
     final response = await KaderFinanceImplementation().getFinances(idKader);
     return response;
   }
+
+  Future<FinanceKader?> getFinance(String uid) async {
+    final response = await KaderFinanceImplementation().getFinanceById(uid);
+    return response;
+  }
+
+  Future<FinanceKader?> getLastestFinance(String idKader) async {
+    final response = await KaderFinanceImplementation().getFinances(idKader);
+    if (response == null || response.isEmpty) {
+      return null;
+    }
+    response.sort((a, b) => b.idIncrement.compareTo(a.idIncrement));
+    return response.first;
+  }
 }
