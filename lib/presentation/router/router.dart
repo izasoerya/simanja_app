@@ -132,8 +132,13 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'account-remaja',
               builder: (BuildContext context, GoRouterState state) {
-                return SubPageLayout(
-                    appBarTitle: 'DETAIL AKUN', child: Placeholder());
+                return LayoutRemaja(child: Placeholder());
+              },
+            ),
+            GoRoute(
+              path: 'account-kader',
+              builder: (BuildContext context, GoRouterState state) {
+                return LayoutKader(child: Placeholder());
               },
             ),
             GoRoute(

@@ -30,10 +30,9 @@ class _LayoutKaderState extends ConsumerState<LayoutKader> {
           router.push('/login-kader/management-kader');
           break;
         case 4:
-          router.push('/');
+          router.push('/login-kader/account-kader');
           break;
       }
-      print(ref.watch(pageIndexProvider));
     });
   }
 
@@ -45,7 +44,7 @@ class _LayoutKaderState extends ConsumerState<LayoutKader> {
       bottomNavigationBar: BottomNavigationBar(
         type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        selectedItemColor: GlobalTheme().primaryColor,
+        selectedItemColor: const GlobalTheme().primaryColor,
         unselectedItemColor: Colors.grey,
         currentIndex: ref.watch(pageIndexProvider),
         onTap: _onItemTapped,
