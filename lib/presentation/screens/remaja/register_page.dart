@@ -111,10 +111,14 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                   TextInput(
                       labelText: 'NIK',
                       hintText: 'Masukkan NIK...',
+                      type: TextInputType.number,
+                      action: TextInputAction.next,
                       value: _readNIK),
                   TextInput(
                       labelText: 'Nama Lengkap',
                       hintText: 'Masukkan Nama Lengkap...',
+                      type: TextInputType.name,
+                      action: TextInputAction.next,
                       value: _readName),
                   FutureBuilder(
                       future: KaderAuthentication().getPosyanduList(),
@@ -140,14 +144,20 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                   TextInput(
                       labelText: 'Alamat',
                       hintText: 'Masukkan Alamat...',
+                      type: TextInputType.streetAddress,
+                      action: TextInputAction.next,
                       value: _readAddress),
                   TextInput(
                       labelText: 'Email',
                       hintText: 'Masukkan Email...',
+                      type: TextInputType.emailAddress,
+                      action: TextInputAction.next,
                       value: _readEmail),
                   TextInput(
                       labelText: 'Kata Sandi',
-                      hintText: 'Masukkan Alamat...',
+                      hintText: 'Masukkan Password...',
+                      type: TextInputType.visiblePassword,
+                      hideText: true,
                       value: _readPassword),
                   ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
                   const Padding(padding: EdgeInsets.only(top: 10)),
@@ -155,6 +165,42 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () async {
+                        if (_nik.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'NIK tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_name.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Nama tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_posyanduMember.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Nama posyandu tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_address.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Alamat tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_dateOfBirth == DateTime.now()) {
+                          showCustomSnackbar(
+                              context, 'Tanggal lahir tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_email.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Email tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_password.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Kata sandi tidak boleh kosong', 2);
+                          return;
+                        }
+
                         UserRemaja remaja = UserRemaja(
                           uid: 'dummy',
                           nik: _nik,
@@ -169,6 +215,7 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                           bpjs: _bpjs,
                           sex: _sex,
                         );
+
                         final response =
                             await RemajaAuthentication().createUser(remaja);
                         if (response) {

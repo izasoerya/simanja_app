@@ -63,17 +63,21 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   Text(
                     'Masuk Remaja',
-                    style: GlobalTheme().headerStyle,
+                    style: const GlobalTheme().headerStyle,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 30)),
                   TextInput(
                     hintText: 'Email',
                     labelText: 'Email',
+                    type: TextInputType.emailAddress,
+                    action: TextInputAction.next,
                     value: _readEmail,
                   ),
                   TextInput(
                     hintText: 'Password',
                     labelText: 'Password',
+                    type: TextInputType.visiblePassword,
+                    hideText: true,
                     value: _readPassword,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 15)),
