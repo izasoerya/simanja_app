@@ -19,4 +19,8 @@ class KaderInventoryService {
         await KaderInventoryImplementation().getInventories(idKader);
     return response;
   }
+
+  Future<void> deleteInventory(KaderInventory inventory) async {
+    await KaderInventoryImplementation().deleteInventory(inventory);
+  }
 }

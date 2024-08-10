@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:simanja_app/domain/entities/kader_inventory.dart';
+import 'package:simanja_app/domain/services/kader_inventory_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_image.dart';
@@ -55,7 +56,63 @@ class ListviewInventory extends StatelessWidget {
                             '${inventories![index].brand} | ${inventories![index].type} ',
                             '${inventories![index].dateReceive.toString().substring(0, 10)} | Jumlah ${inventories![index].stock}',
                           ],
-                          onTap: (_) {});
+                          onTap: (_) {
+                            showDialog(
+                              context: context,
+                              builder: (ctx) {
+                                return Center(
+                                  child: Container(
+                                    constraints: BoxConstraints(
+                                      maxHeight:
+                                          MediaQuery.of(context).size.height /
+                                              2,
+                                    ),
+                                    child: AlertDialog(
+                                      title: Text(inventories![index].name),
+                                      content: SingleChildScrollView(
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            Text(
+                                                'Merk: ${inventories![index].brand}'),
+                                            Text(
+                                                'Tipe: ${inventories![index].type}'),
+                                            Text(
+                                                'Jumlah: ${inventories![index].stock}'),
+                                            Text(
+                                                'Asal: ${inventories![index].source}'),
+                                            Text(
+                                                'Tanggal: ${inventories![index].dateReceive.toString().substring(0, 10)}'),
+                                            Text(
+                                                'Keterangan: ${inventories![index].note}'),
+                                          ],
+                                        ),
+                                      ),
+                                      actions: [
+                                        TextButton(
+                                          onPressed: () =>
+                                              Navigator.of(ctx).pop(),
+                                          child: const Text('Tutup'),
+                                        ),
+                                        TextButton(
+                                          onPressed: () async {
+                                            await KaderInventoryService()
+                                                .deleteInventory(
+                                                    inventories![index]);
+                                            Navigator.of(ctx).pop();
+                                          },
+                                          child: const Text('Hapus Item',
+                                              style:
+                                                  TextStyle(color: Colors.red)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                );
+                              },
+                            );
+                          });
                     }),
               )
             : const Center(child: Text('Data tidak ditemukan')),

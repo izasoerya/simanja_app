@@ -57,8 +57,14 @@ class KaderInventoryImplementation implements KaderInventoryRepo {
   }
 
   @override
-  Future<void> deleteInventory(KaderInventory inventory) {
-    // TODO: implement deleteInventory
-    throw UnimplementedError();
+  Future<void> deleteInventory(KaderInventory inventory) async {
+    try {
+      await Supabase.instance.client
+          .from('kader_inventory')
+          .delete()
+          .eq('uid', inventory.uid);
+    } catch (e) {
+      print('Error: $e');
+    }
   }
 }
