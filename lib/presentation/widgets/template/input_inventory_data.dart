@@ -88,6 +88,10 @@ class InputInventoryData extends StatelessWidget {
               showCustomSnackbar(context, 'Catatan tidak boleh kosong', 2);
               return;
             }
+            if (data['image'] == null) {
+              showCustomSnackbar(context, 'Gambar tidak boleh kosong', 2);
+              return;
+            }
 
             KaderInventory inven = KaderInventory(
                 uid: '',

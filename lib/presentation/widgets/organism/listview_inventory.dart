@@ -60,66 +60,59 @@ class ListviewInventory extends StatelessWidget {
                             '${inventories![index].dateReceive.toString().substring(0, 10)} | Jumlah ${inventories![index].stock}',
                           ],
                           onTap: (_) {
-                            showDialog(
-                              context: context,
-                              builder: (ctx) {
-                                return Center(
-                                  child: Container(
-                                    constraints: BoxConstraints(
-                                      maxHeight:
-                                          MediaQuery.of(context).size.height /
-                                              2,
-                                    ),
-                                    child: AlertDialog(
-                                      title: Text(inventories![index].name),
-                                      content: SingleChildScrollView(
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            Text(
-                                                'Merk: ${inventories![index].brand}'),
-                                            Text(
-                                                'Tipe: ${inventories![index].type}'),
-                                            Text(
-                                                'Jumlah: ${inventories![index].stock}'),
-                                            Text(
-                                                'Asal: ${inventories![index].source}'),
-                                            Text(
-                                                'Tanggal: ${inventories![index].dateReceive.toString().substring(0, 10)}'),
-                                            Text(
-                                                'Keterangan: ${inventories![index].note}'),
-                                          ],
-                                        ),
-                                      ),
-                                      actions: [
-                                        TextButton(
-                                          onPressed: () =>
-                                              Navigator.of(ctx).pop(),
-                                          child: const Text('Tutup'),
-                                        ),
-                                        TextButton(
-                                          onPressed: () async {
-                                            await KaderInventoryService()
-                                                .deleteInventory(
-                                                    inventories![index]);
-                                            Navigator.of(ctx).pop();
-                                          },
-                                          child: const Text('Hapus Item',
-                                              style:
-                                                  TextStyle(color: Colors.red)),
-                                        ),
-                                      ],
-                                    ),
-                                  ),
-                                );
-                              },
-                            );
+                            showCustomModal(context, index);
                           });
                     }),
               )
             : const Center(child: Text('Data tidak ditemukan')),
       ],
+    );
+  }
+
+  Future<dynamic> showCustomModal(BuildContext context, int index) {
+    return showDialog(
+      context: context,
+      builder: (ctx) {
+        return Center(
+          child: Container(
+            constraints: BoxConstraints(
+              maxHeight: MediaQuery.of(context).size.height / 2,
+            ),
+            child: AlertDialog(
+              title: Text(inventories![index].name),
+              content: SingleChildScrollView(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text('Merk: ${inventories![index].brand}'),
+                    Text('Tipe: ${inventories![index].type}'),
+                    Text('Jumlah: ${inventories![index].stock}'),
+                    Text('Asal: ${inventories![index].source}'),
+                    Text(
+                        'Tanggal: ${inventories![index].dateReceive.toString().substring(0, 10)}'),
+                    Text('Keterangan: ${inventories![index].note}'),
+                  ],
+                ),
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () => Navigator.of(ctx).pop(),
+                  child: const Text('Tutup'),
+                ),
+                TextButton(
+                  onPressed: () async {
+                    await KaderInventoryService()
+                        .deleteInventory(inventories![index]);
+                    Navigator.of(ctx).pop();
+                  },
+                  child: const Text('Hapus Item',
+                      style: TextStyle(color: Colors.red)),
+                ),
+              ],
+            ),
+          ),
+        );
+      },
     );
   }
 }
