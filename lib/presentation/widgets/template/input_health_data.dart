@@ -101,7 +101,6 @@ class _InputHealthDataState extends State<InputHealthData> {
                 ScaffoldMessenger.of(context).showSnackBar(
                     const SnackBar(content: Text('Data Gagal Disimpan')));
               }
-              print('${updatedHealthData.toJSON()}');
             }),
         const Padding(padding: EdgeInsets.only(top: 50)),
       ],
