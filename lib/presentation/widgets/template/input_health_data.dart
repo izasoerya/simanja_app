@@ -26,14 +26,20 @@ class _InputHealthDataState extends State<InputHealthData> {
         TextInput(
             hintText: 'Ketik berat badan (bb)...',
             labelText: 'Berat Badan (BB)',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.weight = double.parse(d)),
         TextInput(
             hintText: 'Ketik tinggi badan...',
             labelText: 'Tinggi Badan (TB)',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.height = double.parse(d)),
         TextInput(
             hintText: 'Ketik lingkar lengan...',
             labelText: 'Lingkar Lengan (LiLa)',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.armCircumference = double.parse(d)),
         ChecklistBox(
             text: 'Resiko KEK\n*Centang apabila LiLa < 23.5 cm',
@@ -42,18 +48,26 @@ class _InputHealthDataState extends State<InputHealthData> {
         TextInput(
             hintText: 'Ketik lingkar perut...',
             labelText: 'Lingkar Perut (LP)',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.abdominalCircumference = double.parse(d)),
         TextInput(
             hintText: 'Ketik tekanan darah sistolik...',
             labelText: 'Tekanan Darah Sistolik (TDS)',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.tds = double.parse(d)),
         TextInput(
             hintText: 'Ketik tekanan darah diastolik...',
             labelText: 'Tekanan Darah Sistolik (TDD)',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.tdd = double.parse(d)),
         TextInput(
             hintText: 'Ketik hemoglobin...',
             labelText: 'Hemoglobin (HB)',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.hemoglobin = double.parse(d)),
         ChecklistBox(
             text: 'Resiko Anemia\n*Centang apabila HB < 13 g/dL',
@@ -65,10 +79,14 @@ class _InputHealthDataState extends State<InputHealthData> {
         TextInput(
             hintText: 'Ketik kolesterol...',
             labelText: 'Kolesterol',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.cholesterol = double.parse(d)),
         TextInput(
             hintText: 'Ketik gula darah...',
             labelText: 'Gula Darah',
+            type: TextInputType.number,
+            action: TextInputAction.next,
             value: (d) => healthData.bloodSugar = double.parse(d)),
         TextInput(
             hintText: 'Ketik catatan...',
