@@ -70,11 +70,15 @@ class _LoginKaderPageState extends ConsumerState<LoginKaderPage> {
                   TextInput(
                     hintText: 'Email',
                     labelText: 'Email',
+                    type: TextInputType.emailAddress,
+                    action: TextInputAction.next,
                     value: _readEmail,
                   ),
                   TextInput(
                     hintText: 'Password',
                     labelText: 'Password',
+                    type: TextInputType.name,
+                    hideText: true,
                     value: _readPassword,
                   ),
                   const Padding(padding: EdgeInsets.only(top: 15)),

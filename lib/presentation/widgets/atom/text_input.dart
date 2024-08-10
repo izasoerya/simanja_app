@@ -5,12 +5,16 @@ class TextInput extends StatefulWidget {
   final String hintText;
   final String labelText;
   final TextInputType type;
+  final TextInputAction action;
+  final bool hideText;
   final void Function(String d) value;
   const TextInput({
     super.key,
     required this.hintText,
     required this.labelText,
     this.type = TextInputType.text,
+    this.hideText = false,
+    this.action = TextInputAction.done,
     required this.value,
   });
 
@@ -43,9 +47,11 @@ class _TextInputState extends State<TextInput> {
           Text(widget.labelText),
           const Padding(padding: EdgeInsets.only(bottom: 5)),
           TextField(
-            maxLines: null,
+            maxLines: widget.hideText ? 1 : null,
             controller: _controller,
-            keyboardType: TextInputType.text, // Enable multiline input
+            keyboardType: widget.type, // Enable multiline input
+            obscureText: widget.hideText,
+            textInputAction: widget.action,
             decoration: InputDecoration(
               hintText: widget.hintText,
               contentPadding: const EdgeInsets.symmetric(
@@ -72,7 +78,7 @@ class _TextInputState extends State<TextInput> {
                 borderRadius: BorderRadius.circular(5),
               ),
             ),
-            style: GlobalTheme().paragraphStyle,
+            style: const GlobalTheme().paragraphStyle,
             onChanged: (data) {
               widget.value(data);
             },
