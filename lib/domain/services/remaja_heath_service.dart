@@ -10,8 +10,11 @@ class RemajaHealthService {
     final response = await RemajaHealthImplementation()
         .getHealthbyCheckupUID(checkupUID, remajaUID, date);
     if (response != null) {
-      health.uid = response.uid;
-      return await RemajaHealthImplementation().updateHealth(health);
+      // health.uid = response.uid;
+      final newData = health.copyWith(
+        uid: response.uid,
+      );
+      return await RemajaHealthImplementation().updateHealth(newData);
     }
     return await RemajaHealthImplementation().createHealth(health);
   }

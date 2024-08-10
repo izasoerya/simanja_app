@@ -26,11 +26,35 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   Future<HealthPropertiesRemaja?> updateHealth(
       HealthPropertiesRemaja health) async {
     try {
-      print('health.uid: ${health.uid}');
+      final responseGET = await Supabase.instance.client
+          .from('health_properties_remaja')
+          .select()
+          .eq('uid', health.uid!)
+          .select()
+          .single();
+      final oldData = HealthPropertiesRemaja.fromJSON(responseGET);
+      final newData = oldData.copyWith(
+        weight: health.weight,
+        height: health.height,
+        armCircumference: health.armCircumference,
+        abdominalCircumference: health.abdominalCircumference,
+        bloodPressure: health.bloodPressure,
+        cholesterol: health.cholesterol,
+        bloodSugar: health.bloodSugar,
+        hemoglobin: health.hemoglobin,
+        tds: health.tds,
+        tdd: health.tdd,
+        kek: health.kek,
+        anemia: health.anemia,
+        smoker: health.smoker,
+        tablet: health.tablet,
+        note: health.note,
+        checkedAt: health.checkedAt,
+      );
       final response = await Supabase.instance.client
           .from('health_properties_remaja')
-          .update(health.toJSON())
-          .eq('uid', health.uid!)
+          .update(newData.toJSON())
+          .eq('uid', newData.uid!)
           .select()
           .single();
       return HealthPropertiesRemaja.fromJSON(response);
