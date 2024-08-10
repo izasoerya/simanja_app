@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:simanja_app/domain/entities/kader_inventory.dart';
 import 'package:simanja_app/domain/repositories/kader_inventory_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -8,12 +10,18 @@ class KaderInventoryImplementation implements KaderInventoryRepo {
   @override
   Future<KaderInventory?> createInventory(KaderInventory inventory) async {
     final data = inventory.copyWith(uid: _uuid.v4());
+    final avatarFile = File(data.imageURL);
     try {
       final response = await Supabase.instance.client
           .from('kader_inventory')
           .insert(data.toJSON())
           .select()
           .single();
+      await Supabase.instance.client.storage.from('avatar_image').upload(
+            'kader/${data.uid}.jpg',
+            avatarFile,
+            fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
+          );
       return KaderInventory.fromJson(response);
     } catch (e) {
       print('Error: $e');
@@ -67,4 +75,7 @@ class KaderInventoryImplementation implements KaderInventoryRepo {
       print('Error: $e');
     }
   }
+
+  @override
+  Future uploadImage(String path, String uid) async {}
 }

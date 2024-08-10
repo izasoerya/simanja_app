@@ -4,6 +4,7 @@ import 'package:simanja_app/domain/services/kader_inventory_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/date_of_birth.dart';
+import 'package:simanja_app/presentation/widgets/atom/file_picker.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 import 'package:simanja_app/utils/default_account.dart';
@@ -54,6 +55,7 @@ class InputInventoryData extends StatelessWidget {
             type: TextInputType.text,
             action: TextInputAction.done,
             value: (d) => data['note'] = d),
+        FilePathPicker(path: (d) => data['image'] = d),
         const Padding(padding: EdgeInsets.only(top: 30)),
         SubmitButton(
           text: 'Tambahkan Barang',
@@ -97,7 +99,7 @@ class InputInventoryData extends StatelessWidget {
                 source: data['source'],
                 dateReceive: data['date'],
                 note: data['note'],
-                imageURL: '');
+                imageURL: data['image']);
             final response =
                 await KaderInventoryService().createInventory(inven);
             if (response != null) {

@@ -7,4 +7,5 @@ abstract class KaderInventoryRepo {
   Future<KaderInventory?> createInventory(KaderInventory inventory);
   Future<KaderInventory?> updateInventory(KaderInventory inventory);
   Future<void> deleteInventory(KaderInventory inventory);
+  Future<dynamic> uploadImage(String path, String uid);
 }
