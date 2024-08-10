@@ -77,5 +77,10 @@ class KaderInventoryImplementation implements KaderInventoryRepo {
   }
 
   @override
-  Future uploadImage(String path, String uid) async {}
+  String getImageUrlInventory(String path) {
+    final response = Supabase.instance.client.storage
+        .from('avatar_image')
+        .getPublicUrl('kader/$path.jpg');
+    return response;
+  }
 }

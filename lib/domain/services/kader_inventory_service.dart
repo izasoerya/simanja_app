@@ -20,6 +20,10 @@ class KaderInventoryService {
     return response;
   }
 
+  String getImageUrlInventory(String path) {
+    return KaderInventoryImplementation().getImageUrlInventory(path);
+  }
+
   Future<void> deleteInventory(KaderInventory inventory) async {
     await KaderInventoryImplementation().deleteInventory(inventory);
   }
