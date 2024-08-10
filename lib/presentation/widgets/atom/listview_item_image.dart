@@ -5,6 +5,7 @@ class ItemListviewImage extends StatelessWidget {
   final String title;
   final String uid;
   final List<String> descriptions;
+  final Image? image;
   final void Function(String callBack) onTap;
   const ItemListviewImage({
     super.key,
@@ -12,6 +13,7 @@ class ItemListviewImage extends StatelessWidget {
     required this.uid,
     required this.descriptions,
     required this.onTap,
+    this.image,
   });
 
   @override
@@ -22,7 +24,7 @@ class ItemListviewImage extends StatelessWidget {
         SizedBox(
           width: MediaQuery.of(context).size.width * 0.15,
           height: MediaQuery.of(context).size.height * 0.075,
-          child: Image.asset('assets/logo/No_Image.jpg'),
+          child: image ?? Image.asset('assets/logo/No_Image.jpg'),
         ),
         Padding(
             padding: EdgeInsets.only(
