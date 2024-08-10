@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/presentation/widgets/atom/profile_picture_icon.dart';
 
 class ProfilPicture extends StatelessWidget {
   final UserKader? kader;
@@ -30,72 +31,62 @@ class ProfilPicture extends StatelessWidget {
               color: Colors.white,
             ),
           ),
-          if (kader != null) buildKaderProfile(context),
-          if (remaja != null) buildRemajaProfile(context),
+          if (kader != null) ...buildKaderProfile(context),
+          if (remaja != null) ...buildRemajaProfile(context),
         ],
       ),
     );
   }
 
-  Widget buildKaderProfile(BuildContext context) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 50,
-          // backgroundImage: AssetImage(kader!.photo),
-        ),
-        Text(kader!.nameAccount,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold)),
-        Text(kader!.email,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.normal)),
-        Text(kader!.address,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.normal)),
-        Text('Akun Kader Posyandu',
-            style: TextStyle(
-                color: const GlobalTheme().secondaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold)),
-      ],
-    );
+  List<Widget> buildKaderProfile(BuildContext context) {
+    return [
+      ProfilePictureIcon(
+        kader: kader,
+      ),
+      Text(kader!.nameAccount,
+          style: const TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+      Text(kader!.email,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.normal)),
+      Text(kader!.address,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.normal)),
+      Text('Akun Kader Posyandu',
+          style: TextStyle(
+              color: const GlobalTheme().secondaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.bold)),
+    ];
   }
 
-  Widget buildRemajaProfile(BuildContext context) {
-    return Column(
-      children: [
-        CircleAvatar(
-          radius: 50,
-          // backgroundImage: AssetImage(remaja!.photo),
-        ),
-        Text(remaja!.name,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold)),
-        Text(remaja!.email,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.normal)),
-        Text(remaja!.address,
-            style: const TextStyle(
-                color: Colors.white,
-                fontSize: 16,
-                fontWeight: FontWeight.normal)),
-        Text('Akun Remaja',
-            style: TextStyle(
-                color: const GlobalTheme().secondaryColor,
-                fontSize: 16,
-                fontWeight: FontWeight.bold)),
-      ],
-    );
+  List<Widget> buildRemajaProfile(BuildContext context) {
+    return [
+      ProfilePictureIcon(
+        remaja: remaja,
+      ),
+      Text(remaja!.name,
+          style: const TextStyle(
+              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
+      Text(remaja!.email,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.normal)),
+      Text(remaja!.address,
+          style: const TextStyle(
+              color: Colors.white,
+              fontSize: 16,
+              fontWeight: FontWeight.normal)),
+      Text('Akun Remaja',
+          style: TextStyle(
+              color: const GlobalTheme().secondaryColor,
+              fontSize: 16,
+              fontWeight: FontWeight.bold)),
+    ];
   }
 }

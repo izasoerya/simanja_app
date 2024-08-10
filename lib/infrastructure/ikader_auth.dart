@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/repositories/kader_auth_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -9,28 +11,12 @@ class KaderAuthImplementation implements KaderAuthRepo {
   @override
   Future<void> createUser(UserKader user) async {
     String uid = _uuid.v4();
-    UserKader newUser = UserKader(
-      uid: uid,
-      nameAccount: user.nameAccount,
-      namePosyandu: user.namePosyandu,
-      keyPosyandu: user.keyPosyandu,
-      birthDate: user.birthDate,
-      address: user.address,
-      email: user.email,
-      password: user.password,
-    );
+    UserKader newUser = user.copyWith(uid: uid);
 
     try {
-      await Supabase.instance.client.from('kader_auth').insert({
-        'uid': newUser.uid,
-        'account_name': newUser.nameAccount,
-        'posyandu_name': newUser.namePosyandu,
-        'posyandu_key': newUser.keyPosyandu,
-        'date_of_birth': newUser.birthDate.toIso8601String(),
-        'address': newUser.address,
-        'email': newUser.email,
-        'password': newUser.password,
-      });
+      await Supabase.instance.client
+          .from('kader_auth')
+          .insert(newUser.toJSON());
     } catch (e) {
       print('$e');
       return Future.value(e);
@@ -52,29 +38,17 @@ class KaderAuthImplementation implements KaderAuthRepo {
 
   @override
   Future<UserKader?> getUserbyEmail(String email) async {
-    PostgrestMap response;
     try {
-      response = await Supabase.instance.client
+      final response = await Supabase.instance.client
           .from('kader_auth') // select from table kader_auth
           .select() // select all columns
           .eq('email', email) // where email = email
           .single(); // fetches the first row
+      return UserKader.fromJSON(response);
     } catch (e) {
       print('$e');
       return null;
     }
-
-    UserKader user = UserKader(
-      uid: response['uid'],
-      nameAccount: response['account_name'],
-      namePosyandu: response['posyandu_name'],
-      keyPosyandu: response['posyandu_key'],
-      birthDate: DateTime.parse(response['date_of_birth']),
-      address: response['address'],
-      email: response['email'],
-      password: response['password'],
-    );
-    return user;
   }
 
   @override
@@ -91,28 +65,40 @@ class KaderAuthImplementation implements KaderAuthRepo {
 
   @override
   Future<List<UserKader>> getUsers() async {
-    List<PostgrestMap> response;
     try {
-      response = await Supabase.instance.client
+      final response = await Supabase.instance.client
           .from('kader_auth') // select from table kader_auth
           .select(); // select all columns
+      return response.map((e) => UserKader.fromJSON(e)).toList();
     } catch (e) {
       return Future.error(e);
     }
+  }
 
-    List<UserKader> users = [];
-    for (PostgrestMap response in response) {
-      users.add(UserKader(
-        uid: response['uid'],
-        nameAccount: response['account_name'],
-        namePosyandu: response['posyandu_name'],
-        keyPosyandu: response['posyandu_key'],
-        birthDate: DateTime.parse(response['date_of_birth']),
-        address: response['address'],
-        email: response['email'],
-        password: response['password'],
-      ));
+  @override
+  Future<UserKader?> updateProfilePicture(UserKader user) async {
+    final avatarFile = File(user.urlImage!);
+    try {
+      await Supabase.instance.client.storage.from('avatar_image').upload(
+            'kader/${user.uid}.jpg',
+            avatarFile,
+            fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
+          );
+      final getPublicUrl = Supabase.instance.client.storage
+          .from('avatar_image')
+          .getPublicUrl('kader/${user.uid}.jpg');
+      final response = await Supabase.instance.client
+          .from('kader_auth')
+          .update({
+            'url_image': getPublicUrl,
+          })
+          .eq('uid', user.uid)
+          .select()
+          .single();
+      return UserKader.fromJSON(response);
+    } catch (e) {
+      print('Error: $e');
+      return null;
     }
-    return users;
   }
 }

@@ -7,6 +7,7 @@ class UserKader {
   final String address;
   final String email;
   final String password;
+  final String? urlImage;
 
   UserKader({
     required this.uid,
@@ -17,6 +18,7 @@ class UserKader {
     required this.address,
     required this.email,
     required this.password,
+    this.urlImage,
   });
 
   UserKader copyWith({
@@ -28,6 +30,7 @@ class UserKader {
     String? address,
     String? email,
     String? password,
+    String? urlImage,
   }) {
     return UserKader(
       uid: uid ?? this.uid,
@@ -38,11 +41,35 @@ class UserKader {
       address: address ?? this.address,
       email: email ?? this.email,
       password: password ?? this.password,
+      urlImage: urlImage ?? this.urlImage,
     );
   }
 
-  @override
-  String toString() {
-    return 'UserKader(uid: $uid, nameKader: $nameAccount, namePosyandu: $namePosyandu, nik: $keyPosyandu, birthDate: $birthDate, address: $address, email: $email, password: $password)';
+  factory UserKader.fromJSON(Map<String, dynamic> data) {
+    return UserKader(
+      uid: data['uid'],
+      nameAccount: data['account_name'],
+      namePosyandu: data['posyandu_name'],
+      keyPosyandu: data['posyandu_key'],
+      birthDate: DateTime.parse(data['date_of_birth']),
+      address: data['address'],
+      email: data['email'],
+      password: data['password'],
+      urlImage: data['url_image'],
+    );
+  }
+
+  Map<String, dynamic> toJSON() {
+    return {
+      'uid': uid,
+      'name_account': nameAccount,
+      'name_posyandu': namePosyandu,
+      'key_posyandu': keyPosyandu,
+      'birth_date': birthDate.toIso8601String(),
+      'address': address,
+      'email': email,
+      'password': password,
+      'url_image': urlImage,
+    };
   }
 }

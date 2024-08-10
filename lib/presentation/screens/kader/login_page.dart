@@ -89,7 +89,6 @@ class _LoginKaderPageState extends ConsumerState<LoginKaderPage> {
                         email: _email,
                         password: _password,
                       );
-                      KaderAuthentication().debugUsers();
                       await KaderAuthentication()
                           .loginUser(kader)
                           .then((fetchedKader) {

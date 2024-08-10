@@ -28,10 +28,7 @@ class KaderAuthentication {
     return user.namePosyandu;
   }
 
-  Future<void> debugUsers() async {
-    var data = await KaderAuthImplementation().getUsers();
-    for (var user in data) {
-      print(user.toString());
-    }
+  Future<UserKader?> updateProfilePicture(UserKader user) async {
+    return await KaderAuthImplementation().updateProfilePicture(user);
   }
 }

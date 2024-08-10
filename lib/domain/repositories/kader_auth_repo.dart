@@ -5,6 +5,7 @@ abstract class KaderAuthRepo {
   Future<UserKader?> getUserbyEmail(String email);
   Future<UserKader> getUserbyPassword(String password);
   Future<List<UserKader>> getUsers();
+  Future<UserKader?> updateProfilePicture(UserKader user);
 
   Future<void> createUser(UserKader user);
   Future<void> updateUser(UserKader user);
