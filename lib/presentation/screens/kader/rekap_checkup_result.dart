@@ -49,6 +49,8 @@ class _RekapCheckupResultState extends State<RekapCheckupResult> {
             .toList();
       case 'Merokok':
         return data.where((e) => e != null && e.smoker == true).toList();
+      case 'all':
+        return data;
       default:
         return [];
     }
@@ -72,7 +74,7 @@ class _RekapCheckupResultState extends State<RekapCheckupResult> {
                 description: 'Daftar remaja dengan ${widget.label}'),
             const Padding(padding: EdgeInsets.only(top: 30)),
             isLoading
-                ? const CircularProgressIndicator()
+                ? const Center(child: CircularProgressIndicator())
                 : (filteredData.isEmpty || data.isEmpty)
                     ? const Text('Data tidak ditemukan')
                     : SizedBox(

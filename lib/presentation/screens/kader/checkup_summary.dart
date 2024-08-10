@@ -24,7 +24,7 @@ class CheckupSummaryPage extends StatelessWidget {
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  const Padding(padding: EdgeInsets.only(top: 30)),
+                  const Padding(padding: EdgeInsets.only(top: 20)),
                   const TitleWDescription(
                       title: 'REKAP KONDISI KESEHATAN REMAJA',
                       description:

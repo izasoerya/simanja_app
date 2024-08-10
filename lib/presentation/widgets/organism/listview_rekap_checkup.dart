@@ -1,6 +1,7 @@
 import 'package:intl/intl.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/router/router.dart';
+import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:flutter/material.dart';
@@ -49,7 +50,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
     }
     return SizedBox(
         width: MediaQuery.of(context).size.width * 0.8,
-        height: MediaQuery.of(context).size.height * 0.75,
+        height: MediaQuery.of(context).size.height * 0.8,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -101,6 +102,15 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                     text: 'Tambah Data Checkup',
                     onClick: widget._gotoAddCheckupData)
                 : const SizedBox(),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            SubmitButton(
+                text: 'Lihat List Checkup Remaja',
+                backgroundColor: const GlobalTheme().primaryColor,
+                onClick: () {
+                  router.push(
+                      '/login-kader/rekap-checkup-result?checkupUID=${widget.kaderCheckup.uid}&label=all');
+                }),
+            const Padding(padding: EdgeInsets.only(top: 50)),
           ],
         ));
   }

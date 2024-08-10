@@ -35,6 +35,8 @@ class ItemListViewHealth extends StatelessWidget {
         return 'Berat Badan';
       case 'Merokok':
         return 'Status Merokok';
+      case 'all':
+        return 'Indek Massa Tubuh';
       default:
         return 'Kadar HB';
     }
@@ -52,6 +54,14 @@ class ItemListViewHealth extends StatelessWidget {
         return '${health.weight} Kg';
       case 'Merokok':
         return health.smoker! ? 'Ya' : 'Tidak';
+      case 'all':
+        if (health.height == null || health.weight == null) {
+          return 'nan';
+        }
+        return (health.weight! /
+                (health.height! / 100) *
+                (health.height! / 100))
+            .toString();
       default:
         return '${health.bloodPressure}';
     }
@@ -69,6 +79,8 @@ class ItemListViewHealth extends StatelessWidget {
         return 'Sangat Kurus';
       case 'Merokok':
         return 'Merokok';
+      case 'all':
+        return '';
       default:
         return 'Anemia';
     }
@@ -99,62 +111,81 @@ class ItemListViewHealth extends StatelessWidget {
             future: RemajaAuthentication().getUserbyUID(health.uidRemaja!),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
-                return const CircularProgressIndicator();
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.hasData) {
                 final UserRemaja user = snapshot.data!;
                 return Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(user.name,
-                            style: const TextStyle(
-                              fontSize: 12,
-                              fontWeight: FontWeight.bold,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(user.name,
+                              style: const TextStyle(
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold,
+                              ),
+                              textAlign: TextAlign.start),
+                          Text(user.nik,
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              textAlign: TextAlign.start),
+                          Text(
+                              '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              textAlign: TextAlign.start),
+                          Text(
+                              user.bpjs
+                                  ? 'Pengguna BPJS'
+                                  : 'Bukan Pengguna BPJS',
+                              style: const TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.normal,
+                              ),
+                              textAlign: TextAlign.start),
+                        ],
+                      ),
+                      label != 'all'
+                          ? Column(
+                              children: [
+                                Text(_getLabelText(label),
+                                    style: const TextStyle(fontSize: 10)),
+                                Text(_getHealthValue(label, health),
+                                    style: TextStyle(
+                                      fontSize: 14,
+                                      fontWeight: FontWeight.bold,
+                                      color: const GlobalTheme().primaryColor,
+                                    )),
+                                Text(_getHealthStatus(label),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: const GlobalTheme().secondaryColor,
+                                    )),
+                              ],
+                            )
+                          : Column(
+                              children: [
+                                Text(_getLabelText('all'),
+                                    style: const TextStyle(fontSize: 10)),
+                                Text(_getHealthValue('all', health),
+                                    style: TextStyle(
+                                      fontSize: 24,
+                                      fontWeight: FontWeight.bold,
+                                      color: const GlobalTheme().primaryColor,
+                                    )),
+                                Text(_getHealthStatus('all'),
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      color: const GlobalTheme().secondaryColor,
+                                    )),
+                              ],
                             ),
-                            textAlign: TextAlign.start),
-                        Text(user.nik,
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            textAlign: TextAlign.start),
-                        Text(
-                            '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            textAlign: TextAlign.start),
-                        Text(
-                            user.bpjs ? 'Pengguna BPJS' : 'Bukan Pengguna BPJS',
-                            style: const TextStyle(
-                              fontSize: 10,
-                              fontWeight: FontWeight.normal,
-                            ),
-                            textAlign: TextAlign.start),
-                      ],
-                    ),
-                    Column(
-                      children: [
-                        Text(_getLabelText(label),
-                            style: const TextStyle(fontSize: 10)),
-                        Text(_getHealthValue(label, health),
-                            style: TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold,
-                              color: const GlobalTheme().primaryColor,
-                            )),
-                        Text(_getHealthStatus(label),
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: const GlobalTheme().secondaryColor,
-                            )),
-                      ],
-                    )
-                  ],
-                );
+                    ]);
               }
               return const Text('Data tidak ditemukan');
             }),
