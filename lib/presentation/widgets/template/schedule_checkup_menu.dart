@@ -64,11 +64,9 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
         TextInput(
             hintText: 'Masukkan nama acara...',
             labelText: 'Nama Acara',
+            type: TextInputType.name,
+            action: TextInputAction.next,
             value: _onNameChange),
-        TextInput(
-            hintText: 'Masukkan deskripsi acara...',
-            labelText: 'Deskripsi Acara',
-            value: _onDescriptionChange),
         CustomDropdown(
             label: 'Jenis Acara',
             hint: 'Pilih jenis acara...',
@@ -77,8 +75,16 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
         if (_selectedJenisAcara == 'Lainnya') ...[
           const Padding(padding: EdgeInsets.only(top: 15)),
           TextInput(
+              hintText: 'Masukkan deskripsi acara...',
+              labelText: 'Deskripsi Acara',
+              type: TextInputType.multiline,
+              action: TextInputAction.newline,
+              value: _onDescriptionChange),
+          TextInput(
               hintText: 'Masukkan lokasi...',
               labelText: 'Lokasi Acara',
+              type: TextInputType.streetAddress,
+              action: TextInputAction.next,
               value: _onLocationChange),
           CustomDropdown(
               label: 'Jenis Kegiatan',
@@ -98,18 +104,26 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
           TextInput(
               hintText: 'Masukkan tema...',
               labelText: 'Tema Acara',
+              type: TextInputType.name,
+              action: TextInputAction.next,
               value: _onThemeChange),
           TextInput(
               hintText: 'Masukkan ringkasan kegiatan...',
               labelText: 'Ringkasan Kegiatan',
+              type: TextInputType.multiline,
+              action: TextInputAction.newline,
               value: _onNoteChange),
           TextInput(
               hintText: 'Masukkan jumlah kader...',
               labelText: 'Jumlah Kader',
+              type: TextInputType.name,
+              action: TextInputAction.next,
               value: _onKaderCountChange),
           TextInput(
               hintText: 'Masukkan tamu...',
               labelText: 'Tamu Acara',
+              type: TextInputType.name,
+              action: TextInputAction.next,
               value: _onAttendantChange),
         ],
         const Padding(padding: EdgeInsets.only(top: 20)),
@@ -117,6 +131,15 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
             text: 'Jadwalkan Checkup',
             backgroundColor: const GlobalTheme().primaryColor,
             onClick: () async {
+              if (_name.isEmpty) {
+                showCustomSnackbar(
+                    context, 'Nama kegiatan tidak boleh kosong', 2);
+                return;
+              }
+              if (_date == DateTime.now()) {
+                showCustomSnackbar(context, 'Tanggal tidak boleh kosong', 2);
+                return;
+              }
               if (_selectedJenisAcara! == 'Checkup') {
                 final response = await KaderCheckupService().scheduleCheckup(
                     _name, _date, ref.watch(userKaderProvider).uid);
@@ -127,6 +150,30 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
                   showCustomSnackbar(context, 'Gagal membuat checkup', 2);
                 }
               } else {
+                if (_description.isEmpty) {
+                  showCustomSnackbar(
+                      context, 'Deskripsi tidak boleh kosong', 2);
+                  return;
+                }
+                if (_location.isEmpty) {
+                  showCustomSnackbar(context, 'Lokasi tidak boleh kosong', 2);
+                  return;
+                }
+                if (_theme.isEmpty) {
+                  showCustomSnackbar(context, 'Tema tidak boleh kosong', 2);
+                  return;
+                }
+                if (_selectedJenisKegiatan == null) {
+                  showCustomSnackbar(
+                      context, 'Jenis kegiatan tidak boleh kosong', 2);
+                  return;
+                }
+                if (_note.isEmpty) {
+                  showCustomSnackbar(
+                      context, 'Ringkasan tidak boleh kosong', 2);
+                  return;
+                }
+
                 EventKader event = EventKader(
                     id: 'dummy',
                     idKader: ref.watch(userKaderProvider).uid,

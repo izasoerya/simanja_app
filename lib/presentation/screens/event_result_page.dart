@@ -33,6 +33,9 @@ class EventResultPage extends StatelessWidget {
                   Text(
                       'Tanggal pelaksanaan: ${event.date.toString().substring(0, 10)}'),
                   Text(event.note),
+                  Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
+                  Text('Daftar peserta: ${event.visitor}'),
+                  Text('Daftar kader: ${event.totalKader}'),
                 ],
               );
             }
