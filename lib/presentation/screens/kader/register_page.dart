@@ -90,34 +90,78 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                   TextInput(
                       labelText: 'Nama Akun',
                       hintText: 'Masukkan Nama Akun...',
+                      action: TextInputAction.next,
                       value: _readNameAccount),
                   TextInput(
                       labelText: 'Nama Posyandu',
                       hintText: 'Masukkan Nama Posyandu...',
+                      action: TextInputAction.next,
                       value: _readNamePosyandu),
                   TextInput(
                       labelText: 'Kode Kader',
                       hintText: 'Masukkan Kode Kader...',
+                      action: TextInputAction.next,
+                      type: TextInputType.number,
                       value: _readKey),
                   DateOfBirthField(value: _readDoB, text: 'Tanggal Berdiri'),
                   TextInput(
                       labelText: 'Alamat',
                       type: TextInputType.streetAddress,
                       hintText: 'Masukkan Alamat...',
+                      action: TextInputAction.next,
                       value: _readAddress),
                   TextInput(
                       labelText: 'Email',
                       type: TextInputType.emailAddress,
                       hintText: 'Masukkan Email...',
+                      action: TextInputAction.next,
                       value: _readEmail),
                   TextInput(
                       labelText: 'Kata Sandi',
                       hintText: 'Masukkan Kata Sandi...',
                       type: TextInputType.visiblePassword,
+                      action: TextInputAction.next,
+                      hideText: true,
                       value: _readPassword),
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () {
+                        if (_nameAccount.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Nama akun tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_namePosyandu.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Nama posyandu tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_key.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Kode tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_address.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Alamat tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_dateOfBirth == DateTime.now()) {
+                          showCustomSnackbar(
+                              context, 'Tanggal lahir tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_email.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Email tidak boleh kosong', 2);
+                          return;
+                        }
+                        if (_password.isEmpty) {
+                          showCustomSnackbar(
+                              context, 'Kata sandi tidak boleh kosong', 2);
+                          return;
+                        }
+
                         UserKader kader = UserKader(
                             uid: '',
                             nameAccount: _nameAccount,
