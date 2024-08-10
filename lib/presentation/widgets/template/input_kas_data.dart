@@ -18,7 +18,7 @@ class InputKasData extends StatefulWidget {
 }
 
 class _InputKasDataState extends State<InputKasData> {
-  Map<String, dynamic> data = {};
+  Map<String, dynamic> data = {'date': DateTime.now()};
 
   @override
   Widget build(BuildContext context) {
@@ -34,22 +34,34 @@ class _InputKasDataState extends State<InputKasData> {
         TextInput(
           hintText: 'Ketik Jumlah Mutasi...',
           labelText: 'Mutasi',
+          type: TextInputType.number,
+          action: TextInputAction.done,
           value: (d) => data['mutation'] = int.parse(d),
         ),
         TextInput(
           hintText: 'Ketik Asal Dana...',
           labelText: 'Asal Dana',
+          type: TextInputType.text,
+          action: TextInputAction.done,
           value: (d) => data['source'] = d,
         ),
         TextInput(
           hintText: 'Ketik Deskripsi...',
           labelText: 'Deskripsi',
+          type: TextInputType.text,
+          action: TextInputAction.done,
           value: (d) => data['description'] = d,
         ),
         const Padding(padding: EdgeInsets.only(top: 30)),
         SubmitButton(
             text: 'Simpan Rekam Kas',
             onClick: () async {
+              if (data['mutation'] == null ||
+                  data['source'] == null ||
+                  data['description'] == null) {
+                showCustomSnackbar(context, 'Data tidak boleh kosong', 2);
+                return;
+              }
               int lastTotal = widget.lastData != null
                   ? int.parse(widget.lastData!.total)
                   : 0;
