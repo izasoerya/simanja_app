@@ -10,7 +10,7 @@ class EventKader {
   final String note;
   final String totalKader;
   final String visitor;
-  final String urlImage;
+  final String? urlImage;
   final bool isFinish;
 
   EventKader({
@@ -25,7 +25,7 @@ class EventKader {
     required this.note,
     required this.totalKader,
     required this.visitor,
-    required this.urlImage,
+    this.urlImage,
     this.isFinish = false,
   });
 

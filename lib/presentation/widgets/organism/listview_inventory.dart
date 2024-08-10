@@ -49,12 +49,10 @@ class ListviewInventory extends StatelessWidget {
                       return const Divider();
                     },
                     itemBuilder: (context, index) {
-                      final image = Image.network(KaderInventoryService()
-                          .getImageUrlInventory(inventories![index].uid));
                       return ItemListviewImage(
                           title: inventories![index].name,
                           uid: inventories![index].uid,
-                          image: image,
+                          image: Image.network(inventories![index].imageURL),
                           descriptions: [
                             '${inventories![index].brand} | ${inventories![index].type} ',
                             '${inventories![index].dateReceive.toString().substring(0, 10)} | Jumlah ${inventories![index].stock}',
