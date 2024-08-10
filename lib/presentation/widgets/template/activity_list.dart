@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
-import 'package:simanja_app/presentation/widgets/atom/custom_searchbar.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_activity.dart';
 
 class ActivityList extends StatelessWidget {
@@ -15,8 +14,7 @@ class ActivityList extends StatelessWidget {
       width: MediaQuery.of(context).size.width * 0.8,
       child: Column(
         children: [
-          const CustomSearchBar(label: 'Judul Kegiatan', icon: Icons.search),
-          const Padding(padding: EdgeInsets.only(top: 20)),
+          const Padding(padding: EdgeInsets.only(top: 5)),
           if (items == null || items!.isEmpty)
             isEmpty
           else

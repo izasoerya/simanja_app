@@ -49,14 +49,18 @@ class DetailAccount extends StatelessWidget {
     return Column(
       children: [
         TextSpaceAround(label: 'NIK', data: remaja!.nik),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TextSpaceAround(label: 'Nama', data: remaja!.name),
         TextSpaceAround(
             label: 'Tanggal Lahir',
             data: remaja!.birthDate.toString().substring(0, 10)),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TextSpaceAround(
             label: 'Jenis Kelamin',
             data: remaja!.sex == Gender.male ? 'Laki-laki' : 'Perempuan'),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TextSpaceAround(label: 'Alamat', data: remaja!.address),
+        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TextSpaceAround(label: 'Email', data: remaja!.email),
       ],
     );

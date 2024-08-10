@@ -17,6 +17,7 @@ import 'package:simanja_app/presentation/screens/kader/management_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_checkup_result.dart';
+import 'package:simanja_app/presentation/screens/remaja/account_remaja_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/login_page.dart';
@@ -133,13 +134,15 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'account-remaja',
               builder: (BuildContext context, GoRouterState state) {
-                return LayoutRemaja(child: Placeholder());
+                return LayoutKader(
+                    child: AccountRemajaPage(
+                        remajaUID: state.uri.queryParameters['remajaUID']!));
               },
             ),
             GoRoute(
               path: 'account-kader',
               builder: (BuildContext context, GoRouterState state) {
-                return LayoutKader(child: AccountKaderPage());
+                return const LayoutKader(child: AccountKaderPage());
               },
             ),
             GoRoute(
