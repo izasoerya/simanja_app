@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/domain/repositories/kader_event_repo.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
@@ -65,7 +67,7 @@ class KaderEventImplementation implements KaderEventRepo {
 
   @override
   Future<EventKader?> updateKaderEvent(EventKader kaderEvent) async {
-    try {
+    if (kaderEvent.urlImage == null) {
       final response = await Supabase.instance.client
           .from('kader_activity')
           .update(kaderEvent.toJSON())
@@ -73,9 +75,30 @@ class KaderEventImplementation implements KaderEventRepo {
           .select('*')
           .single();
       return EventKader.fromJSON(response);
-    } catch (e) {
-      print('e: $e');
-      return null;
+    } else {
+      final avatarFile = File(kaderEvent.urlImage!);
+      try {
+        await Supabase.instance.client.storage.from('avatar_image').upload(
+              'kader/${kaderEvent.id}.jpg',
+              avatarFile,
+              fileOptions:
+                  const FileOptions(cacheControl: '3600', upsert: false),
+            );
+        final getPublicUrl = Supabase.instance.client.storage
+            .from('avatar_image')
+            .getPublicUrl('kader/${kaderEvent.id}.jpg');
+        kaderEvent = kaderEvent.copyWith(urlImage: getPublicUrl);
+        final response = await Supabase.instance.client
+            .from('kader_activity')
+            .update(kaderEvent.toJSON())
+            .eq('uid', kaderEvent.id)
+            .select('*')
+            .single();
+        return EventKader.fromJSON(response);
+      } catch (e) {
+        print('e: $e');
+        return null;
+      }
     }
   }
 }

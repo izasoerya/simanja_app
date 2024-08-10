@@ -6,6 +6,7 @@ import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
+import 'package:simanja_app/presentation/widgets/atom/file_picker.dart';
 import 'package:simanja_app/presentation/widgets/atom/horizontal_datepicker.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -64,7 +65,9 @@ class _ScheduleCheckupState extends ConsumerState<EditScheduleEvent> {
             hintText: 'Masukkan deskripsi acara...',
             labelText: 'Deskripsi Acara',
             value: _onDescriptionChange),
+        FilePathPicker(path: _onUrlImageChange),
         ...[
+          const Padding(padding: EdgeInsets.only(top: 15)),
           TextInput(
               hintText: 'Masukkan lokasi...',
               labelText: 'Lokasi Acara',
@@ -119,9 +122,9 @@ class _ScheduleCheckupState extends ConsumerState<EditScheduleEvent> {
                   urlImage: _urlImage ?? widget.event.urlImage);
               final response = await KaderEventService().updateEvent(event);
               if (response != null) {
-                showCustomSnackbar(context, 'Berhasil membuat acara', 0);
+                showCustomSnackbar(context, 'Berhasil menyimpan acara', 0);
               } else {
-                showCustomSnackbar(context, 'Gagal membuat acara', 2);
+                showCustomSnackbar(context, 'Gagal menyimpan acara', 2);
               }
             }),
         const Padding(padding: EdgeInsets.only(top: 20)),

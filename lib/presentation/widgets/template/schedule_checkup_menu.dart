@@ -1,4 +1,3 @@
-import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
@@ -8,7 +7,6 @@ import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
-import 'package:simanja_app/presentation/widgets/atom/file_picker.dart';
 import 'package:simanja_app/presentation/widgets/atom/horizontal_datepicker.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -74,7 +72,6 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
             hint: 'Pilih jenis acara...',
             items: const ['Checkup', 'Lainnya'],
             onChanged: _onJenisAcaraChange),
-        FilePathPicker(path: (d) => _urlImage = d),
         if (_selectedJenisAcara == 'Lainnya') ...[
           const Padding(padding: EdgeInsets.only(top: 15)),
           TextInput(
