@@ -79,19 +79,31 @@ class KaderAuthImplementation implements KaderAuthRepo {
   Future<UserKader?> updateProfilePicture(UserKader user) async {
     final avatarFile = File(user.urlImage!);
     try {
-      await Supabase.instance.client.storage.from('avatar_image').upload(
-            'kader/${user.uid}.jpg',
-            avatarFile,
-            fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
-          );
+      final fileName = '${user.uid}.jpg';
+      print('uid kader: ${user.uid}');
+      final files =
+          await Supabase.instance.client.storage.from('avatar_image').list();
+      final fileExists = files.any((file) => file.name == fileName);
+
+      if (fileExists) {
+        await Supabase.instance.client.storage.from('avatar_image').update(
+              fileName,
+              avatarFile,
+              fileOptions: const FileOptions(cacheControl: '3600'),
+            );
+      } else {
+        await Supabase.instance.client.storage.from('avatar_image').upload(
+            fileName, avatarFile,
+            fileOptions:
+                const FileOptions(cacheControl: '3600', upsert: false));
+      }
+
       final getPublicUrl = Supabase.instance.client.storage
           .from('avatar_image')
-          .getPublicUrl('kader/${user.uid}.jpg');
+          .getPublicUrl(fileName);
       final response = await Supabase.instance.client
           .from('kader_auth')
-          .update({
-            'url_image': getPublicUrl,
-          })
+          .update({'url_image': getPublicUrl})
           .eq('uid', user.uid)
           .select()
           .single();

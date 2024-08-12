@@ -48,7 +48,7 @@ class ProfilePictureIcon extends StatelessWidget {
           CircleAvatar(
             radius: 50,
             backgroundColor: const GlobalTheme().primaryColor,
-            backgroundImage: kader!.urlImage != null
+            backgroundImage: kader?.urlImage != null
                 ? NetworkImage(kader!.urlImage!)
                 : const AssetImage('assets/logo/No_Profil_Picture.png'),
           ),
