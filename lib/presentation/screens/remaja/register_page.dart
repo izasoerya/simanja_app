@@ -1,4 +1,6 @@
+import 'package:sizer/sizer.dart';
 import 'package:flutter/material.dart';
+import 'package:simanja_app/utils/enums.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
@@ -12,8 +14,6 @@ import 'package:simanja_app/presentation/widgets/atom/gender_slider.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
-import 'package:simanja_app/utils/enums.dart';
-import 'package:sizer/sizer.dart';
 
 class RegisterRemajaPage extends StatefulWidget {
   const RegisterRemajaPage({super.key});
@@ -25,7 +25,7 @@ class RegisterRemajaPage extends StatefulWidget {
 }
 
 class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
-  late GlobalTheme theme;
+  GlobalTheme theme = const GlobalTheme();
   late Future<List<Map<String, String>>> listPosyandu;
   late List<String> posyanduNames;
 
@@ -38,38 +38,28 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
     return null;
   }
 
-  //* Callback hell
-  String _nik = '';
-  void _readNIK(data) => _nik = data;
-
-  String _name = '';
-  void _readName(data) => _name = data;
-
-  String _posyanduMember = '';
-  void _readPosyanduMember(data) => _posyanduMember = data;
-
-  DateTime _dateOfBirth = DateTime.now();
-  void _readDoB(data) => _dateOfBirth = data;
-
-  String _address = '';
-  void _readAddress(data) => _address = data;
-
-  String _email = '';
-  void _readEmail(data) => _email = data;
-
-  String _password = '';
-  void _readPassword(data) => _password = data;
-
-  bool _bpjs = false;
-  void _readBPJS(data) => _bpjs = data;
-
-  Gender _sex = Gender.male;
-  void _readSex(data) => _sex = data;
+  Map<String, dynamic> inputData = {
+    'NIK': null,
+    'Nama': null,
+    'Posyandu': null,
+    'Tanggal Lahir': DateTime.now(),
+    'Nomor Telepon': null,
+    'Jalan': null,
+    'No Jalan': null,
+    'RT': null,
+    'RW': null,
+    'Dukuh': null,
+    'Kecamatan': null,
+    'Perokok': false,
+    'Email': null,
+    'Password': null,
+    'BPJS': false,
+    'Jenis Kelamin': Gender.male,
+  };
 
   @override
   void initState() {
     super.initState();
-    theme = const GlobalTheme();
     listPosyandu = KaderAuthentication().getPosyanduList();
   }
 
@@ -113,13 +103,13 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                       hintText: 'Masukkan NIK...',
                       type: TextInputType.number,
                       action: TextInputAction.next,
-                      value: _readNIK),
+                      value: (d) => inputData['NIK'] = d),
                   TextInput(
                       labelText: 'Nama Lengkap',
                       hintText: 'Masukkan Nama Lengkap...',
                       type: TextInputType.name,
                       action: TextInputAction.next,
-                      value: _readName),
+                      value: (d) => inputData['Nama'] = d),
                   FutureBuilder(
                       future: KaderAuthentication().getPosyanduList(),
                       builder: (context, snapshot) {
@@ -132,88 +122,107 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                               .map((item) => item['posyandu']!)
                               .toList();
                           return CustomDropdown(
-                            label: 'Asal Posyandu',
-                            items: posyanduNames,
-                            onChanged: _readPosyanduMember,
-                          );
+                              label: 'Asal Posyandu',
+                              items: posyanduNames,
+                              onChanged: (d) => inputData['Posyandu'] = d);
                         }
-                        return const Text('Error');
+                        return const Text('No Data Found!');
                       }),
                   const Padding(padding: EdgeInsets.only(top: 10)),
-                  DateOfBirthField(value: _readDoB),
+                  DateOfBirthField(
+                      value: (d) => inputData['Tanggal Lahir'] = d),
                   TextInput(
-                      labelText: 'Alamat',
-                      hintText: 'Masukkan Alamat...',
+                      labelText: 'Nomor Telepon / WA',
+                      hintText: '0812142...',
+                      type: TextInputType.number,
+                      action: TextInputAction.next,
+                      value: (d) => inputData['Nomor Telepon'] = d),
+                  TextInput(
+                      labelText: 'Alamat Jalan',
+                      hintText: 'Masukkan Nama Jalan...',
                       type: TextInputType.streetAddress,
                       action: TextInputAction.next,
-                      value: _readAddress),
+                      value: (d) => inputData['Jalan'] = d),
+                  TextInput(
+                      labelText: 'Alamat No Jalan',
+                      hintText: 'Masukkan No Jalan...',
+                      type: TextInputType.number,
+                      action: TextInputAction.next,
+                      value: (d) => inputData['No Jalan'] = d),
+                  TextInput(
+                      labelText: 'No RT',
+                      hintText: 'Masukkan RT...',
+                      type: TextInputType.number,
+                      action: TextInputAction.next,
+                      value: (d) => inputData['RT'] = d),
+                  TextInput(
+                      labelText: 'No RW',
+                      hintText: 'Masukkan RW...',
+                      type: TextInputType.number,
+                      action: TextInputAction.next,
+                      value: (d) => inputData['RW'] = d),
+                  TextInput(
+                      labelText: 'Dukuh / Pedukuhan',
+                      hintText: 'Masukkan Nama Dukuh...',
+                      type: TextInputType.streetAddress,
+                      action: TextInputAction.next,
+                      value: (d) => inputData['Dukuh'] = d),
+                  TextInput(
+                      labelText: 'Kecamatan',
+                      hintText: 'Masukkan Nama Kecamatan...',
+                      type: TextInputType.streetAddress,
+                      action: TextInputAction.next,
+                      value: (d) => inputData['Kecamatan'] = d),
                   TextInput(
                       labelText: 'Email',
                       hintText: 'Masukkan Email...',
                       type: TextInputType.emailAddress,
                       action: TextInputAction.next,
-                      value: _readEmail),
+                      value: (d) => inputData['Email'] = d),
                   TextInput(
                       labelText: 'Kata Sandi',
                       hintText: 'Masukkan Password...',
                       type: TextInputType.visiblePassword,
                       hideText: true,
-                      value: _readPassword),
-                  ChecklistBox(text: 'Punya BPJS ?', value: _readBPJS),
+                      value: (d) => inputData['Password'] = d),
+                  ChecklistBox(
+                      text: 'Pernah Merokok ?',
+                      value: (d) => inputData['Perokok'] = d),
+                  ChecklistBox(
+                      text: 'Punya BPJS ?',
+                      value: (d) => inputData['BPJS'] = d),
                   const Padding(padding: EdgeInsets.only(top: 10)),
-                  GenderSelection(value: _readSex),
+                  GenderSelection(value: (d) => inputData['gender'] = d),
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () async {
-                        if (_nik.isEmpty) {
-                          showCustomSnackbar(
-                              context, 'NIK tidak boleh kosong', 2);
-                          return;
-                        }
-                        if (_name.isEmpty) {
-                          showCustomSnackbar(
-                              context, 'Nama tidak boleh kosong', 2);
-                          return;
-                        }
-                        if (_posyanduMember.isEmpty) {
-                          showCustomSnackbar(
-                              context, 'Nama posyandu tidak boleh kosong', 2);
-                          return;
-                        }
-                        if (_address.isEmpty) {
-                          showCustomSnackbar(
-                              context, 'Alamat tidak boleh kosong', 2);
-                          return;
-                        }
-                        if (_dateOfBirth == DateTime.now()) {
-                          showCustomSnackbar(
-                              context, 'Tanggal lahir tidak boleh kosong', 2);
-                          return;
-                        }
-                        if (_email.isEmpty) {
-                          showCustomSnackbar(
-                              context, 'Email tidak boleh kosong', 2);
-                          return;
-                        }
-                        if (_password.isEmpty) {
-                          showCustomSnackbar(
-                              context, 'Kata sandi tidak boleh kosong', 2);
-                          return;
+                        for (var item in inputData.entries) {
+                          if (item.value == null) {
+                            showCustomSnackbar(
+                                context, '${item.key} Tidak Boleh Kosong', 2);
+                            return;
+                          }
                         }
 
                         UserRemaja remaja = UserRemaja(
-                          uid: 'dummy',
-                          nik: _nik,
-                          name: _name,
+                          uid: '',
+                          nik: inputData['NIK'],
+                          name: inputData['Nama'],
                           posyandu: _translateNametoUID(
-                                  await listPosyandu, _posyanduMember) ??
-                              'dummy',
-                          birthDate: _dateOfBirth,
-                          address: _address,
-                          email: _email,
-                          password: _password,
-                          bpjs: _bpjs,
-                          sex: _sex,
+                              await listPosyandu, inputData['Posyandu'])!,
+                          birthDate: inputData['Tanggal Lahir'],
+                          phoneNumber: inputData['Nomor Telepon'],
+                          street: inputData['Jalan'],
+                          streetNumber: inputData['No Jalan'],
+                          rt: int.parse(inputData['RT']),
+                          rw: int.parse(inputData['RW']),
+                          village: inputData['Dukuh'],
+                          district: inputData['Kecamatan'],
+                          smoker: inputData['Perokok'],
+                          email: inputData['Email'],
+                          password: inputData['Password'],
+                          bpjs: inputData['BPJS'],
+                          sex: inputData['Jenis Kelamin'],
                         );
 
                         final response =

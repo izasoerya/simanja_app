@@ -59,7 +59,7 @@ class DetailAccount extends StatelessWidget {
             label: 'Jenis Kelamin',
             data: remaja!.sex == Gender.male ? 'Laki-laki' : 'Perempuan'),
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
-        TextSpaceAround(label: 'Alamat', data: remaja!.address),
+        TextSpaceAround(label: 'Alamat', data: remaja!.village),
         SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TextSpaceAround(label: 'Email', data: remaja!.email),
       ],

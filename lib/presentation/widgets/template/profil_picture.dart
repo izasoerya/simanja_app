@@ -77,7 +77,7 @@ class ProfilPicture extends StatelessWidget {
               color: Colors.white,
               fontSize: 16,
               fontWeight: FontWeight.normal)),
-      Text(remaja!.address,
+      Text(remaja!.village,
           style: const TextStyle(
               color: Colors.white,
               fontSize: 16,

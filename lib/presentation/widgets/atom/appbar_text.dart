@@ -66,7 +66,7 @@ class AppbarText extends ConsumerWidget {
           () {
             return isKader
                 ? ref.watch(userKaderProvider).address
-                : ref.watch(userRemajaProvider).address;
+                : ref.watch(userRemajaProvider).village;
           }(),
           style: TextStyle(
             color: const GlobalTheme().secondaryColor,

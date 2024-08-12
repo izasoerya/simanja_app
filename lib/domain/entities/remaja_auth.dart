@@ -7,7 +7,14 @@ class UserRemaja {
   final String posyandu;
   final Gender sex;
   final DateTime birthDate;
-  final String address;
+  final String phoneNumber;
+  final String street;
+  final int streetNumber;
+  final int rt;
+  final int rw;
+  final String village;
+  final String district;
+  final bool smoker;
   final bool bpjs;
   final String email;
   final String password;
@@ -19,7 +26,14 @@ class UserRemaja {
     required this.posyandu,
     required this.sex,
     required this.birthDate,
-    required this.address,
+    required this.phoneNumber,
+    required this.street,
+    required this.streetNumber,
+    required this.rt,
+    required this.rw,
+    required this.village,
+    required this.district,
+    required this.smoker,
     required this.bpjs,
     required this.email,
     required this.password,
@@ -32,7 +46,14 @@ class UserRemaja {
     String? posyandu,
     Gender? sex,
     DateTime? birthDate,
-    String? address,
+    String? phoneNumber,
+    String? street,
+    int? streetNumber,
+    int? rt,
+    int? rw,
+    String? village,
+    String? district,
+    bool? smoker,
     bool? bpjs,
     String? email,
     String? password,
@@ -44,7 +65,14 @@ class UserRemaja {
       posyandu: posyandu ?? this.posyandu,
       sex: sex ?? this.sex,
       birthDate: birthDate ?? this.birthDate,
-      address: address ?? this.address,
+      phoneNumber: phoneNumber ?? this.phoneNumber,
+      street: street ?? this.street,
+      streetNumber: streetNumber ?? this.streetNumber,
+      rt: rt ?? this.rt,
+      rw: rw ?? this.rw,
+      village: village ?? this.village,
+      district: district ?? this.district,
+      smoker: smoker ?? this.smoker,
       bpjs: bpjs ?? this.bpjs,
       email: email ?? this.email,
       password: password ?? this.password,
@@ -57,9 +85,16 @@ class UserRemaja {
       name: json['name'],
       nik: json['nik'],
       posyandu: json['posyandu'],
-      sex: json['is_male'] == true ? Gender.male : Gender.female,
+      sex: json['is_male'] ? Gender.male : Gender.female,
       birthDate: DateTime.parse(json['date_of_birth']),
-      address: json['address'],
+      phoneNumber: json['phone_number'],
+      street: json['street'],
+      streetNumber: json['street_number'],
+      rt: json['rt'],
+      rw: json['rw'],
+      village: json['village'],
+      district: json['district'],
+      smoker: json['is_smoker'],
       bpjs: json['is_bpjs'],
       email: json['email'],
       password: json['password'],
@@ -74,7 +109,14 @@ class UserRemaja {
       'posyandu': posyandu,
       'is_male': sex == Gender.male ? true : false,
       'date_of_birth': birthDate.toIso8601String(),
-      'address': address,
+      'phone_number': phoneNumber,
+      'street': street,
+      'street_number': streetNumber,
+      'rt': rt,
+      'rw': rw,
+      'village': village,
+      'district': district,
+      'is_smoker': smoker,
       'is_bpjs': bpjs,
       'email': email,
       'password': password,
