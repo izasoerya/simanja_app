@@ -5,9 +5,11 @@ class SubmitButton extends StatelessWidget {
   final String text;
   final Color backgroundColor;
   final void Function() onClick;
+  final Icon? icon;
   const SubmitButton(
       {super.key,
       required this.text,
+      this.icon,
       this.backgroundColor = const Color.fromRGBO(203, 101, 53, 1),
       required this.onClick});
 
@@ -22,12 +24,20 @@ class SubmitButton extends StatelessWidget {
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(5),
             ),
+            elevation: 5,
           ),
           onPressed: onClick,
-          child: Text(text,
-              style: const GlobalTheme()
-                  .headerStyle
-                  .copyWith(color: Colors.white, fontSize: 18)),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(text,
+                  style: const GlobalTheme()
+                      .headerStyle
+                      .copyWith(color: Colors.white, fontSize: 18)),
+              if (icon != null) const SizedBox(width: 8),
+              icon ?? const SizedBox(),
+            ],
+          ),
         ));
   }
 }
