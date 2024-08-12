@@ -25,6 +25,11 @@ class KaderEventService {
     return response.where((element) => element.isFinish == false).toList();
   }
 
+  Future<List<EventKader>> getDeactiveEventList(String idKader) async {
+    final response = await KaderEventImplementation().getKaderEvents(idKader);
+    return response.where((element) => element.isFinish == true).toList();
+  }
+
   Future<EventKader?> updateEvent(EventKader event) async {
     final response = await KaderEventImplementation().updateKaderEvent(event);
     return response;

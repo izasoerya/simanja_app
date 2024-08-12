@@ -34,10 +34,11 @@ class DashboardKader extends StatelessWidget {
                   return const Text('Error');
                 }),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            const TemplateTitle(text: 'REKAP CHECKUP'),
+            const TemplateTitle(text: 'REKAP PELAYANAN KESEHATAN'),
             const Padding(padding: EdgeInsets.only(top: 15)),
             FutureBuilder(
-                future: KaderCheckupService().getCheckupList(kaderAccount.uid),
+                future: KaderCheckupService()
+                    .getDeactiveCheckupList(kaderAccount.uid),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();
@@ -51,7 +52,7 @@ class DashboardKader extends StatelessWidget {
             const Padding(padding: EdgeInsets.only(top: 20)),
             FutureBuilder(
                 future:
-                    KaderEventService().getActiveEventList(kaderAccount.uid),
+                    KaderEventService().getDeactiveEventList(kaderAccount.uid),
                 builder: (context, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
                     return const CircularProgressIndicator();

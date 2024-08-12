@@ -31,6 +31,14 @@ class KaderCheckupService {
     return activeCheckup;
   }
 
+  Future<List<KaderCheckup>> getDeactiveCheckupList(String posyanduUID) async {
+    List<KaderCheckup> data =
+        await KaderCheckupImplementation().getCheckups(posyanduUID);
+    final activeCheckup =
+        data.where((element) => element.isFinish == true).toList();
+    return activeCheckup;
+  }
+
   Future<List<UserRemaja>?> getRemajaCheckupList(String checkupUID) async {
     List<String>? listRemaja =
         await KaderCheckupImplementation().getRemajaCheckupList(checkupUID);
