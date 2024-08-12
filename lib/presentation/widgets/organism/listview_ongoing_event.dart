@@ -3,7 +3,7 @@ import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
-import 'package:simanja_app/presentation/widgets/organism/listview_activity.dart';
+import 'package:simanja_app/presentation/widgets/organism/listview_all_event.dart';
 
 class OngoingEvent extends StatelessWidget {
   final List<KaderCheckup>? itemsCheckup;
@@ -30,7 +30,7 @@ class OngoingEvent extends StatelessWidget {
           ),
         ),
         const Padding(padding: EdgeInsets.only(top: 10)),
-        ListviewActivity(
+        ListviewAllEvent(
           itemsCheckup: itemsCheckup,
           itemsEvent: itemsEvent,
         ),

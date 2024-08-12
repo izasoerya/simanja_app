@@ -6,10 +6,10 @@ import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_image.dart';
 
-class ListviewActivity extends ConsumerWidget {
+class ListviewAllEvent extends ConsumerWidget {
   final List<KaderCheckup>? itemsCheckup;
   final List<EventKader>? itemsEvent;
-  const ListviewActivity({super.key, this.itemsCheckup, this.itemsEvent});
+  const ListviewAllEvent({super.key, this.itemsCheckup, this.itemsEvent});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {

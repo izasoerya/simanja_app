@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/services/kadet_event_service.dart';
-import 'package:simanja_app/presentation/widgets/organism/listview_activity.dart';
+import 'package:simanja_app/presentation/widgets/organism/listview_all_event.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_description.dart';
 import 'package:simanja_app/utils/default_account.dart';
 
@@ -35,7 +35,7 @@ class ListActivityFinishPage extends StatelessWidget {
                 } else if (snapshot.hasData) {
                   return SizedBox(
                       height: screenHegiht,
-                      child: ListviewActivity(
+                      child: ListviewAllEvent(
                         itemsEvent: snapshot.data!,
                       ));
                 }

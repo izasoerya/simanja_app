@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
-import 'package:simanja_app/presentation/widgets/organism/listview_activity.dart';
+import 'package:simanja_app/presentation/widgets/organism/listview_all_event.dart';
 
 class ActivityList extends StatelessWidget {
   final List<EventKader>? items;
@@ -19,7 +19,7 @@ class ActivityList extends StatelessWidget {
             isEmpty
           else
             Center(
-              child: ListviewActivity(
+              child: ListviewAllEvent(
                 itemsEvent: items,
               ),
             )
