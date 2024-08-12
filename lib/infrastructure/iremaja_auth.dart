@@ -89,7 +89,7 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
           .select('*')
           .eq('posyandu', posyanduUID);
     } catch (e) {
-      print('$e');
+      print('Error: $e');
       return Future.error(e);
     }
     return responses.map((response) => UserRemaja.fromJSON(response)).toList();
