@@ -55,7 +55,7 @@ class _LayoutKaderState extends ConsumerState<LayoutKader> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.people_sharp),
-            label: 'Remaja',
+            label: 'Anggota',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.directions_run),
