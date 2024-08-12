@@ -12,6 +12,8 @@ import 'package:simanja_app/presentation/screens/kader/create_inventory_page.dar
 import 'package:simanja_app/presentation/screens/kader/create_mutation_page.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
+import 'package:simanja_app/presentation/screens/kader/list_activity_finish_page.dart';
+import 'package:simanja_app/presentation/screens/kader/list_checkup_finish_page.dart';
 import 'package:simanja_app/presentation/screens/kader/list_remaja_checkup_page.dart';
 import 'package:simanja_app/presentation/screens/kader/management_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
@@ -98,6 +100,24 @@ final GoRouter router = GoRouter(
                   appBarTitle: 'REKAP KONDISI KESEHATAN REMAJA',
                   child: CheckupSummaryPage(
                       checkupUID: state.uri.queryParameters['checkupUID']!),
+                );
+              },
+            ),
+            GoRoute(
+              path: 'list-finished-checkup',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SubPageLayout(
+                  appBarTitle: 'DAFTAR LAYANAN KESEHATAN SELESAI',
+                  child: ListCheckupFinishPage(),
+                );
+              },
+            ),
+            GoRoute(
+              path: 'list-finished-activity',
+              builder: (BuildContext context, GoRouterState state) {
+                return const SubPageLayout(
+                  appBarTitle: 'DAFTAR AKTIVITAS POSYANDU SELESAI',
+                  child: ListActivityFinishPage(),
                 );
               },
             ),
