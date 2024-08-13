@@ -45,7 +45,7 @@ class _ImageBoxManagementState extends State<ImageBoxManagement> {
                   : Colors.grey,
               enableUnderline: _selectedObject == ManagementObject.inventaris,
             )),
-        const Padding(padding: EdgeInsets.only(left: 20)),
+        const Padding(padding: EdgeInsets.only(left: 15)),
         GestureDetector(
             onTap: () {
               setState(() {
