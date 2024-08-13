@@ -7,6 +7,7 @@ class GlobalTheme {
   final Color primaryColor = const Color.fromRGBO(89, 43, 119, 1);
   final Color primaryColorLight = const Color.fromARGB(255, 208, 174, 221);
   final Color secondaryColor = const Color.fromRGBO(203, 101, 53, 1);
+  final Color lightSecondaryColor = const Color.fromARGB(255, 223, 125, 79);
   final Color textColor = const Color.fromRGBO(66, 66, 66, 1);
 
   TextStyle get headerStyle => TextStyle(
