@@ -67,7 +67,7 @@ class KaderEventImplementation implements KaderEventRepo {
 
   @override
   Future<EventKader?> updateKaderEvent(EventKader kaderEvent) async {
-    if (kaderEvent.urlImage == null) {
+    if (kaderEvent.urlImage == null || kaderEvent.urlImage!.isEmpty) {
       final response = await Supabase.instance.client
           .from('kader_activity')
           .update(kaderEvent.toJSON())
