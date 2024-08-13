@@ -3,17 +3,17 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/image_box.dart';
 import 'package:simanja_app/utils/enums.dart';
 
-class ImageBoxSelection extends StatefulWidget {
+class ImageBoxManagement extends StatefulWidget {
   final ManagementObject defaultValue;
   final void Function(ManagementObject) onTap;
-  const ImageBoxSelection(
+  const ImageBoxManagement(
       {super.key, required this.onTap, required this.defaultValue});
 
   @override
-  State<ImageBoxSelection> createState() => _ImageBoxSelectionState();
+  State<ImageBoxManagement> createState() => _ImageBoxManagementState();
 }
 
-class _ImageBoxSelectionState extends State<ImageBoxSelection> {
+class _ImageBoxManagementState extends State<ImageBoxManagement> {
   final Image imageInventory =
       Image.asset('assets/logo/Kelola_Inventaris_Icon.png');
   final Image imageKas = Image.asset('assets/logo/Kelola_Kas_Icon.png');

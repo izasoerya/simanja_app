@@ -6,7 +6,7 @@ import 'package:simanja_app/domain/services/kader_inventory_service.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_inventory.dart';
 import 'package:simanja_app/utils/default_account.dart';
 import 'package:simanja_app/utils/enums.dart';
-import 'package:simanja_app/presentation/widgets/organism/image_box_selection.dart';
+import 'package:simanja_app/presentation/widgets/organism/image_box_management.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_kas.dart';
 import 'package:simanja_app/presentation/widgets/organism/textfield_and_button.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_posyandu.dart';
@@ -70,7 +70,7 @@ class _ManagementPageState extends State<ManagementPage> {
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
             const TitleWPosyandu(title: 'KELOLA POSYANDU'),
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
-            ImageBoxSelection(
+            ImageBoxManagement(
               onTap: _onObjectSelected,
               defaultValue: _selectedObject,
             ),
