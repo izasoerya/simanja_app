@@ -10,10 +10,7 @@ import 'presentation/router/router.dart';
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Load environment variables
   await dotenv.load(fileName: "assets/.env");
-
-  // Request necessary permissions before initializing other services
   await _requestPermissions();
 
   // Initialize Supabase
@@ -23,30 +20,29 @@ Future<void> main() async {
     debug: true,
   );
 
-  // Run the app
   runApp(const ProviderScope(child: MainApp()));
 }
 
 Future<void> _requestPermissions() async {
-  var status = await Permission.storage.status;
+  var status = await Permission.photos.status;
 
-  status = await Permission.storage.status;
+  status = await Permission.photos.status;
   if (status.isGranted) {
-    print('Storage permission already granted.');
+    print('Access Photo already granted.');
   } else if (status.isDenied || status.isRestricted) {
     status = await Permission.photos.request();
 
     if (status.isGranted) {
-      print('Storage permission granted.');
+      print('Access Photo granted.');
     } else if (status.isDenied) {
       await openAppSettings();
-      await Permission.storage.request();
+      await Permission.photos.request();
     } else if (status.isPermanentlyDenied) {
-      print('Storage permission permanently denied.');
+      print('Access Photo permanently denied.');
       await openAppSettings();
     }
   } else if (status.isPermanentlyDenied) {
-    print('Storage permission permanently denied.');
+    print('Access Photo permanently denied.');
     await openAppSettings();
   }
 }
