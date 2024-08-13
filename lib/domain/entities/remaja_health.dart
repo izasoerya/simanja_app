@@ -13,6 +13,13 @@ class HealthPropertiesRemaja {
     return '$tds/$tdd mmHg';
   }
 
+  double? get imt {
+    if (weight == null || height == null) {
+      return null;
+    }
+    return weight! / ((height! / 100) * (height! / 100));
+  }
+
   double? hemoglobin;
   double? cholesterol;
   double? bloodSugar;
