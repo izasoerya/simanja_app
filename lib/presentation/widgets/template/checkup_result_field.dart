@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
