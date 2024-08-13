@@ -1,5 +1,6 @@
 import 'package:intl/intl.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
+import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/utils/util_excel.dart';
@@ -54,8 +55,33 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Tanggal Pengecekan: $formattedDate',
-                style: TextStyle(fontSize: 10.sp, fontWeight: FontWeight.bold)),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text('Tanggal Pengecekan:\n$formattedDate',
+                    style: TextStyle(
+                        fontSize: 12.sp, fontWeight: FontWeight.bold)),
+                !widget.kaderCheckup.isFinish
+                    ? Container(
+                        decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(5),
+                            color: Colors.green.shade500,
+                            boxShadow: const [
+                              BoxShadow(
+                                  color: Colors.black26,
+                                  offset: Offset(0, 2),
+                                  blurRadius: 2)
+                            ]),
+                        child: IconButton(
+                            onPressed: () => showCompletionDialog(
+                                context, widget.kaderCheckup),
+                            icon: const Icon(Icons.check_circle_outline,
+                                color: Colors.white, size: 30)),
+                      )
+                    : const SizedBox(),
+              ],
+            ),
             const Padding(padding: EdgeInsets.only(top: 10)),
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
@@ -133,4 +159,32 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
           ],
         ));
   }
+}
+
+void showCompletionDialog(BuildContext context, KaderCheckup checkup) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Konfirmasi'),
+        content: const Text('Apakah Anda ingin menandai sebagai selesai?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Batal'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Tandai Sebagai Selesai'),
+            onPressed: () async {
+              final data = checkup.copyWith(isFinish: true);
+              await KaderCheckupService().updateCheckupStatus(data);
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+        ],
+      );
+    },
+  );
 }

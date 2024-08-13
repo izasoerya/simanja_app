@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
-import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_image.dart';
 
@@ -38,42 +37,9 @@ class ListviewAllEvent extends ConsumerWidget {
               title: item.checkupTitle,
               uid: item.uid,
               descriptions: [item.dateEvent.toString().substring(0, 10)],
-              onTap: (data) {
-                showGeneralDialog(
-                  context: context,
-                  pageBuilder: (context, _, __) {
-                    return AlertDialog(
-                      title: Text(data),
-                      content: Text(item.dateEvent.toString()),
-                      actions: [
-                        TextButton(
-                          onPressed: () => Navigator.of(context).pop(),
-                          child: const Text('Belum Selesai'),
-                        ),
-                        TextButton(
-                          onPressed: () async {
-                            final response = await KaderCheckupService()
-                                .updateCheckupStatus(item.copyWith(
-                                    isFinish: true, dateEvent: DateTime.now()));
-                            if (response != null) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content: Text(
-                                          'Checkup berhasil diselesaikan')));
-                            } else {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                      content:
-                                          Text('Checkup gagal diselesaikan')));
-                            }
-                            Navigator.of(context).pop();
-                          },
-                          child: const Text('Selesai'),
-                        ),
-                      ],
-                    );
-                  },
-                );
+              onTap: (_) {
+                router
+                    .push('/login-kader/rekap-checkup?checkupUID=${item.uid}');
               },
             );
           } else if (item is EventKader) {
