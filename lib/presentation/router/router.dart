@@ -127,7 +127,7 @@ final GoRouter router = GoRouter(
                 final param = state.uri.queryParameters;
                 return SubPageLayout(
                     appBarTitle: 'KONDISI REMAJA',
-                    child: RekapCheckupResult(
+                    child: RekapCheckupResultPage(
                         checkupUID: param['checkupUID']!,
                         label: param['label']!));
               },

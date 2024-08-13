@@ -4,17 +4,17 @@ import 'package:simanja_app/domain/services/remaja_heath_service.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_rekap_result.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_description.dart';
 
-class RekapCheckupResult extends StatefulWidget {
+class RekapCheckupResultPage extends StatefulWidget {
   final String checkupUID;
   final String label;
-  const RekapCheckupResult(
+  const RekapCheckupResultPage(
       {super.key, required this.checkupUID, required this.label});
 
   @override
-  State<RekapCheckupResult> createState() => _RekapCheckupResultState();
+  State<RekapCheckupResultPage> createState() => _RekapCheckupResultPageState();
 }
 
-class _RekapCheckupResultState extends State<RekapCheckupResult> {
+class _RekapCheckupResultPageState extends State<RekapCheckupResultPage> {
   List<HealthPropertiesRemaja?> data = [];
   bool isLoading = true;
 
@@ -41,11 +41,11 @@ class _RekapCheckupResultState extends State<RekapCheckupResult> {
         return data.where((e) => e != null && e.kek == true).toList();
       case 'Obesitas':
         return data
-            .where((e) => e != null && e.weight != null && e.weight! > 60)
+            .where((e) => e != null && e.imt != null && e.imt! > 27.0)
             .toList();
       case 'Sangat Kurus':
         return data
-            .where((e) => e != null && e.weight != null && e.weight! < 20)
+            .where((e) => e != null && e.imt != null && e.imt! < 17.0)
             .toList();
       case 'Merokok':
         return data.where((e) => e != null && e.smoker == true).toList();
@@ -59,7 +59,8 @@ class _RekapCheckupResultState extends State<RekapCheckupResult> {
   @override
   Widget build(BuildContext context) {
     List<HealthPropertiesRemaja?> filteredData =
-        _filterHealthsByLabel(widget.label, data);
+        data.isNotEmpty ? _filterHealthsByLabel(widget.label, data) : [];
+    print(filteredData);
 
     return Container(
       width: MediaQuery.of(context).size.width,
