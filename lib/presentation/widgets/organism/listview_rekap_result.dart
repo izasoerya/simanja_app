@@ -18,7 +18,6 @@ class RekapResultList extends StatelessWidget {
         separatorBuilder: (context, index) =>
             const Divider(height: 10, color: Colors.white),
         itemBuilder: (context, index) {
-          // TODO: Create new ListView
           return ItemListViewHealth(health: healths[index]!, label: label);
         });
   }

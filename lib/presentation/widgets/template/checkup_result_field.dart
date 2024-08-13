@@ -87,11 +87,8 @@ class CheckupResultField extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             ResultContainerSmall(
-              value: (item == null ||
-                      item!.weight == null ||
-                      item!.height == null)
-                  ? 'NaN'
-                  : (item!.weight! / pow(item!.height!, 2)).toStringAsFixed(2),
+              value:
+                  (item!.imt == null) ? 'NaN' : (item!.imt!).toStringAsFixed(2),
               label: 'Indeks Massa Tubuh (IMT)',
               textStyle: const TextStyle(
                   fontSize: 21,

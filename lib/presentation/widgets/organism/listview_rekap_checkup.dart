@@ -76,7 +76,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Obesitas: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.weight != null && element!.weight! > 60).length}',
+                    'Obesitas: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.imt != null && element!.imt! > 27.0).length}',
                 isFinish: true,
                 onTap: (d) => widget._gotoRekapCheckupResult('Obesitas'),
                 uid: 'obesitas'),
@@ -84,7 +84,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Sangat Kurus: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.weight != null && element!.weight! < 20).length}',
+                    'Sangat Kurus: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.imt != null && element!.imt! < 17.0).length}',
                 isFinish: true,
                 onTap: (d) => widget._gotoRekapCheckupResult('Sangat Kurus'),
                 uid: 'kurus'),
