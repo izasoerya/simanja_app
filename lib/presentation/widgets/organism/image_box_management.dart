@@ -32,9 +32,7 @@ class _ImageBoxManagementState extends State<ImageBoxManagement> {
       children: [
         GestureDetector(
             onTap: () {
-              setState(() {
-                _selectedObject = ManagementObject.inventaris;
-              });
+              setState(() => _selectedObject = ManagementObject.inventaris);
               widget.onTap(ManagementObject.inventaris);
             },
             child: ImageBox(
@@ -48,9 +46,7 @@ class _ImageBoxManagementState extends State<ImageBoxManagement> {
         const Padding(padding: EdgeInsets.only(left: 15)),
         GestureDetector(
             onTap: () {
-              setState(() {
-                _selectedObject = ManagementObject.kas;
-              });
+              setState(() => _selectedObject = ManagementObject.kas);
               widget.onTap(ManagementObject.kas);
             },
             child: ImageBox(

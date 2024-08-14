@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class ImageBox extends StatelessWidget {
   final Image image;
@@ -23,8 +24,8 @@ class ImageBox extends StatelessWidget {
     return Column(
       children: [
         Container(
-          width: width ?? 100,
-          height: height ?? 120,
+          width: width ?? 16.w,
+          height: height ?? 14.h,
           padding: const EdgeInsets.all(10),
           margin: const EdgeInsets.all(5),
           decoration: BoxDecoration(
@@ -34,13 +35,12 @@ class ImageBox extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              SizedBox(width: 60, height: 60, child: image),
+              SizedBox(width: 10.w, height: 8.h, child: image),
               Text(label,
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 6.sp,
+                      fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center),
             ],
           ),
@@ -49,7 +49,7 @@ class ImageBox extends StatelessWidget {
         enableUnderline != null
             ? enableUnderline!
                 ? Container(
-                    width: (width ?? 80) / 1.5,
+                    width: (width ?? 16.w) / 1.5,
                     height: 5,
                     color: const GlobalTheme().secondaryColor,
                   )
