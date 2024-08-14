@@ -36,8 +36,6 @@ class _InputHealthDataState extends State<InputHealthData> {
       uidRemaja: widget.uidRemaja,
       uidCheckup: widget.uidCheckup,
     );
-    print('uidRemaja: ${data.uidRemaja}');
-    print('uidCheckup: ${data.uidCheckup}');
 
     return SizedBox(
       key: _key,
