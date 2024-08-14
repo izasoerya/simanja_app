@@ -25,6 +25,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   @override
   Future<HealthPropertiesRemaja?> updateHealth(
       HealthPropertiesRemaja health) async {
+    print(health.uid!);
     try {
       final responseGET = await Supabase.instance.client
           .from('health_properties_remaja')

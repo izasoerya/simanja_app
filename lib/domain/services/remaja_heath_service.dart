@@ -3,18 +3,12 @@ import 'package:simanja_app/infrastructure/iremaja_health.dart';
 
 class RemajaHealthService {
   Future<HealthPropertiesRemaja?> upsertRemajaHealth(
-      HealthPropertiesRemaja health,
-      String remajaUID,
-      String checkupUID,
-      DateTime date) async {
-    final response = await RemajaHealthImplementation()
-        .getHealthbyCheckupUID(checkupUID, remajaUID, date);
+      HealthPropertiesRemaja health) async {
+    final response = await RemajaHealthImplementation().getHealthbyCheckupUID(
+        health.uidCheckup!, health.uidRemaja!, health.checkedAt!);
     if (response != null) {
-      // health.uid = response.uid;
-      final newData = health.copyWith(
-        uid: response.uid,
-      );
-      return await RemajaHealthImplementation().updateHealth(newData);
+      health.uid = response.uid;
+      return await RemajaHealthImplementation().updateHealth(health);
     }
     return await RemajaHealthImplementation().createHealth(health);
   }
