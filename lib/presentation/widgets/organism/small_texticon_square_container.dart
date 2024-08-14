@@ -5,17 +5,25 @@ import 'package:sizer/sizer.dart';
 class SmallTextIconSquareContainer extends StatelessWidget {
   final String lowerText;
   final IconData icon;
+  final double? width;
+  final double? height;
   final void Function()? onTap;
-  const SmallTextIconSquareContainer(
-      {super.key, required this.lowerText, required this.icon, this.onTap});
+  const SmallTextIconSquareContainer({
+    super.key,
+    required this.lowerText,
+    required this.icon,
+    this.height,
+    this.width,
+    this.onTap,
+  });
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        width: 150,
-        height: 125,
+        width: width ?? 150,
+        height: height ?? 125,
         decoration: BoxDecoration(
             color: const GlobalTheme().primaryColor,
             borderRadius: BorderRadius.circular(10),
@@ -34,7 +42,7 @@ class SmallTextIconSquareContainer extends StatelessWidget {
             Text(
               lowerText,
               style: TextStyle(
-                fontSize: 10.sp,
+                fontSize: 9.sp,
                 fontWeight: FontWeight.bold,
                 color: Colors.white,
               ),
