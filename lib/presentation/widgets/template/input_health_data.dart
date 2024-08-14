@@ -8,10 +8,10 @@ import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 import 'package:simanja_app/presentation/widgets/organism/image_box_health_input.dart';
 
 class InputHealthData extends StatefulWidget {
-  final String checkup;
-  final String remaja;
+  final String uidCheckup;
+  final String uidRemaja;
   const InputHealthData(
-      {super.key, required this.checkup, required this.remaja});
+      {super.key, required this.uidRemaja, required this.uidCheckup});
 
   @override
   State<InputHealthData> createState() => _InputHealthDataState();
@@ -27,7 +27,55 @@ class _InputHealthDataState extends State<InputHealthData> {
         healthData = HealthPropertiesRemaja();
       });
 
-  Widget _buildTextInput() {
+  @override
+  Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    final data = healthData.copyWith(
+      uidRemaja: widget.uidRemaja,
+      uidCheckup: widget.uidCheckup,
+    );
+    print('uidRemaja: ${data.uidRemaja}');
+    print('uidCheckup: ${data.uidCheckup}');
+
+    return SizedBox(
+      key: _key,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          SizedBox(
+            width: screenWidth * 0.9,
+            child: ImageBoxHealthInput(
+                onTap: (p0) => setState(() => selectedObject = p0),
+                defaultValue: selectedObject),
+          ),
+          Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
+          _HealthDataInput(
+            selectedObject: selectedObject,
+            healthData: data,
+            onReset: _resetHealthData,
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class _HealthDataInput extends StatelessWidget {
+  final HealthInputObject selectedObject;
+  final HealthPropertiesRemaja healthData;
+  final VoidCallback onReset;
+
+  const _HealthDataInput({
+    required this.selectedObject,
+    required this.healthData,
+    required this.onReset,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    HealthPropertiesRemaja inputData = healthData;
     switch (selectedObject) {
       case HealthInputObject.imt:
         return Column(
@@ -37,16 +85,15 @@ class _InputHealthDataState extends State<InputHealthData> {
                 labelText: 'Berat Badan (BB)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.weight = double.parse(d)),
+                value: (d) => inputData.weight = double.parse(d)),
             TextInput(
                 hintText: 'Ketik tinggi badan...',
                 labelText: 'Tinggi Badan (TB)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.height = double.parse(d)),
+                value: (d) => inputData.height = double.parse(d)),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            _SubmitData(
-                data: healthData, parent: widget, onClick: _resetHealthData),
+            _SubmitData(data: inputData, onClick: onReset),
           ],
         );
       case HealthInputObject.kek:
@@ -57,10 +104,10 @@ class _InputHealthDataState extends State<InputHealthData> {
                 labelText: 'Lingkar Lengan (LiLa)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.armCircumference = double.parse(d)),
+                value: (d) => inputData.armCircumference = double.parse(d)),
             ChecklistBox(
                 text: 'Resiko KEK\n*Centang apabila LiLa < 23.5 cm',
-                value: (d) => healthData.kek = d),
+                value: (d) => inputData.kek = d),
             const Padding(padding: EdgeInsets.only(top: 10)),
             TextInput(
                 hintText: 'Ketik lingkar perut...',
@@ -68,10 +115,9 @@ class _InputHealthDataState extends State<InputHealthData> {
                 type: TextInputType.number,
                 action: TextInputAction.next,
                 value: (d) =>
-                    healthData.abdominalCircumference = double.parse(d)),
+                    inputData.abdominalCircumference = double.parse(d)),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            _SubmitData(
-                data: healthData, parent: widget, onClick: _resetHealthData),
+            _SubmitData(data: inputData, onClick: onReset),
           ],
         );
       case HealthInputObject.bloodCheck:
@@ -82,104 +128,71 @@ class _InputHealthDataState extends State<InputHealthData> {
                 labelText: 'Tekanan Darah Sistolik (TDS)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.tds = double.parse(d)),
+                value: (d) => inputData.tds = double.parse(d)),
             TextInput(
                 hintText: 'Ketik tekanan darah diastolik...',
                 labelText: 'Tekanan Darah Sistolik (TDD)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.tdd = double.parse(d)),
+                value: (d) => inputData.tdd = double.parse(d)),
             TextInput(
                 hintText: 'Ketik hemoglobin...',
                 labelText: 'Hemoglobin (HB)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.hemoglobin = double.parse(d)),
+                value: (d) => inputData.hemoglobin = double.parse(d)),
             ChecklistBox(
                 text: 'Resiko Anemia\n*Centang apabila HB < 13 g/dL',
-                value: (d) => healthData.anemia = d),
+                value: (d) => inputData.anemia = d),
             TextInput(
                 hintText: 'Ketik gula darah...',
                 labelText: 'Gula Darah',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.bloodSugar = double.parse(d)),
+                value: (d) => inputData.bloodSugar = double.parse(d)),
             TextInput(
                 hintText: 'Ketik kolesterol...',
                 labelText: 'Kolesterol',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => healthData.cholesterol = double.parse(d)),
+                value: (d) => inputData.cholesterol = double.parse(d)),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            _SubmitData(
-                data: healthData, parent: widget, onClick: _resetHealthData),
+            _SubmitData(data: inputData, onClick: onReset),
           ],
         );
       case HealthInputObject.consultation:
         return Column(
           children: [
-            ChecklistBox(text: 'Perokok?', value: (d) => healthData.smoker = d),
+            ChecklistBox(text: 'Perokok?', value: (d) => inputData.smoker = d),
             ChecklistBox(
                 text: 'Sedang konsumsi TTD?',
-                value: (d) => healthData.tablet = d),
+                value: (d) => inputData.tablet = d),
             const Padding(padding: EdgeInsets.only(top: 10)),
             TextInput(
                 hintText: 'Ketik catatan...',
                 labelText: 'Catatan Konseling',
-                value: (d) => healthData.note = d),
+                value: (d) => inputData.note = d),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            _SubmitData(
-                data: healthData, parent: widget, onClick: _resetHealthData),
+            _SubmitData(data: inputData, onClick: onReset),
           ],
         );
     }
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
-
-    return SizedBox(
-      key: _key,
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Row(
-            children: [
-              SizedBox(
-                  width: screenWidth * 0.9,
-                  child: ImageBoxHealthInput(
-                      onTap: (p0) => setState(() => selectedObject = p0),
-                      defaultValue: selectedObject)),
-            ],
-          ),
-          Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
-          _buildTextInput(),
-        ],
-      ),
-    );
   }
 }
 
 class _SubmitData extends StatelessWidget {
   final HealthPropertiesRemaja data;
-  final InputHealthData parent;
   final VoidCallback onClick;
-  const _SubmitData(
-      {required this.data, required this.parent, required this.onClick});
+  const _SubmitData({required this.data, required this.onClick});
 
   @override
   Widget build(BuildContext context) {
     return SubmitButton(
         text: 'Simpan Perubahan',
         onClick: () async {
-          final updatedData = data.copyWith(
-              uidCheckup: parent.checkup,
-              uidRemaja: parent.remaja,
-              checkedAt: DateTime.now());
-          final response = await RemajaHealthService().upsertRemajaHealth(
-              updatedData, parent.remaja, parent.checkup, DateTime.now());
+          final updatedData = data.copyWith(checkedAt: DateTime.now());
+          final response =
+              await RemajaHealthService().upsertRemajaHealth(updatedData);
           if (response != null) {
             ScaffoldMessenger.of(context).showSnackBar(
                 const SnackBar(content: Text('Data Berhasil Disimpan')));
