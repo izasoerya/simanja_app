@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:simanja_app/domain/entities/kader_finance.dart';
+import 'package:sizer/sizer.dart';
 
 class ItemListViewKas extends StatelessWidget {
   final FinanceKader finance;
@@ -18,12 +19,12 @@ class ItemListViewKas extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(finance.date.toString().substring(0, 10),
-            style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold)),
-        Text(finance.description, style: const TextStyle(fontSize: 12)),
+            style: TextStyle(fontSize: 9.sp, fontWeight: FontWeight.bold)),
+        Text(finance.description, style: TextStyle(fontSize: 8.sp)),
         Text(
           '${finance.isDeposit ? 'Pemasukan' : 'Pengeluaran'} ${formatToIDR(int.parse(finance.value))}',
           style: TextStyle(
-            fontSize: 12,
+            fontSize: 8.sp,
             color: finance.isDeposit ? Colors.green : Colors.red,
           ),
         ),

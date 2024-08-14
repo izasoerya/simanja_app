@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_finance.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class TextfieldAndButton extends StatefulWidget {
   final void Function()? onRefresh;
@@ -36,7 +37,7 @@ class _TextfieldAndButtonState extends State<TextfieldAndButton> {
       children: [
         Text('Kas Posyandu',
             style: TextStyle(
-                fontSize: 16,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.bold,
                 color: const GlobalTheme().primaryColor)),
         Row(
@@ -53,13 +54,13 @@ class _TextfieldAndButtonState extends State<TextfieldAndButton> {
                 children: [
                   Text('Saldo',
                       style: TextStyle(
-                        fontSize: 12,
+                        fontSize: 8.sp,
                         fontWeight: FontWeight.bold,
                         color: const GlobalTheme().secondaryColor,
                       )),
                   Text(formatToIDR(int.parse(_total.toString())),
                       style: TextStyle(
-                          fontSize: 22,
+                          fontSize: 12.sp,
                           fontWeight: FontWeight.bold,
                           color: const GlobalTheme().primaryColor)),
                 ],
@@ -71,7 +72,7 @@ class _TextfieldAndButtonState extends State<TextfieldAndButton> {
                   widget.onRefresh!();
                 },
                 icon: const Icon(Icons.add_circle_rounded),
-                iconSize: MediaQuery.of(context).size.width * 0.15,
+                iconSize: 12.w,
                 color: const GlobalTheme().secondaryColor),
           ],
         )

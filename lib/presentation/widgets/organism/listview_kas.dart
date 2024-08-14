@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simanja_app/domain/entities/kader_finance.dart';
 import 'package:simanja_app/domain/services/kader_finance_service.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
@@ -19,9 +18,8 @@ class ListviewKas extends StatelessWidget {
       children: [
         Text('Detail Mutasi Kas',
             style: TextStyle(
-                fontSize: 15.sp,
-                fontFamily: GoogleFonts.archivoBlack().fontFamily,
-                fontWeight: FontWeight.normal,
+                fontSize: 12.sp,
+                fontWeight: FontWeight.bold,
                 color: const GlobalTheme().primaryColor)),
         Container(
             width: double.infinity,

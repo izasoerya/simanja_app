@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:simanja_app/domain/entities/kader_inventory.dart';
 import 'package:simanja_app/domain/services/kader_inventory_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
@@ -22,16 +21,15 @@ class ListviewInventory extends StatelessWidget {
             Text(
               'Daftar Barang',
               style: TextStyle(
-                  fontSize: 15.sp,
-                  fontFamily: GoogleFonts.archivoBlack().fontFamily,
-                  fontWeight: FontWeight.normal,
+                  fontSize: 12.sp,
+                  fontWeight: FontWeight.bold,
                   color: const GlobalTheme().primaryColor),
               textAlign: TextAlign.start,
             ),
             IconButton(
                 onPressed: () => router.push('/login-kader/create-inventory'),
                 icon: const Icon(Icons.add_circle_rounded),
-                iconSize: 30,
+                iconSize: 6.w,
                 color: const GlobalTheme().secondaryColor),
           ],
         ),
