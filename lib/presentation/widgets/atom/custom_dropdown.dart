@@ -4,6 +4,7 @@ class CustomDropdown extends StatefulWidget {
   final void Function(String data) onChanged;
   final String label;
   final String hint;
+  final String? value;
   final List<String> items;
 
   const CustomDropdown({
@@ -11,6 +12,7 @@ class CustomDropdown extends StatefulWidget {
     required this.label,
     required this.items,
     this.hint = 'Pilih Asal Posyandu...',
+    this.value,
     required this.onChanged,
   });
 
@@ -20,6 +22,12 @@ class CustomDropdown extends StatefulWidget {
 
 class _CustomDropdownState extends State<CustomDropdown> {
   String? _selectedItem;
+
+  @override
+  void initState() {
+    super.initState();
+    _selectedItem = widget.value;
+  }
 
   @override
   Widget build(BuildContext context) {

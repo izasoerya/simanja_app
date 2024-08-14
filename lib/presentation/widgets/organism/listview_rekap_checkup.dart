@@ -21,7 +21,7 @@ class ListViewRekapCheckup extends StatefulWidget {
   });
 
   void _gotoAddCheckupData() => router
-      .push('/login-kader/list-remaja-checkup?checkupUID=${kaderCheckup.uid}');
+      .push('/login-kader/edit-health-remaja?checkupUID=${kaderCheckup.uid}');
   void _gotoRekapCheckupResult(String label) => router.push(
       '/login-kader/rekap-checkup-result?checkupUID=${kaderCheckup.uid}&label=$label');
 

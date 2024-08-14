@@ -14,7 +14,6 @@ import 'package:simanja_app/presentation/screens/kader/edit_data_activity_page.d
 import 'package:simanja_app/presentation/screens/kader/edit_data_health_page.dart';
 import 'package:simanja_app/presentation/screens/kader/list_activity_finish_page.dart';
 import 'package:simanja_app/presentation/screens/kader/list_checkup_finish_page.dart';
-import 'package:simanja_app/presentation/screens/kader/list_remaja_checkup_page.dart';
 import 'package:simanja_app/presentation/screens/kader/management_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_activity_page.dart';
@@ -143,15 +142,6 @@ final GoRouter router = GoRouter(
               },
             ),
             GoRoute(
-              path: 'list-remaja-checkup',
-              builder: (BuildContext context, GoRouterState state) {
-                return SubPageLayout(
-                    appBarTitle: 'DAFTAR REMAJA',
-                    child: ListRemajaCheckupPage(
-                        checkupUID: state.uri.queryParameters['checkupUID']!));
-              },
-            ),
-            GoRoute(
               path: 'account-remaja',
               builder: (BuildContext context, GoRouterState state) {
                 return LayoutKader(
@@ -171,8 +161,7 @@ final GoRouter router = GoRouter(
                 return SubPageLayout(
                   appBarTitle: 'INPUT CHECKUP',
                   child: EditDataHealthPage(
-                      checkupUID: state.uri.queryParameters['checkupUID']!,
-                      remajaUID: state.uri.queryParameters['remajaUID']!),
+                      checkupUID: state.uri.queryParameters['checkupUID']!),
                 );
               },
             ),
