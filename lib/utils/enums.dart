@@ -18,3 +18,10 @@ enum ManagementObject {
   kas,
   inventaris,
 }
+
+enum HealthInputObject {
+  imt,
+  kek,
+  bloodCheck,
+  consultation,
+}
