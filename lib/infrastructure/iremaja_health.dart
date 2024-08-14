@@ -17,7 +17,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
           .single();
       return HealthPropertiesRemaja.fromJSON(response);
     } catch (e) {
-      print('Error:$e');
+      print('Error create health:$e');
       return null;
     }
   }
@@ -59,7 +59,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
           .single();
       return HealthPropertiesRemaja.fromJSON(response);
     } catch (e) {
-      print('Error:$e');
+      print('Error update health:$e');
       return null;
     }
   }
@@ -107,7 +107,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
       }
       return null;
     } catch (e) {
-      print('Error:$e');
+      print('Error get health:$e');
       return null;
     }
   }
