@@ -18,10 +18,11 @@ class DashboardKader extends StatelessWidget {
     return Container(
       width: screenWidth,
       margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-      alignment: Alignment.center,
+      alignment: Alignment.topCenter,
       child: SingleChildScrollView(
         child: Column(
           children: [
+            Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
             const AppbarContent(isKader: true),
             const Padding(padding: EdgeInsets.only(top: 30)),
             const TemplateTitle(text: 'DASHBOARD'),
@@ -44,7 +45,7 @@ class DashboardKader extends StatelessWidget {
               children: [
                 SmallTextIconSquareContainer(
                   lowerText: 'Rekap Pelayanan Kesehatan',
-                  width: screenWidth * 0.3,
+                  width: screenWidth * 0.35,
                   height: screenHeight * 0.15,
                   icon: Icons.medical_services_rounded,
                   onTap: () =>
@@ -53,7 +54,7 @@ class DashboardKader extends StatelessWidget {
                 SmallTextIconSquareContainer(
                   lowerText: 'Rekap Aktivitas Posyandu',
                   icon: Icons.run_circle_rounded,
-                  width: screenWidth * 0.3,
+                  width: screenWidth * 0.35,
                   height: screenHeight * 0.15,
                   onTap: () =>
                       router.push('/login-kader/list-finished-activity'),

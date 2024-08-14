@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class BigTextValueRectangle extends ConsumerWidget {
   final List<UserRemaja> users;
@@ -23,19 +24,19 @@ class BigTextValueRectangle extends ConsumerWidget {
           SizedBox(
             child: Column(
               children: [
-                const Text(
+                Text(
                   'Jumlah Remaja Terdaftar SiMandja',
                   style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 8.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
                   'Posyandu ${ref.watch(userKaderProvider).namePosyandu}',
-                  style: const TextStyle(
+                  style: TextStyle(
                     color: Colors.white,
-                    fontSize: 16,
+                    fontSize: 8.sp,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -44,9 +45,9 @@ class BigTextValueRectangle extends ConsumerWidget {
           ),
           Text(
             users.length.toString(),
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.white,
-              fontSize: 24,
+              fontSize: 15.sp,
               fontWeight: FontWeight.bold,
             ),
           ),
