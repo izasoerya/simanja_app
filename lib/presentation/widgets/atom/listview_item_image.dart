@@ -18,21 +18,21 @@ class ItemListviewImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final screenHeight = MediaQuery.of(context).size.height;
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         SizedBox(
-          width: MediaQuery.of(context).size.width * 0.15,
-          height: MediaQuery.of(context).size.height * 0.075,
+          width: screenWidth * 0.15,
+          height: screenHeight * 0.075,
           child: image ?? Image.asset('assets/logo/No_Image.jpg'),
         ),
-        Padding(
-            padding: EdgeInsets.only(
-                left: MediaQuery.of(context).size.width * 0.025)),
-        Container(
-          height: MediaQuery.of(context).size.height * 0.075,
-          width: MediaQuery.of(context).size.width * 0.625,
-          color: Colors.yellow[100], //! CHANGE TO SIZEDBOX IN PRODUCTION
+        Padding(padding: EdgeInsets.only(left: screenWidth * 0.025)),
+        SizedBox(
+          height: screenHeight * 0.075,
+          width: screenWidth * 0.625,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
