@@ -20,8 +20,12 @@ class InputHealthData extends StatefulWidget {
 class _InputHealthDataState extends State<InputHealthData> {
   HealthPropertiesRemaja healthData = HealthPropertiesRemaja();
   HealthInputObject selectedObject = HealthInputObject.imt;
+  GlobalKey<_InputHealthDataState> _key = GlobalKey();
 
-  void _resetHealthData() => healthData = HealthPropertiesRemaja();
+  void _resetHealthData() => setState(() {
+        _key = GlobalKey();
+        healthData = HealthPropertiesRemaja();
+      });
 
   Widget _buildTextInput() {
     switch (selectedObject) {
@@ -137,6 +141,7 @@ class _InputHealthDataState extends State<InputHealthData> {
     final screenHeight = MediaQuery.of(context).size.height;
 
     return SizedBox(
+      key: _key,
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
