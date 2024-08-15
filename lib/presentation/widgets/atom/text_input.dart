@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class TextInput extends StatefulWidget {
@@ -8,6 +9,9 @@ class TextInput extends StatefulWidget {
   final TextInputAction action;
   final bool hideText;
   final void Function(String d) value;
+  final bool
+      isNumeric; // Add this parameter to indicate if the input should be numeric
+
   const TextInput({
     super.key,
     required this.hintText,
@@ -16,6 +20,7 @@ class TextInput extends StatefulWidget {
     this.hideText = false,
     this.action = TextInputAction.done,
     required this.value,
+    this.isNumeric = false, // Default to false
   });
 
   @override
@@ -49,13 +54,16 @@ class _TextInputState extends State<TextInput> {
           TextField(
             maxLines: widget.hideText ? 1 : null,
             controller: _controller,
-            keyboardType: widget.type, // Enable multiline input
+            keyboardType: widget.type,
             obscureText: widget.hideText,
             textInputAction: widget.action,
+            inputFormatters: widget.isNumeric
+                ? [_CustomNumberInputFormatter()]
+                : [], // Apply the digitsOnly formatter if isNumeric is true
             decoration: InputDecoration(
               hintText: widget.hintText,
-              contentPadding: const EdgeInsets.symmetric(
-                  vertical: 2, horizontal: 10), // Adjusted vertical padding
+              contentPadding:
+                  const EdgeInsets.symmetric(vertical: 2, horizontal: 10),
               border: OutlineInputBorder(
                 borderSide: const BorderSide(
                   color: Colors.grey,
@@ -87,5 +95,19 @@ class _TextInputState extends State<TextInput> {
         ],
       ),
     );
+  }
+}
+
+class _CustomNumberInputFormatter extends TextInputFormatter {
+  @override
+  TextEditingValue formatEditUpdate(
+    TextEditingValue oldValue,
+    TextEditingValue newValue,
+  ) {
+    final regExp = RegExp(r'^[0-9.]*$');
+    if (regExp.hasMatch(newValue.text)) {
+      return newValue;
+    }
+    return oldValue;
   }
 }
