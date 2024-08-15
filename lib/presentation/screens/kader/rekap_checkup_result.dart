@@ -34,23 +34,29 @@ class _RekapCheckupResultPageState extends State<RekapCheckupResultPage> {
 
   List<HealthPropertiesRemaja?> _filterHealthsByLabel(
       String label, List<HealthPropertiesRemaja?> data) {
+    final filteredData = data.where((e) => e != null).toList();
     switch (label) {
       case 'Anemia':
-        return data.where((e) => e != null && e.anemia == true).toList();
+        return filteredData
+            .where((e) =>
+                e!.anemia == 'Berat' ||
+                e.anemia == 'Sedang' ||
+                e.anemia == 'Ringan')
+            .toList();
       case 'Beresiko KEK':
-        return data.where((e) => e != null && e.kek == true).toList();
+        return filteredData.where((e) => e!.kek == 'KEK').toList();
       case 'Obesitas':
-        return data
-            .where((e) => e != null && e.imt != null && e.imt! > 27.0)
+        return filteredData
+            .where((e) => e!.imt != null && e.imt! > 27.0)
             .toList();
       case 'Sangat Kurus':
-        return data
-            .where((e) => e != null && e.imt != null && e.imt! < 17.0)
+        return filteredData
+            .where((e) => e!.imt != null && e.imt! < 17.0)
             .toList();
       case 'Merokok':
-        return data.where((e) => e != null && e.smoker == true).toList();
+        return filteredData.where((e) => e!.smoker == true).toList();
       case 'all':
-        return data;
+        return filteredData;
       default:
         return [];
     }

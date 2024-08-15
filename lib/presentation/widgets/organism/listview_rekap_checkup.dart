@@ -86,7 +86,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Anemia: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.anemia ?? false).length}',
+                    'Anemia: ${widget.items.isEmpty ? '0' : widget.items.where((e) => e?.anemia == 'Berat' || e?.anemia == 'Sedang' || e?.anemia == 'Ringan').length}',
                 isFinish: true,
                 onTap: (d) => widget._gotoRekapCheckupResult('Anemia'),
                 uid: 'anemia'),
@@ -94,7 +94,7 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
             ItemListViewNude(
                 title: 'Jumlah Remaja Yang',
                 description:
-                    'Beresiko KEK: ${widget.items.isEmpty ? '0' : widget.items.where((element) => element?.kek ?? false).length}',
+                    'Beresiko KEK: ${widget.items.isEmpty ? '0' : widget.items.where((e) => e?.kek == 'KEK').length}',
                 isFinish: true,
                 onTap: (d) => widget._gotoRekapCheckupResult('Beresiko KEK'),
                 uid: 'kek'),

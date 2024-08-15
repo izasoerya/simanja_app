@@ -103,10 +103,6 @@ class _HealthDataInput extends StatelessWidget {
                 type: TextInputType.number,
                 action: TextInputAction.next,
                 value: (d) => inputData.armCircumference = double.parse(d)),
-            ChecklistBox(
-                text: 'Resiko KEK\n*Centang apabila LiLa < 23.5 cm',
-                value: (d) => inputData.kek = d),
-            const Padding(padding: EdgeInsets.only(top: 10)),
             TextInput(
                 hintText: 'Ketik lingkar perut...',
                 labelText: 'Lingkar Perut (LP)',
@@ -139,15 +135,18 @@ class _HealthDataInput extends StatelessWidget {
                 type: TextInputType.number,
                 action: TextInputAction.next,
                 value: (d) => inputData.hemoglobin = double.parse(d)),
-            ChecklistBox(
-                text: 'Resiko Anemia\n*Centang apabila HB < 13 g/dL',
-                value: (d) => inputData.anemia = d),
             TextInput(
-                hintText: 'Ketik gula darah...',
-                labelText: 'Gula Darah',
+                hintText: 'Ketik kadar glukosa di vena...',
+                labelText: 'Kadar Glukosa di Vena',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                value: (d) => inputData.bloodSugar = double.parse(d)),
+                value: (d) => inputData.vena = double.parse(d)),
+            TextInput(
+                hintText: 'Ketik kadar glukosa di kapiler...',
+                labelText: 'Kadar Kapiler di Vena',
+                type: TextInputType.number,
+                action: TextInputAction.next,
+                value: (d) => inputData.capillar = double.parse(d)),
             TextInput(
                 hintText: 'Ketik kolesterol...',
                 labelText: 'Kolesterol',

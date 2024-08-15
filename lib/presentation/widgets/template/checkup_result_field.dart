@@ -98,9 +98,7 @@ class CheckupResultField extends StatelessWidget {
             ),
             const ImtDescription(),
             ResultContainerSmall(
-              value: item!.kek != null
-                  ? (item!.kek! ? 'Ya' : 'Tidak')
-                  : 'belum ada data',
+              value: item!.kek != null ? item!.kek! : 'belum ada data',
               label: 'Resiko KEK',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,
@@ -138,9 +136,7 @@ class CheckupResultField extends StatelessWidget {
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
-              value: item!.bloodSugar != null
-                  ? (item!.bloodSugar! > 20 ? 'Tinggi' : 'Normal')
-                  : 'belum ada data',
+              value: item!.bloodSugar ?? 'belum ada data',
               label: 'Status Gula Darah',
               width: 0.3,
               color: const GlobalTheme().primaryColorLight,

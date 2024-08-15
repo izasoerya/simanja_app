@@ -47,7 +47,7 @@ class ItemListViewHealth extends StatelessWidget {
       case 'Anemia':
         return '${health.hemoglobin} gr/dL';
       case 'Beresiko KEK':
-        return health.kek! ? 'Ya' : 'Tidak';
+        return health.kek!;
       case 'Obesitas':
         return '${health.weight} Kg';
       case 'Sangat Kurus':
