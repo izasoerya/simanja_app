@@ -25,7 +25,6 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   @override
   Future<HealthPropertiesRemaja?> updateHealth(
       HealthPropertiesRemaja health) async {
-    print(health.uid!);
     try {
       final responseGET = await Supabase.instance.client
           .from('health_properties_remaja')
@@ -39,14 +38,12 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
         height: health.height,
         armCircumference: health.armCircumference,
         abdominalCircumference: health.abdominalCircumference,
-        bloodPressure: health.bloodPressure,
+        vena: health.vena,
+        capillar: health.capillar,
         cholesterol: health.cholesterol,
-        bloodSugar: health.bloodSugar,
         hemoglobin: health.hemoglobin,
         tds: health.tds,
         tdd: health.tdd,
-        kek: health.kek,
-        anemia: health.anemia,
         smoker: health.smoker,
         tablet: health.tablet,
         note: health.note,
@@ -81,7 +78,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
           .single();
       return HealthPropertiesRemaja.fromJSON(response);
     } catch (e) {
-      print('Error:$e');
+      print('Error delete health:$e');
       return null;
     }
   }
