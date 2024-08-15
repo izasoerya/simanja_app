@@ -75,10 +75,15 @@ class CheckupResultField extends StatelessWidget {
                     : 'belum ada data',
                 label: 'Kolesterol'),
             ResultContainerSmall(
-                value: item!.bloodSugar != null
-                    ? '${item!.bloodSugar} mg/dL'
+                value: item!.vena != null
+                    ? '${item!.vena} mg/dL'
                     : 'belum ada data',
-                label: 'Gula Darah'),
+                label: 'Glukosa di Vena'),
+            ResultContainerSmall(
+                value: item!.capillar != null
+                    ? '${item!.capillar} mg/dL'
+                    : 'belum ada data',
+                label: 'Glukosa di Kapiler'),
           ],
         ),
         Column(
@@ -128,8 +133,8 @@ class CheckupResultField extends StatelessWidget {
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
-              value: item!.cholesterol != null
-                  ? (item!.cholesterol! > 40 ? 'Tinggi' : 'Normal')
+              value: item!.statusCholesterol != null
+                  ? (item!.statusCholesterol!)
                   : 'belum ada data',
               label: 'Status Kolesterol',
               width: 0.3,
@@ -153,8 +158,8 @@ class CheckupResultField extends StatelessWidget {
             Container(
               width: MediaQuery.of(context).size.width * 0.4,
               alignment: Alignment.centerLeft,
-              child: item!.smoker != null
-                  ? (item!.smoker!
+              child: item!.tablet != null
+                  ? (item!.tablet!
                       ? const TextIcon(
                           label: 'Sedang konsumsi TTD', value: true)
                       : const TextIcon(
@@ -181,7 +186,7 @@ class TextIcon extends StatelessWidget {
         children: [
           Icon(value ? Icons.check_circle : Icons.cancel,
               color: value ? Colors.green : Colors.red, size: 30),
-          Text('${value ? '' : 'Tidak'} $label',
+          Text(label,
               style: const TextStyle(
                   fontSize: 12,
                   fontWeight: FontWeight.bold,
