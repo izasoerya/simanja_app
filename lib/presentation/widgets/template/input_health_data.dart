@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
 import 'package:simanja_app/utils/enums.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/domain/services/remaja_heath_service.dart';
-import 'package:simanja_app/presentation/widgets/atom/check_box.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
 import 'package:simanja_app/presentation/widgets/organism/image_box_health_input.dart';
@@ -48,7 +48,7 @@ class _InputHealthDataState extends State<InputHealthData> {
                 onTap: (p0) => setState(() => selectedObject = p0),
                 defaultValue: selectedObject),
           ),
-          Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
+          Padding(padding: EdgeInsets.only(top: screenHeight * 0.025)),
           _HealthDataInput(
             selectedObject: selectedObject,
             healthData: data,
@@ -183,10 +183,21 @@ class _HealthDataInput extends StatelessWidget {
       case HealthInputObject.consultation:
         return Column(
           children: [
-            ChecklistBox(text: 'Perokok?', value: (d) => inputData.smoker = d),
-            ChecklistBox(
-                text: 'Sedang konsumsi TTD?',
-                value: (d) => inputData.tablet = d),
+            CustomDropdown(
+                label: 'Perokok',
+                items: const ['Ya', 'Tidak'],
+                hint: 'Pilih...',
+                onChanged: (d) => d == 'Ya'
+                    ? inputData.smoker = true
+                    : inputData.smoker = false),
+            const Padding(padding: EdgeInsets.only(top: 10)),
+            CustomDropdown(
+                label: 'Sedang Konsumsi TTD',
+                items: const ['Ya', 'Tidak'],
+                hint: 'Pilih...',
+                onChanged: (d) => d == 'Ya'
+                    ? inputData.tablet = true
+                    : inputData.tablet = false),
             const Padding(padding: EdgeInsets.only(top: 10)),
             TextInput(
                 hintText: 'Ketik catatan...',
