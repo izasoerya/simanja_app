@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/presentation/theme/global_theme.dart';
 
 class CustomDropdown extends StatefulWidget {
   final void Function(String data) onChanged;
@@ -34,7 +35,9 @@ class _CustomDropdownState extends State<CustomDropdown> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Text(widget.label, style: const TextStyle(fontSize: 16)),
+        Text(widget.label,
+            style: const GlobalTheme().paragraphStyle.copyWith(fontSize: 14)),
+        const Padding(padding: EdgeInsets.only(top: 5)),
         Container(
           width: MediaQuery.sizeOf(context).width * 0.9,
           padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -63,7 +66,7 @@ class _CustomDropdownState extends State<CustomDropdown> {
                 print(newValue);
               });
             },
-            hint: Text(widget.hint),
+            hint: Text(widget.hint, style: const GlobalTheme().paragraphStyle),
           ),
         ),
       ],
