@@ -211,8 +211,10 @@ class HealthPropertiesRemaja {
       cholesterol: json['cholesterol'] != null
           ? double.parse(json['cholesterol'].toString())
           : null,
-      vena: json['vena'],
-      capillar: json['capillar'],
+      vena: json['vena'] != null ? double.parse(json['vena'].toString()) : null,
+      capillar: json['capillar'] != null
+          ? double.parse(json['capillar'].toString())
+          : null,
       tds: json['tds'] != null ? double.parse(json['tds'].toString()) : null,
       tdd: json['tdd'] != null ? double.parse(json['tdd'].toString()) : null,
       checkedAt: json['checked_at'] != null
@@ -246,7 +248,9 @@ class HealthPropertiesRemaja {
       'status_imt': statusIMT,
       'status_kek': kek,
       'status_anemia': anemia,
+      'status_hipertensi': hipertensi,
       'status_cholesterol': statusCholesterol,
+      'status_blood_sugar': bloodSugar,
       'status_smoker': smoker,
       'status_tablet': tablet,
       'doctor_note': note,
