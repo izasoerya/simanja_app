@@ -5,6 +5,7 @@ import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/nude_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
@@ -86,19 +87,17 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
                     onClick: () async {
                       UserRemaja user = remajaAccount.copyWith(
                           email: _email, password: _password);
-                      await RemajaAuthentication()
-                          .loginUser(user)
-                          .then((fetchedUser) {
-                        if (fetchedUser != null) {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Login Berhasil')));
-                          setUserRemaja(ref, fetchedUser);
-                          widget._pushToDashboard();
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                              const SnackBar(content: Text('Login Gagal')));
-                        }
-                      });
+                      final fetchedUser =
+                          await RemajaAuthentication().loginUser(user);
+
+                      if (fetchedUser != null) {
+                        showCustomSnackbar(context, 'Berhasil Masuk', 0);
+                        setUserRemaja(ref, fetchedUser);
+                        widget._pushToDashboard();
+                      } else {
+                        showCustomSnackbar(
+                            context, 'Email atau Kata Sandi Salah', 2);
+                      }
                     },
                   ),
                   const Padding(padding: EdgeInsets.only(top: 15)),

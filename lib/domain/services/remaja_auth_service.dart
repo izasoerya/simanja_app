@@ -11,9 +11,9 @@ class RemajaAuthentication {
   }
 
   Future<UserRemaja?> loginUser(UserRemaja user) async {
-    UserRemaja fetchedUser =
+    final fetchedUser =
         await RemajaAuthImplementation().getUserbyEmail(user.email);
-    if (fetchedUser.password == user.password) {
+    if (fetchedUser != null && fetchedUser.password == user.password) {
       return fetchedUser;
     }
     return null;

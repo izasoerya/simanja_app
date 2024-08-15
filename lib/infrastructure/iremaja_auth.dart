@@ -42,7 +42,7 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
   }
 
   @override
-  Future<UserRemaja> getUserbyEmail(String email) async {
+  Future<UserRemaja?> getUserbyEmail(String email) async {
     PostgrestMap response;
     try {
       response = await Supabase.instance.client
@@ -52,7 +52,7 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
           .single(); // fetches the first row
     } catch (e) {
       print('$e');
-      return Future.error(e);
+      return null;
     }
 
     UserRemaja fetchedUser = UserRemaja.fromJSON(response);
