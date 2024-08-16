@@ -18,10 +18,8 @@ class ItemListViewHealth extends StatelessWidget {
     this.onTap,
   });
 
-  void _defaultOnTap() {
-    print(health.uid);
-    router.push('/login-kader/result-health-remaja?healthUID=${health.uid}');
-  }
+  void _defaultOnTap() =>
+      router.push('/login-kader/result-health-remaja?healthUID=${health.uid}');
 
   String _getLabelText(String label) {
     switch (label) {
@@ -121,21 +119,22 @@ class ItemListViewHealth extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(user.name,
-                              style: const TextStyle(
-                                fontSize: 12,
+                              style: TextStyle(
+                                fontSize: 8.sp,
                                 fontWeight: FontWeight.bold,
+                                color: const GlobalTheme().primaryColor,
                               ),
                               textAlign: TextAlign.start),
                           Text(user.nik,
-                              style: const TextStyle(
-                                fontSize: 10,
+                              style: TextStyle(
+                                fontSize: 5.sp,
                                 fontWeight: FontWeight.normal,
                               ),
                               textAlign: TextAlign.start),
                           Text(
                               '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
-                              style: const TextStyle(
-                                fontSize: 10,
+                              style: TextStyle(
+                                fontSize: 5.sp,
                                 fontWeight: FontWeight.normal,
                               ),
                               textAlign: TextAlign.start),
@@ -143,48 +142,32 @@ class ItemListViewHealth extends StatelessWidget {
                               user.bpjs
                                   ? 'Pengguna BPJS'
                                   : 'Bukan Pengguna BPJS',
-                              style: const TextStyle(
-                                fontSize: 10,
+                              style: TextStyle(
+                                fontSize: 5.sp,
                                 fontWeight: FontWeight.normal,
                               ),
                               textAlign: TextAlign.start),
                         ],
                       ),
-                      label != 'all'
-                          ? Column(
-                              children: [
-                                Text(_getLabelText(label),
-                                    style: const TextStyle(fontSize: 10)),
-                                Text(_getHealthValue(label, health),
-                                    style: TextStyle(
-                                      fontSize: 14,
-                                      fontWeight: FontWeight.bold,
-                                      color: const GlobalTheme().primaryColor,
-                                    )),
-                                Text(_getHealthStatus(label),
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: const GlobalTheme().secondaryColor,
-                                    )),
-                              ],
-                            )
-                          : Column(
-                              children: [
-                                Text(_getLabelText('all'),
-                                    style: const TextStyle(fontSize: 10)),
-                                Text(_getHealthValue('all', health),
-                                    style: TextStyle(
-                                      fontSize: 24,
-                                      fontWeight: FontWeight.bold,
-                                      color: const GlobalTheme().primaryColor,
-                                    )),
-                                Text(_getHealthStatus('all'),
-                                    style: TextStyle(
-                                      fontSize: 12,
-                                      color: const GlobalTheme().secondaryColor,
-                                    )),
-                              ],
-                            ),
+                      Column(
+                        children: [
+                          Text(_getLabelText(label),
+                              style: TextStyle(
+                                fontSize: 7.sp,
+                              )),
+                          Text(_getHealthValue(label, health),
+                              style: TextStyle(
+                                fontSize: 7.sp,
+                                fontWeight: FontWeight.bold,
+                                color: const GlobalTheme().primaryColor,
+                              )),
+                          Text(_getHealthStatus(label),
+                              style: TextStyle(
+                                fontSize: 7.sp,
+                                color: const GlobalTheme().secondaryColor,
+                              )),
+                        ],
+                      )
                     ]);
               }
               return const Text('Data tidak ditemukan');

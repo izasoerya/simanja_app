@@ -4,6 +4,7 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/result_container_small.dart';
 import 'package:simanja_app/presentation/widgets/organism/imt_description.dart';
 import 'package:simanja_app/utils/default_account.dart';
+import 'package:sizer/sizer.dart';
 
 class CheckupResultField extends StatelessWidget {
   final HealthPropertiesRemaja? item;
@@ -24,15 +25,15 @@ class CheckupResultField extends StatelessWidget {
           children: [
             Text(
               'Lokasi Posyandu: ${kaderAccount.namePosyandu}',
-              style: const TextStyle(
-                  fontSize: 13,
+              style: TextStyle(
+                  fontSize: 7.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
             Text(
                 'Tanggal: ${item!.checkedAt?.toIso8601String().substring(0, 10) ?? 'belum ada data'}',
-                style: const TextStyle(
-                    fontSize: 13,
+                style: TextStyle(
+                    fontSize: 7.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)),
             const Padding(padding: EdgeInsets.only(top: 10)),
@@ -93,19 +94,19 @@ class CheckupResultField extends StatelessWidget {
               value:
                   (item!.imt == null) ? 'NaN' : (item!.imt!).toStringAsFixed(2),
               label: 'Indeks Massa Tubuh (IMT)',
-              textStyle: const TextStyle(
-                  fontSize: 21,
+              textStyle: TextStyle(
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
-              width: 0.3,
-              height: 60,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
+              height: SizerUtil.deviceType == DeviceType.tablet ? 100 : 60,
               color: const GlobalTheme().primaryColorLight,
             ),
             const ImtDescription(),
             ResultContainerSmall(
               value: item!.kek != null ? item!.kek! : 'belum ada data',
               label: 'Resiko KEK',
-              width: 0.3,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
@@ -113,7 +114,7 @@ class CheckupResultField extends StatelessWidget {
                   ? (item!.abdominalCircumference! > 20 ? 'Tinggi' : 'Normal')
                   : 'belum ada data',
               label: 'Status LP',
-              width: 0.3,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
@@ -121,7 +122,7 @@ class CheckupResultField extends StatelessWidget {
                   ? (item!.tdd! > 20 ? 'Tinggi' : 'Normal')
                   : 'belum ada data',
               label: 'Status Tensi',
-              width: 0.3,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
@@ -129,7 +130,7 @@ class CheckupResultField extends StatelessWidget {
                   ? (item!.hemoglobin! < 50 ? 'Ya' : 'Tidak')
                   : 'belum ada data',
               label: 'Status Anemia',
-              width: 0.3,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
@@ -137,18 +138,19 @@ class CheckupResultField extends StatelessWidget {
                   ? (item!.statusCholesterol!)
                   : 'belum ada data',
               label: 'Status Kolesterol',
-              width: 0.3,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             ResultContainerSmall(
               value: item!.bloodSugar ?? 'belum ada data',
               label: 'Status Gula Darah',
-              width: 0.3,
+              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
             Container(
               width: MediaQuery.of(context).size.width * 0.4,
               alignment: Alignment.centerLeft,
+              padding: EdgeInsets.only(top: 1.h),
               child: item!.smoker != null
                   ? (item!.smoker!
                       ? const TextIcon(label: 'Merkokok', value: true)

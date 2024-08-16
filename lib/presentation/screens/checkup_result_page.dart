@@ -32,7 +32,6 @@ class CheckupResultPage extends StatelessWidget {
         } else if (snapshot.hasData) {
           final HealthPropertiesRemaja healthData = snapshot.data![0];
           final UserRemaja userData = snapshot.data![1];
-          print(userData.name);
           return Container(
             width: MediaQuery.of(context).size.width * 0.9,
             margin: EdgeInsets.symmetric(
@@ -42,8 +41,6 @@ class CheckupResultPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   const Padding(padding: EdgeInsets.only(top: 30)),
-                  const TitleWPosyandu(title: 'HASIL PENIMBANGAN'),
-                  const Padding(padding: EdgeInsets.only(top: 15)),
                   UserIdentity(user: userData),
                   const Padding(padding: EdgeInsets.only(top: 20)),
                   CheckupResultField(item: healthData),
