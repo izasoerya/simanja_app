@@ -96,6 +96,9 @@ class _HealthDataInput extends StatelessWidget {
                     d.isNotEmpty ? inputData.height = double.parse(d) : null),
             const Padding(padding: EdgeInsets.only(top: 15)),
             _SubmitData(data: inputData, onClick: onReset),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05))
           ],
         );
       case HealthInputObject.kek:
@@ -121,6 +124,9 @@ class _HealthDataInput extends StatelessWidget {
                     : null),
             const Padding(padding: EdgeInsets.only(top: 15)),
             _SubmitData(data: inputData, onClick: onReset),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05))
           ],
         );
       case HealthInputObject.bloodCheck:
@@ -178,6 +184,9 @@ class _HealthDataInput extends StatelessWidget {
                     : null),
             const Padding(padding: EdgeInsets.only(top: 15)),
             _SubmitData(data: inputData, onClick: onReset),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05))
           ],
         );
       case HealthInputObject.consultation:
@@ -205,6 +214,9 @@ class _HealthDataInput extends StatelessWidget {
                 value: (d) => inputData.note = d),
             const Padding(padding: EdgeInsets.only(top: 15)),
             _SubmitData(data: inputData, onClick: onReset),
+            Padding(
+                padding: EdgeInsets.only(
+                    top: MediaQuery.of(context).size.height * 0.05))
           ],
         );
     }
