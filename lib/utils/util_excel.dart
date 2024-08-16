@@ -35,66 +35,7 @@ class UtilExcel {
       }
     }
 
-    sheet.insertRowIterables([
-      const TextCellValue('No'),
-      const TextCellValue('Nama'),
-      const TextCellValue('Umur'),
-      const TextCellValue('Berat Badan'),
-      const TextCellValue('Tinggi Badan'),
-      const TextCellValue('Lingkar Lengan Atas'),
-      const TextCellValue('Lingkar Perut'),
-      const TextCellValue('Gula Darah'),
-      const TextCellValue('Hemoglobin'),
-      const TextCellValue('Kolesterol'),
-      const TextCellValue('TDS'),
-      const TextCellValue('TDD'),
-      const TextCellValue('Status KEK'),
-      const TextCellValue('Status Anemia'),
-      const TextCellValue('Status Tablet'),
-      const TextCellValue('Status Merokok'),
-      const TextCellValue('Catatan Dokter'),
-    ], 0);
-
-    for (var i = 0; i < items.length; i++) {
-      final item = excelItems[i];
-      sheet.appendRow([
-        IntCellValue(i + 1),
-        TextCellValue(item.name),
-        TextCellValue(item.age),
-        item.data.weight != null ? DoubleCellValue(item.data.weight!) : null,
-        item.data.height != null ? DoubleCellValue(item.data.height!) : null,
-        item.data.armCircumference != null
-            ? DoubleCellValue(item.data.armCircumference!)
-            : null,
-        item.data.abdominalCircumference != null
-            ? DoubleCellValue(item.data.abdominalCircumference!)
-            : null,
-        item.data.bloodSugar != null
-            ? DoubleCellValue(item.data.bloodSugar!)
-            : null,
-        item.data.hemoglobin != null
-            ? DoubleCellValue(item.data.hemoglobin!)
-            : null,
-        item.data.cholesterol != null
-            ? DoubleCellValue(item.data.cholesterol!)
-            : null,
-        item.data.tds != null ? DoubleCellValue(item.data.tds!) : null,
-        item.data.tdd != null ? DoubleCellValue(item.data.tdd!) : null,
-        item.data.kek != null
-            ? TextCellValue(item.data.kek! == true ? 'Ya' : 'Tidak')
-            : null,
-        item.data.anemia != null
-            ? TextCellValue(item.data.anemia! == true ? 'Ya' : 'Tidak')
-            : null,
-        item.data.tablet != null
-            ? TextCellValue(item.data.tablet! == true ? 'Ya' : 'Tidak')
-            : null,
-        item.data.smoker != null
-            ? TextCellValue(item.data.smoker! == true ? 'Ya' : 'Tidak')
-            : null,
-        item.data.note != null ? TextCellValue(item.data.note!) : null,
-      ]);
-    }
+    _insertRowData(sheet, items, excelItems);
 
     var xlsxBytes = excel.save();
     var siMandjaDirectory = Directory('/storage/emulated/0/Download/SiMandja');
@@ -108,5 +49,81 @@ class UtilExcel {
       ..writeAsBytesSync(xlsxBytes!);
 
     return true;
+  }
+
+  void _insertRowData(Sheet sheet, List<HealthPropertiesRemaja?> items,
+      List<ExcelDataType> excelItems) {
+    sheet.insertRowIterables([
+      const TextCellValue('No'),
+      const TextCellValue('Nama'),
+      const TextCellValue('Umur'),
+      const TextCellValue('Berat Badan'),
+      const TextCellValue('Tinggi Badan'),
+      const TextCellValue('Lingkar Lengan Atas'),
+      const TextCellValue('Lingkar Perut'),
+      const TextCellValue('Glukosa di Vena'),
+      const TextCellValue('Glukosa di Kapiler'),
+      const TextCellValue('Hemoglobin'),
+      const TextCellValue('Kolesterol'),
+      const TextCellValue('TDS'),
+      const TextCellValue('TDD'),
+      const TextCellValue('Tekanan Darah'),
+      const TextCellValue('Status IMT'),
+      const TextCellValue('Status KEK'),
+      const TextCellValue('Status Anemia'),
+      const TextCellValue('Status Glukosa'),
+      const TextCellValue('Status Kolesterol'),
+      const TextCellValue('Status Tablet'),
+      const TextCellValue('Status Merokok'),
+      const TextCellValue('Catatan Dokter'),
+    ], 0);
+
+    for (var i = 0; i < items.length; i++) {
+      final item = excelItems[i];
+      sheet.appendRow([
+        IntCellValue(i + 1),
+        TextCellValue(item.name),
+        TextCellValue(item.data.age?.toString() ?? ''),
+        item.data.weight != null ? DoubleCellValue(item.data.weight!) : null,
+        item.data.height != null ? DoubleCellValue(item.data.height!) : null,
+        item.data.armCircumference != null
+            ? DoubleCellValue(item.data.armCircumference!)
+            : null,
+        item.data.abdominalCircumference != null
+            ? DoubleCellValue(item.data.abdominalCircumference!)
+            : null,
+        item.data.vena != null ? DoubleCellValue(item.data.vena!) : null,
+        item.data.capillar != null
+            ? DoubleCellValue(item.data.capillar!)
+            : null,
+        item.data.hemoglobin != null
+            ? DoubleCellValue(item.data.hemoglobin!)
+            : null,
+        item.data.cholesterol != null
+            ? DoubleCellValue(item.data.cholesterol!)
+            : null,
+        item.data.tds != null ? DoubleCellValue(item.data.tds!) : null,
+        item.data.tdd != null ? DoubleCellValue(item.data.tdd!) : null,
+        item.data.bloodPressure != null
+            ? TextCellValue(item.data.bloodPressure!)
+            : null,
+        item.data.imt != null ? TextCellValue(item.data.statusIMT!) : null,
+        item.data.kek != null ? TextCellValue(item.data.kek!) : null,
+        item.data.anemia != null ? TextCellValue(item.data.anemia!) : null,
+        item.data.bloodSugar != null
+            ? TextCellValue(item.data.bloodSugar!)
+            : null,
+        item.data.statusCholesterol != null
+            ? TextCellValue(item.data.statusCholesterol!)
+            : null,
+        item.data.tablet != null
+            ? TextCellValue(item.data.tablet! == true ? 'Ya' : 'Tidak')
+            : null,
+        item.data.smoker != null
+            ? TextCellValue(item.data.smoker! == true ? 'Ya' : 'Tidak')
+            : null,
+        item.data.note != null ? TextCellValue(item.data.note!) : null,
+      ]);
+    }
   }
 }
