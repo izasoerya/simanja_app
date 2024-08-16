@@ -6,7 +6,6 @@ import 'package:simanja_app/domain/services/remaja_heath_service.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/user_identity.dart';
 import 'package:simanja_app/presentation/widgets/template/checkup_result_field.dart';
-import 'package:simanja_app/presentation/widgets/template/title_w_posyandu.dart';
 
 class CheckupResultPage extends StatelessWidget {
   final String healthUID;
