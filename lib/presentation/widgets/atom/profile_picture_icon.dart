@@ -8,7 +8,9 @@ import 'package:simanja_app/presentation/theme/global_theme.dart';
 class ProfilePictureIcon extends StatelessWidget {
   final UserKader? kader;
   final UserRemaja? remaja;
-  const ProfilePictureIcon({super.key, this.kader, this.remaja});
+  final bool isSelf;
+  const ProfilePictureIcon(
+      {super.key, this.kader, this.remaja, required this.isSelf});
 
   Future<void> _pickFile(UserKader? kader, UserRemaja? remaja) async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
@@ -39,37 +41,39 @@ class ProfilePictureIcon extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () =>
-          _pickFile(kader, remaja), // Pass the appropriate parameters here
-      child: Stack(
-        alignment: Alignment.center,
-        children: [
-          CircleAvatar(
-            radius: 50,
-            backgroundColor: const GlobalTheme().primaryColor,
-            backgroundImage: kader?.urlImage != null
-                ? NetworkImage(kader!.urlImage!)
-                : const AssetImage('assets/logo/No_Profil_Picture.png'),
-          ),
-          Positioned(
-            bottom: 0,
-            right: 0,
-            child: Container(
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                shape: BoxShape.circle,
-              ),
-              padding: const EdgeInsets.all(4.0),
-              child: const Icon(
-                Icons.camera_alt,
-                size: 20,
-                color: Colors.black,
-              ),
-            ),
-          ),
-        ],
-      ),
+    return Stack(
+      alignment: Alignment.center,
+      children: [
+        CircleAvatar(
+          radius: 50,
+          backgroundColor: const GlobalTheme().primaryColor,
+          backgroundImage: kader?.urlImage != null
+              ? NetworkImage(kader!.urlImage!)
+              : const AssetImage('assets/logo/No_Profil_Picture.png'),
+        ),
+        Positioned(
+          bottom: 0,
+          right: 0,
+          child: isSelf
+              ? GestureDetector(
+                  onTap: () => _pickFile(
+                      kader, remaja), // Pass the appropriate parameters here
+                  child: Container(
+                    decoration: const BoxDecoration(
+                      color: Colors.white,
+                      shape: BoxShape.circle,
+                    ),
+                    padding: const EdgeInsets.all(4.0),
+                    child: const Icon(
+                      Icons.camera_alt,
+                      size: 20,
+                      color: Colors.black,
+                    ),
+                  ),
+                )
+              : const SizedBox(),
+        ),
+      ],
     );
   }
 }

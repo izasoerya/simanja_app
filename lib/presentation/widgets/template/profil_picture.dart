@@ -7,7 +7,9 @@ import 'package:simanja_app/presentation/widgets/atom/profile_picture_icon.dart'
 class ProfilPicture extends StatelessWidget {
   final UserKader? kader;
   final UserRemaja? remaja;
-  const ProfilPicture({super.key, this.kader, this.remaja});
+  final bool isSelf;
+  const ProfilPicture(
+      {super.key, this.kader, this.remaja, required this.isSelf});
 
   @override
   Widget build(BuildContext context) {
@@ -40,9 +42,7 @@ class ProfilPicture extends StatelessWidget {
 
   List<Widget> buildKaderProfile(BuildContext context) {
     return [
-      ProfilePictureIcon(
-        kader: kader,
-      ),
+      ProfilePictureIcon(kader: kader, isSelf: isSelf),
       Text(kader!.nameAccount,
           style: const TextStyle(
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
@@ -66,9 +66,7 @@ class ProfilPicture extends StatelessWidget {
 
   List<Widget> buildRemajaProfile(BuildContext context) {
     return [
-      ProfilePictureIcon(
-        remaja: remaja,
-      ),
+      ProfilePictureIcon(remaja: remaja, isSelf: isSelf),
       Text(remaja!.name,
           style: const TextStyle(
               color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
