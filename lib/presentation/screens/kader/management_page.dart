@@ -55,6 +55,57 @@ class _ManagementPageState extends State<ManagementPage> {
     setState(() => _inventoryFuture = Future.value(newInventoryList));
   }
 
+  Widget _buildSelectedObjectWidget() {
+    final screenHeight = MediaQuery.of(context).size.height;
+
+    if (_selectedObject == ManagementObject.kas) {
+      return FutureBuilder(
+        future: _financeFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasData) {
+            final data = snapshot.data;
+            if (data == null || data.isEmpty) {
+              return Column(
+                children: [
+                  const TextfieldAndButton(finances: []),
+                  Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
+                  const ListviewKas(finances: []),
+                ],
+              );
+            }
+            data.sort((a, b) => b.idIncrement.compareTo(a.idIncrement));
+            return Column(
+              children: [
+                TextfieldAndButton(
+                    finances: data, onRefresh: _refreshFinanceList),
+                Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
+                ListviewKas(
+                  finances: data,
+                  onRefresh: _refreshFinanceList,
+                ),
+              ],
+            );
+          }
+          return const Text('Data tidak ditemukan');
+        },
+      );
+    } else {
+      return FutureBuilder(
+        future: _inventoryFuture,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasData) {
+            return ListviewInventory(inventories: snapshot.data);
+          }
+          return const Text('Belum ada Inventori');
+        },
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final screenWidth = MediaQuery.of(context).size.width;
@@ -75,62 +126,7 @@ class _ManagementPageState extends State<ManagementPage> {
               defaultValue: _selectedObject,
             ),
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
-            ..._selectedObject == ManagementObject.kas
-                ? [
-                    FutureBuilder(
-                      future: _financeFuture,
-                      builder: (context, snapshot) {
-                        if (snapshot.connectionState ==
-                            ConnectionState.waiting) {
-                          return const CircularProgressIndicator();
-                        } else if (snapshot.hasData) {
-                          final data = snapshot.data;
-                          if (data == null || data.isEmpty) {
-                            return Column(
-                              children: [
-                                const TextfieldAndButton(finances: []),
-                                Padding(
-                                    padding: EdgeInsets.only(
-                                        top: screenHeight * 0.03)),
-                                const ListviewKas(finances: []),
-                              ],
-                            );
-                          }
-                          data.sort(
-                              (a, b) => b.idIncrement.compareTo(a.idIncrement));
-                          return Column(
-                            children: [
-                              TextfieldAndButton(
-                                  finances: data,
-                                  onRefresh: _refreshFinanceList),
-                              Padding(
-                                  padding: EdgeInsets.only(
-                                      top: screenHeight * 0.03)),
-                              ListviewKas(
-                                finances: data,
-                                onRefresh: _refreshFinanceList,
-                              ),
-                            ],
-                          );
-                        }
-                        return const Text('Data tidak ditemukan');
-                      },
-                    ),
-                  ]
-                : [
-                    FutureBuilder(
-                        future: _inventoryFuture,
-                        builder: (context, snapshot) {
-                          if (snapshot.connectionState ==
-                              ConnectionState.waiting) {
-                            return const CircularProgressIndicator();
-                          } else if (snapshot.hasData) {
-                            return ListviewInventory(
-                                inventories: snapshot.data);
-                          }
-                          return const Text('Belum ada Inventori');
-                        }),
-                  ],
+            _buildSelectedObjectWidget(),
             Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
           ],
         ),
