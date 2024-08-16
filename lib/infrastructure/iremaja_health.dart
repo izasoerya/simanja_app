@@ -111,7 +111,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
   }
 
   @override
-  Future<List<HealthPropertiesRemaja>> getListHealth() async {
+  Future<List<HealthPropertiesRemaja>> getListHealth(String uid) async {
     try {
       final response = await Supabase.instance.client
           .from('health_properties_remaja')

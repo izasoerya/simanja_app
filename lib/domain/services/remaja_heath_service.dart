@@ -17,8 +17,8 @@ class RemajaHealthService {
     return await RemajaHealthImplementation().getHealthByUID(uid);
   }
 
-  Future<List<HealthPropertiesRemaja>> getRemajaHealths() async {
-    return await RemajaHealthImplementation().getListHealth();
+  Future<List<HealthPropertiesRemaja>> getRemajaHealths(String uid) async {
+    return await RemajaHealthImplementation().getListHealth(uid);
   }
 
   Future<List<HealthPropertiesRemaja?>?> getListCheckupHealth(
