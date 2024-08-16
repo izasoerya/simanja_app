@@ -115,7 +115,8 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
     try {
       final response = await Supabase.instance.client
           .from('health_properties_remaja')
-          .select('*');
+          .select('*')
+          .eq('uid_remaja', uid);
       return response.map((e) => HealthPropertiesRemaja.fromJSON(e)).toList();
     } catch (e) {
       print('Error:$e');
