@@ -80,7 +80,7 @@ class ItemListViewHealth extends StatelessWidget {
       case 'Merokok':
         return 'Merokok';
       case 'all':
-        return '';
+        return health.statusIMT ?? 'belum ada data';
       default:
         return 'Anemia';
     }

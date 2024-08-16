@@ -18,22 +18,17 @@ class _LayoutRemajaState extends ConsumerState<LayoutRemaja> {
       ref.watch(pageIndexProvider.notifier).state = index;
       switch (ref.watch(pageIndexProvider)) {
         case 0:
-          if (ref.watch(pageIndexProvider.notifier).state != 0) {
-            router.go('/login-remaja/dashboard-remaja');
-          } else {
-            router.push('/login-remaja/dashboard-remaja');
-          }
+          router.go('/login-remaja/dashboard-remaja');
+          ref.watch(pageIndexProvider.notifier).state = 0;
           break;
         case 1:
+          router.push('/login-remaja/result-health-remaja');
+          ref.watch(pageIndexProvider.notifier).state = 1;
           break;
         case 2:
+          router.push('/login-remaja/account-remaja');
+          ref.watch(pageIndexProvider.notifier).state = 0;
           break;
-        case 4:
-          router.push('/');
-          break;
-      }
-      if (ref.watch(pageIndexProvider.notifier).state == 0) {
-        router.go('/login-remaja/dashboard-remaja');
       }
       print(ref.watch(pageIndexProvider));
     });
@@ -45,9 +40,8 @@ class _LayoutRemajaState extends ConsumerState<LayoutRemaja> {
       body: SafeArea(child: widget.child),
       backgroundColor: Colors.white,
       bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
         backgroundColor: Colors.white,
-        selectedItemColor: GlobalTheme().primaryColor,
+        selectedItemColor: const GlobalTheme().primaryColor,
         unselectedItemColor: Colors.grey,
         currentIndex: ref.watch(pageIndexProvider),
         onTap: _onItemTapped,
@@ -57,16 +51,8 @@ class _LayoutRemajaState extends ConsumerState<LayoutRemaja> {
             label: 'Dashboard',
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.people_sharp),
-            label: 'Remaja',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.directions_run),
-            label: 'Kegiatan',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.edit_document),
-            label: 'Kelola',
+            icon: Icon(Icons.data_saver_on_rounded),
+            label: 'Data Kesehatan',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person),

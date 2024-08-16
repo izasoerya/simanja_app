@@ -22,6 +22,7 @@ import 'package:simanja_app/presentation/screens/remaja/account_remaja_page.dart
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/login_page.dart';
+import 'package:simanja_app/presentation/screens/remaja/result_health_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/login_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/register_page.dart';
 import 'package:simanja_app/presentation/screens/kader/register_page.dart';
@@ -58,6 +59,18 @@ final GoRouter router = GoRouter(
               path: 'dashboard-remaja',
               builder: (BuildContext context, GoRouterState state) {
                 return const LayoutRemaja(child: DashboardRemaja());
+              },
+            ),
+            GoRoute(
+              path: 'result-health-remaja',
+              builder: (BuildContext context, GoRouterState state) {
+                return const LayoutRemaja(child: ResultHealthPage());
+              },
+            ),
+            GoRoute(
+              path: 'account-remaja',
+              builder: (BuildContext context, GoRouterState state) {
+                return const LayoutRemaja(child: AccountRemajaPage());
               },
             ),
           ],
