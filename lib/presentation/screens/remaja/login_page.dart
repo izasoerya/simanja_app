@@ -44,21 +44,17 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
                     top: MediaQuery.of(context).size.height * 0.15)),
             Image.asset(
               'assets/logo/Logo Word.png',
-              scale: 0.8.sp,
+              scale:
+                  SizerUtil.deviceType == DeviceType.tablet ? 0.3.sp : 0.8.sp,
             ),
-            Padding(
-                padding: EdgeInsets.only(
-                    top: MediaQuery.of(context).size.height * 0.05)),
+            Padding(padding: EdgeInsets.only(top: 5.h)),
             Container(
-              width: MediaQuery.of(context).size.width * 0.9,
+              width: 90.w,
               decoration: const BoxDecoration(
                 color: Colors.white,
-                borderRadius: BorderRadius.all(
-                  Radius.circular(30),
-                ),
+                borderRadius: BorderRadius.all(Radius.circular(30)),
               ),
-              padding: EdgeInsets.symmetric(
-                  horizontal: MediaQuery.of(context).size.width * 0.05),
+              padding: EdgeInsets.symmetric(horizontal: 5.w),
               child: Column(
                 children: [
                   const Padding(padding: EdgeInsets.only(top: 30)),
@@ -75,8 +71,8 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
                     value: _readEmail,
                   ),
                   TextInput(
-                    hintText: 'Password',
-                    labelText: 'Password',
+                    hintText: 'Kata Sandi',
+                    labelText: 'Kata Sandi',
                     type: TextInputType.visiblePassword,
                     hideText: true,
                     value: _readPassword,
