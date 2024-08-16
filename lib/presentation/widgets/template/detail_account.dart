@@ -3,7 +3,9 @@ import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_space_around.dart';
+import 'package:simanja_app/utils/date_formatter.dart';
 import 'package:simanja_app/utils/enums.dart';
+import 'package:sizer/sizer.dart';
 
 class DetailAccount extends StatelessWidget {
   final UserKader? kader;
@@ -20,8 +22,12 @@ class DetailAccount extends StatelessWidget {
                 fontSize: 20,
                 fontWeight: FontWeight.bold)),
         const Padding(padding: EdgeInsets.only(top: 10)),
-        if (kader != null) buildKaderDetail(context),
-        if (remaja != null) buildRemajaDetail(context),
+        SizedBox(
+          width: 70.w,
+          child: kader != null
+              ? buildKaderDetail(context)
+              : buildRemajaDetail(context),
+        )
       ],
     );
   }
@@ -49,18 +55,21 @@ class DetailAccount extends StatelessWidget {
     return Column(
       children: [
         TextSpaceAround(label: 'NIK', data: remaja!.nik),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
         TextSpaceAround(label: 'Nama', data: remaja!.name),
         TextSpaceAround(
             label: 'Tanggal Lahir',
-            data: remaja!.birthDate.toString().substring(0, 10)),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+            data: DateFormatter().convertToIndonesian(remaja!.birthDate)),
         TextSpaceAround(
             label: 'Jenis Kelamin',
             data: remaja!.sex == Gender.male ? 'Laki-laki' : 'Perempuan'),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+        TextSpaceAround(
+            label: 'Jalan',
+            data: '${remaja!.street} No. ${remaja!.streetNumber}'),
+        TextSpaceAround(
+            label: 'RT / RW',
+            data: '${remaja!.rt.toString()} / ${remaja!.rw.toString()}'),
         TextSpaceAround(label: 'Alamat', data: remaja!.village),
-        SizedBox(height: MediaQuery.of(context).size.height * 0.02),
+        TextSpaceAround(label: 'No HP / WA', data: remaja!.phoneNumber),
         TextSpaceAround(label: 'Email', data: remaja!.email),
       ],
     );

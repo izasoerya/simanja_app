@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class TextSpaceAround extends StatelessWidget {
   final String label;
@@ -8,32 +9,35 @@ class TextSpaceAround extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        Text(
-          '$label :',
-          style: const TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-            fontWeight: FontWeight.bold,
-          ),
-          overflow: TextOverflow.visible,
-        ),
-        Container(
-          width: MediaQuery.of(context).size.width * 0.4,
-          alignment: Alignment.centerRight,
-          child: Text(
-            data,
-            style: TextStyle(
-              color: const GlobalTheme().primaryColor,
+    return Container(
+      padding: EdgeInsets.symmetric(vertical: 0.5.h),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            '$label :',
+            style: const TextStyle(
+              color: Colors.black,
               fontSize: 16,
               fontWeight: FontWeight.bold,
             ),
             overflow: TextOverflow.visible,
           ),
-        ),
-      ],
+          Container(
+            width: MediaQuery.of(context).size.width * 0.4,
+            alignment: Alignment.centerRight,
+            child: Text(
+              data,
+              style: TextStyle(
+                color: const GlobalTheme().primaryColor,
+                fontSize: 16,
+                fontWeight: FontWeight.bold,
+              ),
+              overflow: TextOverflow.visible,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
