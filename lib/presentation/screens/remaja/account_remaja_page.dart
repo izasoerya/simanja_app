@@ -10,7 +10,7 @@ import 'package:simanja_app/utils/default_account.dart';
 
 class AccountRemajaPage extends ConsumerWidget {
   final String? remajaUID;
-  const AccountRemajaPage({super.key, required this.remajaUID});
+  const AccountRemajaPage({super.key, this.remajaUID});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -27,6 +27,9 @@ class AccountRemajaPage extends ConsumerWidget {
             if (snapshot.connectionState == ConnectionState.waiting) {
               return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasData) {
+              if (snapshot.data == null) {
+                return const Text('No user found');
+              }
               return Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
@@ -37,6 +40,8 @@ class AccountRemajaPage extends ConsumerWidget {
                   Padding(
                       padding: EdgeInsets.only(bottom: screenHeight * 0.05)),
                   DetailAccount(remaja: snapshot.data),
+                  Padding(
+                      padding: EdgeInsets.only(bottom: screenHeight * 0.05)),
                   remajaAccount.uid == 'dummy'
                       ? const SizedBox()
                       : SubmitButton(
