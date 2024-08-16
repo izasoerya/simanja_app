@@ -15,7 +15,7 @@ class ResultHealthPage extends StatelessWidget {
       margin: EdgeInsets.symmetric(horizontal: 5.w),
       child: Column(
         children: [
-          Padding(padding: EdgeInsets.only(top: 5.h)),
+          Padding(padding: EdgeInsets.only(top: 2.5.h)),
           const TitleWDescription(
             title: 'Hasil Cek Kesehatan',
             description:
