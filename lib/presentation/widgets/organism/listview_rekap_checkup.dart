@@ -137,24 +137,29 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                       '/login-kader/rekap-checkup-result?checkupUID=${widget.kaderCheckup.uid}&label=all');
                 }),
             const Padding(padding: EdgeInsets.only(top: 15)),
-            SubmitButton(
-                text: 'Unduh Excel',
-                backgroundColor: const Color.fromRGBO(16, 121, 63, 1),
-                icon:
-                    const Icon(Icons.table_chart_outlined, color: Colors.white),
-                onClick: () async {
-                  if (widget.items.isEmpty) {
-                    return;
-                  }
-                  final response = await UtilExcel().createExcel(widget.items);
-                  if (response != null) {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: Text('Berhasil membuat excel')));
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(content: Text('Gagal membuat excel')));
-                  }
-                }),
+            widget.items.isEmpty
+                ? const SizedBox()
+                : SubmitButton(
+                    text: 'Unduh Excel',
+                    backgroundColor: const Color.fromRGBO(16, 121, 63, 1),
+                    icon: const Icon(Icons.table_chart_outlined,
+                        color: Colors.white),
+                    onClick: () async {
+                      if (widget.items.isEmpty) {
+                        return;
+                      }
+                      final response =
+                          await UtilExcel().createExcel(widget.items);
+                      if (response != null) {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Berhasil membuat excel')));
+                      } else {
+                        ScaffoldMessenger.of(context).showSnackBar(
+                            const SnackBar(
+                                content: Text('Gagal membuat excel')));
+                      }
+                    }),
             const Padding(padding: EdgeInsets.only(top: 50)),
           ],
         ));
