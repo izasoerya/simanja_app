@@ -120,21 +120,21 @@ class ItemListViewHealth extends StatelessWidget {
                         children: [
                           Text(user.name,
                               style: TextStyle(
-                                fontSize: 8.sp,
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.bold,
                                 color: const GlobalTheme().primaryColor,
                               ),
                               textAlign: TextAlign.start),
                           Text(user.nik,
                               style: TextStyle(
-                                fontSize: 5.sp,
+                                fontSize: 7.sp,
                                 fontWeight: FontWeight.normal,
                               ),
                               textAlign: TextAlign.start),
                           Text(
                               '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
                               style: TextStyle(
-                                fontSize: 5.sp,
+                                fontSize: 7.sp,
                                 fontWeight: FontWeight.normal,
                               ),
                               textAlign: TextAlign.start),
@@ -143,7 +143,7 @@ class ItemListViewHealth extends StatelessWidget {
                                   ? 'Pengguna BPJS'
                                   : 'Bukan Pengguna BPJS',
                               style: TextStyle(
-                                fontSize: 5.sp,
+                                fontSize: 7.sp,
                                 fontWeight: FontWeight.normal,
                               ),
                               textAlign: TextAlign.start),
@@ -153,17 +153,17 @@ class ItemListViewHealth extends StatelessWidget {
                         children: [
                           Text(_getLabelText(label),
                               style: TextStyle(
-                                fontSize: 7.sp,
+                                fontSize: 8.sp,
                               )),
                           Text(_getHealthValue(label, health),
                               style: TextStyle(
-                                fontSize: 7.sp,
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.bold,
                                 color: const GlobalTheme().primaryColor,
                               )),
                           Text(_getHealthStatus(label),
                               style: TextStyle(
-                                fontSize: 7.sp,
+                                fontSize: 8.sp,
                                 color: const GlobalTheme().secondaryColor,
                               )),
                         ],

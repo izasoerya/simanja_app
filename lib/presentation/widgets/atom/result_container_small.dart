@@ -23,7 +23,7 @@ class ResultContainerSmall extends StatelessWidget {
       children: [
         Text(label,
             style: TextStyle(
-              fontSize: 6.sp,
+              fontSize: 10.sp,
               color: Colors.black,
             )),
         Container(
@@ -38,7 +38,7 @@ class ResultContainerSmall extends StatelessWidget {
           child: Text(value,
               style: textStyle ??
                   TextStyle(
-                    fontSize: 6.sp,
+                    fontSize: 10.sp,
                     fontWeight: FontWeight.normal,
                     color: Colors.black,
                   ),

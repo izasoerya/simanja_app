@@ -26,14 +26,14 @@ class CheckupResultField extends StatelessWidget {
             Text(
               'Lokasi Posyandu: ${kaderAccount.namePosyandu}',
               style: TextStyle(
-                  fontSize: 7.sp,
+                  fontSize: 10.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
             ),
             Text(
                 'Tanggal: ${item!.checkedAt?.toIso8601String().substring(0, 10) ?? 'belum ada data'}',
                 style: TextStyle(
-                    fontSize: 7.sp,
+                    fontSize: 10.sp,
                     fontWeight: FontWeight.bold,
                     color: Colors.black)),
             const Padding(padding: EdgeInsets.only(top: 10)),
@@ -95,7 +95,7 @@ class CheckupResultField extends StatelessWidget {
                   (item!.imt == null) ? 'NaN' : (item!.imt!).toStringAsFixed(2),
               label: 'Indeks Massa Tubuh (IMT)',
               textStyle: TextStyle(
-                  fontSize: 10.sp,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.bold,
                   color: Colors.black),
               width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
