@@ -47,6 +47,7 @@ class RemajaHealthImplementation implements RemajaHealthRepo {
         smoker: health.smoker,
         tablet: health.tablet,
         note: health.note,
+        fasting: health.fasting,
         checkedAt: health.checkedAt,
       );
       final response = await Supabase.instance.client

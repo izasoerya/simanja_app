@@ -56,10 +56,7 @@ class ItemListViewHealth extends StatelessWidget {
         if (health.height == null || health.weight == null) {
           return 'nan';
         }
-        return (health.weight! /
-                (health.height! / 100) *
-                (health.height! / 100))
-            .toString();
+        return health.imt!.toStringAsFixed(2);
       default:
         return '${health.bloodPressure}';
     }

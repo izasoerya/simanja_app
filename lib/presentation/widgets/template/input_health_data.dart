@@ -180,8 +180,8 @@ class _HealthDataInput extends StatelessWidget {
                 items: const ['Ya', 'Tidak'],
                 hint: 'Pilih...',
                 onChanged: (d) => d == 'Ya'
-                    ? inputData.smoker = true
-                    : inputData.smoker = false),
+                    ? inputData.fasting = true
+                    : inputData.fasting = false),
             TextInput(
                 hintText: 'Ketik kolesterol...',
                 labelText: 'Kolesterol',

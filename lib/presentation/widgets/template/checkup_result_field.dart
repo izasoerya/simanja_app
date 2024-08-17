@@ -3,6 +3,7 @@ import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/result_container_small.dart';
 import 'package:simanja_app/presentation/widgets/organism/imt_description.dart';
+import 'package:simanja_app/utils/date_formatter.dart';
 import 'package:simanja_app/utils/default_account.dart';
 import 'package:sizer/sizer.dart';
 
@@ -31,7 +32,7 @@ class CheckupResultField extends StatelessWidget {
                   color: Colors.black),
             ),
             Text(
-                'Tanggal: ${item!.checkedAt?.toIso8601String().substring(0, 10) ?? 'belum ada data'}',
+                'Tanggal: ${DateFormatter().convertToIndonesian(item!.checkedAt!)}',
                 style: TextStyle(
                     fontSize: 10.sp,
                     fontWeight: FontWeight.bold,
