@@ -4,6 +4,7 @@ import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/presentation/provider/provider_user.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/utils/default_account.dart';
+import 'package:sizer/sizer.dart';
 
 class AppbarText extends ConsumerWidget {
   final bool isKader;
@@ -14,11 +15,11 @@ class AppbarText extends ConsumerWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text(
+        Text(
           'Selamat Datang,',
           style: TextStyle(
             color: Colors.black,
-            fontSize: 14,
+            fontSize: SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -30,7 +31,7 @@ class AppbarText extends ConsumerWidget {
           }(),
           style: TextStyle(
             color: const GlobalTheme().primaryColor,
-            fontSize: 22,
+            fontSize: SizerUtil.deviceType == DeviceType.tablet ? 8.sp : 10.sp,
             fontWeight: FontWeight.bold,
             height: 1.2, // Adjust this value to change the vertical spacing
           ),
@@ -51,14 +52,27 @@ class AppbarText extends ConsumerWidget {
                 }()}',
                 style: TextStyle(
                   color: const GlobalTheme().secondaryColor,
-                  fontSize: 14,
+                  fontSize:
+                      SizerUtil.deviceType == DeviceType.tablet ? 8.sp : 10.sp,
                   fontWeight: FontWeight.bold,
                 ),
                 overflow: TextOverflow.ellipsis,
                 maxLines: 1,
               );
             }
-            if (isKader) return Text(ref.watch(userKaderProvider).namePosyandu);
+            if (isKader) {
+              return Text(
+                'Posyandu ${ref.watch(userKaderProvider).namePosyandu}',
+                style: TextStyle(
+                    color: const GlobalTheme().secondaryColor,
+                    fontSize: SizerUtil.deviceType == DeviceType.tablet
+                        ? 8.sp
+                        : 10.sp,
+                    fontWeight: FontWeight.bold),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              );
+            }
             return const Text('Tidak ada data');
           },
         ),
@@ -70,7 +84,7 @@ class AppbarText extends ConsumerWidget {
           }(),
           style: TextStyle(
             color: const GlobalTheme().secondaryColor,
-            fontSize: 14,
+            fontSize: SizerUtil.deviceType == DeviceType.tablet ? 8.sp : 10.sp,
             fontWeight: FontWeight.normal,
           ),
           maxLines: 2,

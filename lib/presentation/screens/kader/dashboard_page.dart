@@ -22,7 +22,7 @@ class DashboardKader extends StatelessWidget {
       child: SingleChildScrollView(
         child: Column(
           children: [
-            Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
+            Padding(padding: EdgeInsets.only(top: screenHeight * 0.025)),
             const AppbarContent(isKader: true),
             const Padding(padding: EdgeInsets.only(top: 30)),
             const TemplateTitle(text: 'DASHBOARD'),
