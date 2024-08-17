@@ -110,17 +110,17 @@ class CheckupResultField extends StatelessWidget {
               width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
               color: const GlobalTheme().primaryColorLight,
             ),
+            // ResultContainerSmall(
+            //   value: item!.abdominalCircumference != null
+            //       ? (item!.abdominalCircumference! > 20 ? 'Tinggi' : 'Normal')
+            //       : 'belum ada data',
+            //   label: 'Status LP',
+            //   width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
+            //   color: const GlobalTheme().primaryColorLight,
+            // ),
             ResultContainerSmall(
-              value: item!.abdominalCircumference != null
-                  ? (item!.abdominalCircumference! > 20 ? 'Tinggi' : 'Normal')
-                  : 'belum ada data',
-              label: 'Status LP',
-              width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
-              color: const GlobalTheme().primaryColorLight,
-            ),
-            ResultContainerSmall(
-              value: item!.tdd != null
-                  ? (item!.tdd! > 20 ? 'Tinggi' : 'Normal')
+              value: item!.hipertensi != null
+                  ? item!.hipertensi!
                   : 'belum ada data',
               label: 'Status Tensi',
               width: SizerUtil.deviceType == DeviceType.tablet ? 0.4 : 0.3,
