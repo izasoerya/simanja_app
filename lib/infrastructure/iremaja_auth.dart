@@ -36,9 +36,19 @@ class RemajaAuthImplementation implements RemajaAuthRepo {
   }
 
   @override
-  Future<void> updateUser(UserRemaja user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<UserRemaja?> updateUser(UserRemaja user) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('remaja_auth')
+          .update(user.toJSON())
+          .eq('uid', user.uid)
+          .select()
+          .single();
+      return UserRemaja.fromJSON(response);
+    } on Exception catch (e) {
+      print('Error: $e');
+      return null;
+    }
   }
 
   @override

@@ -8,6 +8,6 @@ abstract class RemajaAuthRepo {
   Future<List<UserRemaja>> getAllUsers();
 
   Future<UserRemaja?> createUser(UserRemaja user);
-  Future<void> updateUser(UserRemaja user);
+  Future<UserRemaja?> updateUser(UserRemaja user);
   Future<void> deleteUser(UserRemaja user);
 }

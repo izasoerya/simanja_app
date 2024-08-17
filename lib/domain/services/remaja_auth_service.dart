@@ -26,4 +26,8 @@ class RemajaAuthentication {
   Future<List<UserRemaja>> getUsersbyPosyanduID(String posyanduUID) async {
     return await RemajaAuthImplementation().getUsersbyPosyanduID(posyanduUID);
   }
+
+  Future<UserRemaja?> updateUser(UserRemaja user) async {
+    return await RemajaAuthImplementation().updateUser(user);
+  }
 }
