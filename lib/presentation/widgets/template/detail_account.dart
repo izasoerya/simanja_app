@@ -19,7 +19,7 @@ class DetailAccount extends StatelessWidget {
         Text('DETAIL AKUN',
             style: TextStyle(
                 color: const GlobalTheme().secondaryColor,
-                fontSize: 20,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.bold)),
         const Padding(padding: EdgeInsets.only(top: 10)),
         SizedBox(

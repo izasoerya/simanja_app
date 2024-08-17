@@ -18,7 +18,8 @@ class TextSpaceAround extends StatelessWidget {
             '$label :',
             style: TextStyle(
               color: Colors.black,
-              fontSize: 12.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
               fontWeight: FontWeight.bold,
             ),
             overflow: TextOverflow.visible,
@@ -30,7 +31,8 @@ class TextSpaceAround extends StatelessWidget {
               data,
               style: TextStyle(
                 color: const GlobalTheme().primaryColor,
-                fontSize: 12.sp,
+                fontSize:
+                    SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.right,

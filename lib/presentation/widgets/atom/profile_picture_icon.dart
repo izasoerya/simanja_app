@@ -4,6 +4,7 @@ import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/services/kader_auth_service.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class ProfilePictureIcon extends StatelessWidget {
   final UserKader? kader;
@@ -45,7 +46,7 @@ class ProfilePictureIcon extends StatelessWidget {
       alignment: Alignment.center,
       children: [
         CircleAvatar(
-          radius: 50,
+          radius: 10.w,
           backgroundColor: const GlobalTheme().primaryColor,
           backgroundImage: kader?.urlImage != null
               ? NetworkImage(kader!.urlImage!)

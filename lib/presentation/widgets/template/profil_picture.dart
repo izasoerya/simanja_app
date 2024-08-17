@@ -30,7 +30,8 @@ class ProfilPicture extends StatelessWidget {
             'PROFIL',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 15.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 15.sp,
               color: Colors.white,
             ),
           ),
@@ -47,22 +48,26 @@ class ProfilPicture extends StatelessWidget {
       Text(kader!.nameAccount,
           style: TextStyle(
               color: Colors.white,
-              fontSize: 15.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 15.sp,
               fontWeight: FontWeight.bold)),
       Text(kader!.email,
           style: TextStyle(
               color: Colors.white,
-              fontSize: 12.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
               fontWeight: FontWeight.normal)),
       Text(kader!.address,
           style: TextStyle(
               color: Colors.white,
-              fontSize: 12.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
               fontWeight: FontWeight.normal)),
       Text('Akun Kader Posyandu',
           style: TextStyle(
               color: const GlobalTheme().secondaryColor,
-              fontSize: 12.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
               fontWeight: FontWeight.bold)),
     ];
   }
@@ -73,22 +78,20 @@ class ProfilPicture extends StatelessWidget {
       Text(remaja!.name,
           style: TextStyle(
               color: Colors.white,
-              fontSize: 15.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 15.sp,
               fontWeight: FontWeight.bold)),
       Text(remaja!.email,
           style: TextStyle(
               color: Colors.white,
-              fontSize: 12.sp,
-              fontWeight: FontWeight.normal)),
-      Text(remaja!.village,
-          style: TextStyle(
-              color: Colors.white,
-              fontSize: 12.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
               fontWeight: FontWeight.normal)),
       Text('Akun Remaja',
           style: TextStyle(
               color: const GlobalTheme().secondaryColor,
-              fontSize: 12.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
               fontWeight: FontWeight.bold)),
     ];
   }
