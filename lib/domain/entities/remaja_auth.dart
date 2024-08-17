@@ -111,7 +111,6 @@ class UserRemaja {
       'posyandu': posyandu,
       'is_male': sex == Gender.male ? true : false,
       'date_of_birth': birthDate.toIso8601String(),
-      'age': age,
       'phone_number': phoneNumber,
       'street': street,
       'street_number': streetNumber,
