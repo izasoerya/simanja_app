@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_dropdown.dart';
+import 'package:simanja_app/utils/date_formatter.dart';
 import 'package:simanja_app/utils/enums.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/domain/services/remaja_heath_service.dart';
@@ -173,6 +175,13 @@ class _HealthDataInput extends StatelessWidget {
                 isNumeric: true,
                 value: (d) =>
                     d.isNotEmpty ? inputData.capillar = double.parse(d) : null),
+            CustomDropdown(
+                label: 'Sedang Puasa?',
+                items: const ['Ya', 'Tidak'],
+                hint: 'Pilih...',
+                onChanged: (d) => d == 'Ya'
+                    ? inputData.smoker = true
+                    : inputData.smoker = false),
             TextInput(
                 hintText: 'Ketik kolesterol...',
                 labelText: 'Kolesterol',
@@ -233,7 +242,16 @@ class _SubmitData extends StatelessWidget {
     return SubmitButton(
         text: 'Simpan Perubahan',
         onClick: () async {
-          final updatedData = data.copyWith(checkedAt: DateTime.now());
+          final remaja =
+              await RemajaAuthentication().getUserbyUID(data.uidRemaja!);
+          if (remaja == null) {
+            ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Koneksi Bermasalah')));
+            return;
+          }
+          final updatedData = data.copyWith(
+              checkedAt: DateTime.now(),
+              age: DateFormatter().calculateAgeInMonths(remaja.birthDate));
           final response =
               await RemajaHealthService().upsertRemajaHealth(updatedData);
           if (response != null) {

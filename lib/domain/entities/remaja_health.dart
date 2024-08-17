@@ -93,11 +93,11 @@ class HealthPropertiesRemaja {
   }
 
   String? get bloodSugar {
-    if (vena == null || capillar == null) {
+    if (vena == null || capillar == null || fasting == null) {
       return null;
-    } else if (vena! >= 200 || capillar! >= 200) {
+    } else if (vena! >= 200 || capillar! >= 200 && !fasting!) {
       return 'Tinggi';
-    } else if (vena! >= 126 || capillar! <= 100) {
+    } else if (vena! >= 126 || capillar! >= 100 && fasting!) {
       return 'Tinggi';
     } else {
       return 'Normal';
@@ -118,6 +118,7 @@ class HealthPropertiesRemaja {
     }
   }
 
+  bool? fasting;
   bool? smoker;
   bool? tablet;
   String? note;
@@ -138,6 +139,7 @@ class HealthPropertiesRemaja {
     this.tds,
     this.tdd,
     this.checkedAt,
+    this.fasting,
     this.smoker,
     this.tablet,
     this.note,
@@ -160,6 +162,7 @@ class HealthPropertiesRemaja {
     double? tds,
     double? tdd,
     DateTime? checkedAt,
+    bool? fasting,
     bool? smoker,
     bool? tablet,
     String? note,
@@ -181,6 +184,7 @@ class HealthPropertiesRemaja {
       tds: tds ?? this.tds,
       tdd: tdd ?? this.tdd,
       checkedAt: checkedAt ?? this.checkedAt,
+      fasting: fasting ?? this.fasting,
       smoker: smoker ?? this.smoker,
       tablet: tablet ?? this.tablet,
       note: note ?? this.note,
@@ -220,6 +224,7 @@ class HealthPropertiesRemaja {
       checkedAt: json['checked_at'] != null
           ? DateTime.parse(json['checked_at'])
           : null,
+      fasting: json['status_fasting'],
       smoker: json['status_smoker'],
       tablet: json['status_tablet'],
       note: json['doctor_note'],
@@ -251,6 +256,7 @@ class HealthPropertiesRemaja {
       'status_hipertensi': hipertensi,
       'status_cholesterol': statusCholesterol,
       'status_blood_sugar': bloodSugar,
+      'status_fasting': fasting,
       'status_smoker': smoker,
       'status_tablet': tablet,
       'doctor_note': note,
