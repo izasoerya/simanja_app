@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:sizer/sizer.dart';
 
 class SubmitButton extends StatelessWidget {
   final String text;
@@ -33,7 +34,7 @@ class SubmitButton extends StatelessWidget {
               Text(text,
                   style: const GlobalTheme()
                       .headerStyle
-                      .copyWith(color: Colors.white, fontSize: 18)),
+                      .copyWith(color: Colors.white, fontSize: 12.sp)),
               if (icon != null) const SizedBox(width: 8),
               icon ?? const SizedBox(),
             ],

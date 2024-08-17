@@ -16,23 +16,24 @@ class TextSpaceAround extends StatelessWidget {
         children: [
           Text(
             '$label :',
-            style: const TextStyle(
+            style: TextStyle(
               color: Colors.black,
-              fontSize: 16,
+              fontSize: 12.sp,
               fontWeight: FontWeight.bold,
             ),
             overflow: TextOverflow.visible,
           ),
           Container(
-            width: MediaQuery.of(context).size.width * 0.4,
+            width: 40.w,
             alignment: Alignment.centerRight,
             child: Text(
               data,
               style: TextStyle(
                 color: const GlobalTheme().primaryColor,
-                fontSize: 16,
+                fontSize: 12.sp,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.right,
               overflow: TextOverflow.visible,
             ),
           ),
