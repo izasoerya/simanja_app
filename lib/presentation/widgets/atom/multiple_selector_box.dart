@@ -36,7 +36,7 @@ class _MultipleSelectorBoxState extends State<MultipleSelectorBox> {
                 widget.onTap(item);
               },
               child: Container(
-                width: MediaQuery.of(context).size.width / 2.25 - 20,
+                width: MediaQuery.of(context).size.width / 2.5,
                 margin: const EdgeInsets.symmetric(vertical: 4.0),
                 alignment: Alignment.center,
                 padding:
@@ -69,7 +69,7 @@ class _MultipleSelectorBoxState extends State<MultipleSelectorBox> {
                 widget.onTap(item);
               },
               child: Container(
-                width: MediaQuery.of(context).size.width / 2.25 - 20,
+                width: MediaQuery.of(context).size.width / 2.5,
                 margin: const EdgeInsets.symmetric(vertical: 4.0),
                 alignment: Alignment.center,
                 padding:
