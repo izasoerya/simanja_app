@@ -23,7 +23,7 @@ class DetailAccount extends StatelessWidget {
                 fontWeight: FontWeight.bold)),
         const Padding(padding: EdgeInsets.only(top: 10)),
         SizedBox(
-          width: 70.w,
+          width: 80.w,
           child: kader != null
               ? buildKaderDetail(context)
               : buildRemajaDetail(context),
@@ -36,17 +36,12 @@ class DetailAccount extends StatelessWidget {
     return Column(
       children: [
         TextSpaceAround(label: 'Nama Akun', data: kader!.nameAccount),
-        SizedBox(height: 3.w),
         TextSpaceAround(label: 'Nama Posyandu', data: kader!.namePosyandu),
-        SizedBox(height: 3.w),
         TextSpaceAround(label: 'Email', data: kader!.email),
-        SizedBox(height: 3.w),
         TextSpaceAround(
-            label: 'Tanggal Lahir',
-            data: kader!.birthDate.toString().substring(0, 10)),
-        SizedBox(height: 3.w),
+            label: 'Tanggal Berdiri',
+            data: DateFormatter().convertToIndonesian(kader!.birthDate)),
         TextSpaceAround(label: 'Alamat', data: kader!.address),
-        SizedBox(height: 3.w),
       ],
     );
   }
