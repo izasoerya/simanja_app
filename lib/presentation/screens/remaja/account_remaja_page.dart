@@ -7,6 +7,7 @@ import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/template/detail_account.dart';
 import 'package:simanja_app/presentation/widgets/template/profil_picture.dart';
 import 'package:simanja_app/utils/default_account.dart';
+import 'package:sizer/sizer.dart';
 
 class AccountRemajaPage extends ConsumerWidget {
   final String? remajaUID;
@@ -14,48 +15,49 @@ class AccountRemajaPage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final screenHeight = MediaQuery.of(context).size.height;
     final uid = remajaUID ?? remajaAccount.uid;
 
-    return Container(
-      width: screenWidth,
-      margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-      child: FutureBuilder(
-          future: RemajaAuthentication().getUserbyUID(uid),
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasData) {
-              if (snapshot.data == null) {
-                return const Text('No user found');
+    return PopScope(
+      onPopInvoked: (didPop) => ref.watch(pageIndexProvider.notifier).state = 0,
+      child: Container(
+        width: 100.w,
+        margin: EdgeInsets.symmetric(horizontal: 5.w),
+        child: FutureBuilder(
+            future: RemajaAuthentication().getUserbyUID(uid),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasData) {
+                if (snapshot.data == null) {
+                  return const Text('No user found');
+                }
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Padding(padding: EdgeInsets.only(bottom: 5.h)),
+                      ProfilPicture(
+                          remaja: snapshot.data, isSelf: remajaUID == null),
+                      Padding(padding: EdgeInsets.only(bottom: 5.h)),
+                      DetailAccount(remaja: snapshot.data),
+                      Padding(padding: EdgeInsets.only(bottom: 5.h)),
+                      remajaAccount.uid == 'dummy'
+                          ? const SizedBox()
+                          : SubmitButton(
+                              text: 'Keluar Akun',
+                              onClick: () {
+                                ref.watch(pageIndexProvider.notifier).state = 0;
+                                router.go('/');
+                              },
+                            ),
+                      Padding(padding: EdgeInsets.only(bottom: 5.h)),
+                    ],
+                  ),
+                );
               }
-              return Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 0.05)),
-                  ProfilPicture(
-                      remaja: snapshot.data, isSelf: remajaUID == null),
-                  Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 0.05)),
-                  DetailAccount(remaja: snapshot.data),
-                  Padding(
-                      padding: EdgeInsets.only(bottom: screenHeight * 0.05)),
-                  remajaAccount.uid == 'dummy'
-                      ? const SizedBox()
-                      : SubmitButton(
-                          text: 'Keluar Akun',
-                          onClick: () {
-                            ref.watch(pageIndexProvider.notifier).state = 0;
-                            router.go('/');
-                          },
-                        ),
-                ],
-              );
-            }
-            return const Text('No user found');
-          }),
+              return const Text('No user found');
+            }),
+      ),
     );
   }
 }

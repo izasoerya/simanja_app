@@ -3,6 +3,7 @@ import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/profile_picture_icon.dart';
+import 'package:sizer/sizer.dart';
 
 class ProfilPicture extends StatelessWidget {
   final UserKader? kader;
@@ -25,11 +26,11 @@ class ProfilPicture extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Text(
+          Text(
             'PROFIL',
             style: TextStyle(
               fontWeight: FontWeight.bold,
-              fontSize: 20,
+              fontSize: 15.sp,
               color: Colors.white,
             ),
           ),
@@ -44,22 +45,24 @@ class ProfilPicture extends StatelessWidget {
     return [
       ProfilePictureIcon(kader: kader, isSelf: isSelf),
       Text(kader!.nameAccount,
-          style: const TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-      Text(kader!.email,
-          style: const TextStyle(
+          style: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.bold)),
+      Text(kader!.email,
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 12.sp,
               fontWeight: FontWeight.normal)),
       Text(kader!.address,
-          style: const TextStyle(
+          style: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 12.sp,
               fontWeight: FontWeight.normal)),
       Text('Akun Kader Posyandu',
           style: TextStyle(
               color: const GlobalTheme().secondaryColor,
-              fontSize: 16,
+              fontSize: 12.sp,
               fontWeight: FontWeight.bold)),
     ];
   }
@@ -68,22 +71,24 @@ class ProfilPicture extends StatelessWidget {
     return [
       ProfilePictureIcon(remaja: remaja, isSelf: isSelf),
       Text(remaja!.name,
-          style: const TextStyle(
-              color: Colors.white, fontSize: 18, fontWeight: FontWeight.bold)),
-      Text(remaja!.email,
-          style: const TextStyle(
+          style: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 15.sp,
+              fontWeight: FontWeight.bold)),
+      Text(remaja!.email,
+          style: TextStyle(
+              color: Colors.white,
+              fontSize: 12.sp,
               fontWeight: FontWeight.normal)),
       Text(remaja!.village,
-          style: const TextStyle(
+          style: TextStyle(
               color: Colors.white,
-              fontSize: 16,
+              fontSize: 12.sp,
               fontWeight: FontWeight.normal)),
       Text('Akun Remaja',
           style: TextStyle(
               color: const GlobalTheme().secondaryColor,
-              fontSize: 16,
+              fontSize: 12.sp,
               fontWeight: FontWeight.bold)),
     ];
   }
