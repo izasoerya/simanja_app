@@ -1,3 +1,4 @@
+import 'package:simanja_app/utils/date_formatter.dart';
 import 'package:simanja_app/utils/enums.dart';
 
 class UserRemaja {
@@ -7,6 +8,7 @@ class UserRemaja {
   final String posyandu;
   final Gender sex;
   final DateTime birthDate;
+  int? get age => DateFormatter().calculateAgeInMonths(birthDate);
   final String phoneNumber;
   final String street;
   final int streetNumber;
@@ -109,6 +111,7 @@ class UserRemaja {
       'posyandu': posyandu,
       'is_male': sex == Gender.male ? true : false,
       'date_of_birth': birthDate.toIso8601String(),
+      'age': age,
       'phone_number': phoneNumber,
       'street': street,
       'street_number': streetNumber,
