@@ -83,7 +83,8 @@ class UtilExcel {
       sheet.appendRow([
         IntCellValue(i + 1),
         TextCellValue(item.name),
-        TextCellValue(item.data.age?.toString() ?? ''),
+        TextCellValue(
+            '${(item.data.age! / 12)} tahun ${item.data.age! % 12} bulan'),
         item.data.weight != null ? DoubleCellValue(item.data.weight!) : null,
         item.data.height != null ? DoubleCellValue(item.data.height!) : null,
         item.data.armCircumference != null

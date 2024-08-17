@@ -55,6 +55,10 @@ class DetailAccount extends StatelessWidget {
             label: 'Tanggal Lahir',
             data: DateFormatter().convertToIndonesian(remaja!.birthDate)),
         TextSpaceAround(
+            label: 'Umur',
+            data:
+                '${(remaja!.age! ~/ 12).toString()} tahun ${remaja!.age! % 12} bulan'),
+        TextSpaceAround(
             label: 'Jenis Kelamin',
             data: remaja!.sex == Gender.male ? 'Laki-laki' : 'Perempuan'),
         TextSpaceAround(
