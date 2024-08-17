@@ -16,21 +16,22 @@ class _LayoutKaderState extends ConsumerState<LayoutKader> {
   void _onItemTapped(int index) {
     setState(() {
       ref.watch(pageIndexProvider.notifier).state = index;
-      switch (ref.watch(pageIndexProvider)) {
+      final pageIndex = ref.watch(pageIndexProvider);
+      switch (pageIndex) {
         case 0:
-          router.push('/login-kader/dashboard-kader');
+          router.go('/login-kader/dashboard-kader');
           break;
         case 1:
-          router.push('/login-kader/data-remaja-kader');
+          router.go('/login-kader/data-remaja-kader');
           break;
         case 2:
-          router.push('/login-kader/activity-kader');
+          router.go('/login-kader/activity-kader');
           break;
         case 3:
-          router.push('/login-kader/management-kader');
+          router.go('/login-kader/management-kader');
           break;
         case 4:
-          router.push('/login-kader/account-kader');
+          router.go('/login-kader/account-kader');
           break;
       }
     });

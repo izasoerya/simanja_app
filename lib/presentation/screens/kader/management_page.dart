@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:simanja_app/domain/entities/kader_finance.dart';
 import 'package:simanja_app/domain/entities/kader_inventory.dart';
 import 'package:simanja_app/domain/services/kader_finance_service.dart';
 import 'package:simanja_app/domain/services/kader_inventory_service.dart';
+import 'package:simanja_app/presentation/provider/provider_index_page.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_inventory.dart';
 import 'package:simanja_app/utils/default_account.dart';
 import 'package:simanja_app/utils/enums.dart';
@@ -11,14 +14,14 @@ import 'package:simanja_app/presentation/widgets/organism/listview_kas.dart';
 import 'package:simanja_app/presentation/widgets/organism/textfield_and_button.dart';
 import 'package:simanja_app/presentation/widgets/template/title_w_posyandu.dart';
 
-class ManagementPage extends StatefulWidget {
+class ManagementPage extends ConsumerStatefulWidget {
   const ManagementPage({super.key});
 
   @override
-  State<ManagementPage> createState() => _ManagementPageState();
+  ConsumerState<ManagementPage> createState() => _ManagementPageState();
 }
 
-class _ManagementPageState extends State<ManagementPage> {
+class _ManagementPageState extends ConsumerState<ManagementPage> {
   ManagementObject _selectedObject = ManagementObject.kas;
   late Future<List<FinanceKader>?> _financeFuture;
   late Future<List<KaderInventory>?> _inventoryFuture;
@@ -111,24 +114,30 @@ class _ManagementPageState extends State<ManagementPage> {
     final screenWidth = MediaQuery.of(context).size.width;
     final screenHeight = MediaQuery.of(context).size.height;
 
-    return Container(
-      width: screenWidth,
-      margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
-      child: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
-            const TitleWPosyandu(title: 'KELOLA POSYANDU'),
-            Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
-            ImageBoxManagement(
-              onTap: _onObjectSelected,
-              defaultValue: _selectedObject,
-            ),
-            Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
-            _buildSelectedObjectWidget(),
-            Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
-          ],
+    return PopScope(
+      onPopInvoked: (didPop) {
+        router.go('/login-kader/dashboard-kader');
+        changePageIndex(ref, 0);
+      },
+      child: Container(
+        width: screenWidth,
+        margin: EdgeInsets.symmetric(horizontal: screenWidth * 0.05),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              Padding(padding: EdgeInsets.only(top: screenHeight * 0.05)),
+              const TitleWPosyandu(title: 'KELOLA POSYANDU'),
+              Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
+              ImageBoxManagement(
+                onTap: _onObjectSelected,
+                defaultValue: _selectedObject,
+              ),
+              Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
+              _buildSelectedObjectWidget(),
+              Padding(padding: EdgeInsets.only(top: screenHeight * 0.03)),
+            ],
+          ),
         ),
       ),
     );

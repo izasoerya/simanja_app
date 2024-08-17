@@ -5,6 +5,7 @@ import 'package:simanja_app/domain/entities/kader_event.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/domain/services/kadet_event_service.dart';
 import 'package:simanja_app/presentation/provider/provider_index_page.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/template_title.dart';
 import 'package:simanja_app/presentation/widgets/organism/listview_ongoing_event.dart';
 import 'package:simanja_app/presentation/widgets/template/schedule_checkup_menu.dart';
@@ -37,7 +38,10 @@ class _ActivityPageState extends ConsumerState<ActivityPage> {
   @override
   Widget build(BuildContext context) {
     return PopScope(
-      onPopInvoked: (_) => changePageIndex(ref, 0),
+      onPopInvoked: (didPop) {
+        router.go('/login-kader/dashboard-kader');
+        changePageIndex(ref, 0);
+      },
       child: SingleChildScrollView(
         child: Center(
           child: SizedBox(
