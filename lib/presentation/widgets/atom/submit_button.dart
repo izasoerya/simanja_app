@@ -31,10 +31,14 @@ class SubmitButton extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(text,
-                  style: const GlobalTheme()
-                      .headerStyle
-                      .copyWith(color: Colors.white, fontSize: 12.sp)),
+              Text(
+                text,
+                style: const GlobalTheme().headerStyle.copyWith(
+                    color: Colors.white,
+                    fontSize: SizerUtil.deviceType == DeviceType.tablet
+                        ? 8.sp
+                        : 12.sp),
+              ),
               if (icon != null) const SizedBox(width: 8),
               icon ?? const SizedBox(),
             ],
