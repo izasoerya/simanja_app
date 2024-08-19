@@ -24,7 +24,7 @@ class ItemListViewNude extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 10),
+      padding: EdgeInsets.symmetric(horizontal: 2.5.w, vertical: 1.75.h),
       alignment: Alignment.centerLeft,
       decoration: BoxDecoration(
         color: const GlobalTheme().primaryColor,
@@ -56,7 +56,8 @@ class ItemListViewNude extends StatelessWidget {
               Text(
                 description,
                 style: TextStyle(
-                  fontSize: 10.sp,
+                  fontSize:
+                      SizerUtil.deviceType == DeviceType.tablet ? 8.sp : 10.sp,
                   color: Colors.white,
                 ),
                 textAlign: TextAlign.left,

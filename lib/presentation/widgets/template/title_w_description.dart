@@ -17,7 +17,8 @@ class TitleWDescription extends StatelessWidget {
           Text(
             title,
             style: TextStyle(
-              fontSize: 21.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 16.sp : 21.sp,
               fontWeight: FontWeight.w800,
               color: const GlobalTheme().primaryColor,
             ),
@@ -26,7 +27,8 @@ class TitleWDescription extends StatelessWidget {
           Text(
             description,
             style: TextStyle(
-              fontSize: 10.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.tablet ? 8.sp : 10.sp,
               fontWeight: FontWeight.normal,
               color: const GlobalTheme().secondaryColor,
             ),

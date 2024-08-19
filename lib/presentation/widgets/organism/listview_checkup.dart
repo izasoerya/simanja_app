@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_nude.dart';
+import 'package:sizer/sizer.dart';
 
 class ListviewCheckup extends StatelessWidget {
   final List<KaderCheckup> checkupList;
@@ -12,9 +13,9 @@ class ListviewCheckup extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.separated(
-        separatorBuilder: (context, index) => const Divider(
+        separatorBuilder: (context, index) => Divider(
               color: Colors.white,
-              height: 10,
+              height: 1.5.h,
             ),
         itemBuilder: (context, index) {
           return ItemListViewNude(
