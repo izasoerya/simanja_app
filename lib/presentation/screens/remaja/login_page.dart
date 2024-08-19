@@ -33,7 +33,6 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      width: MediaQuery.of(context).size.width,
       alignment: Alignment.topCenter,
       child: SingleChildScrollView(
         child: Column(
@@ -44,12 +43,11 @@ class _LoginRemajaPageState extends ConsumerState<LoginRemajaPage> {
                     top: MediaQuery.of(context).size.height * 0.15)),
             Image.asset(
               'assets/logo/Logo Word.png',
-              scale:
-                  SizerUtil.deviceType == DeviceType.tablet ? 0.3.sp : 0.8.sp,
+              scale: 0.8.sp,
             ),
             Padding(padding: EdgeInsets.only(top: 5.h)),
             Container(
-              width: 90.w,
+              width: MediaQuery.sizeOf(context).width * 0.9,
               decoration: const BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.all(Radius.circular(30)),
