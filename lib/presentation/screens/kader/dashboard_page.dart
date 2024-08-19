@@ -46,7 +46,6 @@ class DashboardKader extends StatelessWidget {
                 SmallTextIconSquareContainer(
                   lowerText: 'Rekap Pelayanan Kesehatan',
                   width: screenWidth * 0.35,
-                  height: screenHeight * 0.15,
                   icon: Icons.medical_services_rounded,
                   onTap: () =>
                       router.push('/login-kader/list-finished-checkup'),
@@ -55,7 +54,6 @@ class DashboardKader extends StatelessWidget {
                   lowerText: 'Rekap Aktivitas Posyandu',
                   icon: Icons.run_circle_rounded,
                   width: screenWidth * 0.35,
-                  height: screenHeight * 0.15,
                   onTap: () =>
                       router.push('/login-kader/list-finished-activity'),
                 ),

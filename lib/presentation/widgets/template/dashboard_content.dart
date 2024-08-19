@@ -5,6 +5,7 @@ import 'package:simanja_app/presentation/widgets/organism/small_textvalue_square
 import 'package:simanja_app/presentation/widgets/organism/wide_textvalue_rectangle.dart.dart';
 import 'package:simanja_app/presentation/widgets/organism/big_textvalue_rectangle.dart';
 import 'package:simanja_app/utils/enums.dart';
+import 'package:sizer/sizer.dart';
 
 class DashboardContent extends StatelessWidget {
   final List<UserRemaja> users;
@@ -17,7 +18,12 @@ class DashboardContent extends StatelessWidget {
         WideTextValueRectangle(users: users),
         const Padding(padding: EdgeInsets.only(top: 5)),
         SizedBox(
-          height: MediaQuery.of(context).size.height * 0.35,
+          height: MediaQuery.of(context).size.height *
+              () {
+                return SizerUtil.orientation == Orientation.portrait
+                    ? 0.35
+                    : 0.6;
+              }(),
           child: Stack(
             alignment: Alignment.topCenter,
             children: [
@@ -30,7 +36,6 @@ class DashboardContent extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     SmallTextvalueSquareContainer(
-                        height: MediaQuery.of(context).size.height * 0.15,
                         width: MediaQuery.of(context).size.width * 0.3,
                         upperText: users
                             .where((element) => element.sex == Gender.female)
@@ -38,7 +43,6 @@ class DashboardContent extends StatelessWidget {
                             .toString(),
                         lowerText: 'Remaja Perempuan'),
                     SmallTextvalueSquareContainer(
-                        height: MediaQuery.of(context).size.height * 0.15,
                         width: MediaQuery.of(context).size.width * 0.3,
                         upperText: users
                             .where((element) => element.sex == Gender.male)
