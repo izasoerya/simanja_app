@@ -17,7 +17,8 @@ class LoginKaderPage extends ConsumerStatefulWidget {
 
   void _pushToForgotPassword() => router.go('/forgot-password');
   void _pushToRegister() => router.go('/register-kader');
-  void _pushToDashboard() => router.go('/login-kader/dashboard-kader');
+  void _pushToDashboard() =>
+      router.pushReplacement('/login-kader/dashboard-kader');
 
   @override
   ConsumerState<LoginKaderPage> createState() => _LoginKaderPageState();
