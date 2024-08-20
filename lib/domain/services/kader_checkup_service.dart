@@ -60,4 +60,12 @@ class KaderCheckupService {
         await KaderCheckupImplementation().updateCheckup(checkup);
     return data;
   }
+
+  Future<bool> deleteCheckup(KaderCheckup checkup) async {
+    final response = await KaderCheckupImplementation().deleteCheckup(checkup);
+    if (response == null) {
+      return true;
+    }
+    return false;
+  }
 }

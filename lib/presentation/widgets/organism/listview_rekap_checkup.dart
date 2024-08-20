@@ -1,8 +1,11 @@
+import 'dart:async';
+
 import 'package:intl/intl.dart';
 import 'package:simanja_app/domain/entities/kader_checkup.dart';
 import 'package:simanja_app/domain/services/kader_checkup_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/utils/util_excel.dart';
 import 'package:sizer/sizer.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -63,21 +66,43 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
                     style: TextStyle(
                         fontSize: 12.sp, fontWeight: FontWeight.bold)),
                 !widget.kaderCheckup.isFinish
-                    ? Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(5),
-                            color: Colors.green.shade500,
-                            boxShadow: const [
-                              BoxShadow(
-                                  color: Colors.black26,
-                                  offset: Offset(0, 2),
-                                  blurRadius: 2)
-                            ]),
-                        child: IconButton(
-                            onPressed: () => showCompletionDialog(
-                                context, widget.kaderCheckup),
-                            icon: const Icon(Icons.check_circle_outline,
-                                color: Colors.white, size: 30)),
+                    ? Row(
+                        children: [
+                          Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.green.shade500,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0, 2),
+                                      blurRadius: 2)
+                                ]),
+                            child: IconButton(
+                                onPressed: () => showCompletionDialog(
+                                    context, widget.kaderCheckup),
+                                icon: const Icon(Icons.check_circle_outline,
+                                    color: Colors.white, size: 30)),
+                          ),
+                          Container(
+                            margin: const EdgeInsets.only(left: 10),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(5),
+                                color: Colors.red.shade500,
+                                boxShadow: const [
+                                  BoxShadow(
+                                      color: Colors.black26,
+                                      offset: Offset(0, 2),
+                                      blurRadius: 2)
+                                ]),
+                            child: IconButton(
+                                onPressed: () async => await showCancelDialog(
+                                    context, widget.kaderCheckup),
+                                icon: const Icon(Icons.cancel_outlined,
+                                    color: Colors.white, size: 30)),
+                          ),
+                        ],
                       )
                     : const SizedBox(),
               ],
@@ -166,7 +191,8 @@ class _ListViewRekapCheckupState extends State<ListViewRekapCheckup> {
   }
 }
 
-void showCompletionDialog(BuildContext context, KaderCheckup checkup) {
+Future<void> showCompletionDialog(
+    BuildContext context, KaderCheckup checkup) async {
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -185,6 +211,40 @@ void showCompletionDialog(BuildContext context, KaderCheckup checkup) {
             onPressed: () async {
               final data = checkup.copyWith(isFinish: true);
               await KaderCheckupService().updateCheckupStatus(data);
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+        ],
+      );
+    },
+  );
+}
+
+Future<void> showCancelDialog(
+    BuildContext context, KaderCheckup checkup) async {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Konfirmasi'),
+        content: const Text('Apakah Anda ingin menghapus acara ini?'),
+        actions: <Widget>[
+          TextButton(
+            child: const Text('Batal'),
+            onPressed: () {
+              Navigator.of(context).pop(); // Close the dialog
+            },
+          ),
+          ElevatedButton(
+            child: const Text('Hapus Acara'),
+            onPressed: () async {
+              final data = checkup.copyWith(isFinish: true);
+              final res = await KaderCheckupService().deleteCheckup(data);
+              if (res) {
+                showCustomSnackbar(context, 'Berhasil Menghapus Acara', 0);
+              } else {
+                showCustomSnackbar(context, 'Gagal Menghapus Acara', 2);
+              }
               Navigator.of(context).pop(); // Close the dialog
             },
           ),

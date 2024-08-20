@@ -7,5 +7,5 @@ abstract class KaderCheckupRepo {
 
   Future<void> createCheckup(String title, DateTime date, String kaderUID);
   Future<KaderCheckup?> updateCheckup(KaderCheckup activity);
-  Future<void> deleteCheckup(KaderCheckup activity);
+  Future<Error?> deleteCheckup(KaderCheckup activity);
 }

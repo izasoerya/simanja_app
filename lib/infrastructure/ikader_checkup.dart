@@ -98,9 +98,17 @@ class KaderCheckupImplementation implements KaderCheckupRepo {
   }
 
   @override
-  Future<void> deleteCheckup(KaderCheckup activity) {
-    // TODO: implement deleteCheckup
-    throw UnimplementedError();
+  Future<Error?> deleteCheckup(KaderCheckup activity) async {
+    try {
+      await Supabase.instance.client
+          .from('kader_checkup')
+          .delete()
+          .eq('uid', activity.uid);
+      return null;
+    } catch (e) {
+      print('Error: $e');
+      return Error.throwWithStackTrace(e, StackTrace.current);
+    }
   }
 
   @override
