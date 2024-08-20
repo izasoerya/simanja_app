@@ -6,5 +6,5 @@ abstract class KaderEventRepo {
 
   Future<EventKader?> createKaderEvent(EventKader kaderEvent);
   Future<EventKader?> updateKaderEvent(EventKader kaderEvent);
-  Future<void> deleteKaderEvent(EventKader kaderEvent);
+  Future<Error?> deleteKaderEvent(EventKader kaderEvent);
 }

@@ -10,6 +10,7 @@ import 'package:simanja_app/presentation/widgets/atom/file_picker.dart';
 import 'package:simanja_app/presentation/widgets/atom/horizontal_datepicker.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:simanja_app/presentation/widgets/atom/text_input.dart';
+import 'package:simanja_app/utils/date_formatter.dart';
 
 class EditScheduleEvent extends ConsumerStatefulWidget {
   final EventKader event;
@@ -54,6 +55,56 @@ class _ScheduleCheckupState extends ConsumerState<EditScheduleEvent> {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+                'Tanggal Acara: \n${DateFormatter().convertToIndonesian(widget.event.date)}',
+                style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600)),
+            Row(
+              children: [
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.green.shade500,
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(0, 2),
+                            blurRadius: 2)
+                      ]),
+                  child: IconButton(
+                      onPressed: () =>
+                          _createCompletionDialog(context, widget.event),
+                      icon: const Icon(Icons.check_circle_outline,
+                          color: Colors.white, size: 30)),
+                ),
+                Container(
+                  margin: const EdgeInsets.only(left: 10),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: Colors.red.shade500,
+                      boxShadow: const [
+                        BoxShadow(
+                            color: Colors.black26,
+                            offset: Offset(0, 2),
+                            blurRadius: 2)
+                      ]),
+                  child: IconButton(
+                      onPressed: () async =>
+                          await _createCancelDialog(context, widget.event),
+                      icon: const Icon(Icons.cancel_outlined,
+                          color: Colors.white, size: 30)),
+                ),
+              ],
+            ),
+          ],
+        ),
+        const Padding(padding: const EdgeInsets.only(top: 15)),
         HorizontalDatePicker(
             onDateChange: _onDateChange, startDate: widget.event.date),
         const Padding(padding: EdgeInsets.only(top: 15)),
@@ -144,4 +195,68 @@ class _ScheduleCheckupState extends ConsumerState<EditScheduleEvent> {
       ],
     );
   }
+}
+
+Future<void> _createCompletionDialog(BuildContext ctx, EventKader event) async {
+  showDialog(
+      context: ctx,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Konfirmasi'),
+          content: const Text('Apakah Anda ingin menandai sebagai selesai?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Batal'),
+              onPressed: () {
+                Navigator.of(context).pop(); // Close the dialog
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Tandai Sebagai Selesai'),
+              onPressed: () async {
+                final data = event.copyWith(isFinish: true);
+                final res = await KaderEventService().updateEvent(data);
+                Navigator.of(context).pop();
+                if (res != null) {
+                  showCustomSnackbar(ctx, 'Berhasil menyelesaikan acara', 0);
+                } else {
+                  showCustomSnackbar(ctx, 'Gagal menyelesaikan acara', 2);
+                }
+              },
+            ),
+          ],
+        );
+      });
+}
+
+Future<void> _createCancelDialog(BuildContext ctx, EventKader event) async {
+  showDialog(
+      context: ctx,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: const Text('Konfirmasi'),
+          content: const Text('Apakah Anda ingin membatalkan acara?'),
+          actions: <Widget>[
+            TextButton(
+              child: const Text('Batal'),
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+            ),
+            ElevatedButton(
+              child: const Text('Batalkan Acara'),
+              onPressed: () async {
+                final res = await KaderEventService().deleteEvent(event);
+                Navigator.of(context).pop();
+                if (res) {
+                  showCustomSnackbar(ctx, 'Berhasil membatalkan acara', 0);
+                  router.push('/login-kader/dashboard-kader');
+                } else {
+                  showCustomSnackbar(ctx, 'Gagal membatalkan acara', 2);
+                }
+              },
+            ),
+          ],
+        );
+      });
 }

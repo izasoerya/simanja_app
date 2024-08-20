@@ -35,7 +35,8 @@ class KaderEventService {
     return response;
   }
 
-  Future<void> deleteEvent() async {
-    // Delete event
+  Future<bool> deleteEvent(EventKader event) async {
+    final res = await KaderEventImplementation().deleteKaderEvent(event);
+    return res == null;
   }
 }

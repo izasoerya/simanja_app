@@ -28,9 +28,17 @@ class KaderEventImplementation implements KaderEventRepo {
   }
 
   @override
-  Future<void> deleteKaderEvent(EventKader kaderEvent) {
-    // TODO: implement deleteKaderEvent
-    throw UnimplementedError();
+  Future<Error?> deleteKaderEvent(EventKader kaderEvent) async {
+    try {
+      await Supabase.instance.client
+          .from('kader_activity')
+          .delete()
+          .eq('uid', kaderEvent.id);
+      return null;
+    } catch (e) {
+      print('Error: $e');
+      return Error.throwWithStackTrace(e, StackTrace.current);
+    }
   }
 
   @override
