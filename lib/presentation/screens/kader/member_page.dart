@@ -17,30 +17,34 @@ class MemberPage extends ConsumerWidget {
         router.go('/login-kader/dashboard-kader');
         changePageIndex(ref, 0);
       },
-      child: Center(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            const Padding(padding: EdgeInsets.only(top: 30)),
-            const TitleWPosyandu(title: 'DATA REMAJA'),
-            const Padding(padding: EdgeInsets.only(top: 30)),
-            Text('List Remaja Posyandu',
-                style: Theme.of(context).textTheme.headlineSmall),
-            const Padding(padding: EdgeInsets.only(top: 30)),
-            FutureBuilder(
-                future: RemajaAuthentication()
-                    .getUsersbyPosyanduID(kaderAccount.uid),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-                  } else if (snapshot.hasData) {
-                    return ListViewAccount(
-                        users: snapshot.data!,
-                        redirect: '/login-kader/account-remaja?');
-                  }
-                  return const Text('No users found');
-                }),
-          ],
+      child: Container(
+        width: MediaQuery.of(context).size.width,
+        alignment: Alignment.topCenter,
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Padding(padding: EdgeInsets.only(top: 30)),
+              const TitleWPosyandu(title: 'DATA REMAJA'),
+              const Padding(padding: EdgeInsets.only(top: 30)),
+              Text('List Remaja Posyandu',
+                  style: Theme.of(context).textTheme.headlineSmall),
+              const Padding(padding: EdgeInsets.only(top: 30)),
+              FutureBuilder(
+                  future: RemajaAuthentication()
+                      .getUsersbyPosyanduID(kaderAccount.uid),
+                  builder: (context, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      return const CircularProgressIndicator();
+                    } else if (snapshot.hasData) {
+                      return ListViewAccount(
+                          users: snapshot.data!,
+                          redirect: '/login-kader/account-remaja?');
+                    }
+                    return const Text('No users found');
+                  }),
+            ],
+          ),
         ),
       ),
     );

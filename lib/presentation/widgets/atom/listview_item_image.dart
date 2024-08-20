@@ -31,7 +31,7 @@ class ItemListviewImage extends StatelessWidget {
         ),
         Padding(padding: EdgeInsets.only(left: screenWidth * 0.025)),
         SizedBox(
-          height: screenHeight * 0.075,
+          height: screenHeight * 0.1,
           width: screenWidth * 0.625,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,

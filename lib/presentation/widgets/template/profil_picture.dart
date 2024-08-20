@@ -16,7 +16,10 @@ class ProfilPicture extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: MediaQuery.of(context).size.height * 0.4,
+      height: MediaQuery.of(context).size.height *
+          () {
+            return SizerUtil.orientation == Orientation.portrait ? 0.4 : 0.8;
+          }(),
       padding: const EdgeInsets.symmetric(vertical: 20),
       decoration: BoxDecoration(
         color: const GlobalTheme().primaryColor,
