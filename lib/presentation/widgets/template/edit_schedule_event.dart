@@ -179,19 +179,6 @@ class _ScheduleCheckupState extends ConsumerState<EditScheduleEvent> {
               }
             }),
         const Padding(padding: EdgeInsets.only(top: 20)),
-        SubmitButton(
-            text: 'Tandai Sebagai Selesai',
-            backgroundColor: const GlobalTheme().secondaryColor,
-            onClick: () async {
-              final response = await KaderEventService()
-                  .updateEvent(widget.event.copyWith(isFinish: true));
-              if (response != null) {
-                showCustomSnackbar(context, 'Berhasil menyelesaikan acara', 0);
-                router.push('/login-kader/dashboard-kader');
-              } else {
-                showCustomSnackbar(context, 'Gagal menyelesaikan acara', 2);
-              }
-            })
       ],
     );
   }
@@ -219,6 +206,7 @@ Future<void> _createCompletionDialog(BuildContext ctx, EventKader event) async {
                 Navigator.of(context).pop();
                 if (res != null) {
                   showCustomSnackbar(ctx, 'Berhasil menyelesaikan acara', 0);
+                  router.push('/login-kader/activity-kader');
                 } else {
                   showCustomSnackbar(ctx, 'Gagal menyelesaikan acara', 2);
                 }
@@ -250,7 +238,7 @@ Future<void> _createCancelDialog(BuildContext ctx, EventKader event) async {
                 Navigator.of(context).pop();
                 if (res) {
                   showCustomSnackbar(ctx, 'Berhasil membatalkan acara', 0);
-                  router.push('/login-kader/dashboard-kader');
+                  router.push('/login-kader/activity-kader');
                 } else {
                   showCustomSnackbar(ctx, 'Gagal membatalkan acara', 2);
                 }
