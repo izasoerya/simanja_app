@@ -22,6 +22,10 @@ class KaderAuthentication {
         .toList();
   }
 
+  Future<UserKader?> getUser(String uid) async {
+    return await KaderAuthImplementation().getUserbyId(uid);
+  }
+
   Future<String> getPosyanduName(String uid) async {
     final response = await KaderAuthImplementation().getUsers();
     final user = response.firstWhere((element) => element.uid == uid);

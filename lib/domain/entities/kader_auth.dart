@@ -7,7 +7,7 @@ class UserKader {
   final String address;
   final String email;
   final String password;
-  final String? urlImage;
+  String? urlImage;
 
   UserKader({
     required this.uid,
