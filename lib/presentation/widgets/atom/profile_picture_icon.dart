@@ -3,6 +3,7 @@ import 'package:file_picker/file_picker.dart';
 import 'package:simanja_app/domain/entities/kader_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/services/kader_auth_service.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/utils/default_account.dart';
@@ -20,9 +21,9 @@ class ProfilePictureIcon extends StatefulWidget {
 }
 
 class _ProfilePictureIconState extends State<ProfilePictureIcon> {
-  late UserKader kader;
+  late dynamic user; // Can be either UserKader or UserRemaja
 
-  Future<void> _pickFile(UserKader? kader, UserRemaja? remaja) async {
+  Future<void> _pickFile() async {
     FilePickerResult? result = await FilePicker.platform.pickFiles(
       allowMultiple: false,
       type: FileType.custom,
@@ -32,23 +33,25 @@ class _ProfilePictureIconState extends State<ProfilePictureIcon> {
     if (result != null) {
       String? filePath = result.files.single.path;
       if (filePath != null) {
-        if (kader != null) {
-          final newKader = kader.copyWith(urlImage: filePath);
-          final updatedKader =
-              await KaderAuthentication().updateProfilePicture(newKader);
-          if (updatedKader != null) {
-            kaderAccount.urlImage = updatedKader.urlImage;
-            setState(() => this.kader = updatedKader);
+        if (user is UserKader) {
+          final newUser = (user as UserKader).copyWith(urlImage: filePath);
+          final updatedUser =
+              await KaderAuthentication().updateProfilePicture(newUser);
+          if (updatedUser != null) {
+            kaderAccount.urlImage = updatedUser.urlImage;
+            setState(() => user = updatedUser);
+            router.pop();
+          }
+        } else if (user is UserRemaja) {
+          final newUser = (user as UserRemaja).copyWith(urlImage: filePath);
+          final updatedUser =
+              await RemajaAuthentication().updateProfilePicture(newUser);
+          if (updatedUser != null) {
+            remajaAccount.urlImage = updatedUser.urlImage;
+            setState(() => user = updatedUser);
             router.pop();
           }
         }
-        // else if (remaja != null) {
-        //   final response =
-        //       await KaderAuthentication().updateProfilePicture(remaja);
-        //   if (response!.urlImage != null) {
-        //     print('Profile Picture Updated for Remaja');
-        //   }
-        // }
       }
     } else {
       return;
@@ -58,7 +61,7 @@ class _ProfilePictureIconState extends State<ProfilePictureIcon> {
   @override
   void initState() {
     super.initState();
-    kader = widget.kader!;
+    user = widget.kader ?? widget.remaja;
   }
 
   @override
@@ -69,8 +72,8 @@ class _ProfilePictureIconState extends State<ProfilePictureIcon> {
         CircleAvatar(
           radius: 10.w,
           backgroundColor: const GlobalTheme().primaryColor,
-          backgroundImage: kader.urlImage != null
-              ? NetworkImage(kader.urlImage!)
+          backgroundImage: user.urlImage != null
+              ? NetworkImage(user.urlImage!)
               : const AssetImage('assets/logo/No_Profil_Picture.png')
                   as ImageProvider,
         ),
@@ -79,7 +82,7 @@ class _ProfilePictureIconState extends State<ProfilePictureIcon> {
           right: 0,
           child: widget.isSelf
               ? GestureDetector(
-                  onTap: () => _pickFile(widget.kader, widget.remaja),
+                  onTap: _pickFile,
                   child: Container(
                     decoration: const BoxDecoration(
                       color: Colors.white,

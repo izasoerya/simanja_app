@@ -20,6 +20,7 @@ class UserRemaja {
   final bool bpjs;
   final String email;
   final String password;
+  String? urlImage;
 
   UserRemaja({
     required this.uid,
@@ -39,6 +40,7 @@ class UserRemaja {
     required this.bpjs,
     required this.email,
     required this.password,
+    this.urlImage,
   });
 
   UserRemaja copyWith({
@@ -59,6 +61,7 @@ class UserRemaja {
     bool? bpjs,
     String? email,
     String? password,
+    String? urlImage,
   }) {
     return UserRemaja(
       uid: uid ?? this.uid,
@@ -78,6 +81,7 @@ class UserRemaja {
       bpjs: bpjs ?? this.bpjs,
       email: email ?? this.email,
       password: password ?? this.password,
+      urlImage: urlImage ?? this.urlImage,
     );
   }
 
@@ -100,6 +104,7 @@ class UserRemaja {
       bpjs: json['is_bpjs'],
       email: json['email'],
       password: json['password'],
+      urlImage: json['url_image'],
     );
   }
 
@@ -122,6 +127,7 @@ class UserRemaja {
       'is_bpjs': bpjs,
       'email': email,
       'password': password,
+      'url_image': urlImage,
     };
   }
 }

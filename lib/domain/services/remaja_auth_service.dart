@@ -30,4 +30,8 @@ class RemajaAuthentication {
   Future<UserRemaja?> updateUser(UserRemaja user) async {
     return await RemajaAuthImplementation().updateUser(user);
   }
+
+  Future<UserRemaja?> updateProfilePicture(UserRemaja user) async {
+    return await RemajaAuthImplementation().updateProfilePicture(user);
+  }
 }
