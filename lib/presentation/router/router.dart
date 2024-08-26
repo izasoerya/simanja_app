@@ -157,7 +157,8 @@ final GoRouter router = GoRouter(
             GoRoute(
               path: 'account-remaja',
               builder: (BuildContext context, GoRouterState state) {
-                return LayoutKader(
+                return SubPageLayout(
+                    appBarTitle: 'DATA REMAJA',
                     child: AccountRemajaPage(
                         remajaUID: state.uri.queryParameters['remajaUID']!));
               },

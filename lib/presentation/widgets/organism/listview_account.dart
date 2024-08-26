@@ -32,6 +32,8 @@ class ListViewAccount extends StatelessWidget {
                 user.birthDate.toString().substring(0, 10),
                 user.sex == Gender.male ? 'Laki-laki' : 'Perempuan',
               ],
+              image:
+                  user.urlImage != null ? Image.network(user.urlImage!) : null,
               onTap: (data) => _defaultOnTap(user.uid),
             );
           }),
