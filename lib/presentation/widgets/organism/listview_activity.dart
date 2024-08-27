@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/domain/entities/kader_event.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/widgets/atom/listview_item_activity.dart';
 
 class ListviewActivity extends StatelessWidget {
@@ -22,6 +23,9 @@ class ListviewActivity extends StatelessWidget {
               image: item.urlImage!.isNotEmpty
                   ? Image.network(item.urlImage!)
                   : null,
+              onTap: () => router.push(
+                '/login-kader/result-data-activity?eventUID=${item.id}',
+              ),
             );
           },
           separatorBuilder: (context, index) => const SizedBox(height: 10),
