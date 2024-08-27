@@ -28,20 +28,6 @@ class KaderEventImplementation implements KaderEventRepo {
   }
 
   @override
-  Future<Error?> deleteKaderEvent(EventKader kaderEvent) async {
-    try {
-      await Supabase.instance.client
-          .from('kader_activity')
-          .delete()
-          .eq('uid', kaderEvent.id);
-      return null;
-    } catch (e) {
-      print('Error: $e');
-      return Error.throwWithStackTrace(e, StackTrace.current);
-    }
-  }
-
-  @override
   Future<EventKader?> getKaderEventById(String id) async {
     try {
       final response = await Supabase.instance.client
@@ -75,7 +61,28 @@ class KaderEventImplementation implements KaderEventRepo {
 
   @override
   Future<EventKader?> updateKaderEvent(EventKader kaderEvent) async {
-    if (kaderEvent.urlImage == null || kaderEvent.urlImage!.isEmpty) {
+    final response = await Supabase.instance.client
+        .from('kader_activity')
+        .update(kaderEvent.toJSON())
+        .eq('uid', kaderEvent.id)
+        .select('*')
+        .single();
+    return EventKader.fromJSON(response);
+  }
+
+  @override
+  Future<EventKader?> updateProfilePicture(EventKader kaderEvent) async {
+    final avatarFile = File(kaderEvent.urlImage!);
+    try {
+      await Supabase.instance.client.storage.from('avatar_image').upload(
+            'activity/${kaderEvent.id}.jpg',
+            avatarFile,
+            fileOptions: const FileOptions(cacheControl: '3600', upsert: false),
+          );
+      final getPublicUrl = Supabase.instance.client.storage
+          .from('avatar_image')
+          .getPublicUrl('activity/${kaderEvent.id}.jpg');
+      kaderEvent = kaderEvent.copyWith(urlImage: getPublicUrl);
       final response = await Supabase.instance.client
           .from('kader_activity')
           .update(kaderEvent.toJSON())
@@ -83,30 +90,23 @@ class KaderEventImplementation implements KaderEventRepo {
           .select('*')
           .single();
       return EventKader.fromJSON(response);
-    } else {
-      final avatarFile = File(kaderEvent.urlImage!);
-      try {
-        await Supabase.instance.client.storage.from('avatar_image').upload(
-              'kader/${kaderEvent.id}.jpg',
-              avatarFile,
-              fileOptions:
-                  const FileOptions(cacheControl: '3600', upsert: false),
-            );
-        final getPublicUrl = Supabase.instance.client.storage
-            .from('avatar_image')
-            .getPublicUrl('kader/${kaderEvent.id}.jpg');
-        kaderEvent = kaderEvent.copyWith(urlImage: getPublicUrl);
-        final response = await Supabase.instance.client
-            .from('kader_activity')
-            .update(kaderEvent.toJSON())
-            .eq('uid', kaderEvent.id)
-            .select('*')
-            .single();
-        return EventKader.fromJSON(response);
-      } catch (e) {
-        print('e: $e');
-        return null;
-      }
+    } catch (e) {
+      print('e: $e');
+      return null;
+    }
+  }
+
+  @override
+  Future<Error?> deleteKaderEvent(EventKader kaderEvent) async {
+    try {
+      await Supabase.instance.client
+          .from('kader_activity')
+          .delete()
+          .eq('uid', kaderEvent.id);
+      return null;
+    } catch (e) {
+      print('Error: $e');
+      return Error.throwWithStackTrace(e, StackTrace.current);
     }
   }
 }

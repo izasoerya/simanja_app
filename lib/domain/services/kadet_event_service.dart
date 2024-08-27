@@ -35,6 +35,12 @@ class KaderEventService {
     return response;
   }
 
+  Future<EventKader?> updateProfilePicture(EventKader event) async {
+    final response =
+        await KaderEventImplementation().updateProfilePicture(event);
+    return response;
+  }
+
   Future<bool> deleteEvent(EventKader event) async {
     final res = await KaderEventImplementation().deleteKaderEvent(event);
     return res == null;

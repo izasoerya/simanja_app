@@ -171,6 +171,13 @@ class _ScheduleCheckupState extends ConsumerState<EditScheduleEvent> {
                   totalKader: _kaderCount ?? widget.event.totalKader,
                   visitor: _attendant ?? widget.event.visitor,
                   urlImage: _urlImage ?? widget.event.urlImage);
+              if (event.urlImage != null) {
+                final res =
+                    await KaderEventService().updateProfilePicture(event);
+                if (res != null) {
+                  event.urlImage = res.urlImage;
+                }
+              }
               final response = await KaderEventService().updateEvent(event);
               if (response != null) {
                 showCustomSnackbar(context, 'Berhasil menyimpan acara', 0);

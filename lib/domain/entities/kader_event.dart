@@ -10,7 +10,7 @@ class EventKader {
   final String note;
   final String totalKader;
   final String visitor;
-  final String? urlImage;
+  String? urlImage;
   final bool isFinish;
 
   EventKader({
