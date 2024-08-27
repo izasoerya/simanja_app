@@ -6,11 +6,14 @@ class ItemListViewActivity extends StatelessWidget {
   final String title;
   final List<String> description;
   final DateTime date;
-  const ItemListViewActivity(
-      {super.key,
-      required this.title,
-      required this.description,
-      required this.date});
+  final Image? image;
+  const ItemListViewActivity({
+    super.key,
+    required this.title,
+    required this.description,
+    required this.date,
+    this.image,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +27,9 @@ class ItemListViewActivity extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.start,
         children: [
-          SizedBox(width: 60, child: Image.asset('assets/logo/No_Image.jpg')),
+          SizedBox(
+              width: 60,
+              child: image ?? Image.asset('assets/logo/No_Image.jpg')),
           SizedBox(width: MediaQuery.of(context).size.width * 0.05),
           Expanded(
             child: Column(

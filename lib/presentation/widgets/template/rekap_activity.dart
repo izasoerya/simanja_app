@@ -26,11 +26,15 @@ class RekapActivity extends StatelessWidget {
           String title;
           String uid;
           List<String> descriptions;
+          Image? image;
           void Function(String d) onTap;
 
           if (item is EventKader) {
             title = item.name;
             uid = item.id;
+            image = item.urlImage!.isNotEmpty
+                ? Image.network(item.urlImage!)
+                : null;
             descriptions = [
               item.description,
               '${item.date.toString().substring(0, 10)} | Aktivitas Lain'
@@ -53,7 +57,12 @@ class RekapActivity extends StatelessWidget {
           }
 
           return ItemListviewImage(
-              title: title, uid: uid, descriptions: descriptions, onTap: onTap);
+            title: title,
+            uid: uid,
+            descriptions: descriptions,
+            onTap: onTap,
+            image: image,
+          );
         },
       ),
     );

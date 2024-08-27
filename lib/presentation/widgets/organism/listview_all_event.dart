@@ -47,9 +47,9 @@ class ListviewAllEvent extends ConsumerWidget {
               child: ItemListviewImage(
                 title: item.name,
                 uid: item.id,
-                image: item.urlImage == null || item.urlImage!.isEmpty
-                    ? null
-                    : Image.network(item.urlImage!),
+                image: item.urlImage!.isNotEmpty
+                    ? Image.network(item.urlImage!)
+                    : null,
                 descriptions: [
                   item.description,
                   '${item.topic} | ${item.date.toString().substring(0, 10)}',

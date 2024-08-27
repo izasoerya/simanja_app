@@ -16,9 +16,13 @@ class ListviewActivity extends StatelessWidget {
           itemBuilder: (context, index) {
             final item = items[index];
             return ItemListViewActivity(
-                title: item.name,
-                description: [item.topic, item.description],
-                date: item.date);
+              title: item.name,
+              description: [item.topic, item.description],
+              date: item.date,
+              image: item.urlImage!.isNotEmpty
+                  ? Image.network(item.urlImage!)
+                  : null,
+            );
           },
           separatorBuilder: (context, index) => const SizedBox(height: 10),
           itemCount: items.length),
