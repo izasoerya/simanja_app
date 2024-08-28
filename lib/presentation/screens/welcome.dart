@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
-import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
 import 'package:sizer/sizer.dart';
 
@@ -52,7 +51,7 @@ class WelcomePage extends StatelessWidget {
                                 ? 6.sp
                                 : 8.sp,
                             fontWeight: FontWeight.bold,
-                            color: GlobalTheme().primaryColor,
+                            color: const GlobalTheme().primaryColor,
                           ),
                       textAlign: TextAlign.center,
                     ),
