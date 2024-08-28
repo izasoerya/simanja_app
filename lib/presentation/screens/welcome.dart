@@ -20,43 +20,11 @@ class WelcomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: <Widget>[
-              Column(
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Image(
-                        image: const AssetImage('assets/logo/ugm.png'),
-                        height: 5.h,
-                        width: 10.w,
-                      ),
-                      SizedBox(width: 4.w),
-                      Text(
-                        'Departemen Layanan dan\nInformasi Kesehatan',
-                        style: const GlobalTheme().paragraphStyle.copyWith(
-                            fontSize: 10.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const GlobalTheme().primaryColor),
-                        overflow: TextOverflow.visible,
-                      ),
-                    ],
-                  ),
-                  Padding(padding: EdgeInsets.only(top: 3.h)),
-                  SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.8,
-                    child: Text(
-                      'Aplikasi ini Digunakan Sebagai Sistem Informasi Pencatatan dan Manajemen Data Kesehatan Remaja yang Dilakukan di Posyandu Remaja',
-                      style: const GlobalTheme().paragraphStyle.copyWith(
-                            fontSize: SizerUtil.deviceType == DeviceType.tablet
-                                ? 6.sp
-                                : 8.sp,
-                            fontWeight: FontWeight.bold,
-                            color: const GlobalTheme().primaryColor,
-                          ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ],
+              Image(
+                image: const AssetImage('assets/logo/dept-kesehatan-ugm.png'),
+                width: 75.w,
+                height: 10.h,
+                color: const Color(0xFF0D47A1),
               ),
               Image(
                 image: const AssetImage('assets/logo/SiMandja-Logo.png'),
@@ -88,7 +56,21 @@ class WelcomePage extends StatelessWidget {
                     ),
                   ],
                 ),
-              )
+              ),
+              SizedBox(
+                width: MediaQuery.of(context).size.width * 0.8,
+                child: Text(
+                  'Aplikasi ini Digunakan Sebagai Sistem Informasi Pencatatan dan Manajemen Data Kesehatan Remaja yang Dilakukan di Posyandu Remaja',
+                  style: const GlobalTheme().paragraphStyle.copyWith(
+                        fontSize: SizerUtil.deviceType == DeviceType.tablet
+                            ? 6.sp
+                            : 8.sp,
+                        fontWeight: FontWeight.bold,
+                        color: const GlobalTheme().primaryColor,
+                      ),
+                  textAlign: TextAlign.center,
+                ),
+              ),
             ],
           ),
         ),
