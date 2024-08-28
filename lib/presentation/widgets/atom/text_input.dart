@@ -9,8 +9,6 @@ class TextInput extends StatefulWidget {
   final TextInputAction action;
   final bool hideText;
   final void Function(String d) value;
-  final bool
-      isNumeric; // Add this parameter to indicate if the input should be numeric
 
   const TextInput({
     super.key,
@@ -20,7 +18,6 @@ class TextInput extends StatefulWidget {
     this.hideText = false,
     this.action = TextInputAction.done,
     required this.value,
-    this.isNumeric = false, // Default to false
   });
 
   @override
@@ -57,7 +54,7 @@ class _TextInputState extends State<TextInput> {
             keyboardType: widget.type,
             obscureText: widget.hideText,
             textInputAction: widget.action,
-            inputFormatters: widget.isNumeric
+            inputFormatters: widget.type == TextInputType.number
                 ? [_CustomNumberInputFormatter()]
                 : [], // Apply the digitsOnly formatter if isNumeric is true
             decoration: InputDecoration(

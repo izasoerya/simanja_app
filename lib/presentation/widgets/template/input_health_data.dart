@@ -85,7 +85,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Berat Badan (BB)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) =>
                     d.isNotEmpty ? inputData.weight = double.parse(d) : null),
             TextInput(
@@ -93,7 +92,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Tinggi Badan (TB)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) =>
                     d.isNotEmpty ? inputData.height = double.parse(d) : null),
             const Padding(padding: EdgeInsets.only(top: 15)),
@@ -111,7 +109,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Lingkar Lengan (LiLa)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) => d.isNotEmpty
                     ? inputData.armCircumference = double.parse(d)
                     : null),
@@ -120,7 +117,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Lingkar Perut (LP)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) => d.isNotEmpty
                     ? inputData.abdominalCircumference = double.parse(d)
                     : null),
@@ -139,7 +135,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Tekanan Darah Sistolik (TDS)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) =>
                     d.isNotEmpty ? inputData.tds = double.parse(d) : null),
             TextInput(
@@ -147,7 +142,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Tekanan Darah Diastolik (TDD)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) =>
                     d.isNotEmpty ? inputData.tdd = double.parse(d) : null),
             TextInput(
@@ -155,7 +149,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Hemoglobin (HB)',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) => d.isNotEmpty
                     ? inputData.hemoglobin = double.parse(d)
                     : null),
@@ -164,7 +157,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Kadar Glukosa di Vena',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) =>
                     d.isNotEmpty ? inputData.vena = double.parse(d) : null),
             TextInput(
@@ -172,7 +164,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Kadar Kapiler di Vena',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) =>
                     d.isNotEmpty ? inputData.capillar = double.parse(d) : null),
             CustomDropdown(
@@ -187,7 +178,6 @@ class _HealthDataInput extends StatelessWidget {
                 labelText: 'Kolesterol',
                 type: TextInputType.number,
                 action: TextInputAction.next,
-                isNumeric: true,
                 value: (d) => d.isNotEmpty
                     ? inputData.cholesterol = double.parse(d)
                     : null),
