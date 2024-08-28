@@ -213,7 +213,7 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                           birthDate: inputData['Tanggal Lahir'],
                           phoneNumber: inputData['Nomor Telepon'],
                           street: inputData['Jalan'],
-                          streetNumber: inputData['No Jalan'],
+                          streetNumber: int.parse(inputData['No Jalan']),
                           rt: int.parse(inputData['RT']),
                           rw: int.parse(inputData['RW']),
                           village: inputData['Dukuh'],
