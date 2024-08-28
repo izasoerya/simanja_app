@@ -114,6 +114,9 @@ class UtilExcel {
         item.data.bloodSugar != null
             ? TextCellValue(item.data.bloodSugar!)
             : null,
+        item.data.hipertensi != null
+            ? TextCellValue(item.data.hipertensi!)
+            : null,
         item.data.statusCholesterol != null
             ? TextCellValue(item.data.statusCholesterol!)
             : null,
