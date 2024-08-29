@@ -4,6 +4,7 @@ import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
+import 'package:simanja_app/utils/date_formatter.dart';
 import 'package:simanja_app/utils/enums.dart';
 import 'package:sizer/sizer.dart';
 
@@ -115,35 +116,49 @@ class ItemListViewHealth extends StatelessWidget {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text(user.name,
-                              style: TextStyle(
-                                fontSize: 10.sp,
-                                fontWeight: FontWeight.bold,
-                                color: const GlobalTheme().primaryColor,
-                              ),
-                              textAlign: TextAlign.start),
-                          Text(user.nik,
-                              style: TextStyle(
-                                fontSize: 7.sp,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              textAlign: TextAlign.start),
                           Text(
-                              '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
-                              style: TextStyle(
-                                fontSize: 7.sp,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              textAlign: TextAlign.start),
+                            user.name,
+                            style: TextStyle(
+                              fontSize: 10.sp,
+                              fontWeight: FontWeight.bold,
+                              color: const GlobalTheme().primaryColor,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
                           Text(
-                              user.bpjs
-                                  ? 'Pengguna BPJS'
-                                  : 'Bukan Pengguna BPJS',
-                              style: TextStyle(
-                                fontSize: 7.sp,
-                                fontWeight: FontWeight.normal,
-                              ),
-                              textAlign: TextAlign.start),
+                            user.nik,
+                            style: TextStyle(
+                              fontSize: 7.sp,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          Text(
+                            '${user.birthDate.toString().substring(0, 10)} | ${user.sex == Gender.male ? 'Laki-laki' : 'Perempuan'}',
+                            style: TextStyle(
+                              fontSize: 7.sp,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          Text(
+                            user.bpjs ? 'Pengguna BPJS' : 'Bukan Pengguna BPJS',
+                            style: TextStyle(
+                              fontSize: 7.sp,
+                              fontWeight: FontWeight.normal,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
+                          Padding(padding: EdgeInsets.only(top: 5.sp)),
+                          Text(
+                            DateFormatter()
+                                .convertToIndonesian(health.checkedAt!),
+                            style: TextStyle(
+                              fontSize: 8.sp,
+                              fontWeight: FontWeight.bold,
+                            ),
+                            textAlign: TextAlign.start,
+                          ),
                         ],
                       ),
                       Column(

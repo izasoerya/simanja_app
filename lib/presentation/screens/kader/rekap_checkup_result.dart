@@ -77,8 +77,10 @@ class _RekapCheckupResultPageState extends State<RekapCheckupResultPage> {
           children: [
             const Padding(padding: EdgeInsets.only(top: 30)),
             TitleWDescription(
-                title: 'Rekap Remaja ${widget.label}',
-                description: 'Daftar remaja dengan ${widget.label}'),
+                title:
+                    'Rekap Remaja ${widget.label == 'all' ? 'Keseluruhan' : widget.label}',
+                description:
+                    'Daftar remaja dengan ${widget.label == 'all' ? 'Keseluruhan' : widget.label} yang telah dilakukan'),
             const Padding(padding: EdgeInsets.only(top: 30)),
             isLoading
                 ? const Center(child: CircularProgressIndicator())
