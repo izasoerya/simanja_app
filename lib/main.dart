@@ -16,7 +16,7 @@ Future<void> main() async {
   await _requestPermissions();
 
   EmailOTP.config(
-    appName: 'MyApp',
+    appName: 'SiMandja',
     otpType: OTPType.numeric,
     emailTheme: EmailTheme.v1,
   );
