@@ -1,3 +1,4 @@
+import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -14,7 +15,12 @@ Future<void> main() async {
   await dotenv.load(fileName: "assets/.env");
   await _requestPermissions();
 
-  // Initialize Supabase
+  EmailOTP.config(
+    appName: 'MyApp',
+    otpType: OTPType.numeric,
+    emailTheme: EmailTheme.v1,
+  );
+
   await Supabase.initialize(
     url: 'https://wwdvooszvayxzzkxsokv.supabase.co',
     anonKey: dotenv.env['API_ANON_SUPABASE'].toString(),
