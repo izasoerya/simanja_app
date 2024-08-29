@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:simanja_app/domain/services/kader_auth_service.dart';
+import 'package:simanja_app/domain/services/remaja_auth_service.dart';
+import 'package:simanja_app/presentation/router/router.dart';
 import 'package:simanja_app/presentation/theme/global_theme.dart';
 import 'package:simanja_app/presentation/widgets/atom/custom_snackbar.dart';
 import 'package:simanja_app/presentation/widgets/atom/submit_button.dart';
@@ -84,6 +87,11 @@ class OtpVerificationPageState extends State<ChangePasswordPage> {
                         } else if (_newPassword != _rePassword) {
                           showCustomSnackbar(context, 'Password tidak sama', 2);
                         } else {
+                          await KaderAuthentication()
+                              .updatePassword(widget.email, _newPassword);
+                          await RemajaAuthentication()
+                              .updatePassword(widget.email, _newPassword);
+                          router.go('/');
                           showCustomSnackbar(context, 'Berhasil', 0);
                         }
                       }),

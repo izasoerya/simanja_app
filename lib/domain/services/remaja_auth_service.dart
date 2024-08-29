@@ -35,6 +35,16 @@ class RemajaAuthentication {
     return await RemajaAuthImplementation().updateUser(user);
   }
 
+  Future<UserRemaja?> updatePassword(String email, String password) async {
+    await getUserbyEmail(email).then((value) {
+      if (value != null) {
+        final remaja = value.copyWith(password: password);
+        return RemajaAuthImplementation().updateUser(remaja);
+      }
+    });
+    return null;
+  }
+
   Future<UserRemaja?> updateProfilePicture(UserRemaja user) async {
     return await RemajaAuthImplementation().updateProfilePicture(user);
   }

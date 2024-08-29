@@ -31,9 +31,19 @@ class KaderAuthImplementation implements KaderAuthRepo {
   }
 
   @override
-  Future<void> updateUser(UserKader user) {
-    // TODO: implement updateUser
-    throw UnimplementedError();
+  Future<UserKader?> updateUser(UserKader user) async {
+    try {
+      final response = await Supabase.instance.client
+          .from('kader_auth')
+          .update(user.toJSON())
+          .eq('uid', user.uid)
+          .select()
+          .single();
+      return UserKader.fromJSON(response);
+    } catch (e) {
+      print('$e');
+      return null;
+    }
   }
 
   @override

@@ -8,6 +8,6 @@ abstract class KaderAuthRepo {
   Future<UserKader?> updateProfilePicture(UserKader user);
 
   Future<void> createUser(UserKader user);
-  Future<void> updateUser(UserKader user);
+  Future<UserKader?> updateUser(UserKader user);
   Future<void> deleteUser(UserKader user);
 }

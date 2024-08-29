@@ -39,4 +39,14 @@ class KaderAuthentication {
   Future<UserKader?> updateProfilePicture(UserKader user) async {
     return await KaderAuthImplementation().updateProfilePicture(user);
   }
+
+  Future<UserKader?> updatePassword(String email, String password) async {
+    await getUserbyEmail(email).then((value) {
+      if (value != null) {
+        final kader = value.copyWith(password: password);
+        return KaderAuthImplementation().updateUser(kader);
+      }
+    });
+    return null;
+  }
 }
