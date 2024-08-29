@@ -23,12 +23,26 @@ class RemajaAuthentication {
     return await RemajaAuthImplementation().getUserbyUID(id);
   }
 
+  Future<UserRemaja?> getUserbyEmail(String email) async {
+    return await RemajaAuthImplementation().getUserbyEmail(email);
+  }
+
   Future<List<UserRemaja>> getUsersbyPosyanduID(String posyanduUID) async {
     return await RemajaAuthImplementation().getUsersbyPosyanduID(posyanduUID);
   }
 
   Future<UserRemaja?> updateUser(UserRemaja user) async {
     return await RemajaAuthImplementation().updateUser(user);
+  }
+
+  Future<UserRemaja?> updatePassword(String email, String password) async {
+    await getUserbyEmail(email).then((value) {
+      if (value != null) {
+        final remaja = value.copyWith(password: password);
+        return RemajaAuthImplementation().updateUser(remaja);
+      }
+    });
+    return null;
   }
 
   Future<UserRemaja?> updateProfilePicture(UserRemaja user) async {

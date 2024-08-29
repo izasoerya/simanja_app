@@ -60,7 +60,7 @@ class WelcomePage extends StatelessWidget {
               SizedBox(
                 width: MediaQuery.of(context).size.width * 0.8,
                 child: Text(
-                  'Aplikasi ini Digunakan Sebagai Sistem Informasi Pencatatan dan Manajemen Data Kesehatan Remaja yang Dilakukan di Posyandu Remaja',
+                  'Aplikasi ini Digunakan Sebagai Pencatatan Data dan Manajemen Informasi Kesehatan yang Dilakukan di Posyandu Remaja',
                   style: const GlobalTheme().paragraphStyle.copyWith(
                         fontSize: SizerUtil.deviceType == DeviceType.tablet
                             ? 6.sp

@@ -26,23 +26,20 @@ class ResultHealthPage extends ConsumerWidget {
                   'Berikut adalah hasil cek kesehatan yang telah dilakukan',
             ),
             Padding(padding: EdgeInsets.only(top: 3.h)),
-            SizedBox(
-              height: 50.h,
-              child: FutureBuilder(
-                  future:
-                      RemajaHealthService().getRemajaHealths(remajaAccount.uid),
-                  builder: (context, snapshot) {
-                    if (snapshot.connectionState == ConnectionState.waiting) {
-                      return const Center(child: CircularProgressIndicator());
-                    } else if (snapshot.hasData) {
-                      return RekapResultList(
-                        healths: snapshot.data!,
-                        label: 'all',
-                      );
-                    }
-                    return const Text('Data not found');
-                  }),
-            ),
+            FutureBuilder(
+                future:
+                    RemajaHealthService().getRemajaHealths(remajaAccount.uid),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasData) {
+                    return RekapResultList(
+                      healths: snapshot.data!,
+                      label: 'all',
+                    );
+                  }
+                  return const Text('Data not found');
+                }),
           ],
         ),
       ),
