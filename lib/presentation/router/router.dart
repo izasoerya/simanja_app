@@ -5,6 +5,7 @@ import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
 import 'package:simanja_app/presentation/screens/checkup_result_page.dart';
 import 'package:simanja_app/presentation/screens/event_result_page.dart';
+import 'package:simanja_app/presentation/screens/forgot_password_page.dart';
 import 'package:simanja_app/presentation/screens/kader/account_kader_page.dart';
 import 'package:simanja_app/presentation/screens/kader/activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/checkup_summary.dart';
@@ -18,6 +19,7 @@ import 'package:simanja_app/presentation/screens/kader/management_page.dart';
 import 'package:simanja_app/presentation/screens/kader/member_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_activity_page.dart';
 import 'package:simanja_app/presentation/screens/kader/rekap_checkup_result.dart';
+import 'package:simanja_app/presentation/screens/otp_verification_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/account_remaja_page.dart';
 import 'package:simanja_app/presentation/screens/remaja/dashboard_page.dart';
 import 'package:simanja_app/presentation/screens/kader/dashboard_page.dart';
@@ -47,6 +49,24 @@ final GoRouter router = GoRouter(
           path: 'register-kader',
           builder: (BuildContext context, GoRouterState state) {
             return const AuthLayout(child: RegisterKaderPage());
+          },
+        ),
+        GoRoute(
+          path: 'forgot-password',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AuthLayout(child: ForgotPasswordPage());
+          },
+        ),
+        GoRoute(
+          path: 'otp-verification',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AuthLayout(child: OtpVerificationPage());
+          },
+        ),
+        GoRoute(
+          path: 'change-password',
+          builder: (BuildContext context, GoRouterState state) {
+            return const AuthLayout(child: ForgotPasswordPage());
           },
         ),
         GoRoute(

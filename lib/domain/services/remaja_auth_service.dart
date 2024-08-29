@@ -23,6 +23,10 @@ class RemajaAuthentication {
     return await RemajaAuthImplementation().getUserbyUID(id);
   }
 
+  Future<UserRemaja?> getUserbyEmail(String email) async {
+    return await RemajaAuthImplementation().getUserbyEmail(email);
+  }
+
   Future<List<UserRemaja>> getUsersbyPosyanduID(String posyanduUID) async {
     return await RemajaAuthImplementation().getUsersbyPosyanduID(posyanduUID);
   }

@@ -32,6 +32,10 @@ class KaderAuthentication {
     return user.namePosyandu;
   }
 
+  Future<UserKader?> getUserbyEmail(String email) async {
+    return await KaderAuthImplementation().getUserbyEmail(email);
+  }
+
   Future<UserKader?> updateProfilePicture(UserKader user) async {
     return await KaderAuthImplementation().updateProfilePicture(user);
   }
