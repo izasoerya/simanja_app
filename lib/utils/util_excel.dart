@@ -2,15 +2,15 @@ import 'dart:io';
 
 import 'package:excel/excel.dart';
 import 'package:path/path.dart';
+import 'package:simanja_app/domain/entities/remaja_auth.dart';
 import 'package:simanja_app/domain/entities/remaja_health.dart';
 import 'package:simanja_app/domain/services/remaja_auth_service.dart';
 
 class ExcelDataType {
-  String name;
-  String age;
+  UserRemaja remaja;
   HealthPropertiesRemaja data;
 
-  ExcelDataType(this.name, this.age, this.data);
+  ExcelDataType(this.remaja, this.data);
 }
 
 class UtilExcel {
@@ -23,9 +23,9 @@ class UtilExcel {
     for (var e in items) {
       if (e!.uidRemaja != null) {
         try {
-          final data = await RemajaAuthentication().getUserbyUID(e.uidRemaja!);
-          excelItems.add(
-              ExcelDataType(data!.name, data.birthDate.second.toString(), e));
+          final remaja =
+              await RemajaAuthentication().getUserbyUID(e.uidRemaja!);
+          excelItems.add(ExcelDataType(remaja!, e));
         } catch (e) {
           print(('Error: $e'));
           return null;
@@ -57,6 +57,7 @@ class UtilExcel {
       const TextCellValue('No'),
       const TextCellValue('Nama'),
       const TextCellValue('Umur'),
+      const TextCellValue('Dukuh/Dusun'),
       const TextCellValue('Berat Badan'),
       const TextCellValue('Tinggi Badan'),
       const TextCellValue('Lingkar Lengan Atas'),
@@ -72,6 +73,7 @@ class UtilExcel {
       const TextCellValue('Status KEK'),
       const TextCellValue('Status Anemia'),
       const TextCellValue('Status Glukosa'),
+      const TextCellValue('Status Tensi'),
       const TextCellValue('Status Kolesterol'),
       const TextCellValue('Status Tablet'),
       const TextCellValue('Status Merokok'),
@@ -82,9 +84,10 @@ class UtilExcel {
       final item = excelItems[i];
       sheet.appendRow([
         IntCellValue(i + 1),
-        TextCellValue(item.name),
+        TextCellValue(item.remaja.name),
         TextCellValue(
             '${(item.data.age! / 12)} tahun ${item.data.age! % 12} bulan'),
+        TextCellValue(item.remaja.village),
         item.data.weight != null ? DoubleCellValue(item.data.weight!) : null,
         item.data.height != null ? DoubleCellValue(item.data.height!) : null,
         item.data.armCircumference != null

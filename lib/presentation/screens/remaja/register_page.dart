@@ -162,8 +162,8 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                       action: TextInputAction.next,
                       value: (d) => inputData['RW'] = d),
                   TextInput(
-                      labelText: 'Dukuh / Pedukuhan',
-                      hintText: 'Masukkan Nama Dukuh...',
+                      labelText: 'Dukuh / Dusun',
+                      hintText: 'Masukkan Nama Dusun...',
                       type: TextInputType.streetAddress,
                       action: TextInputAction.next,
                       value: (d) => inputData['Dukuh'] = d),
