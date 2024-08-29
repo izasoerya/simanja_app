@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:simanja_app/presentation/layout/kader_layout.dart';
 import 'package:simanja_app/presentation/layout/remaja_layout.dart';
 import 'package:simanja_app/presentation/layout/sub_page_layout.dart';
+import 'package:simanja_app/presentation/screens/change_password_page.dart';
 import 'package:simanja_app/presentation/screens/checkup_result_page.dart';
 import 'package:simanja_app/presentation/screens/event_result_page.dart';
 import 'package:simanja_app/presentation/screens/forgot_password_page.dart';
@@ -60,13 +61,19 @@ final GoRouter router = GoRouter(
         GoRoute(
           path: 'otp-verification',
           builder: (BuildContext context, GoRouterState state) {
-            return const AuthLayout(child: OtpVerificationPage());
+            return AuthLayout(
+              child: OtpVerificationPage(
+                  email: state.uri.queryParameters['email']!),
+            );
           },
         ),
         GoRoute(
           path: 'change-password',
           builder: (BuildContext context, GoRouterState state) {
-            return const AuthLayout(child: ForgotPasswordPage());
+            return AuthLayout(
+              child: ChangePasswordPage(
+                  email: state.uri.queryParameters['email']!),
+            );
           },
         ),
         GoRoute(

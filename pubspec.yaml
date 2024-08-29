@@ -23,6 +23,7 @@ dependencies:
   riverpod_annotation: ^2.3.5
   sizer: ^2.0.15
   supabase_flutter: ^2.5.7
+  timer_count_down: ^2.2.2
   uuid: ^4.4.0
 
 dev_dependencies:
