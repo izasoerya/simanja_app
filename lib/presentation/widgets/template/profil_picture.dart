@@ -65,7 +65,8 @@ class ProfilPicture extends StatelessWidget {
               color: Colors.white,
               fontSize:
                   SizerUtil.deviceType == DeviceType.tablet ? 10.sp : 12.sp,
-              fontWeight: FontWeight.normal)),
+              fontWeight: FontWeight.normal),
+          textAlign: TextAlign.center),
       Text('Akun Kader Posyandu',
           style: TextStyle(
               color: const GlobalTheme().secondaryColor,

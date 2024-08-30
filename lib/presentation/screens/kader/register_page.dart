@@ -175,6 +175,7 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                         // TODO: Implement input condition
                         KaderAuthentication().createUser(kader);
                         showCustomSnackbar(context, 'Berhasil mendaftar', 0);
+                        router.go('/login-kader');
                       }),
                   NudeButton(
                     text: 'Sudah punya akun? Masuk',

@@ -62,10 +62,10 @@ class UserKader {
   Map<String, dynamic> toJSON() {
     return {
       'uid': uid,
-      'name_account': nameAccount,
-      'name_posyandu': namePosyandu,
-      'key_posyandu': keyPosyandu,
-      'birth_date': birthDate.toIso8601String(),
+      'account_name': nameAccount,
+      'posyandu_name': namePosyandu,
+      'posyandu_key': keyPosyandu,
+      'date_of_birth': birthDate.toIso8601String(),
       'address': address,
       'email': email,
       'password': password,
