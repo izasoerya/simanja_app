@@ -1,3 +1,6 @@
+import 'dart:io';
+
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:email_otp/email_otp.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
@@ -13,7 +16,6 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await dotenv.load(fileName: "assets/.env");
-  await _requestPermissions();
 
   EmailOTP.config(
     appName: 'SiMandja',
@@ -31,28 +33,64 @@ Future<void> main() async {
   });
 }
 
-Future<void> _requestPermissions() async {
-  var status = await Permission.photos.status;
+Future<void> _requestPermissions(BuildContext ctx) async {
+  var photoStatus = await Permission.photos.status;
+  var storageStatus = await Permission.storage.status;
 
-  status = await Permission.photos.status;
-  if (status.isGranted) {
-    print('Access Photo already granted.');
-  } else if (status.isDenied || status.isRestricted) {
-    status = await Permission.photos.request();
-
-    if (status.isGranted) {
-      print('Access Photo granted.');
-    } else if (status.isDenied) {
-      await openAppSettings();
-      await Permission.photos.request();
-    } else if (status.isPermanentlyDenied) {
-      print('Access Photo permanently denied.');
-      await openAppSettings();
+  if (Platform.isAndroid && (await _isAndroid10OrLower())) {
+    if (storageStatus.isGranted) {
+      print('Access to Photos and Storage already granted.');
+    } else {
+      if (storageStatus.isDenied || storageStatus.isRestricted) {
+        storageStatus = await Permission.storage.request();
+        if (storageStatus.isGranted) {
+          print('Access to Photos and Storage granted.');
+        } else {
+          await _showPermissionDialog(ctx);
+          storageStatus = await Permission.storage.request();
+        }
+      } else if (storageStatus.isGranted) {
+        print('Access to Photos and Storage granted.');
+      }
     }
-  } else if (status.isPermanentlyDenied) {
-    print('Access Photo permanently denied.');
-    await openAppSettings();
+  } else {
+    if (photoStatus.isGranted) {
+      print('Access to Photos already granted.');
+    } else if (photoStatus.isDenied || photoStatus.isRestricted) {
+      photoStatus = await Permission.photos.request();
+      if (photoStatus.isGranted) {
+        print('Access to Photos granted.');
+      } else {
+        _showPermissionDialog(ctx);
+      }
+    }
   }
+}
+
+Future<bool> _isAndroid10OrLower() async {
+  if (Platform.isAndroid) {
+    var androidInfo = await DeviceInfoPlugin().androidInfo;
+    return androidInfo.version.sdkInt <= 29;
+  }
+  return false;
+}
+
+Future<void> _showPermissionDialog(BuildContext ctx) async {
+  showDialog(
+    context: ctx,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        title: const Text('Akses Foto dan File Dibutuhkan'),
+        content: const Text('Tolong izinkan akses foto dan file.'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(),
+            child: const Text('OK'),
+          ),
+        ],
+      );
+    },
+  );
 }
 
 class MainApp extends StatelessWidget {
@@ -60,10 +98,14 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Sizer(
-      builder: (context, orientation, deviceType) {
-        return MaterialApp.router(routerConfig: router);
-      },
-    );
+    return FutureBuilder(
+        future: _requestPermissions(context),
+        builder: (context, snapshot) {
+          return Sizer(
+            builder: (context, orientation, deviceType) {
+              return MaterialApp.router(routerConfig: router);
+            },
+          );
+        });
   }
 }
