@@ -90,7 +90,7 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
               label: 'Jenis Kegiatan',
               hint: 'Pilih jenis kegiatan...',
               items: const [
-                'PHKS',
+                'Pendidikan Keterampilan Hidup Sehat',
                 'Kesehatan Reproduksi Remaja',
                 'Kesehatan Jiwa & NAPZA',
                 'Gizi',
