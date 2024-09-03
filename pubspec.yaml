@@ -26,6 +26,7 @@ dependencies:
   timer_count_down: ^2.2.2
   uuid: ^4.4.0
   flutter_launcher_icons: ^0.13.1
+  device_info_plus: ^10.1.2
 
 dev_dependencies:
   flutter_test:
