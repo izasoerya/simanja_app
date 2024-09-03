@@ -192,7 +192,7 @@ class _RegisterRemajaPageState extends State<RegisterRemajaPage> {
                       text: 'Punya BPJS ?',
                       value: (d) => inputData['BPJS'] = d),
                   const Padding(padding: EdgeInsets.only(top: 10)),
-                  GenderSelection(value: (d) => inputData['gender'] = d),
+                  GenderSelection(value: (d) => inputData['Jenis Kelamin'] = d),
                   SubmitButton(
                       text: 'Daftar',
                       onClick: () async {

@@ -171,7 +171,6 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                             address: _address,
                             email: _email,
                             password: _password);
-
                         // TODO: Implement input condition
                         KaderAuthentication().createUser(kader);
                         showCustomSnackbar(context, 'Berhasil mendaftar', 0);
