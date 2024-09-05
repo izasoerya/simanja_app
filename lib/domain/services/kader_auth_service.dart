@@ -36,6 +36,16 @@ class KaderAuthentication {
     return await KaderAuthImplementation().getUserbyEmail(email);
   }
 
+  Future<bool> getPosyanduKey(String key) async {
+    final response = await KaderAuthImplementation().getPosyanduKey();
+    if (response == null) {
+      return false; // Return false if the response is null
+    }
+    final user =
+        response.firstWhere((element) => element == key, orElse: () => '');
+    return user.isNotEmpty;
+  }
+
   Future<UserKader?> updateProfilePicture(UserKader user) async {
     return await KaderAuthImplementation().updateProfilePicture(user);
   }

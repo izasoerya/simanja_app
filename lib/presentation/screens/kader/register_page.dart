@@ -125,7 +125,7 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                       value: _readPassword),
                   SubmitButton(
                       text: 'Daftar',
-                      onClick: () {
+                      onClick: () async {
                         if (_nameAccount.isEmpty) {
                           showCustomSnackbar(
                               context, 'Nama akun tidak boleh kosong', 2);
@@ -172,7 +172,14 @@ class _RegisterKaderPageState extends State<RegisterKaderPage> {
                             email: _email,
                             password: _password);
                         // TODO: Implement input condition
-                        KaderAuthentication().createUser(kader);
+                        final _keyCheck = await KaderAuthentication()
+                            .getPosyanduKey(kader.keyPosyandu);
+                        if (!_keyCheck) {
+                          showCustomSnackbar(
+                              context, 'Kode Posyandu tidak valid', 2);
+                          return;
+                        }
+                        await KaderAuthentication().createUser(kader);
                         showCustomSnackbar(context, 'Berhasil mendaftar', 0);
                         router.go('/login-kader');
                       }),

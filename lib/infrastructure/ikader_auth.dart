@@ -126,4 +126,16 @@ class KaderAuthImplementation implements KaderAuthRepo {
       return null;
     }
   }
+
+  @override
+  Future<List<String>?> getPosyanduKey() async {
+    try {
+      final response =
+          await Supabase.instance.client.from('kader_key').select();
+      return response.map((e) => e['key'] as String).toList();
+    } catch (e) {
+      print('Error: $e');
+      return null;
+    }
+  }
 }

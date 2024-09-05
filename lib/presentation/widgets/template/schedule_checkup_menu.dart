@@ -175,18 +175,19 @@ class _ScheduleCheckupState extends ConsumerState<ScheduleCheckup> {
                 }
 
                 EventKader event = EventKader(
-                    id: 'dummy',
-                    idKader: ref.watch(userKaderProvider).uid,
-                    name: _name,
-                    description: _description,
-                    location: _location,
-                    date: _date,
-                    theme: _theme,
-                    topic: _selectedJenisKegiatan!,
-                    note: _note,
-                    totalKader: _kaderCount,
-                    visitor: _attendant,
-                    urlImage: _urlImage);
+                  id: 'dummy',
+                  idKader: ref.watch(userKaderProvider).uid,
+                  name: _name,
+                  description: _description,
+                  location: _location,
+                  date: _date,
+                  theme: _theme,
+                  topic: _selectedJenisKegiatan!,
+                  note: _note,
+                  totalKader: _kaderCount,
+                  visitor: _attendant,
+                  urlImage: _urlImage,
+                );
                 final response = await KaderEventService().createEvent(event);
                 if (response != null) {
                   showCustomSnackbar(context, 'Berhasil membuat acara', 0);
